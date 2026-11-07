@@ -1,0 +1,19 @@
+﻿permission_code,description
+jobs.read_public,Đọc tin đủ điều kiện công khai
+profile.manage_own,Quản lý hồ sơ và CV cá nhân
+application.manage_own,Nộp và theo dõi đơn của mình
+interview.respond_own,Phản hồi lịch của mình
+matching.use_own,Xem gợi ý cho hồ sơ của mình
+chat.use_public,Hỏi đáp từ tài liệu công khai
+chat.read_own,Tra cứu đơn và lịch của mình qua API có xác thực
+practice.use_own,Luyện và xem kết quả của mình
+company.manage_own,Quản lý công ty mình là thành viên
+jobs.manage_company,Quản lý tin của công ty mình
+application.review_company,Xét đơn vào tin của công ty mình
+cv.read_attached_company,Xem CV đính kèm đúng đơn của công ty mình
+interview.schedule_company,Quản lý lịch thuộc công ty mình
+jobs.moderate,Duyệt tin trong phạm vi được giao
+documents.publish,Quản lý tài liệu kiến thức
+questions.publish,Quản lý ngân hàng câu hỏi
+users.manage,Quản lý tài khoản và quyền
+audit.read,Đọc nhật ký quản trị

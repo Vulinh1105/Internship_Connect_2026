@@ -1,0 +1,11 @@
+﻿template_id,role,question_ids,visibility,language
+PRACTICE-DATA,Data Analyst,DATA-01|DATA-02|DATA-03,own,vi
+PRACTICE-FIN,Finance Intern,FIN-01|FIN-02|FIN-03,own,vi
+PRACTICE-MKT,Content Marketing,MKT-01|MKT-02|MKT-03,own,vi
+PRACTICE-HR,Recruitment Intern,HR-01|HR-02|HR-03,own,vi
+PRACTICE-DEV,Software Developer Intern,DEV-01|DEV-02|DEV-03,own,vi
+PRACTICE-BIZ,Business Development,BIZ-01|BIZ-02|BIZ-03,own,vi
+PRACTICE-ACC,Accounting Intern,ACC-01|ACC-02|ACC-03,own,vi
+PRACTICE-OPS,Operations Intern,OPS-01|OPS-02|OPS-03,own,vi
+PRACTICE-UX,UI UX Intern,UX-01|UX-02|UX-03,own,vi
+PRACTICE-LOG,Logistics Intern,LOG-01|LOG-02|LOG-03,own,vi

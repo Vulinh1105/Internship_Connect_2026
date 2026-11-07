@@ -1,0 +1,1061 @@
+﻿seed_code,company_seed_code,title,category,work_mode,location,salary_min_vnd,salary_max_vnd,currency,experience,education,quantity,working_hours,deadline,status,moderation_status,description,requirements,benefits,application_instructions,is_demo,program_type,employment_schedule,pay_type,pay_period,fixture_case
+DEMO-J0001,DEMO-C001,Thực tập sinh Phân tích dữ liệu – Khối vận hành,Công nghệ thông tin,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0002,DEMO-C002,Thực tập sinh Phân tích dữ liệu – Khối phát triển,Công nghệ thông tin,remote,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0003,DEMO-C003,Thực tập sinh Phân tích dữ liệu – Khối dự án,Công nghệ thông tin,onsite,Hải Phòng,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0004,DEMO-C004,Thực tập sinh Phân tích dữ liệu – Khối vận hành,Công nghệ thông tin,hybrid,Hà Nội,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0005,DEMO-C005,Thực tập sinh Phân tích dữ liệu – Khối phát triển,Công nghệ thông tin,remote,TP. Hồ Chí Minh,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,negotiable,month,baseline_public
+DEMO-J0006,DEMO-C006,Thực tập sinh Phân tích dữ liệu – Khối dự án,Công nghệ thông tin,onsite,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0007,DEMO-C007,Thực tập sinh Phân tích dữ liệu – Khối vận hành,Công nghệ thông tin,hybrid,Đà Nẵng,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0008,DEMO-C008,Thực tập sinh Phân tích dữ liệu – Khối phát triển,Công nghệ thông tin,remote,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0009,DEMO-C009,Thực tập sinh Phân tích dữ liệu – Khối dự án,Công nghệ thông tin,onsite,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0010,DEMO-C010,Thực tập sinh Phân tích dữ liệu – Khối vận hành,Công nghệ thông tin,hybrid,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0011,DEMO-C011,Thực tập sinh Tài chính doanh nghiệp – Khối phát triển,Tài chính - Ngân hàng,remote,Cần Thơ,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0012,DEMO-C012,Thực tập sinh Tài chính doanh nghiệp – Khối dự án,Tài chính - Ngân hàng,onsite,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0013,DEMO-C013,Thực tập sinh Tài chính doanh nghiệp – Khối vận hành,Tài chính - Ngân hàng,hybrid,Bắc Ninh,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0014,DEMO-C014,Thực tập sinh Tài chính doanh nghiệp – Khối phát triển,Tài chính - Ngân hàng,remote,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0015,DEMO-C015,Thực tập sinh Tài chính doanh nghiệp – Khối dự án,Tài chính - Ngân hàng,onsite,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0016,DEMO-C016,Thực tập sinh Tài chính doanh nghiệp – Khối vận hành,Tài chính - Ngân hàng,hybrid,Đà Nẵng,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0017,DEMO-C017,Thực tập sinh Tài chính doanh nghiệp – Khối phát triển,Tài chính - Ngân hàng,remote,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0018,DEMO-C018,Thực tập sinh Tài chính doanh nghiệp – Khối dự án,Tài chính - Ngân hàng,onsite,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0019,DEMO-C019,Thực tập sinh Tài chính doanh nghiệp – Khối vận hành,Tài chính - Ngân hàng,hybrid,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0020,DEMO-C020,Thực tập sinh Tài chính doanh nghiệp – Khối phát triển,Tài chính - Ngân hàng,remote,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến tài chính - ngân hàng.
+Kiến thức cơ bản: Excel, Financial Modeling, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,negotiable,month,baseline_public
+DEMO-J0021,DEMO-C001,Thực tập sinh Marketing nội dung – Khối dự án,Marketing,onsite,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0022,DEMO-C002,Thực tập sinh Marketing nội dung – Khối vận hành,Marketing,hybrid,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0023,DEMO-C003,Thực tập sinh Marketing nội dung – Khối phát triển,Marketing,remote,Hải Phòng,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0024,DEMO-C004,Thực tập sinh Marketing nội dung – Khối dự án,Marketing,onsite,Hà Nội,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0025,DEMO-C005,Thực tập sinh Marketing nội dung – Khối vận hành,Marketing,hybrid,TP. Hồ Chí Minh,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0026,DEMO-C006,Thực tập sinh Marketing nội dung – Khối phát triển,Marketing,remote,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0027,DEMO-C007,Thực tập sinh Marketing nội dung – Khối dự án,Marketing,onsite,Đà Nẵng,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0028,DEMO-C008,Thực tập sinh Marketing nội dung – Khối vận hành,Marketing,hybrid,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0029,DEMO-C009,Thực tập sinh Marketing nội dung – Khối phát triển,Marketing,remote,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0030,DEMO-C010,Thực tập sinh Marketing nội dung – Khối dự án,Marketing,onsite,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến marketing.
+Kiến thức cơ bản: Content Writing, SEO, Canva.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0031,DEMO-C011,Thực tập sinh Tuyển dụng – Khối vận hành,Nhân sự,hybrid,Cần Thơ,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0032,DEMO-C012,Thực tập sinh Tuyển dụng – Khối phát triển,Nhân sự,remote,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0033,DEMO-C013,Thực tập sinh Tuyển dụng – Khối dự án,Nhân sự,onsite,Bắc Ninh,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0034,DEMO-C014,Thực tập sinh Tuyển dụng – Khối vận hành,Nhân sự,hybrid,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0035,DEMO-C015,Thực tập sinh Tuyển dụng – Khối phát triển,Nhân sự,remote,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,negotiable,month,baseline_public
+DEMO-J0036,DEMO-C016,Thực tập sinh Tuyển dụng – Khối dự án,Nhân sự,onsite,Đà Nẵng,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0037,DEMO-C017,Thực tập sinh Tuyển dụng – Khối vận hành,Nhân sự,hybrid,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0038,DEMO-C018,Thực tập sinh Tuyển dụng – Khối phát triển,Nhân sự,remote,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0039,DEMO-C019,Thực tập sinh Tuyển dụng – Khối dự án,Nhân sự,onsite,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0040,DEMO-C020,Thực tập sinh Tuyển dụng – Khối vận hành,Nhân sự,hybrid,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến nhân sự.
+Kiến thức cơ bản: Communication, Excel, Interview Scheduling.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0041,DEMO-C001,Thực tập sinh Phát triển phần mềm – Khối phát triển,Công nghệ thông tin,remote,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0042,DEMO-C002,Thực tập sinh Phát triển phần mềm – Khối dự án,Công nghệ thông tin,onsite,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0043,DEMO-C003,Thực tập sinh Phát triển phần mềm – Khối vận hành,Công nghệ thông tin,hybrid,Hải Phòng,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0044,DEMO-C004,Thực tập sinh Phát triển phần mềm – Khối phát triển,Công nghệ thông tin,remote,Hà Nội,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0045,DEMO-C005,Thực tập sinh Phát triển phần mềm – Khối dự án,Công nghệ thông tin,onsite,TP. Hồ Chí Minh,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0046,DEMO-C006,Thực tập sinh Phát triển phần mềm – Khối vận hành,Công nghệ thông tin,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0047,DEMO-C007,Thực tập sinh Phát triển phần mềm – Khối phát triển,Công nghệ thông tin,remote,Đà Nẵng,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0048,DEMO-C008,Thực tập sinh Phát triển phần mềm – Khối dự án,Công nghệ thông tin,onsite,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0049,DEMO-C009,Thực tập sinh Phát triển phần mềm – Khối vận hành,Công nghệ thông tin,hybrid,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0050,DEMO-C010,Thực tập sinh Phát triển phần mềm – Khối phát triển,Công nghệ thông tin,remote,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: Python, Git, REST API.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,negotiable,month,baseline_public
+DEMO-J0051,DEMO-C011,Thực tập sinh Kinh doanh B2B – Khối dự án,Kinh doanh,onsite,Cần Thơ,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0052,DEMO-C012,Thực tập sinh Kinh doanh B2B – Khối vận hành,Kinh doanh,hybrid,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0053,DEMO-C013,Thực tập sinh Kinh doanh B2B – Khối phát triển,Kinh doanh,remote,Bắc Ninh,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0054,DEMO-C014,Thực tập sinh Kinh doanh B2B – Khối dự án,Kinh doanh,onsite,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0055,DEMO-C015,Thực tập sinh Kinh doanh B2B – Khối vận hành,Kinh doanh,hybrid,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0056,DEMO-C016,Thực tập sinh Kinh doanh B2B – Khối phát triển,Kinh doanh,remote,Đà Nẵng,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0057,DEMO-C017,Thực tập sinh Kinh doanh B2B – Khối dự án,Kinh doanh,onsite,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0058,DEMO-C018,Thực tập sinh Kinh doanh B2B – Khối vận hành,Kinh doanh,hybrid,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0059,DEMO-C019,Thực tập sinh Kinh doanh B2B – Khối phát triển,Kinh doanh,remote,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0060,DEMO-C020,Thực tập sinh Kinh doanh B2B – Khối dự án,Kinh doanh,onsite,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kinh doanh.
+Kiến thức cơ bản: Communication, CRM, Excel.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0061,DEMO-C001,Thực tập sinh Kế toán – Khối vận hành,Kế toán - Kiểm toán,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0062,DEMO-C002,Thực tập sinh Kế toán – Khối phát triển,Kế toán - Kiểm toán,remote,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0063,DEMO-C003,Thực tập sinh Kế toán – Khối dự án,Kế toán - Kiểm toán,onsite,Hải Phòng,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0064,DEMO-C004,Thực tập sinh Kế toán – Khối vận hành,Kế toán - Kiểm toán,hybrid,Hà Nội,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0065,DEMO-C005,Thực tập sinh Kế toán – Khối phát triển,Kế toán - Kiểm toán,remote,TP. Hồ Chí Minh,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,negotiable,month,baseline_public
+DEMO-J0066,DEMO-C006,Thực tập sinh Kế toán – Khối dự án,Kế toán - Kiểm toán,onsite,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0067,DEMO-C007,Thực tập sinh Kế toán – Khối vận hành,Kế toán - Kiểm toán,hybrid,Đà Nẵng,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0068,DEMO-C008,Thực tập sinh Kế toán – Khối phát triển,Kế toán - Kiểm toán,remote,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0069,DEMO-C009,Thực tập sinh Kế toán – Khối dự án,Kế toán - Kiểm toán,onsite,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0070,DEMO-C010,Thực tập sinh Kế toán – Khối vận hành,Kế toán - Kiểm toán,hybrid,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến kế toán - kiểm toán.
+Kiến thức cơ bản: Excel, Accounting, Reconciliation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0071,DEMO-C011,Thực tập sinh Vận hành – Khối phát triển,Vận hành,remote,Cần Thơ,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0072,DEMO-C012,Thực tập sinh Vận hành – Khối dự án,Vận hành,onsite,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0073,DEMO-C013,Thực tập sinh Vận hành – Khối vận hành,Vận hành,hybrid,Bắc Ninh,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0074,DEMO-C014,Thực tập sinh Vận hành – Khối phát triển,Vận hành,remote,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0075,DEMO-C015,Thực tập sinh Vận hành – Khối dự án,Vận hành,onsite,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0076,DEMO-C016,Thực tập sinh Vận hành – Khối vận hành,Vận hành,hybrid,Đà Nẵng,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0077,DEMO-C017,Thực tập sinh Vận hành – Khối phát triển,Vận hành,remote,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0078,DEMO-C018,Thực tập sinh Vận hành – Khối dự án,Vận hành,onsite,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0079,DEMO-C019,Thực tập sinh Vận hành – Khối vận hành,Vận hành,hybrid,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0080,DEMO-C020,Thực tập sinh Vận hành – Khối phát triển,Vận hành,remote,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến vận hành.
+Kiến thức cơ bản: Excel, Process Improvement, Reporting.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,negotiable,month,baseline_public
+DEMO-J0081,DEMO-C001,Thực tập sinh Thiết kế UI/UX – Khối dự án,Thiết kế,onsite,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0082,DEMO-C002,Thực tập sinh Thiết kế UI/UX – Khối vận hành,Thiết kế,hybrid,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0083,DEMO-C003,Thực tập sinh Thiết kế UI/UX – Khối phát triển,Thiết kế,remote,Hải Phòng,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0084,DEMO-C004,Thực tập sinh Thiết kế UI/UX – Khối dự án,Thiết kế,onsite,Hà Nội,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0085,DEMO-C005,Thực tập sinh Thiết kế UI/UX – Khối vận hành,Thiết kế,hybrid,TP. Hồ Chí Minh,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0086,DEMO-C006,Thực tập sinh Thiết kế UI/UX – Khối phát triển,Thiết kế,remote,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0087,DEMO-C007,Thực tập sinh Thiết kế UI/UX – Khối dự án,Thiết kế,onsite,Đà Nẵng,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0088,DEMO-C008,Thực tập sinh Thiết kế UI/UX – Khối vận hành,Thiết kế,hybrid,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0089,DEMO-C009,Thực tập sinh Thiết kế UI/UX – Khối phát triển,Thiết kế,remote,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0090,DEMO-C010,Thực tập sinh Thiết kế UI/UX – Khối dự án,Thiết kế,onsite,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến thiết kế.
+Kiến thức cơ bản: Figma, Prototyping, User Research.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-J0091,DEMO-C011,Thực tập sinh Logistics – Khối vận hành,Logistics,hybrid,Cần Thơ,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0092,DEMO-C012,Thực tập sinh Logistics – Khối phát triển,Logistics,remote,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0093,DEMO-C013,Thực tập sinh Logistics – Khối dự án,Logistics,onsite,Bắc Ninh,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0094,DEMO-C014,Thực tập sinh Logistics – Khối vận hành,Logistics,hybrid,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0095,DEMO-C015,Thực tập sinh Logistics – Khối phát triển,Logistics,remote,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,negotiable,month,baseline_public
+DEMO-J0096,DEMO-C016,Thực tập sinh Logistics – Khối dự án,Logistics,onsite,Đà Nẵng,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0097,DEMO-C017,Thực tập sinh Logistics – Khối vận hành,Logistics,hybrid,Hà Nội,2500000,3500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 2,500,000–3,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0098,DEMO-C018,Thực tập sinh Logistics – Khối phát triển,Logistics,remote,Hà Nội,3500000,4500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,3,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 3,500,000–4,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,trainee,part_time,range,month,baseline_public
+DEMO-J0099,DEMO-C019,Thực tập sinh Logistics – Khối dự án,Logistics,onsite,TP. Hồ Chí Minh,5000000,6000000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,4,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 5,000,000–6,000,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,baseline_public
+DEMO-J0100,DEMO-C020,Thực tập sinh Logistics – Khối vận hành,Logistics,hybrid,Hà Nội,,,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,1,20–30 giờ/tuần,2027-03-31,open,approved,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến logistics.
+Kiến thức cơ bản: Excel, Supply Chain, Documentation.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: Thỏa thuận.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,negotiable,month,baseline_public
+DEMO-F-PENDING,DEMO-C001,Tin demo chờ duyệt,Công nghệ thông tin,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,pending,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,pending
+DEMO-F-REJECTED,DEMO-C001,Tin demo bị từ chối duyệt,Công nghệ thông tin,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,rejected,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,rejected
+DEMO-F-CLOSED,DEMO-C001,Tin demo đã đóng,Công nghệ thông tin,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,closed,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,closed
+DEMO-F-EXPIRED,DEMO-C001,Tin demo đã hết hạn,Công nghệ thông tin,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2026-10-31,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,expired
+DEMO-F-NO-DEADLINE,DEMO-C001,Tin demo không đặt hạn,Công nghệ thông tin,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,,open,approved,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,no-deadline
+DEMO-F-DRAFT,DEMO-C001,Tin demo bản nháp,Công nghệ thông tin,hybrid,Hà Nội,1500000,2500000,VND,Không yêu cầu,Sinh viên đại học/cao đẳng,2,20–30 giờ/tuần,2027-03-31,open,draft,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng.","Sinh viên năm 2-4 hoặc mới tốt nghiệp, quan tâm đến công nghệ thông tin.
+Kiến thức cơ bản: SQL, Excel, Power BI.
+Có khả năng tự học, làm việc nhóm và giao tiếp rõ ràng.
+Có thể tham gia tối thiểu 20 giờ/tuần; không yêu cầu kinh nghiệm toàn thời gian.","Hỗ trợ thực tập: 1,500,000–2,500,000 VND/tháng.
+Có người hướng dẫn, phản hồi công việc hằng tuần, tài liệu đào tạo và xác nhận hoàn thành nếu đáp ứng yêu cầu.
+Không thu phí ứng tuyển.",Nộp hồ sơ trực tiếp qua hệ thống Internship Connect. Không gửi thông tin nhạy cảm.,True,internship,part_time,range,month,draft

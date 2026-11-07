@@ -1,0 +1,531 @@
+﻿job_seed_code,title,category,location,work_mode,deadline,status,moderation_status,skill_ids,description
+DEMO-J0001,Thực tập sinh Phân tích dữ liệu – Khối vận hành,Công nghệ thông tin,Hà Nội,hybrid,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0002,Thực tập sinh Phân tích dữ liệu – Khối phát triển,Công nghệ thông tin,Hà Nội,remote,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0003,Thực tập sinh Phân tích dữ liệu – Khối dự án,Công nghệ thông tin,Hải Phòng,onsite,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0004,Thực tập sinh Phân tích dữ liệu – Khối vận hành,Công nghệ thông tin,Hà Nội,hybrid,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0005,Thực tập sinh Phân tích dữ liệu – Khối phát triển,Công nghệ thông tin,TP. Hồ Chí Minh,remote,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0006,Thực tập sinh Phân tích dữ liệu – Khối dự án,Công nghệ thông tin,Hà Nội,onsite,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0007,Thực tập sinh Phân tích dữ liệu – Khối vận hành,Công nghệ thông tin,Đà Nẵng,hybrid,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0008,Thực tập sinh Phân tích dữ liệu – Khối phát triển,Công nghệ thông tin,Hà Nội,remote,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0009,Thực tập sinh Phân tích dữ liệu – Khối dự án,Công nghệ thông tin,TP. Hồ Chí Minh,onsite,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0010,Thực tập sinh Phân tích dữ liệu – Khối vận hành,Công nghệ thông tin,Hà Nội,hybrid,2027-03-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0011,Thực tập sinh Tài chính doanh nghiệp – Khối phát triển,Tài chính - Ngân hàng,Cần Thơ,remote,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0012,Thực tập sinh Tài chính doanh nghiệp – Khối dự án,Tài chính - Ngân hàng,Hà Nội,onsite,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0013,Thực tập sinh Tài chính doanh nghiệp – Khối vận hành,Tài chính - Ngân hàng,Bắc Ninh,hybrid,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0014,Thực tập sinh Tài chính doanh nghiệp – Khối phát triển,Tài chính - Ngân hàng,TP. Hồ Chí Minh,remote,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0015,Thực tập sinh Tài chính doanh nghiệp – Khối dự án,Tài chính - Ngân hàng,Hà Nội,onsite,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0016,Thực tập sinh Tài chính doanh nghiệp – Khối vận hành,Tài chính - Ngân hàng,Đà Nẵng,hybrid,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0017,Thực tập sinh Tài chính doanh nghiệp – Khối phát triển,Tài chính - Ngân hàng,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0018,Thực tập sinh Tài chính doanh nghiệp – Khối dự án,Tài chính - Ngân hàng,Hà Nội,onsite,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0019,Thực tập sinh Tài chính doanh nghiệp – Khối vận hành,Tài chính - Ngân hàng,TP. Hồ Chí Minh,hybrid,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0020,Thực tập sinh Tài chính doanh nghiệp – Khối phát triển,Tài chính - Ngân hàng,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-009|SKL-017,"1. Hỗ trợ triển khai công việc Finance Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0021,Thực tập sinh Marketing nội dung – Khối dự án,Marketing,Hà Nội,onsite,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0022,Thực tập sinh Marketing nội dung – Khối vận hành,Marketing,Hà Nội,hybrid,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0023,Thực tập sinh Marketing nội dung – Khối phát triển,Marketing,Hải Phòng,remote,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0024,Thực tập sinh Marketing nội dung – Khối dự án,Marketing,Hà Nội,onsite,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0025,Thực tập sinh Marketing nội dung – Khối vận hành,Marketing,TP. Hồ Chí Minh,hybrid,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0026,Thực tập sinh Marketing nội dung – Khối phát triển,Marketing,Hà Nội,remote,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0027,Thực tập sinh Marketing nội dung – Khối dự án,Marketing,Đà Nẵng,onsite,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0028,Thực tập sinh Marketing nội dung – Khối vận hành,Marketing,Hà Nội,hybrid,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0029,Thực tập sinh Marketing nội dung – Khối phát triển,Marketing,TP. Hồ Chí Minh,remote,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0030,Thực tập sinh Marketing nội dung – Khối dự án,Marketing,Hà Nội,onsite,2027-03-31,open,approved,SKL-004|SKL-019|SKL-002,"1. Hỗ trợ triển khai công việc Content Marketing theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0031,Thực tập sinh Tuyển dụng – Khối vận hành,Nhân sự,Cần Thơ,hybrid,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0032,Thực tập sinh Tuyển dụng – Khối phát triển,Nhân sự,Hà Nội,remote,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0033,Thực tập sinh Tuyển dụng – Khối dự án,Nhân sự,Bắc Ninh,onsite,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0034,Thực tập sinh Tuyển dụng – Khối vận hành,Nhân sự,TP. Hồ Chí Minh,hybrid,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0035,Thực tập sinh Tuyển dụng – Khối phát triển,Nhân sự,Hà Nội,remote,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0036,Thực tập sinh Tuyển dụng – Khối dự án,Nhân sự,Đà Nẵng,onsite,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0037,Thực tập sinh Tuyển dụng – Khối vận hành,Nhân sự,Hà Nội,hybrid,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0038,Thực tập sinh Tuyển dụng – Khối phát triển,Nhân sự,Hà Nội,remote,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0039,Thực tập sinh Tuyển dụng – Khối dự án,Nhân sự,TP. Hồ Chí Minh,onsite,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0040,Thực tập sinh Tuyển dụng – Khối vận hành,Nhân sự,Hà Nội,hybrid,2027-03-31,open,approved,SKL-003|SKL-007|SKL-011,"1. Hỗ trợ triển khai công việc Recruitment Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0041,Thực tập sinh Phát triển phần mềm – Khối phát triển,Công nghệ thông tin,Hà Nội,remote,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0042,Thực tập sinh Phát triển phần mềm – Khối dự án,Công nghệ thông tin,Hà Nội,onsite,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0043,Thực tập sinh Phát triển phần mềm – Khối vận hành,Công nghệ thông tin,Hải Phòng,hybrid,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0044,Thực tập sinh Phát triển phần mềm – Khối phát triển,Công nghệ thông tin,Hà Nội,remote,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0045,Thực tập sinh Phát triển phần mềm – Khối dự án,Công nghệ thông tin,TP. Hồ Chí Minh,onsite,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0046,Thực tập sinh Phát triển phần mềm – Khối vận hành,Công nghệ thông tin,Hà Nội,hybrid,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0047,Thực tập sinh Phát triển phần mềm – Khối phát triển,Công nghệ thông tin,Đà Nẵng,remote,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0048,Thực tập sinh Phát triển phần mềm – Khối dự án,Công nghệ thông tin,Hà Nội,onsite,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0049,Thực tập sinh Phát triển phần mềm – Khối vận hành,Công nghệ thông tin,TP. Hồ Chí Minh,hybrid,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0050,Thực tập sinh Phát triển phần mềm – Khối phát triển,Công nghệ thông tin,Hà Nội,remote,2027-03-31,open,approved,SKL-015|SKL-010|SKL-018,"1. Hỗ trợ triển khai công việc Software Developer Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0051,Thực tập sinh Kinh doanh B2B – Khối dự án,Kinh doanh,Cần Thơ,onsite,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0052,Thực tập sinh Kinh doanh B2B – Khối vận hành,Kinh doanh,Hà Nội,hybrid,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0053,Thực tập sinh Kinh doanh B2B – Khối phát triển,Kinh doanh,Bắc Ninh,remote,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0054,Thực tập sinh Kinh doanh B2B – Khối dự án,Kinh doanh,TP. Hồ Chí Minh,onsite,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0055,Thực tập sinh Kinh doanh B2B – Khối vận hành,Kinh doanh,Hà Nội,hybrid,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0056,Thực tập sinh Kinh doanh B2B – Khối phát triển,Kinh doanh,Đà Nẵng,remote,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0057,Thực tập sinh Kinh doanh B2B – Khối dự án,Kinh doanh,Hà Nội,onsite,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0058,Thực tập sinh Kinh doanh B2B – Khối vận hành,Kinh doanh,Hà Nội,hybrid,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0059,Thực tập sinh Kinh doanh B2B – Khối phát triển,Kinh doanh,TP. Hồ Chí Minh,remote,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0060,Thực tập sinh Kinh doanh B2B – Khối dự án,Kinh doanh,Hà Nội,onsite,2027-03-31,open,approved,SKL-003|SKL-005|SKL-007,"1. Hỗ trợ triển khai công việc Business Development theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0061,Thực tập sinh Kế toán – Khối vận hành,Kế toán - Kiểm toán,Hà Nội,hybrid,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0062,Thực tập sinh Kế toán – Khối phát triển,Kế toán - Kiểm toán,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0063,Thực tập sinh Kế toán – Khối dự án,Kế toán - Kiểm toán,Hải Phòng,onsite,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0064,Thực tập sinh Kế toán – Khối vận hành,Kế toán - Kiểm toán,Hà Nội,hybrid,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0065,Thực tập sinh Kế toán – Khối phát triển,Kế toán - Kiểm toán,TP. Hồ Chí Minh,remote,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0066,Thực tập sinh Kế toán – Khối dự án,Kế toán - Kiểm toán,Hà Nội,onsite,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0067,Thực tập sinh Kế toán – Khối vận hành,Kế toán - Kiểm toán,Đà Nẵng,hybrid,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0068,Thực tập sinh Kế toán – Khối phát triển,Kế toán - Kiểm toán,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0069,Thực tập sinh Kế toán – Khối dự án,Kế toán - Kiểm toán,TP. Hồ Chí Minh,onsite,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0070,Thực tập sinh Kế toán – Khối vận hành,Kế toán - Kiểm toán,Hà Nội,hybrid,2027-03-31,open,approved,SKL-007|SKL-001|SKL-016,"1. Hỗ trợ triển khai công việc Accounting Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0071,Thực tập sinh Vận hành – Khối phát triển,Vận hành,Cần Thơ,remote,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0072,Thực tập sinh Vận hành – Khối dự án,Vận hành,Hà Nội,onsite,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0073,Thực tập sinh Vận hành – Khối vận hành,Vận hành,Bắc Ninh,hybrid,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0074,Thực tập sinh Vận hành – Khối phát triển,Vận hành,TP. Hồ Chí Minh,remote,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0075,Thực tập sinh Vận hành – Khối dự án,Vận hành,Hà Nội,onsite,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0076,Thực tập sinh Vận hành – Khối vận hành,Vận hành,Đà Nẵng,hybrid,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0077,Thực tập sinh Vận hành – Khối phát triển,Vận hành,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0078,Thực tập sinh Vận hành – Khối dự án,Vận hành,Hà Nội,onsite,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0079,Thực tập sinh Vận hành – Khối vận hành,Vận hành,TP. Hồ Chí Minh,hybrid,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0080,Thực tập sinh Vận hành – Khối phát triển,Vận hành,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-013|SKL-017,"1. Hỗ trợ triển khai công việc Operations Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0081,Thực tập sinh Thiết kế UI/UX – Khối dự án,Thiết kế,Hà Nội,onsite,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0082,Thực tập sinh Thiết kế UI/UX – Khối vận hành,Thiết kế,Hà Nội,hybrid,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0083,Thực tập sinh Thiết kế UI/UX – Khối phát triển,Thiết kế,Hải Phòng,remote,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0084,Thực tập sinh Thiết kế UI/UX – Khối dự án,Thiết kế,Hà Nội,onsite,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0085,Thực tập sinh Thiết kế UI/UX – Khối vận hành,Thiết kế,TP. Hồ Chí Minh,hybrid,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0086,Thực tập sinh Thiết kế UI/UX – Khối phát triển,Thiết kế,Hà Nội,remote,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0087,Thực tập sinh Thiết kế UI/UX – Khối dự án,Thiết kế,Đà Nẵng,onsite,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0088,Thực tập sinh Thiết kế UI/UX – Khối vận hành,Thiết kế,Hà Nội,hybrid,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0089,Thực tập sinh Thiết kế UI/UX – Khối phát triển,Thiết kế,TP. Hồ Chí Minh,remote,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0090,Thực tập sinh Thiết kế UI/UX – Khối dự án,Thiết kế,Hà Nội,onsite,2027-03-31,open,approved,SKL-008|SKL-014|SKL-022,"1. Hỗ trợ triển khai công việc UI UX Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0091,Thực tập sinh Logistics – Khối vận hành,Logistics,Cần Thơ,hybrid,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0092,Thực tập sinh Logistics – Khối phát triển,Logistics,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0093,Thực tập sinh Logistics – Khối dự án,Logistics,Bắc Ninh,onsite,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0094,Thực tập sinh Logistics – Khối vận hành,Logistics,TP. Hồ Chí Minh,hybrid,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0095,Thực tập sinh Logistics – Khối phát triển,Logistics,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0096,Thực tập sinh Logistics – Khối dự án,Logistics,Đà Nẵng,onsite,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0097,Thực tập sinh Logistics – Khối vận hành,Logistics,Hà Nội,hybrid,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0098,Thực tập sinh Logistics – Khối phát triển,Logistics,Hà Nội,remote,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0099,Thực tập sinh Logistics – Khối dự án,Logistics,TP. Hồ Chí Minh,onsite,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-J0100,Thực tập sinh Logistics – Khối vận hành,Logistics,Hà Nội,hybrid,2027-03-31,open,approved,SKL-007|SKL-021|SKL-006,"1. Hỗ trợ triển khai công việc Logistics Intern theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-F-PENDING,Tin demo chờ duyệt,Công nghệ thông tin,Hà Nội,hybrid,2027-03-31,open,pending,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-F-REJECTED,Tin demo bị từ chối duyệt,Công nghệ thông tin,Hà Nội,hybrid,2027-03-31,open,rejected,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-F-CLOSED,Tin demo đã đóng,Công nghệ thông tin,Hà Nội,hybrid,2027-03-31,closed,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-F-EXPIRED,Tin demo đã hết hạn,Công nghệ thông tin,Hà Nội,hybrid,2026-10-31,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-F-NO-DEADLINE,Tin demo không đặt hạn,Công nghệ thông tin,Hà Nội,hybrid,,open,approved,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."
+DEMO-F-DRAFT,Tin demo bản nháp,Công nghệ thông tin,Hà Nội,hybrid,2027-03-31,open,draft,SKL-020|SKL-007|SKL-012,"1. Hỗ trợ triển khai công việc Data Analyst theo kế hoạch tuần.
+2. Thu thập, kiểm tra và tổng hợp thông tin phục vụ dự án.
+3. Phối hợp với người hướng dẫn để xử lý yêu cầu và ghi nhận kết quả.
+4. Chuẩn bị báo cáo tiến độ, đề xuất cải tiến và trình bày kết quả.
+5. Tuân thủ quy trình bảo mật và tiêu chuẩn chất lượng."

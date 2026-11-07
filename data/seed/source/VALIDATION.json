@@ -1,0 +1,41 @@
+{
+  "as_of": "2026-11-07",
+  "checks": [
+    "CSV columns and JSONL syntax",
+    "unique keys and skill pairs",
+    "core references and role grants",
+    "application and interview chronology",
+    "public eligibility fixtures",
+    "pay ranges",
+    "knowledge files and evaluation references",
+    "rubric weights and scores"
+  ],
+  "rows": {
+    "access/company_members.csv": 20,
+    "access/permissions.csv": 18,
+    "access/role_permissions.csv": 27,
+    "access/roles.csv": 5,
+    "access/users.csv": 62,
+    "ai/chatbot/derived_public_text.csv": 121,
+    "ai/chatbot/document_catalog.csv": 8,
+    "ai/matching/jobs.csv": 106,
+    "ai/matching/profiles.csv": 40,
+    "ai/virtual_interview/practice_templates.csv": 10,
+    "ai/virtual_interview/questions.csv": 30,
+    "ai/virtual_interview/rubrics.csv": 90,
+    "core/companies.csv": 20,
+    "core/internship_skills.csv": 318,
+    "core/internships.csv": 106,
+    "core/skills.csv": 22,
+    "core/student_skills.csv": 96,
+    "core/students.csv": 40,
+    "demo/application_events.csv": 230,
+    "demo/applications.csv": 100,
+    "demo/interviews.csv": 20,
+    "ai/chatbot/evaluation_cases.jsonl": 14,
+    "ai/matching/evaluation_cases.jsonl": 12,
+    "ai/virtual_interview/evaluation_cases.jsonl": 9
+  },
+  "public_jobs": 101,
+  "scope": "offline dataset checks; no DB import or model execution"
+}

@@ -1,0 +1,31 @@
+﻿question_id,role,question_type,difficulty,question,rubric_version,time_limit_sec,is_demo
+DATA-01,Data Analyst,technical,intermediate,Bảng đơn có nhiều dòng cùng order_id. Hãy mô tả cách tính số đơn và doanh thu theo tháng mà không đếm trùng.,1,180,True
+DATA-02,Data Analyst,technical,basic,Kết quả dashboard lệch 10% so với báo cáo tháng. Bạn kiểm tra từ đâu?,1,180,True
+DATA-03,Data Analyst,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Data Analyst, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+FIN-01,Finance Intern,technical,intermediate,Doanh thu tăng nhưng dòng tiền giảm. Bạn sẽ đọc những chỉ tiêu nào để giải thích?,1,180,True
+FIN-02,Finance Intern,technical,basic,Hãy xây mô hình đơn giản để thử tác động khi chi phí biến đổi tăng 5%.,1,180,True
+FIN-03,Finance Intern,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Finance Intern, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+MKT-01,Content Marketing,technical,intermediate,Một bài có nhiều lượt xem nhưng ít đăng ký. Bạn sẽ thử thay đổi gì?,1,180,True
+MKT-02,Content Marketing,technical,basic,Hãy lập dàn ý nội dung cho sinh viên lần đầu chuẩn bị CV.,1,180,True
+MKT-03,Content Marketing,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Content Marketing, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+HR-01,Recruitment Intern,technical,intermediate,Bạn sắp lịch cho ba ứng viên khi người phỏng vấn chỉ có hai khung giờ. Bạn xử lý ra sao?,1,180,True
+HR-02,Recruitment Intern,technical,basic,Một hồ sơ thiếu CV trước hạn nộp. Bạn làm gì để xử lý nhất quán?,1,180,True
+HR-03,Recruitment Intern,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Recruitment Intern, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+DEV-01,Software Developer Intern,technical,intermediate,API nộp đơn bị gửi hai lần khi người dùng nhấn liên tiếp. Bạn thiết kế cách chống trùng thế nào?,1,180,True
+DEV-02,Software Developer Intern,technical,basic,Trang hiện danh sách rỗng dù MySQL có dữ liệu. Bạn sẽ lần theo lỗi thế nào?,1,180,True
+DEV-03,Software Developer Intern,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Software Developer Intern, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+BIZ-01,Business Development,technical,intermediate,Có 50 khách hàng tiềm năng. Bạn chọn 10 khách để liên hệ trước theo tiêu chí nào?,1,180,True
+BIZ-02,Business Development,technical,basic,Khách phản hồi quan tâm nhưng chưa sẵn sàng mua. Bạn ghi gì vào CRM?,1,180,True
+BIZ-03,Business Development,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Business Development, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+ACC-01,Accounting Intern,technical,intermediate,Sổ ngân hàng và sổ kế toán lệch một khoản. Bạn đối soát thế nào?,1,180,True
+ACC-02,Accounting Intern,technical,basic,Một hóa đơn có vẻ đã được ghi hai lần. Bạn xác minh như thế nào?,1,180,True
+ACC-03,Accounting Intern,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Accounting Intern, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+OPS-01,Operations Intern,technical,intermediate,Thời gian xử lý yêu cầu tăng gấp đôi. Bạn tìm nút thắt bằng dữ liệu nào?,1,180,True
+OPS-02,Operations Intern,technical,basic,Bạn phải bàn giao một quy trình chưa có tài liệu. Hãy mô tả cấu trúc hướng dẫn.,1,180,True
+OPS-03,Operations Intern,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Operations Intern, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+UX-01,UI UX Intern,technical,intermediate,Người dùng bỏ dở ở form ứng tuyển. Bạn kiểm tra giả thuyết nào trước?,1,180,True
+UX-02,UI UX Intern,technical,basic,Hãy mô tả cách làm prototype cho luồng nộp CV và phản hồi lỗi.,1,180,True
+UX-03,UI UX Intern,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến UI UX Intern, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+LOG-01,Logistics Intern,technical,intermediate,Tồn kho thực tế thấp hơn số liệu hệ thống. Bạn kiểm tra gì?,1,180,True
+LOG-02,Logistics Intern,technical,basic,Một lô hàng trễ có thể ảnh hưởng ba đơn. Bạn lập kế hoạch cập nhật thế nào?,1,180,True
+LOG-03,Logistics Intern,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Logistics Intern, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True

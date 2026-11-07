@@ -1,0 +1,41 @@
+﻿student_seed_code,major,target_category,preferred_location,preferred_work_mode,available_from,hours_per_week,skill_ids,preference_source
+DEMO-S001,Tài chính,Công nghệ thông tin,Hà Nội,hybrid,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S002,Kế toán,Công nghệ thông tin,Hà Nội,remote,2027-01-01,25,SKL-003|SKL-004|SKL-007,synthetic_demo
+DEMO-S003,Công nghệ thông tin,Công nghệ thông tin,Hải Phòng,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S004,Marketing,Công nghệ thông tin,Hà Nội,hybrid,2027-01-01,25,SKL-003|SKL-007|SKL-015,synthetic_demo
+DEMO-S005,Quản trị kinh doanh,Công nghệ thông tin,TP. Hồ Chí Minh,remote,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S006,Logistics,Công nghệ thông tin,Hà Nội,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S007,Khoa học dữ liệu,Công nghệ thông tin,Đà Nẵng,hybrid,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S008,Ngôn ngữ Anh,Công nghệ thông tin,Hà Nội,remote,2027-01-01,25,SKL-003|SKL-007|SKL-008,synthetic_demo
+DEMO-S009,Tài chính,Công nghệ thông tin,TP. Hồ Chí Minh,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S010,Kế toán,Công nghệ thông tin,Hà Nội,hybrid,2027-01-01,25,SKL-003|SKL-007|SKL-020,synthetic_demo
+DEMO-S011,Công nghệ thông tin,Tài chính - Ngân hàng,Cần Thơ,remote,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S012,Marketing,Tài chính - Ngân hàng,Hà Nội,onsite,2027-01-01,25,SKL-003|SKL-004|SKL-007,synthetic_demo
+DEMO-S013,Quản trị kinh doanh,Tài chính - Ngân hàng,Bắc Ninh,hybrid,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S014,Logistics,Tài chính - Ngân hàng,TP. Hồ Chí Minh,remote,2027-01-01,25,SKL-003|SKL-007|SKL-015,synthetic_demo
+DEMO-S015,Khoa học dữ liệu,Tài chính - Ngân hàng,Hà Nội,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S016,Ngôn ngữ Anh,Tài chính - Ngân hàng,Đà Nẵng,hybrid,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S017,Tài chính,Tài chính - Ngân hàng,Hà Nội,remote,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S018,Kế toán,Tài chính - Ngân hàng,Hà Nội,onsite,2027-01-01,25,SKL-003|SKL-007|SKL-008,synthetic_demo
+DEMO-S019,Công nghệ thông tin,Tài chính - Ngân hàng,TP. Hồ Chí Minh,hybrid,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S020,Marketing,Tài chính - Ngân hàng,Hà Nội,remote,2027-01-01,25,SKL-003|SKL-007|SKL-020,synthetic_demo
+DEMO-S021,Quản trị kinh doanh,Marketing,Hà Nội,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S022,Logistics,Marketing,Hà Nội,hybrid,2027-01-01,25,SKL-003|SKL-004|SKL-007,synthetic_demo
+DEMO-S023,Khoa học dữ liệu,Marketing,Hải Phòng,remote,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S024,Ngôn ngữ Anh,Marketing,Hà Nội,onsite,2027-01-01,25,SKL-003|SKL-007|SKL-015,synthetic_demo
+DEMO-S025,Tài chính,Marketing,TP. Hồ Chí Minh,hybrid,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S026,Kế toán,Marketing,Hà Nội,remote,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S027,Công nghệ thông tin,Marketing,Đà Nẵng,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S028,Marketing,Marketing,Hà Nội,hybrid,2027-01-01,25,SKL-003|SKL-007|SKL-008,synthetic_demo
+DEMO-S029,Quản trị kinh doanh,Marketing,TP. Hồ Chí Minh,remote,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S030,Logistics,Marketing,Hà Nội,onsite,2027-01-01,25,SKL-003|SKL-007|SKL-020,synthetic_demo
+DEMO-S031,Khoa học dữ liệu,Nhân sự,Cần Thơ,hybrid,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S032,Ngôn ngữ Anh,Nhân sự,Hà Nội,remote,2027-01-01,25,SKL-003|SKL-004|SKL-007,synthetic_demo
+DEMO-S033,Tài chính,Nhân sự,Bắc Ninh,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S034,Kế toán,Nhân sự,TP. Hồ Chí Minh,hybrid,2027-01-01,25,SKL-003|SKL-007|SKL-015,synthetic_demo
+DEMO-S035,Công nghệ thông tin,Nhân sự,Hà Nội,remote,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S036,Marketing,Nhân sự,Đà Nẵng,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S037,Quản trị kinh doanh,Nhân sự,Hà Nội,hybrid,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S038,Logistics,Nhân sự,Hà Nội,remote,2027-01-01,25,SKL-003|SKL-007|SKL-008,synthetic_demo
+DEMO-S039,Khoa học dữ liệu,Nhân sự,TP. Hồ Chí Minh,onsite,2027-01-01,25,SKL-003|SKL-007,synthetic_demo
+DEMO-S040,Ngôn ngữ Anh,Nhân sự,Hà Nội,hybrid,2027-01-01,25,SKL-003|SKL-007|SKL-020,synthetic_demo

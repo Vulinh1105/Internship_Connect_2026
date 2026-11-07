@@ -1,0 +1,91 @@
+﻿question_id,rubric_version,criterion_id,criterion,weight,score_0,score_1,score_2
+DATA-01,1,C1,phát hiện mức hạt dữ liệu theo order_id,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DATA-01,1,C2,giải thích cách gộp theo đơn,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DATA-01,1,C3,đối chiếu tổng trước và sau gộp,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DATA-02,1,C1,kiểm kỳ và múi giờ,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DATA-02,1,C2,đối chiếu bộ lọc và cách tính,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DATA-02,1,C3,khoanh vùng theo ngày hoặc nguồn,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DATA-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DATA-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DATA-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-01,1,C1,phân biệt doanh thu và thu tiền,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-01,1,C2,kiểm phải thu và tồn kho,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-01,1,C3,nêu dữ liệu kiểm chứng,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-02,1,C1,nêu giả định,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-02,1,C2,tách biến đầu vào khỏi kết quả,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-02,1,C3,so sánh kịch bản và đơn vị,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+FIN-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-01,1,C1,xác định mục tiêu chuyển đổi,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-01,1,C2,kiểm nguồn truy cập và CTA,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-01,1,C3,đề xuất cách đo thử nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-02,1,C1,xác định đối tượng,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-02,1,C2,sắp xếp các bước thực hành,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-02,1,C3,đưa CTA và cách kiểm tra hữu ích,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+MKT-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-01,1,C1,thu thập thời gian khả dụng,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-01,1,C2,xử lý xung đột và xác nhận,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-01,1,C3,giữ thông tin ứng viên đúng người,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-02,1,C1,kiểm quy định,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-02,1,C2,gửi yêu cầu bổ sung rõ hạn,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-02,1,C3,ghi trạng thái mà không tự suy diễn,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+HR-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-01,1,C1,xác định khóa sinh viên và tin,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-01,1,C2,đề xuất unique constraint hoặc idempotency,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-01,1,C3,kiểm thử hai request đồng thời,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-02,1,C1,kiểm HTTP response,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-02,1,C2,kiểm bộ lọc nghiệp vụ,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-02,1,C3,đối chiếu dữ liệu và cách render,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+DEV-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-01,1,C1,nêu tiêu chí phù hợp,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-01,1,C2,ưu tiên theo tín hiệu có dữ liệu,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-01,1,C3,ghi kế hoạch theo dõi,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-02,1,C1,ghi nhu cầu và lý do trì hoãn,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-02,1,C2,xác định bước tiếp theo,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-02,1,C3,phân biệt nhận định và dữ kiện,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BIZ-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-01,1,C1,kiểm ngày và mã giao dịch,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-01,1,C2,phân biệt chênh lệch thời điểm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-01,1,C3,lưu bằng chứng trước điều chỉnh,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-02,1,C1,so số hóa đơn nhà cung cấp và số tiền,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-02,1,C2,đối chiếu chứng từ,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-02,1,C3,đề xuất xử lý có phê duyệt,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+ACC-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-01,1,C1,đo thời gian từng bước,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-01,1,C2,phân biệt lưu lượng và năng lực,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-01,1,C3,đề xuất đo sau thay đổi,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-02,1,C1,liệt kê đầu vào và đầu ra,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-02,1,C2,mô tả bước và người chịu trách nhiệm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-02,1,C3,ghi ngoại lệ và cách xác minh,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+OPS-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-01,1,C1,xem dữ liệu bỏ dở,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-01,1,C2,kiểm thử với người dùng,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-01,1,C3,đề xuất thay đổi và tiêu chí đo,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-02,1,C1,vẽ trạng thái chính và lỗi,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-02,1,C2,thiết kế thông báo có hành động,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-02,1,C3,thử tác vụ với người dùng,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+UX-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-01,1,C1,đối chiếu SKU và vị trí,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-01,1,C2,kiểm giao dịch nhập xuất,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-01,1,C3,ghi nhận sai lệch và cách xác minh,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-02,1,C1,xác định đơn chịu ảnh hưởng,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-02,1,C2,ưu tiên theo cam kết,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-02,1,C3,cập nhật ETA có nguồn và phương án,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+LOG-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
