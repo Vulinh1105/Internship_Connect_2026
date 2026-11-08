@@ -69,7 +69,8 @@ def verify_flows():
     job=payload(company.post("/api/jobs",json={"company_id":company_id,"title":"Thuc tap SQL Python",
          "description":"Phan tich du lieu SQL Python va viet bao cao kiem thu.",
          "requirements":"Kien thuc SQL","category":"Data","location":"Ha Noi","work_mode":"hybrid",
-         "skills":["SQL","Python"],"deadline":(now()+timedelta(days=30)).date().isoformat()}),201)
+         "skills":["SQL","Python"],"deadline":(now()+timedelta(days=30)).date().isoformat(),
+         "experience":"6 thang","education":"Đại học trở lên","quantity":2,"employment_schedule":"full_time","address":"12 Tran Hung Dao"}),201)
     jid=job["id"]
     assert guest.get(f"/api/jobs/{jid}").status_code==404
     assert student.post(f"/api/jobs/{jid}/review",json={"decision":"approved"}).status_code==403
@@ -81,6 +82,10 @@ def verify_flows():
     assert len(followed)==1 and "Thuc tap SQL Python" in followed[0]["message"]
     assert not any(n["kind"]=="company_new_job" for n in payload(company.get("/api/notifications")))
     assert payload(guest.get(f"/api/jobs/{jid}"))["active"]
+    extra=payload(guest.get(f"/api/jobs/{jid}"))["details"]
+    assert extra["quantity"]==2 and extra["education"]=="Đại học trở lên" and extra["address"]=="12 Tran Hung Dao"
+    assert company.post("/api/jobs",json={"company_id":company_id,"title":"Sai hoc van","description":"Mo ta du dai de hop le.",
+         "requirements":"Yeu cau","category":"Data","location":"Ha Noi","work_mode":"hybrid","education":"Tiến sĩ"}).status_code==422
     approved=[n for n in payload(company.get("/api/notifications")) if n["kind"]=="job_approved" and n["target_id"]==jid]
     assert approved and "Thuc tap SQL Python" in approved[0]["message"]
     assert vectors.entries("jobs",vectors.filters(entity_id=jid))

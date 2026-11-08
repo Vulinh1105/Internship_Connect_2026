@@ -3,18 +3,32 @@ import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,mod
 import {jobCard,loginRequired} from './public.js';
 import {logoTile} from '../components/media.js';
 
+const educations=[['','Chưa nêu'],'Không yêu cầu','Sinh viên đại học/cao đẳng','Sinh viên năm cuối','Mới tốt nghiệp','Trung cấp trở lên','Cao đẳng trở lên','Đại học trở lên','Thạc sĩ trở lên'];
+const part=(title,html)=>'<section class="form-section"><h3>'+title+'</h3>'+html+'</section>';
+const wide=html=>'<div class="wide">'+html+'</div>';
 function jobFields(companies,j={}){
-  return '<div class="form-grid">'+select('company_id','Doanh nghiệp',companies.map(c=>[c.id,c.name]),j.company_id)
-    +field('title','Tiêu đề',j.title,'text','required')+field('category','Ngành',j.category,'text','required')
-    +field('location','Địa điểm',j.location,'text','required')+select('work_mode','Hình thức',modes,j.work_mode)
-    +select('level','Cấp độ',[['intern','Thực tập'],['fresher','Fresher'],['junior','Junior'],['senior','Senior']],j.level)
-    +field('salary_min','Lương từ',j.salary_min,'number','min="0"')+field('salary_max','Lương đến',j.salary_max,'number','min="0"')
-    +field('deadline','Hạn nộp',j.deadline,'date')+'</div>'+field('skills','Kỹ năng, cách nhau bằng dấu phẩy',j.skills?.join(', '))
-    +area('description','Mô tả',j.description,'required minlength="15"')+area('requirements','Yêu cầu',j.requirements,'required minlength="4"')
-    +area('benefits','Quyền lợi',j.details?.benefits);
+  const d=j.details||{};
+  const schedules=[['','Chưa chọn'],['part_time','Bán thời gian'],['full_time','Toàn thời gian']];
+  const levels=[['intern','Thực tập'],['fresher','Fresher'],['junior','Junior'],['senior','Senior']];
+  return part('1. Thông tin chung','<div class="form-grid">'+select('company_id','Doanh nghiệp',companies.map(c=>[c.id,c.name]),j.company_id)
+      +select('level','Cấp độ',levels,j.level)+wide(field('title','Tiêu đề',j.title,'text','required'))
+      +field('category','Ngành',j.category,'text','required')+'</div>')
+    +part('2. Địa điểm và hình thức','<div class="form-grid">'+field('location','Tỉnh / thành phố',j.location,'text','required')
+      +select('work_mode','Hình thức',modes,j.work_mode)+select('employment_schedule','Lịch làm việc',schedules,d.employment_schedule)
+      +wide(area('working_hours','Thời gian làm việc (mỗi dòng một khung giờ)',d.working_hours,'rows="2" maxlength="500" placeholder="Thứ 2 - Thứ 6 (từ 08:00 đến 17:00)"'))
+      +wide(field('address','Địa chỉ cụ thể',d.address,'text','maxlength="255"'))+'</div>')
+    +part('3. Yêu cầu ứng viên','<div class="form-grid">'+field('experience','Kinh nghiệm',d.experience,'text','maxlength="100" placeholder="Ví dụ: Không yêu cầu, 6 tháng"')
+      +select('education','Học vấn',educations,d.education)+field('quantity','Số lượng tuyển',d.quantity,'number','min="1" max="1000"')
+      +wide(field('skills','Kỹ năng, cách nhau bằng dấu phẩy',j.skills?.join(', ')))+'</div>')
+    +part('4. Phụ cấp và hạn nộp','<div class="form-grid">'+field('salary_min','Lương từ',j.salary_min,'number','min="0"')
+      +field('salary_max','Lương đến',j.salary_max,'number','min="0"')+field('deadline','Hạn nộp',j.deadline,'date')+'</div>')
+    +part('5. Nội dung tin','<div class="stack">'+area('description','Mô tả',j.description,'required minlength="15"')
+      +area('requirements','Yêu cầu',j.requirements,'required minlength="4"')+area('benefits','Quyền lợi',d.benefits)+'</div>');
 }
 function jobPayload(data){
   return {...data,company_id:Number(data.company_id),skills:list(data.skills),deadline:data.deadline||null,
+    quantity:data.quantity?Number(data.quantity):null,education:data.education||null,
+    employment_schedule:data.employment_schedule||null,
     salary_min:data.salary_min?Number(data.salary_min):null,salary_max:data.salary_max?Number(data.salary_max):null};
 }
 async function workspace({root,user,reload}){

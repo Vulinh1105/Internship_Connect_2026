@@ -9,6 +9,9 @@ from . import repository as repo
 from .models import Job, Review, SavedJob
 from .moderation import assess
 
+# Các trường mô tả thêm của tin, lưu trong cột details cùng với quyền lợi.
+DETAIL_FIELDS=("experience","education","quantity","working_hours","employment_schedule","address")
+
 def is_public(j):
     return (j.status == "open" and j.moderation_status == "approved" and j.deleted_at is None
             and (j.deadline is None or j.deadline >= today()))
@@ -83,9 +86,12 @@ def upsert(db, actor, data, ident=None):
     else:
         j=Job(company_id=data.company_id)
         db.add(j)
-    for key,value in data.model_dump(exclude={"benefits"}).items():
+    for key,value in data.model_dump(exclude={"benefits",*DETAIL_FIELDS}).items():
         setattr(j,key,value)
-    j.details={**(j.details or {}),"benefits":data.benefits}
+    # Bỏ giá trị cũ rồi ghi giá trị mới để doanh nghiệp xóa trống được một trường.
+    details={k:v for k,v in (j.details or {}).items() if k not in DETAIL_FIELDS}
+    details.update({k:getattr(data,k) for k in DETAIL_FIELDS if getattr(data,k) not in (None,"")})
+    j.details={**details,"benefits":data.benefits}
     j.moderation_status="pending"
     j.status="open"
     j.flags=assess(j,actor["id"])

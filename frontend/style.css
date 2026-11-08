@@ -4,7 +4,7 @@
   --forest: #0B2545;
   --deep: #12315E;
   --pine: #1B4580;
-  --leaf: #1D68E0;
+  --leaf: #1a52ad;
   --sage: #8FB8F5;
   --mint: #DDEBFF;
   --ink: var(--forest);
@@ -417,3 +417,9 @@ select.dd-native { position: absolute !important; width: 1px !important; height:
 .notice-text { overflow-wrap: anywhere; }
 .notice-item.unread .notice-text { font-weight: 650; }
 .notice-dot { flex: 0 0 10px; width: 10px; height: 10px; margin-top: 6px; border-radius: 50%; background: var(--leaf); }
+
+/* Form đăng tin chia nhóm */
+.form-section { display: grid; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+.form-section:first-child { padding-top: 0; border-top: 0; }
+.form-section h3 { margin: 0; font-size: .95rem; color: var(--pine); }
+.form-grid .wide { grid-column: 1 / -1; }

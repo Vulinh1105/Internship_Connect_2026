@@ -68,7 +68,6 @@ async function jobs({root,args,user}){
 }
 const levelLabel={intern:'Thực tập',fresher:'Fresher',junior:'Junior',senior:'Senior'};
 const scheduleLabel={part_time:'Bán thời gian',full_time:'Toàn thời gian'};
-const programLabel={internship:'Thực tập',trainee:'Thực tập sinh'};
 const svg=path=>'<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+path+'</svg>';
 const iconPin=svg('<path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>');
 const iconExp=svg('<circle cx="12" cy="9" r="5"/><path d="m9 13-1 8 4-2 4 2-1-8"/>');
@@ -88,11 +87,11 @@ async function job({root,args,user}){
   const workMode=modes.find(([key])=>key===j.work_mode)?.[1];
   root.innerHTML='<p class="crumbs"><a href="#home">Trang chủ</a> › <a href="#jobs">Vị trí thực tập</a> › '+esc(j.title)+'</p><div class="detail-layout"><div class="detail-main">'
     +box('<h1>'+esc(j.title)+'</h1><p class="salary">'+esc(money(j.salary_min,j.salary_max))+'</p>'
-      +'<div class="info-trio">'+infoItem(iconPin,'Địa điểm',j.location)+infoItem(iconExp,'Kinh nghiệm',d.experience||'—')+infoItem(iconCal,'Hạn ứng tuyển',j.deadline||'Linh hoạt')+'</div>'
+      +'<div class="info-trio">'+infoItem(iconPin,'Địa điểm',d.address?d.address+', '+j.location:j.location)+infoItem(iconExp,'Kinh nghiệm',d.experience||'—')+infoItem(iconCal,'Hạn ứng tuyển',j.deadline||'Linh hoạt')+'</div>'
       +'<div class="cta-row">'+(canApply?'<button type="button" data-action="goto-apply">Ứng tuyển ngay</button>':!user?'<a class="button" href="#login">Đăng nhập để ứng tuyển</a>':'')
       +(user&&j.active?saveButton(j.id,j.title,ids.has(j.id)):'')+'</div>')
     +box('<h2 class="section-title">Tổng quan</h2>'+overviewRow('Kỹ năng',j.skills?.length?tags(...j.skills):'')+overviewRow('Ngành',tags(j.category))
-      +overviewRow('Hình thức',tags(workMode))+overviewRow('Thời gian',d.working_hours?tags(d.working_hours):''))
+      +overviewRow('Hình thức',tags(workMode))+overviewRow('Thời gian',d.working_hours?tags(...String(d.working_hours).split('\n').map(x=>x.trim()).filter(Boolean)):''))
     +box('<h2 class="section-title">Mô tả công việc</h2>'+bullets(j.description)+'<h2 class="section-title">Yêu cầu</h2>'+bullets(j.requirements)
       +(d.benefits?'<h2 class="section-title">Quyền lợi</h2>'+bullets(d.benefits):''))
     +'</div><aside class="detail-side">'
@@ -102,7 +101,7 @@ async function job({root,args,user}){
       +link('company/'+j.company_id,'Xem trang công ty')).replace('class="panel"','class="panel company-card"')
     +box('<h2 class="section-title">Thông tin chung</h2><dl class="facts">'+fact('Cấp bậc',levelLabel[j.level]||j.level)+fact('Học vấn',d.education)
       +fact('Số lượng tuyển',d.quantity?d.quantity+' người':'')+fact('Hình thức làm việc',workMode)
-      +fact('Loại hình',[scheduleLabel[d.employment_schedule],programLabel[d.program_type]].filter(Boolean).join(' · '))+'</dl>')
+      +fact('Lịch làm việc',scheduleLabel[d.employment_schedule])+'</dl>')
     +'</aside></div>';
   bindHearts(root,user,ids);
   action(root,'goto-apply',()=>root.querySelector('#apply-section')?.scrollIntoView({behavior:'smooth'}));
