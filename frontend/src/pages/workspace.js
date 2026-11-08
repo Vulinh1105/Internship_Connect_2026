@@ -80,11 +80,13 @@ async function knowledge({root,user,reload}){
   const docs=await api('/knowledge');
   root.innerHTML=heading('Tài liệu chatbot')+box(form('add-doc',field('title','Tiêu đề','','text','required')+field('topic','Chủ đề','FAQ')
     +area('content','Nội dung','','required minlength="15"'),'Thêm tài liệu'))
-    +box(form('upload-doc',field('title','Tiêu đề','','text','required')+'<label class="field">Tệp văn bản<input name="file" type="file" required accept=".md,.txt,.pdf,.docx"></label>','Tải tài liệu'))
-    +grid(docs.map(d=>'<article class="card"><h3>'+esc(d.title)+'</h3>'+tags(status(d.status),d.source,'v'+d.version)
-       +(d.status==='published'?btn('archive','Lưu trữ',d.id):'')+'</article>'));
+    +box(form('upload-doc',field('title','Tiêu đề','','text','required')+'<label class="field">Tệp văn bản (tối đa 50 MB, PDF tối đa 600 trang)<input name="file" type="file" required accept=".md,.txt,.pdf,.docx"></label>','Tải tài liệu'))
+    +grid(docs.map(d=>'<article class="card"><h3>'+esc(d.title)+'</h3>'+tags(status(d.status),d.source,'v'+d.version,d.status==='published'?(d.vector_synced_at?'Đã lập chỉ mục':'Chờ lập chỉ mục'):'')
+       +(d.status==='published'?btn('archive','Lưu trữ',d.id)
+          +(d.source.replaceAll('\\','/').startsWith('data/knowledge/')&&d.source.toLowerCase().endsWith('.pdf')?btn('reprocess','Đọc lại PDF',d.id):''):'')+'</article>'));
   bindForm(root,'add-doc',async data=>{await api('/knowledge',{method:'POST',data});await reload();});
   bindForm(root,'upload-doc',async data=>{await api('/knowledge/upload',{method:'POST',data});await reload();},{keepFiles:true});
+  action(root,'reprocess',async id=>{toast('Đang đọc lại PDF. Bản scan có thể mất vài phút.');await api('/knowledge/'+id+'/reprocess',{method:'POST'});toast('Đã đọc lại PDF');await reload();});
   action(root,'archive',async id=>{if(confirm('Gỡ tài liệu khỏi tri thức công khai?')){await api('/knowledge/'+id,{method:'DELETE'});await reload();}});
 }
 export const pages={workspace,edit,applicants,moderation,accounts,knowledge};

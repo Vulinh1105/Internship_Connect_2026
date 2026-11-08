@@ -35,11 +35,13 @@ def refresh(db,kind,ident):
     digest=sha256(json.dumps([texts,payload],ensure_ascii=False,sort_keys=True).encode()).hexdigest()
     old=vectors.entries(kind,vectors.filters(entity_id=ident))
     if len(old)==len(texts) and all(p.payload.get("hash")==digest for p in old):
+        if kind=="knowledge" and info["content_hash"]!=digest:
+            knowledge.mark_synced(db,ident,digest,texts)
         return
-    if texts:
-        values=embed(texts)
+    for start in range(0,len(texts),32):
+        values=embed(texts[start:start+32])
         vectors.upsert(kind,[(vectors.point_id(kind,ident,i),v,{**payload,"entity_id":ident,"position":i,"hash":digest})
-                             for i,v in enumerate(values)])
+                             for i,v in enumerate(values,start)])
     keep={vectors.point_id(kind,ident,i) for i in range(len(texts))}
     vectors.delete_points(kind,[p.id for p in old if p.id not in keep])
     if kind=="jobs":

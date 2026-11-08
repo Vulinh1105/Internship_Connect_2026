@@ -96,4 +96,4 @@ def download(db,actor,ident):
     a=authorized(db,actor,ident)
     if a.cv_id is None:
         raise HTTPException(404,"Đơn chưa đính kèm CV")
-    return students.file_for_student(db,a.student_id,a.cv_id)
+    return students.file_for_student(db,a.student_id,a.cv_id,submitted=True)

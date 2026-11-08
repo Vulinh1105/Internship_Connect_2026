@@ -1,11 +1,12 @@
 from hashlib import sha256
 from pathlib import Path
 from fastapi import HTTPException
-from sqlalchemy import select
+from sqlalchemy import select, update
 from app.common.records import first,record,require
 from app.common import storage,file_parsing
 from app.ai.providers.embedding import normalize,words
-from app.ai.providers.llm import structured
+from app.core.config import now
+from sqlalchemy.exc import IntegrityError
 from .models import Student,Skill,CV
 from .schemas import CVFacts
 from . import repository as repo
@@ -24,7 +25,8 @@ def get_own(db,actor):
     return require(first(db,Student,user_id=actor["id"]),"Chưa có hồ sơ sinh viên")
 
 def profile(db,actor):
-    return record(get_own(db,actor))
+    student=get_own(db,actor)
+    return {**record(student),"skills":match_input(db,student.id)["skills"]}
 
 def public_name(db,ident):
     s=require(repo.get_student(db,ident))
@@ -35,16 +37,19 @@ def user_id_for(db,ident):
 
 def match_input(db,student_id,cv_id=None):
     s=require(repo.get_student(db,student_id))
-    options=select(CV).where(CV.student_id==s.id,CV.confirmed.is_(True))
+    options=select(CV).where(CV.student_id==s.id,CV.confirmed.is_(True),CV.archived.is_(False))
     if cv_id is not None:
         options=options.where(CV.id==cv_id)
-    cv=db.scalar(options.order_by(CV.id.desc()).limit(1))
+    cv=db.scalar(options.order_by(CV.created_at.desc(),CV.id.desc()).limit(1))
     if cv:
-        content=" ".join(cv.extracted.get("projects",[])+cv.extracted.get("experience",[]))
+        content=cv_text(cv)
+        skills=cv.extracted.get("skills",[])
     else:
+        archived=db.scalars(select(CV.extracted).filter_by(student_id=s.id,archived=True))
+        archived_skills={skill for facts in archived for skill in facts.get("skills",[])}
+        skills=[skill for skill in s.skills if skill not in archived_skills]
         content=s.summary
     safe=file_parsing.redact(content,s.name)[:4000]
-    skills=s.skills
     return {"student_id":s.id,"major":s.major,"skills":skills,"preferences":s.preferences,
             "text":" ".join([s.major, s.preferences.get("target_category","")," ".join(skills),safe]),
             "cv_id":cv.id if cv else None}
@@ -78,68 +83,96 @@ def update_profile(db,actor,data):
     return record(s)
 
 def view_cv(cv):
-    return record(cv,"id","original_name","extracted","confirmed","created_at")
+    return {**record(cv,"id","original_name","extracted","confirmed","created_at"),"has_text":bool(cv.parsed_text.strip())}
 
 def list_cvs(db,actor):
     s=get_own(db,actor)
-    return [view_cv(c) for c in db.scalars(select(CV).filter_by(student_id=s.id).order_by(CV.id.desc()))]
+    return [view_cv(c) for c in db.scalars(select(CV).filter_by(student_id=s.id,archived=False).order_by(CV.created_at.desc(),CV.id.desc()))]
 
 def own_cv(db,actor,ident):
     s=get_own(db,actor)
-    return require(first(db,CV,id=ident,student_id=s.id),"Không tìm thấy CV của bạn")
+    return require(first(db,CV,id=ident,student_id=s.id,archived=False),"Không tìm thấy CV của bạn")
 
-def upload(db,actor,name,data,ai_consent):
+def archive_cv(db,cv):
+    from app.ai.vector.sync import enqueue
+    changed=db.execute(update(CV).where(CV.id==cv.id,CV.archived.is_(False)).values(archived=True))
+    if changed.rowcount!=1:
+        raise HTTPException(409,"CV vừa thay đổi. Hãy tải lại trang.")
+    enqueue(db,"cvs",cv.id)
+
+
+def remove_cv(db,actor,ident):
+    archive_cv(db,own_cv(db,actor,ident))
+    db.commit()
+
+
+def upload(db,actor,name,data,*,replace_id=None):
+    from app.ai.vector.sync import enqueue
     s=get_own(db,actor)
+    old=own_cv(db,actor,replace_id) if replace_id is not None else None
     digest=sha256(data).hexdigest()
-    previous=first(db,CV,student_id=s.id,content_hash=digest)
-    if previous:
-        return view_cv(previous)
-    key=storage.save(data,name,folder="cvs",allowed={".pdf",".docx",".txt"},max_bytes=5_000_000)
-    path=storage.resolve(key)
+    cv=first(db,CV,student_id=s.id,content_hash=digest)
+    path=None
     try:
-        safe=file_parsing.redact(file_parsing.parse(path),s.name)
-        normal=normalize(safe)
-        known=[v["name"] for v in skills_catalog(db) if set(words(v["name"])) and normalize(v["name"]) in normal]
-        fallback=CVFacts(skills=known).model_dump()
-        extracted=structured(CVFacts,"Trích xuất các mục được nêu trong CV, không bổ sung thông tin.",
-                             {"cv":safe},fallback,user_id=actor["id"],feature="cv_extract") if ai_consent else CVFacts(**fallback)
-        facts=extracted.model_dump()
-        facts["skills"],facts["pending_skills"]=canonical(db,facts["skills"])
-        cv=CV(student_id=s.id,original_name=Path(name).name[:255],storage_key=key,parsed_text=safe,
-              content_hash=digest,extracted=facts,confirmed=False)
-        db.add(cv)
+        if cv is None:
+            key=storage.save(data,name,folder="cvs",allowed={".pdf",".docx",".txt"},max_bytes=5_000_000)
+            path=storage.resolve(key)
+            safe=file_parsing.redact(file_parsing.parse(path,allow_empty_pdf=True),s.name)[:15_000]
+            terms=" "+" ".join(words(safe))+" "
+            skills=[v["name"] for v in skills_catalog(db)
+                    if (tokens:=words(v["name"])) and (" "+" ".join(tokens)+" ") in terms]
+            cv=CV(student_id=s.id,original_name=Path(name).name[:255],storage_key=key,parsed_text=safe,
+                  content_hash=digest,extracted=CVFacts(skills=skills[:40]).model_dump())
+            db.add(cv)
+        if old is not None and old.id!=cv.id:
+            archive_cv(db,old)
+        if cv.archived or (old is not None and old.id!=cv.id):
+            cv.created_at=now()
+        cv.archived=False
+        cv.confirmed=True
+        db.flush()
+        enqueue(db,"cvs",cv.id)
         db.commit()
-        return view_cv(cv)
-    except Exception:
-        path.unlink(missing_ok=True)
+    except Exception as exc:
+        db.rollback()
+        if path is not None:
+            path.unlink(missing_ok=True)
+        if isinstance(exc,IntegrityError):
+            raise HTTPException(409,"CV vừa được cập nhật. Hãy tải lại trang và thử lại.") from exc
         raise
+    return view_cv(cv)
+
 
 def confirm(db,actor,ident,facts):
     from app.ai.vector.sync import enqueue
-    s=get_own(db,actor)
     cv=own_cv(db,actor,ident)
     values=facts.model_dump()
     values["skills"],unknown=canonical(db,values["skills"])
     values["pending_skills"]=unknown
     cv.extracted=values
     cv.confirmed=True
-    s.skills=list(dict.fromkeys(s.skills+values["skills"]))
-    s.details={**s.details,"cv_facts":values,"pending_skills":unknown}
     enqueue(db,"cvs",cv.id)
     db.commit()
     return view_cv(cv)
 
+def cv_text(cv):
+    return " ".join(cv.extracted.get("projects",[])+cv.extracted.get("experience",[])) or cv.parsed_text
+
+
 def vector_record(db,ident):
     c=repo.get_cv(db,ident)
-    if not c or not c.confirmed:
+    if not c or not c.confirmed or c.archived:
         return None
     s=require(repo.get_student(db,c.student_id))
-    parts=c.extracted.get("skills",[])+c.extracted.get("projects",[])+c.extracted.get("experience",[])
-    return {"text":file_parsing.redact(" ".join(parts),s.name)[:8000],"user_id":s.user_id}
+    parts=c.extracted.get("skills",[])+[cv_text(c)]
+    text=file_parsing.redact(" ".join(parts),s.name).strip()[:8000]
+    return {"text":text,"user_id":s.user_id} if text else None
 
-def file_for_student(db,student_id,cv_id):
-    cv=require(first(db,CV,id=cv_id,student_id=student_id),"Không tìm thấy CV")
+def file_for_student(db,student_id,cv_id,*,submitted=False):
+    cv=first(db,CV,id=cv_id,student_id=student_id)
+    if cv is None or (cv.archived and not submitted):
+        raise HTTPException(404,"Không tìm thấy CV")
     return storage.resolve(cv.storage_key),cv.original_name
 
 def confirmed_cv_ids(db):
-    return set(db.scalars(select(CV.id).where(CV.confirmed.is_(True))))
+    return set(db.scalars(select(CV.id).where(CV.confirmed.is_(True),CV.archived.is_(False))))

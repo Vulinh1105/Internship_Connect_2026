@@ -1,35 +1,35 @@
 import {api} from '../api/client.js';
-import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,modes,list,status,toast,bindForm,action} from '../components/ui.js';
+import {esc,tags,box,copy,empty,heading,field,select,link,btn,form,grid,status,toast,bindForm,action} from '../components/ui.js';
 import {jobCard,loginRequired} from './public.js';
 
-const facts=[['skills','Kỹ năng'],['education','Học vấn'],['experience','Kinh nghiệm'],['projects','Dự án'],['certificates','Chứng chỉ'],['languages','Ngoại ngữ']];
-const lineList=value=>String(value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+const cvFile='<label class="field">Tệp .pdf, .docx hoặc .txt (tối đa 5 MB)<input type="file" name="file" required accept=".pdf,application/pdf,.docx,.txt"></label>';
+
 async function profile({root,user,reload}){
   if(!user)return loginRequired(root);
-  const [p,cvs,catalog]=await Promise.all([api('/students/me'),api('/students/me/cvs'),api('/students/skills')]);
-  const pref=p.preferences;
-  root.innerHTML=heading('Hồ sơ & CV','Kiểm tra dữ liệu trích xuất trước khi đưa vào gợi ý vị trí.')
-    +box(form('profile','<div class="form-grid">'+field('name','Họ tên',p.name,'text','required')+field('major','Chuyên ngành',p.major)
-    +field('target_category','Ngành muốn làm',pref.target_category)+field('preferred_location','Địa điểm mong muốn',pref.preferred_location)
-    +select('preferred_work_mode','Hình thức',[['','Linh hoạt'],...modes],pref.preferred_work_mode)
-    +field('salary_min','Lương tối thiểu',pref.salary_min,'number','min="0"')+'</div>'
-    +field('skills','Kỹ năng, cách nhau bằng dấu phẩy',p.skills.join(', '))
-    +area('summary','Giới thiệu',p.summary),'Lưu hồ sơ')
-    +'<details><summary>Danh mục kỹ năng</summary>'+tags(...catalog.map(s=>s.name))+'</details>')
-    +box('<h2>Tải CV</h2>'+form('upload','<label class="field">PDF, DOCX hoặc TXT tối đa 5 MB<input type="file" name="file" required accept=".pdf,.docx,.txt"></label>'
-    +'<label><input type="checkbox" name="ai_consent" value="true"> Cho phép dùng mô hình AI để trích xuất văn bản đã lọc thông tin liên hệ</label>','Tải lên'))
-    +cvs.map(c=>box('<h3>'+esc(c.original_name)+'</h3>'+tags(c.confirmed?'Đã xác nhận':'Chờ xác nhận')
-      +'<a href="/api/students/me/cvs/'+c.id+'/download">Tải bản gốc</a><details '+(!c.confirmed?'open':'')+'><summary>Kiểm tra và chỉnh dữ liệu</summary>'
-      +form('cv-'+c.id,facts.map(([key,label])=>area(key,label,(c.extracted[key]||[]).join('\n'))).join(''),'Xác nhận dữ liệu')+'</details>')).join('');
-  bindForm(root,'profile',async data=>{
-    const {name,major,summary,skills,salary_min,...preferences}=data;
-    await api('/students/me',{method:'PUT',data:{name,major,summary,skills:list(skills),preferences:{...preferences,salary_min:salary_min?Number(salary_min):null}}});
-    toast('Đã lưu hồ sơ');await reload();
+  const cvs=await api('/students/me/cvs');
+  root.innerHTML=heading('Hồ sơ & CV','Tải lên và quản lý CV dùng khi ứng tuyển.')
+    +box('<h2>Tải CV</h2>'+form('upload',cvFile,'Tải lên'))
+    +cvs.map(c=>box('<h3>'+esc(c.original_name)+'</h3>'
+      +tags(c.confirmed?'Sẵn sàng sử dụng':'Chờ xác nhận')
+      +(c.has_text===false?copy('Có thể đính kèm CV khi ứng tuyển. Gợi ý theo nội dung cần CV có văn bản đọc được.'):'')
+      +'<div class="row"><a href="/api/students/me/cvs/'+c.id+'/download">Tải bản gốc</a>'
+      +(!c.confirmed?btn('activate-cv','Dùng CV này',c.id):'')+btn('remove-cv','Xóa CV',c.id)+'</div>'
+      +'<details><summary>Thay CV</summary>'+form('replace-'+c.id,cvFile,'Lưu CV mới')+'</details>')).join('');
+  bindForm(root,'upload',async data=>{
+    await api('/students/me/cvs',{method:'POST',data});toast('Đã tải CV');await reload();
+  },{keepFiles:true});
+  for(const c of cvs)bindForm(root,'replace-'+c.id,async data=>{
+    await api('/students/me/cvs/'+c.id,{method:'PUT',data});toast('Đã thay CV');await reload();
+  },{keepFiles:true});
+  action(root,'activate-cv',async id=>{
+    const cv=cvs.find(c=>c.id===Number(id));
+    await api('/students/me/cvs/'+id+'/confirm',{method:'POST',data:cv.extracted});
+    toast('CV đã sẵn sàng sử dụng');await reload();
   });
-  bindForm(root,'upload',async data=>{await api('/students/me/cvs',{method:'POST',data});toast('Hãy kiểm tra dữ liệu CV');await reload();},{keepFiles:true});
-  for(const c of cvs)bindForm(root,'cv-'+c.id,async values=>{
-    await api('/students/me/cvs/'+c.id+'/confirm',{method:'POST',data:Object.fromEntries(Object.entries(values).map(([k,v])=>[k,lineList(v)]))});
-    toast('Đã xác nhận CV');await reload();
+  action(root,'remove-cv',async id=>{
+    if(confirm('Xóa CV khỏi hồ sơ? Các đơn đã nộp vẫn giữ bản CV đính kèm.')){
+      await api('/students/me/cvs/'+id,{method:'DELETE'});toast('Đã xóa CV khỏi hồ sơ');await reload();
+    }
   });
 }
 async function matching({root,user}){

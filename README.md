@@ -22,6 +22,28 @@ powershell -ExecutionPolicy Bypass -File .\start.ps1 -Database mysql
 
 Compose tạo MySQL trên cổng 3307 và Qdrant trên cổng 6335. Alembic tạo bảng, script seed nhập dữ liệu mẫu. MySQL giữ dữ liệu nghiệp vụ. Qdrant giữ chỉ mục vector. Nếu chọn hai chế độ vào hai lần khác nhau, mỗi chế độ có dữ liệu nghiệp vụ riêng. Để dùng MySQL có sẵn, tạo database trống và cấu hình `DATABASE_URL` trong `.env`, dùng tùy chọn chạy mặc định với dịch vụ MySQL đã bật.
 
+## Pipeline chatbot chuyển từ chatbot_AI
+
+Mã graph, reranker và kiểm tra nguồn gốc nằm trong `backend/app/ai/rag/legacy/`.
+Tiến trình `legacy_worker.py` chạy graph. `legacy_runtime.py` lấy các đoạn
+tài liệu công khai từ MySQL và collection Tri thức của Internship Connect.
+
+Để cài môi trường riêng trên Windows, chạy từ thư mục dự án:
+
+```powershell
+.\.venv\Scripts\python.exe -m venv .\data\runtime\rag-venv
+.\data\runtime\rag-venv\Scripts\python.exe -m pip install -r .\backend\requirements-rag.txt
+```
+
+Cần có model `BAAI/bge-reranker-v2-m3` trong cache Hugging Face. Sau khi
+chuẩn bị model, đặt `RAG_LEGACY_PYTHON=data/runtime/rag-venv/Scripts/python.exe`
+trong `.env`. Mặc định, bước chọn bằng chứng và sinh câu trả lời của graph
+chạy local.
+
+## OCR cho tài liệu chatbot
+
+Để đọc PDF scan tiếng Việt, đặt [vie.traineddata](https://github.com/tesseract-ocr/tessdata_fast/blob/main/vie.traineddata) vào `data/runtime/tessdata/`. Mục Tri thức sẽ dùng OCR cho những trang scan gần như không có lớp văn bản. Với PDF đã tải lên trước đó, dùng nút **Đọc lại PDF** để cập nhật chỉ mục.
+
 ## Tài khoản thử
 
 Dùng mật khẩu mặc định `LocalDemo2026!` cho bốn tài khoản mẫu. Có thể đặt `DEMO_PASSWORD` trong `.env` trước lần seed đầu.

@@ -1,7 +1,7 @@
 import json
 from typing import Literal
 from pydantic import BaseModel,Field
-from fastapi import APIRouter
+from fastapi import APIRouter,Query
 from fastapi.responses import StreamingResponse
 from app.core.deps import Actor,DB
 from . import service
@@ -15,6 +15,10 @@ class FeedbackInput(BaseModel):
     comment:str=Field(default="",max_length=500)
 
 router=APIRouter(prefix="/api/chat",tags=["chat"])
+
+@router.get("/sessions")
+def sessions(db:DB,actor:Actor,before:int|None=Query(default=None,gt=0)):
+    return service.sessions(db,actor,before)
 
 @router.post("/sessions",status_code=201)
 def create(db:DB,actor:Actor):

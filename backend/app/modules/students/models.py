@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Date, DateTime, Float, ForeignKey, Integer, JSON, String, Text, UniqueConstraint
+from sqlalchemy import Boolean, Column, Date, DateTime, Float, ForeignKey, Integer, JSON, String, Text, UniqueConstraint, false
 from app.core.config import now
 from app.core.database import Base
 
@@ -31,5 +31,6 @@ class CV(Base):
     content_hash = Column(String(64), nullable=False)
     extracted = Column(JSON, nullable=False)
     confirmed = Column(Boolean, default=False, nullable=False)
+    archived = Column(Boolean, server_default=false(), nullable=False)
     created_at = Column(DateTime, default=now, nullable=False)
     __table_args__ = (UniqueConstraint('student_id','content_hash'),)

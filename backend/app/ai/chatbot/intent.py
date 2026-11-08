@@ -28,9 +28,9 @@ def classify(user_id,question,history,summary,has_job,profile):
         kind="mock"
     elif "tu van cv" in t or "cv cua toi" in t:
         kind="cv_advice"
-    elif "so sanh" in t:
+    elif "so sanh" in t and (has_job or any(x in t for x in ("tin ","vi tri","cong viec"))):
         kind="compare"
-    elif "chi tiet" in t or (has_job and "tin nay" in t):
+    elif ("chi tiet" in t and (has_job or "tin " in t or "vi tri" in t)) or (has_job and "tin nay" in t):
         kind="job_detail"
     elif any(x in t for x in ("tu nop","dat han","cho duyet","cong khai","tien ve")):
         kind="knowledge"
@@ -38,10 +38,12 @@ def classify(user_id,question,history,summary,has_job,profile):
         kind="job_search"
     elif any(x in t for x in ("ung tuyen","phong van","cv","ho so","han nop","phu cap","ky nang","kiem duyet","cong khai","cho duyet","dat han","con han","het han")):
         kind="knowledge"
-    else:
+    elif t.strip(" .!?") in {"chao", "xin chao", "chao ban", "hello", "hi", "cam on"}:
         kind="other"
+    else:
+        kind="knowledge"
     loc=next((x for x in ["Hà Nội","Đà Nẵng","Hồ Chí Minh","Cần Thơ"] if normalize(x) in t),"")
     fallback=Intent(intent=kind,confidence=.9,query=question,entities=Entities(location=loc))
-    return structured(Intent,"Viết lại câu hỏi tự đủ ngữ cảnh và phân loại ý định. Chỉ trích bộ lọc có căn cứ.",
+    return structured(Intent,"Viết lại câu hỏi tự đủ ngữ cảnh và phân loại ý định. Dùng knowledge cho câu hỏi thông tin có thể tra trong tài liệu, kể cả chủ đề mới. Chỉ trích bộ lọc có căn cứ.",
                       {"question":question,"recent":history,"summary":summary,"profile":profile},fallback.model_dump(),
                       user_id=user_id,feature="chat_route")

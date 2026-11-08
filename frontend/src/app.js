@@ -1,9 +1,9 @@
 import {api} from './api/client.js';
 import {esc,heading,empty,toast,action,btn} from './components/ui.js';
 import * as publicPages from './pages/public.js';
-import * as student from './pages/student.js';
-import * as workspace from './pages/workspace.js';
-import * as ai from './pages/ai.js';
+import * as student from './pages/student.js?v=cv-pdf-2';
+import * as workspace from './pages/workspace.js?v=chat-history-1';
+import * as ai from './pages/ai.js?v=chat-history-1';
 
 const root=document.querySelector('#page'), nav=document.querySelector('#nav');
 const routes={...publicPages.pages,...student.pages,...workspace.pages,...ai.pages};

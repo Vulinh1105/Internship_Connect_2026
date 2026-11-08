@@ -41,23 +41,46 @@ async function chat({root,user,reload}){
     try{history=await api('/chat/sessions/'+id+'/messages');}
     catch{sessionStorage.removeItem(key(user));id=0;}
   }
+  const sessionList='<details open><summary>Lịch sử hội thoại</summary><div class="row" id="chat-history"></div>'
+    +btn('more-chat','Xem thêm')+'</details>';
   root.innerHTML=heading('Chatbot thực tập','Tìm vị trí, hỏi quy trình, tra cứu đơn của bạn hoặc luyện phỏng vấn.')
-    +box('<div class="row">'+btn('new-chat','Hội thoại mới')+'</div><div class="chat-log" aria-live="polite"></div>'
-    +form('chat',field('message','Câu hỏi','','text','required minlength="2" maxlength="500"')
-      +field('job_ids','Mã tin để xem hoặc so sánh, cách nhau bằng dấu phẩy'),'Gửi'));
+    +box('<div class="row">'+btn('new-chat','Hội thoại mới')+'</div>'+sessionList+'<div class="chat-log" aria-live="polite"></div>'
+    +form('chat',field('message','Câu hỏi','','text','required minlength="2" maxlength="500"'),'Gửi'));
+  const list=root.querySelector('#chat-history');
+  const more=root.querySelector('[data-action="more-chat"]');
+  let before=null;
+  async function loadHistory(append=false){
+    const page=await api('/chat/sessions'+(append?'?before='+before:''));
+    const entries=page.items.map(s=>btn('open-chat',s.title,s.id)).join('');
+    if(append)list.insertAdjacentHTML('beforeend',entries);
+    else list.innerHTML=entries||'<span class="muted">Chưa có hội thoại.</span>';
+    before=page.next;
+    more.hidden=!before;
+    for(const button of list.querySelectorAll('[data-action="open-chat"]')){
+      button.setAttribute('aria-pressed',String(Number(button.dataset.value)===id));
+    }
+  }
+  list.addEventListener('click',async event=>{
+    const button=event.target.closest('[data-action="open-chat"]');
+    if(button){
+      sessionStorage.setItem(key(user),button.dataset.value);
+      await reload();
+    }
+  });
+  action(root,'more-chat',()=>loadHistory(true));
+  await loadHistory();
   const log=root.querySelector('.chat-log');
   if(!history.length)bubble(log,'assistant','Chào bạn! Ví dụ, hãy hỏi “Điều kiện công khai tin là gì?” hoặc “Đơn ứng tuyển của tôi đang ở đâu?”.');
   for(const m of history)bubble(log,m.role,m.text,m.role==='assistant'?{...m.meta,id:m.id}:null);
   action(root,'new-chat',async()=>{sessionStorage.removeItem(key(user));await reload();});
   bindForm(root,'chat',async(data,el)=>{
     if(!id){id=(await api('/chat/sessions',{method:'POST'})).id;sessionStorage.setItem(key(user),id);}
-    const job_ids=data.job_ids.split(',').map(Number).filter(n=>Number.isInteger(n)&&n>0).slice(0,5);
     bubble(log,'user',data.message);
     el.reset();
     const [content,node]=bubble(log,'assistant','Đang xử lý…');
     try{
       let text='';
-      await stream(await api('/chat/sessions/'+id+'/messages',{method:'POST',data:{message:data.message,job_ids}}),(kind,result)=>{
+      await stream(await api('/chat/sessions/'+id+'/messages',{method:'POST',data:{message:data.message}}),(kind,result)=>{
         if(kind==='delta'){text+=result.text;content.textContent=text;}
         if(kind==='result'){
           content.textContent=result.answer;
@@ -66,16 +89,17 @@ async function chat({root,user,reload}){
         log.scrollTop=log.scrollHeight;
       });
     }catch(error){content.textContent=error.message;}
+    await loadHistory();
   });
 }
 async function mock({root,user}){
   if(!user)return loginRequired(root);
   const [roles,history]=await Promise.all([api('/mock-interviews/roles'),api('/mock-interviews')]);
   root.innerHTML=heading('Phỏng vấn ảo','Luyện câu hỏi theo vai trò, xem dẫn chứng và theo dõi tiến bộ.')
-    +box(form('start',select('role','Vai trò',roles)+field('job_id','Mã tin để cá nhân hóa (tùy chọn)',null,'number','min="1"'),'Bắt đầu luyện'))
+    +box(form('start',select('role','Vai trò',roles),'Bắt đầu luyện'))
     +'<h2>Buổi luyện gần đây</h2>'+grid(history.map(s=>box('<h3>'+esc(s.role)+'</h3>'+tags(status(s.state),s.report&&s.report.score+' / 100')
       +link('mock-session/'+s.id,s.state==='active'?'Tiếp tục':'Xem buổi luyện'))));
-  bindForm(root,'start',async data=>{const s=await api('/mock-interviews',{method:'POST',data:{role:data.role,job_id:Number(data.job_id)||null}});location.hash='mock-session/'+s.id;});
+  bindForm(root,'start',async data=>{const s=await api('/mock-interviews',{method:'POST',data:{role:data.role}});location.hash='mock-session/'+s.id;});
 }
 function reportView(r){
   return '<h2>Kết quả luyện tập</h2>'+tags(r.score+' / 100',r.previous_score!=null?'Buổi trước '+r.previous_score:'',r.delta!=null?'Thay đổi '+r.delta:'')

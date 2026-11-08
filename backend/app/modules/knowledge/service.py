@@ -6,9 +6,13 @@ from sqlalchemy import select, text
 from app.common import storage,file_parsing
 from app.common.records import record,require
 from app.ai.providers.embedding import words
-from app.core.config import now,ROOT
+from app.core.config import now,ROOT,RUNTIME
 from .models import Document,Chunk
 from . import repository as repo
+
+MAX_UPLOAD_BYTES = 50_000_000
+MAX_PDF_PAGES = 600
+MAX_DOCUMENT_CHARS = 3_000_000
 
 def admin(actor):
     if actor["role"] not in {"staff","admin"}:
@@ -27,14 +31,23 @@ def publish(db,actor,title,content,source="",topic="FAQ"):
     db.commit()
     return record(d,"id","title","status")
 
+def read_document(path):
+    content = file_parsing.parse(path,max_pdf_pages=MAX_PDF_PAGES,max_chars=None,ocr_tessdata=RUNTIME/"tessdata")
+    if len(content) > MAX_DOCUMENT_CHARS:
+        raise HTTPException(422, "Tài liệu vượt 3 triệu ký tự. Hãy tách thành nhiều phần.")
+    return content
+
+
 def upload(db,actor,name,data,title):
     admin(actor)
     if not title.strip() or len(title)>220:
         raise HTTPException(422,"Tiêu đề không hợp lệ")
-    key=storage.save(data,name,folder="knowledge",allowed={".txt",".md",".pdf",".docx"},max_bytes=10_000_000)
+    if len(data) > MAX_UPLOAD_BYTES:
+        raise HTTPException(413, "Tệp vượt giới hạn 50 MB.")
+    key=storage.save(data,name,folder="knowledge",allowed={".txt",".md",".pdf",".docx"},max_bytes=MAX_UPLOAD_BYTES)
     path=storage.resolve(key)
     try:
-        content=file_parsing.parse(path)
+        content=read_document(path)
         dest=ROOT/"data/knowledge"/path.name
         dest.parent.mkdir(parents=True,exist_ok=True)
         path.replace(dest)
@@ -45,6 +58,23 @@ def upload(db,actor,name,data,title):
             raise
     finally:
         path.unlink(missing_ok=True)
+
+def reprocess(db,actor,ident):
+    from app.ai.vector.sync import enqueue
+    admin(actor)
+    d=require(repo.get_document(db,ident))
+    source=(ROOT/d.source).resolve()
+    if (d.status!="published" or not source.is_relative_to((ROOT/"data/knowledge").resolve())
+            or source.suffix.lower()!=".pdf" or not source.is_file()):
+        raise HTTPException(422,"Chỉ xử lý lại được PDF đang công khai có tệp gốc.")
+    content=read_document(source)
+    if d.content!=content or not d.vector_synced_at:
+        d.content=content
+        d.vector_synced_at=None
+        enqueue(db,"knowledge",d.id)
+        db.commit()
+    return record(d,"id","title","status","vector_synced_at")
+
 
 def remove(db,actor,ident):
     from app.ai.vector.sync import enqueue
@@ -70,7 +100,7 @@ def vector_record(db,ident):
     d=repo.get_document(db,ident)
     if not d or d.status!="published" or d.visibility!="public":
         return None
-    return {"title":d.title,"topic":d.topic,"source":d.source,"version":d.version,"texts":list(split(d.content))}
+    return {"title":d.title,"topic":d.topic,"source":d.source,"version":d.version,"content_hash":d.content_hash,"texts":list(split(d.content))}
 
 def mark_synced(db,ident,digest,texts):
     d=repo.get_document(db,ident)
@@ -86,11 +116,13 @@ def mark_synced(db,ident,digest,texts):
 def public_ids(db):
     return set(db.scalars(select(Document.id).filter_by(status="published",visibility="public")))
 
-def chunks_for(db,ids):
+def chunks_for(db,ids,*,positions=None):
     if not ids:
         return []
     stmt=select(Chunk,Document).join(Document,Chunk.document_id==Document.id).where(
         Document.id.in_(ids),Document.status=="published",Document.visibility=="public")
+    if positions is not None:
+        stmt=stmt.where(Chunk.position.in_(positions))
     return [{"document_id":d.id,"position":c.position,"text":c.text,"title":d.title,"source":d.source} for c,d in db.execute(stmt)]
 
 def lexical(db,query,limit=20):

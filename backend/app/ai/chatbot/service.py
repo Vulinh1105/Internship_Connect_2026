@@ -1,3 +1,4 @@
+import os
 import re
 from sqlalchemy import select
 from time import perf_counter
@@ -7,6 +8,7 @@ from app.core.rate_limit import enforce
 from app.ai.usage import check
 from app.ai.rag.retrieve import retrieve
 from app.ai.rag.generate import answer
+from app.ai.rag import legacy_runtime
 from app.modules.students import service as students
 from app.modules.jobs import service as jobs
 from . import intent,tools
@@ -17,6 +19,18 @@ def create(db,actor):
     db.add(item)
     db.commit()
     return {"id":item.id}
+
+def sessions(db,actor,before=None):
+    question=(select(Message.text).where(Message.session_id==ChatSession.id,Message.role=="user")
+              .order_by(Message.id).limit(1).scalar_subquery())
+    stmt=select(ChatSession.id,ChatSession.created_at,question.label("question")).where(
+        ChatSession.user_id==actor["id"],question.is_not(None))
+    if before is not None:
+        stmt=stmt.where(ChatSession.id<before)
+    rows=list(db.execute(stmt.order_by(ChatSession.id.desc()).limit(21)))
+    return {"items":[{"id":row.id,"created_at":row.created_at,"title":row.question[:90]} for row in rows[:20]],
+            "next":rows[19].id if len(rows)>20 else None}
+
 
 def own(db,actor,ident):
     return require(first(db,ChatSession,id=ident,user_id=actor["id"]),"Không tìm thấy hội thoại")
@@ -38,6 +52,10 @@ def respond(db,actor,ident,data):
         profile={"skills":p["skills"],"major":p["major"],"location":p["preferences"].get("preferred_location")}
     decision=intent.classify(actor["id"],data.message,[{"role":m["role"],"text":m["text"][:350]} for m in recent[-12:]],session.summary, bool(data.job_ids),profile)
     result={"answer":"","jobs":[],"sources":[],"action":None,"tools_used":[]}
+    job_ids=data.job_ids
+    if not job_ids and decision.intent in {"job_detail","compare","cv_advice"}:
+        job_ids=list(dict.fromkeys(j["id"] for message in reversed(recent)
+                                  for j in message["meta"].get("jobs",[])))[:5]
     job_code=re.search(r"\bDEMO-(?:J\d+|F-[A-Z0-9-]+)\b",data.message.upper())
     app_code=re.search(r"\bDEMO-A\d+\b",data.message.upper())
     try:
@@ -66,18 +84,21 @@ def respond(db,actor,ident,data):
                 if relax:
                     result["answer"]+=" Đã mở rộng bộ lọc "+", ".join(relax)+"."
         elif decision.intent in {"job_detail","compare"}:
-            result["jobs"]=tools.compare_jobs(db,actor,data.job_ids) if decision.intent=="compare" else tools.job_details(db,data.job_ids)
+            result["jobs"]=tools.compare_jobs(db,actor,job_ids) if decision.intent=="compare" else tools.job_details(db,job_ids[:1] if not data.job_ids else job_ids)
             result["tools_used"]=["get_job"]
-            result["answer"]="Thông tin từ các tin đang công khai:" if result["jobs"] else "Chọn mã tin đang mở để xem. Tin đã đóng hoặc không tồn tại sẽ không có kết quả."
+            result["answer"]="Thông tin từ các tin đang công khai:" if result["jobs"] else "Hãy tìm tin đang mở trong hội thoại này trước khi xem chi tiết hoặc so sánh."
         elif decision.intent=="application_status":
             items=tools.my_applications(db,actor,app_code.group(0) if app_code else None)
             result["tools_used"]=["get_my_applications"]
             result["answer"]="\n".join(f"#{a['id']} · {a['title']} · {a['status']}" for a in items) or "Bạn chưa có đơn ứng tuyển."
         elif decision.intent=="cv_advice":
-            result["answer"]=tools.cv_advice(db,actor,data.job_ids[0] if data.job_ids else None)
+            result["answer"]=tools.cv_advice(db,actor,job_ids[0] if job_ids else None)
             result["tools_used"]=["compare_cv"]
         elif decision.intent=="knowledge":
-            result.update(answer(actor["id"],decision.query,retrieve(db,actor["id"],decision.query)))
+            if legacy_python:=os.getenv("RAG_LEGACY_PYTHON"):
+                result.update(legacy_runtime.answer(db,actor["id"],decision.query,legacy_python))
+            else:
+                result.update(answer(actor["id"],decision.query,retrieve(db,actor["id"],decision.query)))
             result["tools_used"]=["retrieve_knowledge"]
         elif decision.intent=="mock" and actor["role"]=="student":
             result["answer"]="Bạn có thể chọn vị trí và bắt đầu phiên luyện tập."

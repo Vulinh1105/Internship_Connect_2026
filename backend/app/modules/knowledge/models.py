@@ -1,4 +1,5 @@
 from sqlalchemy import Boolean, Column, Date, DateTime, Float, ForeignKey, Integer, JSON, String, Text, UniqueConstraint
+from sqlalchemy.dialects.mysql import MEDIUMTEXT
 from app.core.config import now
 from app.core.database import Base
 
@@ -8,7 +9,7 @@ class Document(Base):
     code = Column(String(80), unique=True)
     title = Column(String(220), nullable=False)
     source = Column(String(255), nullable=False)
-    content = Column(Text, nullable=False)
+    content = Column(Text().with_variant(MEDIUMTEXT(), "mysql"), nullable=False)
     topic = Column(String(100), default='FAQ', nullable=False)
     version = Column(String(30), nullable=False, default='1')
     visibility = Column(String(20), default='public', nullable=False)

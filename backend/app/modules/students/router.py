@@ -1,4 +1,4 @@
-from fastapi import APIRouter,BackgroundTasks,File,Form,UploadFile
+from fastapi import APIRouter,BackgroundTasks,File,UploadFile
 from fastapi.responses import FileResponse
 from app.common.background import sync_pending
 from app.core.deps import Actor,DB
@@ -24,8 +24,22 @@ def cvs(db:DB,actor:Actor):
     return service.list_cvs(db,actor)
 
 @router.post("/me/cvs",status_code=201)
-def upload(db:DB,actor:Actor,file:UploadFile=File(),ai_consent:bool=Form(False)):
-    return service.upload(db,actor,file.filename or "",file.file.read(5_000_001),ai_consent)
+def upload(db:DB,actor:Actor,tasks:BackgroundTasks,file:UploadFile=File()):
+    result=service.upload(db,actor,file.filename or "",file.file.read(5_000_001))
+    tasks.add_task(sync_pending)
+    return result
+
+@router.put("/me/cvs/{ident}")
+def replace(ident:int,db:DB,actor:Actor,tasks:BackgroundTasks,file:UploadFile=File()):
+    result=service.upload(db,actor,file.filename or "",file.file.read(5_000_001),replace_id=ident)
+    tasks.add_task(sync_pending)
+    return result
+
+@router.delete("/me/cvs/{ident}")
+def remove(ident:int,db:DB,actor:Actor,tasks:BackgroundTasks):
+    service.remove_cv(db,actor,ident)
+    tasks.add_task(sync_pending)
+    return {"ok":True}
 
 @router.post("/me/cvs/{ident}/confirm")
 def confirm(ident:int,data:CVFacts,db:DB,actor:Actor,tasks:BackgroundTasks):

@@ -1,15 +1,33 @@
 import re
 from fastapi import HTTPException
 
-def parse(path):
+def pdf_text(pdf,ocr_tessdata):
+    pages=[]
+    for page in pdf:
+        text=page.get_text()
+        if ocr_tessdata is not None and len(text.strip())<32 and page.get_image_info():
+            if not (ocr_tessdata/"vie.traineddata").is_file():
+                raise HTTPException(422,"PDF scan cần bộ OCR tiếng Việt. Hãy cài vie.traineddata hoặc tải bản PDF có lớp văn bản.")
+            recognized=page.get_textpage_ocr(language="vie",dpi=180,full=True,tessdata=str(ocr_tessdata))
+            text=page.get_text(textpage=recognized)
+        pages.append(text)
+    return "\n".join(pages)
+
+
+def parse(path, *, max_pdf_pages=100, max_chars=160_000, allow_empty_pdf=False, ocr_tessdata=None):
+    suffix = path.suffix.lower()
     try:
-        match path.suffix.lower():
+        match suffix:
             case ".pdf":
                 import pymupdf
-                with pymupdf.open(path) as pdf:
-                    if len(pdf) > 100:
-                        raise HTTPException(422, "Chỉ hỗ trợ tài liệu tối đa 100 trang")
-                    text = "\n".join(page.get_text() for page in pdf)
+                # CV uploads are bounded and can be opened without locking the stored file.
+                document = pymupdf.open(stream=path.read_bytes(), filetype="pdf") if allow_empty_pdf else pymupdf.open(path)
+                with document as pdf:
+                    if len(pdf) == 0 or pdf.needs_pass:
+                        raise HTTPException(422, "PDF phải có ít nhất một trang và mở được không cần mật khẩu.")
+                    if len(pdf) > max_pdf_pages:
+                        raise HTTPException(422, f"Chỉ hỗ trợ tài liệu tối đa {max_pdf_pages} trang")
+                    text = pdf_text(pdf,ocr_tessdata)
             case ".docx":
                 from docx import Document
                 doc = Document(path)
@@ -22,9 +40,9 @@ def parse(path):
     except Exception as exc:
         raise HTTPException(422, "Không đọc được tệp. Kiểm tra định dạng và mật khẩu.") from exc
     text = text.strip()
-    if not text:
+    if not text and not (allow_empty_pdf and suffix == ".pdf"):
         raise HTTPException(422, "Không có văn bản đọc được. Với PDF ảnh, hãy nhập hồ sơ bằng tay.")
-    return text[:160000]
+    return text[:max_chars]
 
 def redact(text, name=""):
     if name:
