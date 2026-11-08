@@ -6,6 +6,9 @@ from app.ai.providers.embedding import normalize,words
 IGNORED={"la","gi","nao","nhung","cac","voi","nhu","the","bao","nhieu","co","cua","va","trong"}
 
 
+NO_DATA_MESSAGE="Xin lỗi, hiện tại tôi chưa tìm thấy thông tin phù hợp với câu hỏi của bạn trong hệ thống dữ liệu."
+QUESTION_FILLER=IGNORED | {"hay","cho","toi","minh","hoi","biet","duoc","khong","the","nao","can","nhung","vay","day","giup"}
+
 MINIMUM_WORK_AGE_QUERY="độ tuổi lao động tối thiểu"
 
 
@@ -27,8 +30,10 @@ def supports_minimum_work_age(quote):
     )
 
 
-def best_passage(query,text,*,minimum_work_age=False):
+def best_passage(query,text,*,minimum_work_age=False,evidence_title=None):
     terms=set(query)-IGNORED
+    required=set(query)-QUESTION_FILLER
+    title_terms=set(words(evidence_title or ""))
     phrases={pair for pair in zip(query,query[1:]) if not IGNORED.intersection(pair)}
     long_phrases={triple for triple in zip(query,query[1:],query[2:]) if not IGNORED.intersection(triple)}
     sentences=list(re.finditer(r".+?(?:(?<!\d)[.!?;](?=\s|$)|$)",text,re.S))
@@ -59,6 +64,12 @@ def best_passage(query,text,*,minimum_work_age=False):
                     break
                 end=following.end()
         quote=text[sentence.start():min(end,sentence.start()+560)].strip()
-        if len(quote)>=8 and (not minimum_work_age or supports_minimum_work_age(quote)):
-            best_score,best_quote=score,quote
+        if len(quote)<8:
+            continue
+        if minimum_work_age:
+            if not supports_minimum_work_age(quote):
+                continue
+        elif evidence_title is not None and (len(required)<2 or not required<=title_terms | set(words(quote))):
+            continue
+        best_score,best_quote=score,quote
     return best_score,best_quote

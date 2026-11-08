@@ -13,7 +13,7 @@ class Entities(BaseModel):
     skills: list[str]=Field(default_factory=list,max_length=12)
 
 class Intent(BaseModel):
-    intent: Literal["job_search","job_detail","compare","application_status","knowledge","cv_advice","mock","other"]
+    intent: Literal["hiring_companies","job_search","job_detail","compare","application_status","knowledge","cv_advice","mock","other"]
     confidence: float=Field(ge=0,le=1)
     query: str=Field(max_length=500)
     entities: Entities=Field(default_factory=Entities)
@@ -22,6 +22,8 @@ def classify(user_id,question,history,summary,has_job,profile):
     t=normalize(question)
     if re.search(r"\b(bo qua (chi dan|huong dan)|ignore (all|previous)|system prompt|lay api key)\b",t):
         return Intent(intent="other",confidence=1,query=question)
+    if re.fullmatch(r"(?:hien tai\s+)?(?:(?:nhung|cac)\s+)?(?:cong ty|doanh nghiep)\s+nao\s+(?:dang|hien dang)\s+tuyen(?:\s+dung)?[?.!\s]*",t):
+        return Intent(intent="hiring_companies",confidence=1,query=question)
     if re.search(r"\bdemo-a\d+\b",t) or any(x in t for x in ("don cua toi","don ung tuyen cua toi","trang thai ung tuyen")):
         kind="application_status"
     elif "phong van thu" in t or "phong van ao" in t:

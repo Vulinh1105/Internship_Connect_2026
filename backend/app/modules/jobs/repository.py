@@ -9,6 +9,12 @@ def visible():
     return (Job.status == "open", Job.moderation_status == "approved",
             Job.deleted_at.is_(None), or_(Job.deadline.is_(None), Job.deadline >= today()))
 
+def hiring_company_ids(db, limit):
+    count = func.count(Job.id)
+    stmt = (select(Job.company_id).where(*visible()).group_by(Job.company_id)
+            .order_by(count.desc(), Job.company_id).limit(limit))
+    return list(db.scalars(stmt))
+
 def find(db, q="", location="", category="", work_mode="", level="", salary_min=None, salary_max=None, offset=0, limit=20, company_id=None):
     stmt = select(Job).where(*visible())
     if company_id is not None:

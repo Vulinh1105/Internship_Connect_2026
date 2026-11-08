@@ -3,6 +3,7 @@ from app.ai.vector import client as vectors
 from app.modules.knowledge import service as knowledge
 from fastapi import HTTPException
 from .relevance import MINIMUM_WORK_AGE_QUERY,asks_minimum_work_age,best_passage
+from .legacy_fusion import fuse_ranks
 
 
 
@@ -14,23 +15,22 @@ def retrieve(db,user_id,question,*,limit=5):
     terms=words(question)
     query=set(terms)
     lexical=knowledge.lexical(db,question,50)
-    by_key={(d["document_id"],d["position"]):d for d in lexical}
-    rr={k:1/(60+i+1) for i,k in enumerate(by_key)}
+    semantic=[]
     try:
         vector=embed([question],user_id)[0]
         matches=vectors.search("knowledge",vector,limit=50)
         authoritative=knowledge.chunks_for(db,{p.payload["entity_id"] for p in matches})
         actual={(d["document_id"],d["position"]):d for d in authoritative}
-        for i,p in enumerate(matches):
+        for p in matches:
             key=(p.payload["entity_id"],p.payload["position"])
             if key in actual:
-                by_key[key]=actual[key]
-                rr[key]=rr.get(key,0)+1/(60+i+1)
+                semantic.append(actual[key])
     except HTTPException as exc:
         if exc.status_code==429:
             raise
     except Exception:
         pass
+    rr,by_key=fuse_ranks(semantic,lexical)
     def rank(k):
         d=by_key[k]
         overlap=len(query.intersection(words(d["title"]+" "+d["text"])))

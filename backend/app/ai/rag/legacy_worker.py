@@ -36,7 +36,9 @@ class StoreRetriever:
 
 def judge_locally(query, chunks):
     texts = [chunk.metadata["full_text"] for chunk in chunks]
-    send({"type": "evidence", "query": query, "texts": texts})
+    send({"type": "evidence", "query": query, "chunks": [
+        {"text": text, "title": chunk.metadata["source"]} for text, chunk in zip(texts, chunks)
+    ]})
     selected = json.loads(sys.stdin.readline()).get("evidence", [])
     indices = []
     for item in selected:

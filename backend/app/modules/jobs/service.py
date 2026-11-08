@@ -40,6 +40,9 @@ def brief(db, ident):
 def public_detail(db, ident):
     return detail(db, ident)
 
+def hiring_companies(db, limit=10):
+    return [companies.company_name(db, ident) for ident in repo.hiring_company_ids(db, limit)]
+
 def public_ids(db):
     return set(db.scalars(select(Job.id).where(*repo.visible())))
 

@@ -19,7 +19,7 @@ from app.modules.knowledge import service as knowledge
 
 from .generate import extract_locally
 from .lists import complete_list, list_heading
-from .relevance import MINIMUM_WORK_AGE_QUERY, asks_minimum_work_age, best_passage
+from .relevance import NO_DATA_MESSAGE, MINIMUM_WORK_AGE_QUERY, asks_minimum_work_age, best_passage
 from .retrieve import retrieve
 from app.ai.providers.embedding import words
 
@@ -108,7 +108,7 @@ def _run(python, db, user_id, question, *, initial_chunks=None):
                 if event["type"] == "result":
                     break
                 if event["type"] == "evidence":
-                    _send(extract_locally(event["query"], [{"text": text} for text in event["texts"]]))
+                    _send(extract_locally(event["query"], event["chunks"]))
                     continue
                 if event["type"] != "retrieve":
                     raise ValueError("Unexpected legacy RAG event")
@@ -131,6 +131,8 @@ def _run(python, db, user_id, question, *, initial_chunks=None):
         for chunk_id in citation["chunk_ids"]:
             if chunk := seen_chunks.get(chunk_id):
                 selected.setdefault(chunk["document_id"], chunk)
+    if not selected:
+        return {"answer": NO_DATA_MESSAGE, "sources": []}
     return {"answer": event["answer"], "sources": [
         {"number": index, "document_id": ident, "title": chunk["title"], "source": chunk["source"]}
         for index, (ident, chunk) in enumerate(selected.items(), 1)
@@ -151,4 +153,6 @@ def answer(db, user_id, question, python):
                     "number": 1, "document_id": chunk["document_id"],
                     "title": chunk["title"], "source": chunk["source"],
                 }]}
+        if not extract_locally(query, candidates)["evidence"]:
+            return {"answer": NO_DATA_MESSAGE, "sources": []}
         return _run(python, db, user_id, query, initial_chunks=candidates)
