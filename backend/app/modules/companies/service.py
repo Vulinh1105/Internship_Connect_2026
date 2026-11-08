@@ -1,17 +1,30 @@
+from pathlib import Path
 from fastapi import HTTPException
 from sqlalchemy import select
+from app.common import storage
 from app.common.records import first, put, record, require
 from .models import Company, Follow, Member
 from . import repository as repo
 
+LOGO_TYPES = {".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp"}
+LOGO_MAX = 2 * 1024 * 1024
+
+def public(company):
+    # Khóa lưu tệp logo nằm trong details; API công khai chỉ trả cờ has_logo.
+    data = record(company)
+    details = dict(data["details"] or {})
+    data["has_logo"] = bool(details.pop("logo", None))
+    data["details"] = details
+    return data
+
 def detail(db, ident):
-    return record(require(repo.get_company(db, ident), "Không tìm thấy doanh nghiệp"))
+    return public(require(repo.get_company(db, ident), "Không tìm thấy doanh nghiệp"))
 
 def company_name(db, ident):
     return detail(db, ident)["name"]
 
 def list_public(db):
-    return [record(c) for c in db.scalars(select(Company).order_by(Company.name).limit(300))]
+    return [public(c) for c in db.scalars(select(Company).order_by(Company.name).limit(300))]
 
 def memberships(db, user_id):
     return list(db.scalars(select(Member.company_id).filter_by(user_id=user_id, active=True)))
@@ -30,7 +43,57 @@ def save(db, actor, ident, data):
         setattr(c, field, getattr(data, field))
     c.details = {**c.details, "benefits": data.benefits}
     db.commit()
-    return record(c)
+    return public(c)
+
+def logo_kind(data):
+    if data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return ".png"
+    if data.startswith(b"\xff\xd8\xff"):
+        return ".jpg"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return ".webp"
+    return None
+
+def discard(key):
+    if not key:
+        return
+    try:
+        storage.resolve(key).unlink(missing_ok=True)
+    except HTTPException:
+        pass
+
+def set_logo(db, actor, ident, data, filename):
+    ensure_member(db, actor, ident)
+    c = require(repo.get_company(db, ident))
+    if not data or len(data) > LOGO_MAX:
+        raise HTTPException(413, "Logo trống hoặc vượt quá 2 MB")
+    kind = logo_kind(data)
+    claimed = {".jpeg": ".jpg"}.get(Path(filename or "").suffix.lower(), Path(filename or "").suffix.lower())
+    if kind is None or claimed != kind:
+        raise HTTPException(415, "Logo phải là ảnh PNG, JPG hoặc WebP hợp lệ")
+    key = storage.save(data, "logo" + kind, folder="company-logos", allowed=set(LOGO_TYPES), max_bytes=LOGO_MAX)
+    old = c.details.get("logo")
+    c.details = {**c.details, "logo": key}
+    db.commit()
+    discard(old)
+    return public(c)
+
+def remove_logo(db, actor, ident):
+    ensure_member(db, actor, ident)
+    c = require(repo.get_company(db, ident))
+    old = c.details.get("logo")
+    c.details = {k: v for k, v in c.details.items() if k != "logo"}
+    db.commit()
+    discard(old)
+    return public(c)
+
+def logo_file(db, ident):
+    c = require(repo.get_company(db, ident), "Không tìm thấy doanh nghiệp")
+    key = c.details.get("logo")
+    if not key:
+        raise HTTPException(404, "Doanh nghiệp chưa có logo")
+    path = storage.resolve(key)
+    return path, LOGO_TYPES.get(path.suffix.lower(), "application/octet-stream")
 
 def follow(db, actor, company_id, value):
     detail(db, company_id)

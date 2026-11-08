@@ -1,6 +1,7 @@
 import {api} from '../api/client.js';
 import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,modes,list,status,toast,bindForm,action} from '../components/ui.js';
 import {jobCard,loginRequired} from './public.js';
+import {logoTile} from '../components/media.js';
 
 function jobFields(companies,j={}){
   return '<div class="form-grid">'+select('company_id','Doanh nghiệp',companies.map(c=>[c.id,c.name]),j.company_id)
@@ -20,7 +21,11 @@ async function workspace({root,user,reload}){
   if(!user)return loginRequired(root);
   const [companies,jobs,interviews]=await Promise.all([api('/companies/mine'),api('/jobs/mine'),api('/interviews')]);
   root.innerHTML=heading('Quản lý tuyển dụng','Đăng tin, xử lý đơn ứng tuyển và đặt lịch.')
-    +'<div class="split"><div class="split-main">'+companies.map(c=>box('<details><summary>Chỉnh hồ sơ · '+esc(c.name)+'</summary>'+form('co-'+c.id,
+    +'<div class="split"><div class="split-main">'+companies.map(c=>box('<details><summary>Chỉnh hồ sơ · '+esc(c.name)+'</summary>'
+      +'<div class="logo-edit">'+logoTile(c.id,c.name,true,c.has_logo)
+      +form('logo-'+c.id,'<label class="field">Logo (PNG, JPG hoặc WebP, tối đa 2 MB)<input type="file" name="file" required accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"></label>','Tải logo lên')
+      +(c.has_logo?btn('remove-logo','Xóa logo',c.id):'')+'</div>'
+      +form('co-'+c.id,
       field('name','Tên',c.name)+field('industry','Ngành',c.industry)+field('city','Thành phố',c.city)
       +area('description','Mô tả',c.description)+area('benefits','Quyền lợi',c.details?.benefits),'Lưu hồ sơ')+'</details>')).join('')
     +(companies.length?box('<details><summary>Đăng tin mới</summary>'+form('new-job',jobFields(companies),'Gửi kiểm duyệt')+'</details>'):empty('Tài khoản chưa thuộc doanh nghiệp.'))
@@ -30,7 +35,11 @@ async function workspace({root,user,reload}){
     +'</div><aside class="split-side"><h2>Lịch phỏng vấn đã mời</h2>'+grid(interviews.map(i=>box('<h3>'+esc(i.student_name)+'</h3>'
       +tags(i.scheduled_at.replace('T',' '),status(i.status))+copy(i.location)+copy(i.response||'')
       +(['invited','confirmed','reschedule_requested'].includes(i.status)?btn('cancel','Hủy lịch',i.id):''))))+'</aside></div>';
-  for(const c of companies)bindForm(root,'co-'+c.id,async data=>{await api('/companies/'+c.id,{method:'PUT',data});toast('Đã lưu');await reload();});
+  for(const c of companies){
+    bindForm(root,'co-'+c.id,async data=>{await api('/companies/'+c.id,{method:'PUT',data});toast('Đã lưu');await reload();});
+    bindForm(root,'logo-'+c.id,async data=>{await api('/companies/'+c.id+'/logo',{method:'POST',data});toast('Đã cập nhật logo');await reload();},{keepFiles:true});
+  }
+  action(root,'remove-logo',async id=>{if(confirm('Xóa logo doanh nghiệp?')){await api('/companies/'+id+'/logo',{method:'DELETE'});toast('Đã xóa logo');await reload();}});
   bindForm(root,'new-job',async data=>{await api('/jobs',{method:'POST',data:jobPayload(data)});toast('Tin đã vào hàng chờ');await reload();});
   for(const [name,method] of [['close','POST'],['delete','DELETE']])action(root,name,async id=>{
     if(confirm('Cập nhật trạng thái tin này?')){await api('/jobs/'+id+(name==='close'?'/close':''),{method});await reload();}

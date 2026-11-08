@@ -1,7 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, File, UploadFile
+from fastapi.responses import FileResponse
 from app.core.deps import Actor, DB
 from . import service
 from .schemas import CompanyInput
+from .service import LOGO_MAX
 
 router = APIRouter(prefix="/api/companies", tags=["companies"])
 
@@ -16,6 +18,20 @@ def mine(db: DB, actor: Actor):
 @router.get("/{ident}")
 def detail(ident: int, db: DB):
     return service.detail(db, ident)
+
+@router.get("/{ident}/logo")
+def logo(ident: int, db: DB):
+    path, media_type = service.logo_file(db, ident)
+    return FileResponse(path, media_type=media_type,
+                        headers={"Cache-Control": "no-cache", "X-Content-Type-Options": "nosniff"})
+
+@router.post("/{ident}/logo")
+def upload_logo(ident: int, db: DB, actor: Actor, file: UploadFile = File()):
+    return service.set_logo(db, actor, ident, file.file.read(LOGO_MAX + 1), file.filename or "")
+
+@router.delete("/{ident}/logo")
+def delete_logo(ident: int, db: DB, actor: Actor):
+    return service.remove_logo(db, actor, ident)
 
 @router.put("/{ident}")
 def update(ident: int, data: CompanyInput, db: DB, actor: Actor):

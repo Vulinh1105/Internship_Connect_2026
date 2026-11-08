@@ -1,4 +1,5 @@
 from datetime import timedelta
+import base64
 import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -120,3 +121,33 @@ def verify_flows():
     assert response.status_code==200
     result=payload(student.get(f"/api/chat/sessions/{chat}/messages"))[-1]
     assert result["meta"]["jobs"]==[]
+    verify_logo(company,company_id)
+
+PNG=base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==")
+
+def verify_logo(company,company_id):
+    url=f"/api/companies/{company_id}/logo"
+    guest=TestClient(app)
+    assert guest.get(url).status_code==404
+    assert payload(guest.get(f"/api/companies/{company_id}"))["has_logo"] is False
+    assert guest.post(url,files={"file":("l.png",PNG,"image/png")}).status_code==401
+    assert actor("usr-demo-s001").post(url,files={"file":("l.png",PNG,"image/png")}).status_code==403
+    assert company.post(url,files={"file":("l.svg",b"<svg xmlns='http://www.w3.org/2000/svg'/>","image/svg+xml")}).status_code==415
+    assert company.post(url,files={"file":("fake.png",b"khong phai anh","image/png")}).status_code==415
+    assert company.post(url,files={"file":("khac.jpg",PNG,"image/jpeg")}).status_code==415
+    assert company.post(url,files={"file":("big.png",PNG+b"0"*(2*1024*1024),"image/png")}).status_code==413
+    done=payload(company.post(url,files={"file":("logo.png",PNG,"image/png")}))
+    assert done["has_logo"] is True and "logo" not in done["details"]
+    served=guest.get(url)
+    assert served.status_code==200 and served.content==PNG
+    assert served.headers["content-type"]=="image/png" and served.headers["cache-control"]=="no-cache"
+    assert any(c["id"]==company_id and c["has_logo"] for c in payload(guest.get("/api/companies")))
+    job=payload(guest.get("/api/jobs?limit=100"))["items"]
+    assert any(j["company_id"]==company_id and j["company_has_logo"] for j in job)
+    current=payload(company.get(f"/api/companies/{company_id}"))
+    body={k:current[k] for k in ("name","industry","city","description")}|{"benefits":current["details"].get("benefits","")}
+    assert payload(company.put(f"/api/companies/{company_id}",json=body))["has_logo"] is True
+    replaced=payload(company.post(url,files={"file":("logo.jpeg",b"\xff\xd8\xff\xe0"+b"0"*20,"image/jpeg")}))
+    assert replaced["has_logo"] is True and guest.get(url).headers["content-type"]=="image/jpeg"
+    assert payload(company.delete(url))["has_logo"] is False
+    assert guest.get(url).status_code==404

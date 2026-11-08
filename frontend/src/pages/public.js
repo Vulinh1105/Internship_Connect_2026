@@ -20,7 +20,13 @@ export function jobCard(j){
 }
 const pinIcon='<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
 const heartIcon='<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
-const topCard=j=>'<article class="card top-card"><div class="top-card-head">'+logoTile(j.company_id,j.company_name)
+const pager=(cur,pages,prev,next)=>pages<2?'':'<div class="pager"><button type="button" class="pager-btn" data-action="page" data-value="'+prev+'" aria-label="Trang trước"'+(cur<2?' disabled':'')+'>‹</button>'
+  +'<span><b>'+cur+'</b> / '+pages+' trang</span><button type="button" class="pager-btn" data-action="page" data-value="'+next+'" aria-label="Trang sau"'+(cur>=pages?' disabled':'')+'>›</button></div>';
+const bindSave=(root,user)=>action(root,'save',async id=>{
+  if(!user){location.hash='login';return;}
+  await api('/jobs/'+id+'/saved',{method:'PUT'});toast('Đã lưu tin');
+});
+const topCard=j=>'<article class="card top-card"><div class="top-card-head">'+logoTile(j.company_id,j.company_name,false,j.company_has_logo)
   +'<div><h3><a href="#job/'+j.id+'">'+esc(j.title)+'</a></h3><p class="muted">'+esc(j.company_name)+'</p></div></div>'
   +'<div class="top-card-foot">'+tags(money(j.salary_min,j.salary_max),j.location)
   +'<button type="button" class="heart" data-action="save" data-value="'+j.id+'" aria-label="Lưu tin '+esc(j.title)+'">'+heartIcon+'</button></div></article>';
@@ -47,10 +53,7 @@ async function home({root,user}){
     const params=new URLSearchParams(Object.entries(values).map(([k,v])=>[k,v.trim()]).filter(([,v])=>v));
     location.hash=params.toString()?'jobs/'+params:'jobs';
   });
-  action(root,'save',async id=>{
-    if(!user){location.hash='login';return;}
-    await api('/jobs/'+id+'/saved',{method:'PUT'});toast('Đã lưu tin');
-  });
+  bindSave(root,user);
 }
 const featured=data=>data.items.slice(0,6);
 async function jobs({root,args,user}){
@@ -62,11 +65,11 @@ async function jobs({root,args,user}){
     +select('level','Cấp độ',[['','Tất cả'],['intern','Thực tập'],['fresher','Fresher'],['junior','Junior'],['senior','Senior']],params.get('level'))
     +field('salary_min','Lương từ',params.get('salary_min'),'number','min="0"')+field('salary_max','Lương đến',params.get('salary_max'),'number','min="0"')+'</div>','Tìm vị trí'))
     +'<div class="row results-bar"><span class="muted">'+page.total+' kết quả</span>'+(user?link('saved','Tin đã lưu'):'')+'</div>'
-    +(page.items.length?grid(page.items.map(jobCard)):empty('Chưa có tin khớp với bộ lọc.'))
-    +'<div class="row">'+(page.offset?btn('page','Trang trước',Math.max(0,page.offset-page.limit)):'')
-    +(page.offset+page.limit<page.total?btn('page','Trang tiếp',page.offset+page.limit):'')+'</div>';
+    +(page.items.length?'<div class="top-grid">'+page.items.map(topCard).join('')+'</div>':empty('Chưa có tin khớp với bộ lọc.'))
+    +pager(Math.floor(page.offset/page.limit)+1,Math.ceil(page.total/page.limit),Math.max(0,page.offset-page.limit),page.offset+page.limit);
   bindForm(root,'search',values=>{location.hash='jobs/'+new URLSearchParams(Object.entries(values).filter(([,v])=>v));});
   action(root,'page',offset=>{params.set('offset',offset);location.hash='jobs/'+params;});
+  bindSave(root,user);
 }
 const levelLabel={intern:'Thực tập',fresher:'Fresher',junior:'Junior',senior:'Senior'};
 const scheduleLabel={part_time:'Bán thời gian',full_time:'Toàn thời gian'};
@@ -98,7 +101,7 @@ async function job({root,args,user}){
     +box('<h2 class="section-title">Mô tả công việc</h2>'+bullets(j.description)+'<h2 class="section-title">Yêu cầu</h2>'+bullets(j.requirements)
       +(d.benefits?'<h2 class="section-title">Quyền lợi</h2>'+bullets(d.benefits):''))
     +'</div><aside class="detail-side">'
-    +box('<div class="company-head">'+logoTile(j.company_id,j.company_name,true)+'<h3>'+esc(j.company_name)+'</h3></div>'
+    +box('<div class="company-head">'+logoTile(j.company_id,j.company_name,true,c?.has_logo??j.company_has_logo)+'<h3>'+esc(j.company_name)+'</h3></div>'
       +'<div class="company-facts">'+(cd.company_size?'<p><b>Quy mô:</b> '+esc(cd.company_size)+' nhân viên</p>':'')
       +((cd.address||c?.city)?'<p><b>Địa điểm:</b> '+esc(cd.address||c.city)+'</p>':'')+(c?.industry?'<p><b>Ngành nghề:</b> '+esc(c.industry)+'</p>':'')+'</div>'
       +link('company/'+j.company_id,'Xem trang công ty')).replace('class="panel"','class="panel company-card"')
@@ -118,18 +121,27 @@ async function job({root,args,user}){
     });
   }
 }
-const companyCard=c=>'<article class="card"><h3><a href="#company/'+c.id+'">'+esc(c.name)+'</a></h3>'+tags(c.industry,c.city)+copy(c.description.slice(0,170)+'…')+'</article>';
-async function companies({root}){
-  const records=await api('/companies');
+const companyCard=c=>'<article class="card top-card"><div class="top-card-head">'+logoTile(c.id,c.name,false,c.has_logo)
+  +'<div><h3><a href="#company/'+c.id+'">'+esc(c.name)+'</a></h3><p class="muted">'+esc(c.industry)+'</p></div></div>'
+  +'<div class="top-card-foot">'+tags(c.city,c.details?.company_size&&c.details.company_size+' nhân viên')+'</div></article>';
+const COMPANY_PAGE=12;
+async function companies({root,args}){
+  const all=await api('/companies');
+  const pages=Math.max(1,Math.ceil(all.length/COMPANY_PAGE));
+  const current=Math.min(pages,Math.max(1,Number(new URLSearchParams(args[0]||'').get('page'))||1));
+  const records=all.slice((current-1)*COMPANY_PAGE,current*COMPANY_PAGE);
   root.innerHTML=heading('Doanh nghiệp','Khám phá hồ sơ trong hệ thống và xem ảnh những địa điểm làm việc tại Việt Nam.')
     +companyGallery()+'<section class="section" aria-labelledby="demo-companies-title">'
     +'<div class="section-heading"><div><p class="eyebrow">Dữ liệu ứng tuyển mẫu</p>'
     +'<h2 id="demo-companies-title">Doanh nghiệp trên hệ thống</h2></div></div>'
-    +grid(records.map(companyCard))+'</section>';
+    +(records.length?'<div class="top-grid">'+records.map(companyCard).join('')+'</div>':empty())
+    +pager(current,pages,current-1,current+1)+'</section>';
+  action(root,'page',n=>{location.hash='companies/'+new URLSearchParams({page:n});});
 }
 async function company({root,args,user}){
   const c=await api('/companies/'+Number(args[0]));
-  root.innerHTML=heading(c.name,c.industry)+tags(c.city,c.details?.company_size,c.details?.verification_status)
+  root.innerHTML='<div class="company-head company-page-head">'+logoTile(c.id,c.name,true,c.has_logo)+'<div>'+heading(c.name,c.industry)+'</div></div>'
+    +tags(c.city,c.details?.company_size,c.details?.verification_status)
     +box(copy(c.description)+copy(c.details?.culture||'')+copy(c.details?.benefits||''))
     +(user?'<div class="row">'+btn('follow','Theo dõi')+btn('unfollow','Bỏ theo dõi')+'</div>':'');
   for(const [name,value] of [['follow',true],['unfollow',false]])action(root,name,async()=>{

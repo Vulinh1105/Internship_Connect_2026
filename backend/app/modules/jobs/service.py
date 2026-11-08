@@ -13,7 +13,8 @@ def is_public(j):
             and (j.deadline is None or j.deadline >= today()))
 
 def output(db, j):
-    return {**record(j), "company_name": companies.company_name(db, j.company_id), "active": is_public(j)}
+    company = companies.detail(db, j.company_id)
+    return {**record(j), "company_name": company["name"], "company_has_logo": company["has_logo"], "active": is_public(j)}
 
 def search(db, **filters):
     rows, total = repo.find(db, **filters)
