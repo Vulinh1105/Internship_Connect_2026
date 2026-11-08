@@ -1,9 +1,5 @@
 import {api} from '../api/client.js';
-<<<<<<< HEAD
-import {esc,tags,box,copy,empty,heading,field,select,link,btn,form,grid,status,toast,bindForm,action} from '../components/ui.js';
-=======
-import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,money,modes,list,status,toast,bindForm,action} from '../components/ui.js';
->>>>>>> origin/main
+import {esc,tags,box,copy,empty,heading,field,select,link,btn,form,grid,money,modes,status,toast,bindForm,action} from '../components/ui.js';
 import {jobCard,loginRequired} from './public.js';
 
 const cvFile='<label class="field">Tệp .pdf, .docx hoặc .txt (tối đa 5 MB)<input type="file" name="file" required accept=".pdf,application/pdf,.docx,.txt"></label>';
