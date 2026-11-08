@@ -37,3 +37,9 @@ def by_company(db, company_ids):
 
 def queue(db):
     return list(db.scalars(select(Job).where(Job.moderation_status=="pending", Job.deleted_at.is_(None)).order_by(Job.id)))
+
+def queue_count(db):
+    return db.scalar(select(func.count()).select_from(Job).where(Job.moderation_status=="pending", Job.deleted_at.is_(None))) or 0
+
+def approved_before(db, job_id):
+    return db.scalar(select(func.count()).select_from(Review).where(Review.job_id==job_id, Review.decision=="approved")) or 0

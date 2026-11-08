@@ -66,10 +66,4 @@ async function applications({root,user,reload}){
   for(const i of interviews)bindForm(root,'reply-'+i.id,async data=>{await api('/interviews/'+i.id+'/respond',{method:'POST',data});await reload();});
   action(root,'withdraw',async id=>{if(confirm('Rút đơn ứng tuyển này?')){await api('/applications/'+id+'/status',{method:'PATCH',data:{status:'withdrawn'}});await reload();}});
 }
-async function notifications({root,user,reload}){
-  if(!user)return loginRequired(root);
-  const rows=await api('/notifications');
-  root.innerHTML=heading('Thông báo')+btn('read','Đánh dấu đã đọc')+(rows.length?'<div class="notice-list">'+rows.map(n=>box(tags(n.read_at?'Đã đọc':'Mới',n.created_at.replace('T',' ').slice(0,16))+copy(n.message))).join('')+'</div>':empty());
-  action(root,'read',async()=>{await api('/notifications/read',{method:'POST'});await reload();});
-}
-export const pages={profile,matching,saved,applications,notifications};
+export const pages={profile,matching,saved,applications};

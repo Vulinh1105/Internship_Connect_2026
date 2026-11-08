@@ -36,6 +36,14 @@ def list_public(db):
 def memberships(db, user_id):
     return list(db.scalars(select(Member.company_id).filter_by(user_id=user_id, active=True)))
 
+def member_user_ids(db, company_id):
+    return list(db.scalars(select(Member.user_id).filter_by(company_id=company_id, active=True)))
+
+def follower_user_ids(db, company_id):
+    # Người theo dõi, trừ chính thành viên công ty (họ đã biết tin của mình).
+    members = set(member_user_ids(db, company_id))
+    return [u for u in db.scalars(select(Follow.user_id).filter_by(company_id=company_id)) if u not in members]
+
 def ensure_member(db, actor, company_id):
     if actor["role"] != "company_member" or company_id not in memberships(db, actor["id"]):
         raise HTTPException(403, "Bạn không thuộc doanh nghiệp sở hữu dữ liệu này")

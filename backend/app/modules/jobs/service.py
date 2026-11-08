@@ -4,6 +4,7 @@ from app.core.config import now, today
 from app.common.pagination import page
 from app.common.records import first, put, record, require
 from app.modules.companies import service as companies
+from app.modules.notifications import service as notifications
 from . import repository as repo
 from .models import Job, Review, SavedJob
 from .moderation import assess
@@ -26,6 +27,12 @@ def detail(db, ident, actor=None):
         if not actor or (actor["role"] not in {"staff","admin"} and j.company_id not in companies.memberships(db,actor["id"])):
             raise HTTPException(404, "Tin không công khai hoặc đã hết hạn")
     return output(db,j)
+
+def brief(db, ident):
+    # Dùng cho thông báo: cần tên tin và công ty kể cả khi tin đã đóng hoặc chưa công khai.
+    j = require(repo.get_job(db, ident), "Không tìm thấy tin")
+    return {"id": j.id, "title": j.title, "company_id": j.company_id,
+            "company_name": companies.company_name(db, j.company_id)}
 
 def public_detail(db, ident):
     return detail(db, ident)
@@ -55,6 +62,11 @@ def moderation_queue(db, actor):
     if actor["role"] not in {"admin","staff"}:
         raise HTTPException(403, "Chỉ nhân sự kiểm duyệt")
     return [output(db,j) for j in repo.queue(db)]
+
+def moderation_count(db, actor):
+    if actor["role"] not in {"admin","staff"}:
+        raise HTTPException(403, "Chỉ nhân sự kiểm duyệt")
+    return {"pending": repo.queue_count(db)}
 
 def upsert(db, actor, data, ident=None):
     from app.ai.vector.sync import enqueue
@@ -93,8 +105,20 @@ def review(db, actor, ident, data):
         raise HTTPException(422,"Tin đã hết hạn")
     if data.decision=="rejected" and not data.reason.strip():
         raise HTTPException(422,"Nhập lý do từ chối")
+    first_approval=data.decision=="approved" and repo.approved_before(db,j.id)==0
     j.moderation_status=data.decision
     db.add(Review(job_id=j.id,reviewer_id=actor["id"],decision=data.decision,reason=data.reason))
+    if data.decision=="approved":
+        text=f"Tin {j.title} đã được duyệt và hiển thị công khai."
+        kind="job_approved"
+    else:
+        text=f"Tin {j.title} bị từ chối. Lý do: {data.reason.strip()}. Hãy chỉnh sửa và gửi duyệt lại."
+        kind="job_rejected"
+    notifications.send_many(db,companies.member_user_ids(db,j.company_id),kind,text,j.id)
+    if first_approval:
+        # Chỉ báo người theo dõi lần đầu tin được duyệt; sửa tin rồi duyệt lại không báo thêm.
+        notifications.send_many(db,companies.follower_user_ids(db,j.company_id),"company_new_job",
+            f"{companies.company_name(db,j.company_id)} vừa đăng tin {j.title}.",j.id)
     enqueue(db,"jobs",j.id)
     db.commit()
     return output(db,j)

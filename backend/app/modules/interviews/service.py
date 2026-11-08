@@ -7,6 +7,12 @@ from app.modules.notifications import service as notifications
 from .models import Interview
 from . import repository as repo
 
+def when(t):
+    return f"{t:%H:%M} ngày {t:%d/%m}"
+
+REPLY_TEXT={"confirmed":"đã xác nhận lịch phỏng vấn","declined":"đã từ chối lịch phỏng vấn",
+            "reschedule_requested":"xin đổi lịch phỏng vấn"}
+
 def invite(db,actor,data):
     if actor["role"]!="company_member":
         raise HTTPException(403,"Chỉ doanh nghiệp được mời")
@@ -28,7 +34,8 @@ def invite(db,actor,data):
     db.add(row)
     applications.reviewing(db,actor,data.application_id)
     db.flush()
-    notifications.send(db,ctx["user_id"],"interview","Bạn có lời mời phỏng vấn",row.id)
+    notifications.send(db,ctx["user_id"],"interview",
+        f"{ctx['company_name']} mời bạn phỏng vấn vị trí {ctx['job_title']} lúc {when(time)}. Hãy xác nhận hoặc xin đổi lịch.",row.id)
     db.commit()
     return record(row)
 
@@ -50,14 +57,16 @@ def reply(db,actor,ident,data):
     if actor["role"]!="student":
         raise HTTPException(403,"Chỉ sinh viên được phản hồi lời mời")
     i=require(repo.get_interview(db,ident))
-    applications.interview_context(db,actor,i.application_id)
+    ctx=applications.interview_context(db,actor,i.application_id)
     if i.status!="invited" or i.scheduled_at<=now():
         raise HTTPException(409,"Lời mời đã phản hồi hoặc hết hiệu lực")
     if data.action=="reschedule_requested" and not data.message.strip():
         raise HTTPException(422,"Nhập thời gian đề xuất")
     i.status=data.action
     i.response=data.message
-    notifications.send(db,i.invited_by,"interview_reply",f"Sinh viên phản hồi lịch: {i.status}",i.id)
+    text=f"{ctx['student_name']} {REPLY_TEXT[i.status]} {ctx['job_title']} ({when(i.scheduled_at)})"
+    text+=f": {data.message.strip()}" if data.message.strip() else "."
+    notifications.send(db,i.invited_by,"interview_reply",text,i.id)
     db.commit()
     return record(i)
 
@@ -73,6 +82,7 @@ def cancel(db,actor,ident):
     i=require(repo.get_interview(db,ident))
     ctx=applications.interview_context(db,actor,i.application_id)
     i.status="cancelled";i.cancelled_at=now()
-    notifications.send(db,ctx["user_id"],"interview_cancelled","Lịch phỏng vấn đã được hủy",i.id)
+    notifications.send(db,ctx["user_id"],"interview_cancelled",
+        f"{ctx['company_name']} đã hủy lịch phỏng vấn {ctx['job_title']} ngày {i.scheduled_at:%d/%m}.",i.id)
     db.commit()
     return record(i)

@@ -25,6 +25,10 @@ def mine(db:DB,actor:Actor):
 def queue(db:DB,actor:Actor):
     return service.moderation_queue(db,actor)
 
+@router.get("/moderation/count")
+def queue_count(db:DB,actor:Actor):
+    return service.moderation_count(db,actor)
+
 @router.get("/saved")
 def saved(db:DB,actor:Actor):
     return service.saved(db,actor)
