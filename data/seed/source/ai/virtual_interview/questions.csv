@@ -29,3 +29,7 @@ UX-03,UI UX Intern,behavioral,basic,"Trong một bài tập hoặc dự án liê
 LOG-01,Logistics Intern,technical,intermediate,Tồn kho thực tế thấp hơn số liệu hệ thống. Bạn kiểm tra gì?,1,180,True
 LOG-02,Logistics Intern,technical,basic,Một lô hàng trễ có thể ảnh hưởng ba đơn. Bạn lập kế hoạch cập nhật thế nào?,1,180,True
 LOG-03,Logistics Intern,behavioral,basic,"Trong một bài tập hoặc dự án liên quan đến Logistics Intern, hãy kể một lần bạn phát hiện sai sót và cách bạn phối hợp sửa.",1,180,True
+BACKEND-01,Backend Intern,technical,basic,Bạn hãy giải thích sự khác nhau giữa GET và POST trong REST API và nêu một ví dụ cho mỗi phương thức.,1,120,True
+BACKEND-02,Backend Intern,technical,basic,API tạo tài khoản nhận email đã tồn tại. Bạn sẽ kiểm tra dữ liệu và trả phản hồi như thế nào?,1,120,True
+BACKEND-03,Backend Intern,technical,intermediate,Một API đọc danh sách chạy chậm khi dữ liệu lớn. Bạn sẽ đo và cải thiện phần nào trước?,1,120,True
+BACKEND-04,Backend Intern,behavioral,basic,Hãy kể một lần bạn gặp lỗi backend trong dự án và cách bạn tìm nguyên nhân.,1,120,True

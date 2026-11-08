@@ -75,7 +75,8 @@ def start(db,actor,data):
     if count>=DAILY_MOCKS:
         raise HTTPException(429,"Đã đạt số buổi luyện hôm nay")
     profile=students.profile(db,actor)
-    plan=planner.plan(role,questions,jd,profile,actor["id"])
+    level=data.level or (jd["level"] if jd else "intern")
+    plan=planner.plan(role,questions,jd,profile,actor["id"],level=level)
     item=MockSession(user_id=actor["id"],role=role,job_id=data.job_id,state="active",plan=plan,
                      expires_at=now()+timedelta(hours=24))
     db.add(item)
@@ -98,12 +99,19 @@ def submit(db,actor,ident,data):
         raise HTTPException(422,"Hãy xác nhận nội dung câu trả lời")
     q=item.plan[item.cursor]
     prompt=q["followup"] if item.followups else q["question"]
-    evaluation,followup=evaluator.evaluate({**q,"question":prompt},text,actor["id"],data.skip)
+    next_item=item.plan[item.cursor+1] if item.cursor+1<len(item.plan) else None
+    recent=answers_for(db,ident) if AI_BACKEND=="openai" and not data.skip else []
+    context={"role":item.role,"level":q.get("level","intern"),
+             "recent":[{"question":a.question,"answer":a.transcript[:500]} for a in recent[-3:]],
+             "next":{"question":next_item["question"],"rubric":next_item["rubric"]} if next_item else None}
+    evaluation,followup,next_question=evaluator.evaluate({**q,"question":prompt},text,actor["id"],data.skip,context=context)
     needs_followup=bool(followup and not data.skip and item.followups==0 and evaluation["score"]<75)
     cursor=item.cursor+int(not needs_followup)
     plan=list(item.plan)
     if needs_followup:
         plan[item.cursor]={**q,"followup":followup}
+    elif next_item and len(next_question)>=12:
+        plan[cursor]={**next_item,"question":next_question}
     state="finished" if cursor==len(plan) else "active"
     answer=Answer(session_id=ident,position=data.cursor,turn=data.turn,question=prompt,transcript=text,
                   transcript_confirmed=data.confirmed,evaluation=evaluation)
@@ -118,4 +126,4 @@ def submit(db,actor,ident,data):
     if summary:
         db.add(Report(session_id=ident,report=summary))
     db.commit()
-    return view(db,item)
+    return {**view(db,item),"evaluation":evaluation}

@@ -89,3 +89,11 @@ LOG-02,1,C3,cập nhật ETA có nguồn và phương án,25,Không đề cập 
 LOG-03,1,C1,nêu bối cảnh và sai sót cụ thể,40,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
 LOG-03,1,C2,phân biệt phần việc của mình và nhóm,35,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
 LOG-03,1,C3,nêu kết quả và điều rút kinh nghiệm,25,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu cách làm hoặc bằng chứng,Trình bày đúng và giải thích cách thực hiện cụ thể
+BACKEND-01,1,C1,Phân biệt GET để truy xuất và POST để gửi dữ liệu xử lý,50,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu ví dụ hoặc bằng chứng,Trình bày đúng và giải thích cụ thể
+BACKEND-01,1,C2,Ví dụ REST API phù hợp với mỗi phương thức,50,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu ví dụ hoặc bằng chứng,Trình bày đúng và giải thích cụ thể
+BACKEND-02,1,C1,Kiểm tra email trùng và xử lý đồng thời bằng ràng buộc duy nhất,50,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu ví dụ hoặc bằng chứng,Trình bày đúng và giải thích cụ thể
+BACKEND-02,1,C2,Phản hồi lỗi phù hợp với thông báo rõ ràng,50,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu ví dụ hoặc bằng chứng,Trình bày đúng và giải thích cụ thể
+BACKEND-03,1,C1,Đo thời gian phản hồi và tìm truy vấn hoặc bước gây chậm,50,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu ví dụ hoặc bằng chứng,Trình bày đúng và giải thích cụ thể
+BACKEND-03,1,C2,Giải thích cách dùng phân trang hoặc chỉ mục và đo lại,50,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu ví dụ hoặc bằng chứng,Trình bày đúng và giải thích cụ thể
+BACKEND-04,1,C1,Mô tả lỗi và cách tái hiện hoặc kiểm tra log,50,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu ví dụ hoặc bằng chứng,Trình bày đúng và giải thích cụ thể
+BACKEND-04,1,C2,Nêu cách xác minh bản sửa và kết quả,50,Không đề cập hoặc sai bản chất,Đề cập đúng nhưng thiếu ví dụ hoặc bằng chứng,Trình bày đúng và giải thích cụ thể

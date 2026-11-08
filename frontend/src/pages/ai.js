@@ -1,6 +1,7 @@
 import {api,stream} from '../api/client.js';
 import {esc,tags,box,copy,empty,money,heading,field,area,select,link,btn,form,grid,status,toast,bindForm,action} from '../components/ui.js';
 import {jobCard,loginRequired} from './public.js';
+import {interviewer,interviewMedia} from '../components/interviewer.js?v=interview-avatar-1';
 
 const key=user=>'ic-chat-'+user.id;
 function compareTable(jobs){
@@ -96,10 +97,11 @@ async function mock({root,user}){
   if(!user)return loginRequired(root);
   const [roles,history]=await Promise.all([api('/mock-interviews/roles'),api('/mock-interviews')]);
   root.innerHTML=heading('Phỏng vấn ảo','Luyện câu hỏi theo vai trò, xem dẫn chứng và theo dõi tiến bộ.')
-    +box(form('start',select('role','Vai trò',roles),'Bắt đầu luyện'))
+    +box(form('start',select('role','Vị trí',roles,roles.includes('Backend Intern')?'Backend Intern':roles[0])
+      +select('level','Cấp độ',[['intern','Thực tập'],['fresher','Fresher'],['junior','Junior']]),'Bắt đầu phỏng vấn'))
     +'<h2>Buổi luyện gần đây</h2>'+grid(history.map(s=>box('<h3>'+esc(s.role)+'</h3>'+tags(status(s.state),s.report&&s.report.score+' / 100')
       +link('mock-session/'+s.id,s.state==='active'?'Tiếp tục':'Xem buổi luyện'))));
-  bindForm(root,'start',async data=>{const s=await api('/mock-interviews',{method:'POST',data:{role:data.role}});location.hash='mock-session/'+s.id;});
+  bindForm(root,'start',async data=>{const s=await api('/mock-interviews',{method:'POST',data:{role:data.role,level:data.level}});location.hash='mock-session/'+s.id+'/start';});
 }
 function reportView(r){
   return '<h2>Kết quả luyện tập</h2>'+tags(r.score+' / 100',r.previous_score!=null?'Buổi trước '+r.previous_score:'',r.delta!=null?'Thay đổi '+r.delta:'')
@@ -109,44 +111,95 @@ function reportView(r){
     +r.answers.map(a=>box('<h3>'+esc(a.question)+'</h3>'+tags(a.skipped?'Đã bỏ qua':a.score+' / 100')+copy(a.transcript)
       +'<ul>'+a.criteria.map(c=>'<li><b>'+esc(c.criterion)+'</b> · '+c.score+'/2'+(c.quote?copy('“'+c.quote+'”'):'')+copy(c.feedback)+'</li>').join('')+'</ul>')).join('');
 }
-async function mockSession({root,user,args,reload}){
+async function mockSession({root,user,args,signal}){
   if(!user)return loginRequired(root);
-  const s=await api('/mock-interviews/'+Number(args[0]));
-  root.innerHTML=heading(s.role,'Phỏng vấn ảo · '+(s.mode==='local'?'Chấm thử bằng quy tắc local':'Chấm thử có hỗ trợ mô hình'))+link('mock','Buổi luyện của bạn');
-  if(!s.question){root.insertAdjacentHTML('beforeend',s.report?reportView(s.report):empty('Buổi luyện đã kết thúc.'));return;}
-  root.insertAdjacentHTML('beforeend',box(tags('Câu '+(s.cursor+1)+' / '+s.total,s.turn?'Câu hỏi bổ sung':'',s.question.seconds+' giây gợi ý')
-    +'<h2>'+esc(s.question.question)+'</h2><div class="row">'+btn('read','Đọc câu hỏi')+btn('mic','Nhập bằng giọng nói')+btn('skip','Bỏ qua')+btn('abandon','Dừng buổi luyện')+'</div>'
-    +form('answer',area('transcript','Câu trả lời','','required maxlength="5000"')
-      +'<label><input type="checkbox" name="confirmed" required> Tôi đã kiểm tra và xác nhận câu trả lời</label>','Gửi câu trả lời')
-    +(s.mode==='openai'?'<details><summary>Gửi bản ghi âm</summary>'+form('audio','<label class="field">Tệp âm thanh<input type="file" name="file" required accept="audio/*"></label>'
-      +'<label><input type="checkbox" name="consent" value="true" required> Đồng ý gửi âm thanh để chuyển thành văn bản</label>','Chuyển thành văn bản')+'</details>':'')));
-  const transcript=root.querySelector('[name=transcript]');
-  const endpoint='/mock-interviews/'+s.id;
-  const submit=async data=>{await api(endpoint+'/answers',{method:'POST',data:{...data,cursor:s.cursor,turn:s.turn}});await reload();};
-  bindForm(root,'answer',data=>submit({transcript:data.transcript,confirmed:!!data.confirmed}));
-  action(root,'skip',async()=>{if(confirm('Bỏ qua câu này?'))await submit({skip:true});});
-  action(root,'abandon',async()=>{
-    if(confirm('Dừng buổi luyện này?')){await api(endpoint+'/abandon',{method:'POST'});await reload();}
+  const endpoint='/mock-interviews/'+Number(args[0]);
+  let session=await api(endpoint,{signal});
+  if(signal.aborted)return;
+  root.innerHTML=heading(session.role,'Phỏng vấn ảo · '+(session.mode==='local'?'Chấm thử bằng quy tắc local':'Chấm thử có hỗ trợ mô hình'))
+    +link('mock','Buổi luyện của bạn')
+    +'<div class="interview-layout">'+interviewer+'<div class="interview-question"></div></div>';
+  const panel=root.querySelector('.interview-question');
+  let state='ready';
+  function updateControls(next){
+    state=next;
+    const mic=panel.querySelector('[data-action="mic"]');
+    const read=panel.querySelector('[data-action="read"]');
+    if(mic){
+      mic.textContent=state==='listening'?'Dừng micro':'Bật micro';
+      mic.disabled=state==='thinking';
+    }
+    if(read)read.disabled=['thinking','listening'].includes(state);
+    for(const button of panel.querySelectorAll('#answer button, #audio button, [data-action="skip"], [data-action="abandon"]')){
+      button.disabled=['thinking','listening'].includes(state);
+    }
+  }
+  const media=interviewMedia(root.querySelector('.interviewer'),{
+    endpoint, mode:session.mode, signal, onError:toast, onState:updateControls,
+    onTranscript(text){
+      const input=panel.querySelector('[name="transcript"]');
+      if(!input)return;
+      input.value=text.slice(0,5000);
+      panel.querySelector('[name="confirmed"]').checked=false;
+      input.focus();
+    },
   });
-  action(root,'read',async()=>{
-    if('speechSynthesis' in window){
-      speechSynthesis.cancel();
-      const voice=new SpeechSynthesisUtterance(s.question.question);voice.lang='vi-VN';speechSynthesis.speak(voice);
-    }else if(s.mode==='openai')await new Audio('/api'+endpoint+'/speech').play();
-    else toast('Trình duyệt chưa có chức năng đọc.');
-  });
-  action(root,'mic',()=>{
-    const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-    if(!Recognition){toast('Trình duyệt chưa hỗ trợ nhận giọng nói. Bạn có thể nhập chữ.');return;}
-    if(!confirm('Cho phép trình duyệt nhận giọng nói? Dịch vụ nhận diện phụ thuộc trình duyệt.'))return;
-    const recognizer=new Recognition();recognizer.lang='vi-VN';
-    recognizer.onresult=e=>{transcript.value=e.results[0][0].transcript;root.querySelector('[name=confirmed]').checked=false;};
-    recognizer.onerror=()=>toast('Không nhận được giọng nói. Hãy nhập chữ hoặc thử lại.');
-    recognizer.start();
-  });
-  bindForm(root,'audio',async data=>{
-    transcript.value=(await api(endpoint+'/transcribe',{method:'POST',data})).transcript;
-    root.querySelector('[name=confirmed]').checked=false;transcript.focus();
-  },{keepFiles:true});
+  let autoRead=true;
+  function render(){
+    if(!session.question){
+      media.set('finished');
+      panel.innerHTML=box(session.report?reportView(session.report):empty('Buổi luyện đã kết thúc.'));
+      return;
+    }
+    const feedback=session.evaluation;
+    const summary=feedback&&!feedback.skipped
+      ?'<details class="interview-feedback" open><summary>Câu vừa trả lời · '+esc(feedback.score)+' / 100</summary>'
+        +'<ul>'+feedback.criteria.map(item=>'<li><strong>'+esc(item.criterion)+'</strong> · '+esc(item.feedback)+'</li>').join('')+'</ul></details>':'';
+    panel.innerHTML=box(summary+tags('Câu '+(session.cursor+1)+' / '+session.total,session.turn?'Câu hỏi bổ sung':'',session.question.seconds+' giây gợi ý')
+      +'<h2>'+esc(session.question.question)+'</h2><div class="row">'+btn('read','Đọc câu hỏi')+btn('mic','Bật micro')+btn('skip','Bỏ qua')+btn('abandon','Dừng buổi luyện')+'</div>'
+      +'<label><input type="checkbox" name="auto_read" '+(autoRead?'checked':'')+'> Tự đọc câu hỏi tiếp theo</label>'
+      +form('answer',area('transcript','Câu trả lời','','required maxlength="5000"')
+        +'<label><input type="checkbox" name="confirmed" required> Tôi đã kiểm tra và xác nhận câu trả lời</label>','Gửi câu trả lời')
+      +(session.mode==='openai'?'<details><summary>Tải bản ghi âm có sẵn</summary>'
+        +form('audio','<label class="field">Tệp âm thanh<input type="file" name="file" required accept="audio/*"></label>'
+          +'<label><input type="checkbox" name="consent" value="true" required> Đồng ý gửi âm thanh tới OpenAI để chuyển thành văn bản</label>','Chuyển thành văn bản')+'</details>':''));
+    panel.querySelector('[name="auto_read"]').addEventListener('change',event=>{autoRead=event.target.checked;});
+    bindForm(panel,'answer',data=>submit({transcript:data.transcript,confirmed:!!data.confirmed}));
+    bindForm(panel,'audio',data=>media.transcribe(data),{keepFiles:true});
+    action(panel,'skip',async()=>{if(confirm('Bỏ qua câu này?'))await submit({skip:true});});
+    action(panel,'abandon',async()=>{
+      if(['listening','thinking'].includes(state) || !confirm('Dừng buổi luyện này?'))return;
+      media.stopSpeech();
+      media.set('thinking');
+      try{
+        session=await api(endpoint+'/abandon',{method:'POST',signal});
+        if(!signal.aborted)render();
+      }finally{
+        if(!signal.aborted&&session.question)media.set('ready');
+      }
+    });
+    action(panel,'read',()=>media.play(session.question.question));
+    action(panel,'mic',()=>media.listen());
+    media.set('ready');
+  }
+  async function submit(data){
+    if(['listening','thinking'].includes(state))return;
+    media.stopSpeech();
+    media.set('thinking','Đang chấm câu trả lời');
+    try{
+      session=await api(endpoint+'/answers',{method:'POST',signal,data:{...data,cursor:session.cursor,turn:session.turn}});
+      if(signal.aborted)return;
+      render();
+      if(autoRead && session.question) void media.play(session.question.question);
+    }catch(error){
+      if(signal.aborted)return;
+      media.set('ready');
+      throw error;
+    }
+  }
+  render();
+  if(args[1]==='start'&&session.question){
+    requestAnimationFrame(()=>{if(autoRead&&!signal.aborted&&state==='ready')void media.play(session.question.question);});
+  }
 }
 export const pages={chat,mock,'mock-session':mockSession};

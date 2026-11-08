@@ -3,17 +3,19 @@ import {esc,heading,empty,toast,action,btn} from './components/ui.js';
 import * as publicPages from './pages/public.js';
 import * as student from './pages/student.js?v=merge-fix-1';
 import * as workspace from './pages/workspace.js?v=chat-history-1';
-import * as ai from './pages/ai.js?v=chat-history-1';
+import * as ai from './pages/ai.js?v=interview-avatar-1';
 
 const root=document.querySelector('#page'), nav=document.querySelector('#nav');
 const routes={...publicPages.pages,...student.pages,...workspace.pages,...ai.pages};
-let user=null, last=0;
+let user=null, last=0, activePage;
 const common=[['jobs','Thực tập'],['companies','Doanh nghiệp']];
 const studentNav=[['profile','Hồ sơ CV'],['matching','AI Matching'],['applications','Đơn ứng tuyển'],['mock','Phỏng vấn ảo']];
 const roleNav={student:studentNav,company_member:[['workspace','Quản lý tuyển dụng']],staff:[['moderation','Kiểm duyệt']],admin:[['moderation','Kiểm duyệt'],['accounts','Tài khoản'],['knowledge','Tri thức']]};
 
 async function load(){
   const version=++last;
+  activePage?.abort();
+  const page=activePage=new AbortController();
   const [key='home',...args]=(location.hash.slice(1)||'home').split('/');
   let actor;
   try{actor=await api('/auth/me');}
@@ -27,7 +29,7 @@ async function load(){
   const stage=document.createElement('div');
   root.innerHTML=empty('Đang tải…');
   try{
-    await (routes[key]||publicPages.pages.home)({root:stage,user,args,reload:load});
+    await (routes[key]||publicPages.pages.home)({root:stage,user,args,reload:load,signal:page.signal});
   }catch(error){
     stage.innerHTML=heading('Không mở được trang')+empty(error.message);
   }

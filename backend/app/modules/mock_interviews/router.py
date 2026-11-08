@@ -30,7 +30,8 @@ def transcribe(ident:int,db:DB,actor:Actor,file:UploadFile=File(...),consent:boo
     item=get(ident,db,actor)
     if item["state"]!="active" or not consent:
         raise HTTPException(422,"Cần buổi luyện đang mở và đồng ý gửi âm thanh")
-    if file.content_type not in {"audio/webm","audio/ogg","audio/mpeg","audio/wav","audio/mp4"}:
+    media_type=(file.content_type or "").split(";",1)[0].strip().lower()
+    if media_type not in {"audio/webm","audio/ogg","audio/mpeg","audio/wav","audio/mp4"}:
         raise HTTPException(415,"Định dạng âm thanh không hỗ trợ")
     payload=file.file.read(8*1024*1024+1)
     if not payload or len(payload)>8*1024*1024:
