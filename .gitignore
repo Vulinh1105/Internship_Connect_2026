@@ -6,3 +6,4 @@ data/runtime/
 data/uploads/
 *.db
 *.sqlite
+env.md

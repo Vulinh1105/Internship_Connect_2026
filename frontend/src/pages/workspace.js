@@ -20,16 +20,16 @@ async function workspace({root,user,reload}){
   if(!user)return loginRequired(root);
   const [companies,jobs,interviews]=await Promise.all([api('/companies/mine'),api('/jobs/mine'),api('/interviews')]);
   root.innerHTML=heading('Quản lý tuyển dụng','Đăng tin, xử lý đơn ứng tuyển và đặt lịch.')
-    +companies.map(c=>box('<details><summary>Chỉnh hồ sơ · '+esc(c.name)+'</summary>'+form('co-'+c.id,
+    +'<div class="split"><div class="split-main">'+companies.map(c=>box('<details><summary>Chỉnh hồ sơ · '+esc(c.name)+'</summary>'+form('co-'+c.id,
       field('name','Tên',c.name)+field('industry','Ngành',c.industry)+field('city','Thành phố',c.city)
       +area('description','Mô tả',c.description)+area('benefits','Quyền lợi',c.details?.benefits),'Lưu hồ sơ')+'</details>')).join('')
     +(companies.length?box('<details><summary>Đăng tin mới</summary>'+form('new-job',jobFields(companies),'Gửi kiểm duyệt')+'</details>'):empty('Tài khoản chưa thuộc doanh nghiệp.'))
     +'<h2>Tin đã đăng</h2>'+grid(jobs.map(j=>'<article class="card"><h3>'+esc(j.title)+'</h3>'+tags(status(j.status),status(j.moderation_status),j.deadline)
       +'<div class="row">'+link('applicants/'+j.id,'Hồ sơ ứng tuyển')+link('edit/'+j.id,'Chỉnh tin')
       +(j.status==='open'?btn('close','Đóng tin',j.id):'')+btn('delete','Xóa tin',j.id)+'</div></article>'))
-    +'<h2>Lịch phỏng vấn đã mời</h2>'+grid(interviews.map(i=>box('<h3>'+esc(i.student_name)+'</h3>'
+    +'</div><aside class="split-side"><h2>Lịch phỏng vấn đã mời</h2>'+grid(interviews.map(i=>box('<h3>'+esc(i.student_name)+'</h3>'
       +tags(i.scheduled_at.replace('T',' '),status(i.status))+copy(i.location)+copy(i.response||'')
-      +(['invited','confirmed','reschedule_requested'].includes(i.status)?btn('cancel','Hủy lịch',i.id):''))));
+      +(['invited','confirmed','reschedule_requested'].includes(i.status)?btn('cancel','Hủy lịch',i.id):''))))+'</aside></div>';
   for(const c of companies)bindForm(root,'co-'+c.id,async data=>{await api('/companies/'+c.id,{method:'PUT',data});toast('Đã lưu');await reload();});
   bindForm(root,'new-job',async data=>{await api('/jobs',{method:'POST',data:jobPayload(data)});toast('Tin đã vào hàng chờ');await reload();});
   for(const [name,method] of [['close','POST'],['delete','DELETE']])action(root,name,async id=>{
@@ -63,9 +63,9 @@ async function applicants({root,user,args,reload}){
 async function moderation({root,user,reload}){
   if(!user)return loginRequired(root);
   const rows=await api('/jobs/moderation');
-  root.innerHTML=heading('Hàng chờ kiểm duyệt')+(rows.length?rows.map(j=>box(jobCard(j)
-    +(j.flags?.length?'<p class="alert">'+esc(j.flags.join(' · '))+'</p>':'')
-    +form('review-'+j.id,select('decision','Quyết định',[['approved','Duyệt'],['rejected','Từ chối']])+area('reason','Lý do'),'Lưu quyết định'))).join(''):empty('Hàng chờ đã trống.'));
+  root.innerHTML=heading('Hàng chờ kiểm duyệt')+(rows.length?rows.map(j=>box('<div class="review-item"><div>'+jobCard(j)
+    +(j.flags?.length?'<p class="alert">'+esc(j.flags.join(' · '))+'</p>':'')+'</div>'
+    +form('review-'+j.id,select('decision','Quyết định',[['approved','Duyệt'],['rejected','Từ chối']])+area('reason','Lý do'),'Lưu quyết định')+'</div>')).join(''):empty('Hàng chờ đã trống.'));
   for(const j of rows)bindForm(root,'review-'+j.id,async data=>{await api('/jobs/'+j.id+'/review',{method:'POST',data});await reload();});
 }
 async function accounts({root,user,reload}){

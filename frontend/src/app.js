@@ -31,7 +31,16 @@ async function load(){
   }catch(error){
     stage.innerHTML=heading('Không mở được trang')+empty(error.message);
   }
-  if(version===last)root.replaceChildren(stage);
+  if(version!==last)return;
+  const adminKeys=['moderation','accounts','knowledge'];
+  if(['staff','admin'].includes(user?.role)&&adminKeys.includes(key)){
+    const layout=document.createElement('div');
+    layout.className='admin-layout';
+    layout.innerHTML='<aside class="admin-side" aria-label="Quản trị">'+roleNav[user.role].map(([path,text])=>'<a href="#'+path+'"'+(key===path?' aria-current="page"':'')+'>'+esc(text)+'</a>').join('')+'</aside>';
+    stage.classList.add('admin-content');
+    layout.append(stage);
+    root.replaceChildren(layout);
+  }else root.replaceChildren(stage);
 }
 document.querySelector('.skip-link').addEventListener('click',event=>{
   event.preventDefault();

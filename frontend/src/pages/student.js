@@ -1,5 +1,5 @@
 import {api} from '../api/client.js';
-import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,modes,list,status,toast,bindForm,action} from '../components/ui.js';
+import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,money,modes,list,status,toast,bindForm,action} from '../components/ui.js';
 import {jobCard,loginRequired} from './public.js';
 
 const facts=[['skills','Kỹ năng'],['education','Học vấn'],['experience','Kinh nghiệm'],['projects','Dự án'],['certificates','Chứng chỉ'],['languages','Ngoại ngữ']];
@@ -32,11 +32,21 @@ async function profile({root,user,reload}){
     toast('Đã xác nhận CV');await reload();
   });
 }
+const matchRow=j=>{
+  const pct=Math.max(0,Math.min(100,Math.round(Number(j.match_score)||0)));
+  const workMode=modes.find(([key])=>key===j.work_mode)?.[1];
+  return '<article class="card match-row"><div class="ring" style="--pct:'+pct+'" role="img" aria-label="'+(j.match_score!=null?'Phù hợp '+pct+'%':'Chưa có điểm')+'"><span>'+(j.match_score!=null?pct+'%':'–')+'</span></div>'
+    +'<div class="match-body"><h3><a href="#job/'+j.id+'">'+esc(j.title)+'</a></h3><p class="muted">'+esc(j.company_name)+'</p>'
+    +tags(j.location,workMode,j.category)
+    +'<p class="job-summary">'+esc(money(j.salary_min,j.salary_max))+' · Hạn '+esc(j.deadline||'linh hoạt')+'</p>'
+    +(j.reason?'<p>'+esc(j.reason)+'</p>':'')+(j.skills?.length?tags(...j.skills.slice(0,5)):'')+'</div>'
+    +'<a class="card-link" href="#job/'+j.id+'">Xem thêm <span aria-hidden="true">→</span></a></article>';
+};
 async function matching({root,user}){
   if(!user)return loginRequired(root);
   const jobs=await api('/matching');
   root.innerHTML=heading('AI Matching','Gợi ý dựa trên hồ sơ, kỹ năng và nguyện vọng. Điểm số dùng để tham khảo khi chọn tin.')
-    +grid(jobs.map(jobCard))+(!jobs.length?link('profile','Cập nhật hồ sơ'):'');
+    +(jobs.length?'<div class="match-list">'+jobs.map(matchRow).join('')+'</div>':empty())+(!jobs.length?link('profile','Cập nhật hồ sơ'):'');
 }
 async function saved({root,user,reload}){
   if(!user)return loginRequired(root);
@@ -48,18 +58,18 @@ async function applications({root,user,reload}){
   if(!user)return loginRequired(root);
   const [apps,interviews]=await Promise.all([api('/applications/me'),api('/interviews')]);
   root.innerHTML=heading('Đơn ứng tuyển','Theo dõi trạng thái và phản hồi lời mời phỏng vấn trên web.')
-    +'<h2>Lịch phỏng vấn</h2>'+(interviews.length?interviews.map(i=>box('<h3>'+esc(i.location)+'</h3>'+tags(i.scheduled_at.replace('T',' '),status(i.status))
+    +'<div class="split"><div class="split-main"><h2>Đơn của bạn</h2>'+(apps.length?apps.map(a=>box('<h3>'+esc(a.job_title)+'</h3>'+tags('#'+a.id,status(a.status),a.match_score!=null?'Phù hợp '+a.match_score+'%':'')
+      +(a.cv_id?'<a href="/api/applications/'+a.id+'/cv">Xem CV đã nộp</a>':'')+(['pending','reviewing'].includes(a.status)?'<div class="row">'+btn('withdraw','Rút đơn',a.id)+'</div>':''))).join(''):empty())
+    +'</div><aside class="split-side"><h2>Lịch phỏng vấn</h2>'+(interviews.length?interviews.map(i=>box('<h3>'+esc(i.location)+'</h3>'+tags(i.scheduled_at.replace('T',' '),status(i.status))
     +copy(i.note)+(i.status==='invited'?form('reply-'+i.id,select('action','Phản hồi',[['confirmed','Xác nhận'],['declined','Từ chối'],['reschedule_requested','Xin đổi lịch']])
-      +field('message','Ghi chú / lịch đề xuất'),'Gửi phản hồi'):''))).join(''):empty('Chưa có lời mời.'))
-    +'<h2>Đơn của bạn</h2>'+(apps.length?apps.map(a=>box('<h3>'+esc(a.job_title)+'</h3>'+tags('#'+a.id,status(a.status),a.match_score!=null?'Phù hợp '+a.match_score+'%':'')
-      +(a.cv_id?'<a href="/api/applications/'+a.id+'/cv">Xem CV đã nộp</a>':'')+(['pending','reviewing'].includes(a.status)?'<div class="row">'+btn('withdraw','Rút đơn',a.id)+'</div>':''))).join(''):empty());
+      +field('message','Ghi chú / lịch đề xuất'),'Gửi phản hồi'):''))).join(''):empty('Chưa có lời mời.'))+'</aside></div>';
   for(const i of interviews)bindForm(root,'reply-'+i.id,async data=>{await api('/interviews/'+i.id+'/respond',{method:'POST',data});await reload();});
   action(root,'withdraw',async id=>{if(confirm('Rút đơn ứng tuyển này?')){await api('/applications/'+id+'/status',{method:'PATCH',data:{status:'withdrawn'}});await reload();}});
 }
 async function notifications({root,user,reload}){
   if(!user)return loginRequired(root);
   const rows=await api('/notifications');
-  root.innerHTML=heading('Thông báo')+btn('read','Đánh dấu đã đọc')+(rows.length?rows.map(n=>box(tags(n.read_at?'Đã đọc':'Mới',n.created_at.replace('T',' ').slice(0,16))+copy(n.message))).join(''):empty());
+  root.innerHTML=heading('Thông báo')+btn('read','Đánh dấu đã đọc')+(rows.length?'<div class="notice-list">'+rows.map(n=>box(tags(n.read_at?'Đã đọc':'Mới',n.created_at.replace('T',' ').slice(0,16))+copy(n.message))).join('')+'</div>':empty());
   action(root,'read',async()=>{await api('/notifications/read',{method:'POST'});await reload();});
 }
 export const pages={profile,matching,saved,applications,notifications};
