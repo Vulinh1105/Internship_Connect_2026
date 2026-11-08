@@ -1,6 +1,6 @@
 from pathlib import Path
 from fastapi import HTTPException
-from sqlalchemy import select
+from sqlalchemy import func, select
 from app.common import storage
 from app.common.records import first, put, record, require
 from .models import Company, Follow, Member
@@ -20,6 +20,13 @@ def public(company):
 def detail(db, ident):
     return public(require(repo.get_company(db, ident), "Không tìm thấy doanh nghiệp"))
 
+def profile(db, ident, actor=None):
+    # Trang công ty: thêm số người theo dõi và trạng thái theo dõi của người đang xem.
+    data = detail(db, ident)
+    data["followers"] = db.scalar(select(func.count()).select_from(Follow).where(Follow.company_id == ident)) or 0
+    data["following"] = bool(actor and first(db, Follow, company_id=ident, user_id=actor["id"]))
+    return data
+
 def company_name(db, ident):
     return detail(db, ident)["name"]
 
@@ -28,6 +35,14 @@ def list_public(db):
 
 def memberships(db, user_id):
     return list(db.scalars(select(Member.company_id).filter_by(user_id=user_id, active=True)))
+
+def member_user_ids(db, company_id):
+    return list(db.scalars(select(Member.user_id).filter_by(company_id=company_id, active=True)))
+
+def follower_user_ids(db, company_id):
+    # Người theo dõi, trừ chính thành viên công ty (họ đã biết tin của mình).
+    members = set(member_user_ids(db, company_id))
+    return [u for u in db.scalars(select(Follow.user_id).filter_by(company_id=company_id)) if u not in members]
 
 def ensure_member(db, actor, company_id):
     if actor["role"] != "company_member" or company_id not in memberships(db, actor["id"]):

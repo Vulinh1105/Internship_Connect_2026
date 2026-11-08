@@ -73,8 +73,16 @@ def verify_flows():
     jid=job["id"]
     assert guest.get(f"/api/jobs/{jid}").status_code==404
     assert student.post(f"/api/jobs/{jid}/review",json={"decision":"approved"}).status_code==403
+    assert student.get("/api/jobs/moderation/count").status_code==403
+    assert payload(staff.get("/api/jobs/moderation/count"))["pending"]>=1
+    payload(student.put(f"/api/companies/{company_id}/follow?value=true"))
     payload(staff.post(f"/api/jobs/{jid}/review",json={"decision":"approved"}))
+    followed=[n for n in payload(student.get("/api/notifications")) if n["kind"]=="company_new_job" and n["target_id"]==jid]
+    assert len(followed)==1 and "Thuc tap SQL Python" in followed[0]["message"]
+    assert not any(n["kind"]=="company_new_job" for n in payload(company.get("/api/notifications")))
     assert payload(guest.get(f"/api/jobs/{jid}"))["active"]
+    approved=[n for n in payload(company.get("/api/notifications")) if n["kind"]=="job_approved" and n["target_id"]==jid]
+    assert approved and "Thuc tap SQL Python" in approved[0]["message"]
     assert vectors.entries("jobs",vectors.filters(entity_id=jid))
     cv=payload(student.post("/api/students/me/cvs",files={"file":("sample.txt",b"SQL and Python data analysis","text/plain")}),201)
     cv_id=cv["id"]
@@ -84,6 +92,9 @@ def verify_flows():
     a=payload(student.post("/api/applications",json={"job_id":jid,"cv_id":cv_id}),201)
     aid=a["id"]
     assert student.post("/api/applications",json={"job_id":jid,"cv_id":cv_id}).status_code==409
+    new_app=[n for n in payload(company.get("/api/notifications")) if n["kind"]=="application_new" and n["target_id"]==jid]
+    assert len(new_app)==1 and "ứng tuyển" in new_app[0]["message"]
+    assert not any(n["kind"]=="application_new" and n["target_id"]==jid for n in payload(student.get("/api/notifications")))
     assert student.get(f"/api/applications/job/{jid}").status_code==403
     assert payload(company.get(f"/api/applications/job/{jid}"))[0]["id"]==aid
     assert company.get(f"/api/applications/{aid}/cv").status_code==200
@@ -93,6 +104,15 @@ def verify_flows():
     assert payload(student.post(f"/api/interviews/{iid}/respond",json={"action":"confirmed"}))["status"]=="confirmed"
     assert payload(company.patch(f"/api/applications/{aid}/status",json={"status":"accepted"}))["status"]=="accepted"
     assert len(payload(student.get("/api/notifications")))>=2
+    mine=payload(student.get("/api/notifications"))
+    assert any("đã được nhận" in n["message"] for n in mine if n["kind"]=="application_status")
+    unread=payload(student.get("/api/notifications/unread-count"))["unread"]
+    assert unread>=2
+    one=next(n for n in mine if n["read_at"] is None)
+    assert company.post(f"/api/notifications/{one['id']}/read").status_code==404
+    assert payload(student.post(f"/api/notifications/{one['id']}/read"))["unread"]==unread-1
+    assert payload(student.post("/api/notifications/read"))["unread"]==0
+    assert payload(student.get("/api/notifications/unread-count"))["unread"]==0
     payload(company.post(f"/api/jobs/{jid}/close"))
     assert guest.get(f"/api/jobs/{jid}").status_code==404
     assert not vectors.entries("jobs",vectors.filters(entity_id=jid))

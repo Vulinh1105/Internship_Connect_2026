@@ -15,8 +15,10 @@ def hiring_company_ids(db, limit):
             .order_by(count.desc(), Job.company_id).limit(limit))
     return list(db.scalars(stmt))
 
-def find(db, q="", location="", category="", work_mode="", level="", salary_min=None, salary_max=None, offset=0, limit=20):
+def find(db, q="", location="", category="", work_mode="", level="", salary_min=None, salary_max=None, offset=0, limit=20, company_id=None):
     stmt = select(Job).where(*visible())
+    if company_id is not None:
+        stmt = stmt.where(Job.company_id == company_id)
     for col, value in [(Job.location,location),(Job.category,category),(Job.work_mode,work_mode),(Job.level,level)]:
         if value:
             stmt = stmt.where(col.icontains(value, autoescape=True))
@@ -41,3 +43,9 @@ def by_company(db, company_ids):
 
 def queue(db):
     return list(db.scalars(select(Job).where(Job.moderation_status=="pending", Job.deleted_at.is_(None)).order_by(Job.id)))
+
+def queue_count(db):
+    return db.scalar(select(func.count()).select_from(Job).where(Job.moderation_status=="pending", Job.deleted_at.is_(None))) or 0
+
+def approved_before(db, job_id):
+    return db.scalar(select(func.count()).select_from(Review).where(Review.job_id==job_id, Review.decision=="approved")) or 0

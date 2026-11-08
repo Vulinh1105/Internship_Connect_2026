@@ -11,31 +11,31 @@ const messages = {
 export const interviewer = `<aside class="interviewer" data-state="ready" aria-label="Người phỏng vấn ảo">
   <svg class="interviewer-art" viewBox="0 0 320 300" aria-hidden="true">
     <defs>
-      <linearGradient id="interview-suit" x2="1" y2="1"><stop stop-color="#2d605b"/><stop offset="1" stop-color="#153b38"/></linearGradient>
+      <linearGradient id="interview-suit" x2="1" y2="1"><stop stop-color="#2f5f9e"/><stop offset="1" stop-color="#16396b"/></linearGradient>
       <linearGradient id="interview-skin" x2="0" y2="1"><stop stop-color="#fac6a6"/><stop offset="1" stop-color="#e99b80"/></linearGradient>
     </defs>
-    <circle cx="160" cy="135" r="100" fill="#d5e9db"/>
-    <circle cx="160" cy="135" r="91" fill="none" stroke="#f4faf2" stroke-width="2"/>
-    <path d="M81 257v-37q0-42 36-42h87q36 0 36 42v37" fill="#aacabd" stroke="#92b5a8" stroke-width="3"/>
-    <path d="M108 176Q92 118 111 79q16-34 53-32 40 2 51 39 10 34-3 91z" fill="#273839"/>
+    <circle cx="160" cy="135" r="100" fill="#d6e6fb"/>
+    <circle cx="160" cy="135" r="91" fill="none" stroke="#f2f7ff" stroke-width="2"/>
+    <path d="M81 257v-37q0-42 36-42h87q36 0 36 42v37" fill="#a9c4e8" stroke="#8fb0dd" stroke-width="3"/>
+    <path d="M108 176Q92 118 111 79q16-34 53-32 40 2 51 39 10 34-3 91z" fill="#252f3d"/>
     <path d="M72 255q8-45 37-54l25-10h53l27 11q29 9 37 53" fill="url(#interview-suit)"/>
     <path d="M142 175v25q18 23 37 0v-25" fill="#de8d76"/>
     <path d="M128 196l32 51 32-51-14-8q-18 22-36 0z" fill="#f5eee2"/>
-    <path d="M125 198l-13 11 19 12-5 10 34 16m37-49 13 11-19 12 5 10-36 16" fill="none" stroke="#7fa697" stroke-width="1.5"/>
+    <path d="M125 198l-13 11 19 12-5 10 34 16m37-49 13 11-19 12 5 10-36 16" fill="none" stroke="#7f9fd0" stroke-width="1.5"/>
     <ellipse cx="110" cy="134" rx="10" ry="15" fill="#e89f85"/>
     <ellipse cx="210" cy="134" rx="10" ry="15" fill="#e89f85"/>
     <path d="M112 103q0-46 48-46t48 46v34q-2 53-48 58-46-5-48-58z" fill="url(#interview-skin)"/>
-    <path d="M106 114q-8-62 45-67 52-5 65 46l-4 26q-11-7-17-29-35 18-72 6l-11 22z" fill="#273839"/>
-    <path d="M115 90q13-34 50-33 23 1 34 16-36 13-77 17" fill="#394b48"/>
+    <path d="M106 114q-8-62 45-67 52-5 65 46l-4 26q-11-7-17-29-35 18-72 6l-11 22z" fill="#252f3d"/>
+    <path d="M115 90q13-34 50-33 23 1 34 16-36 13-77 17" fill="#38455a"/>
     <path d="M126 119q9-6 18-2m32 0q10-4 18 2" fill="none" stroke="#704a43" stroke-width="2.6" stroke-linecap="round"/>
-    <g class="interviewer-eyes" fill="#283c39"><ellipse cx="137" cy="130" rx="3.6" ry="4.5"/><ellipse cx="184" cy="130" rx="3.6" ry="4.5"/></g>
+    <g class="interviewer-eyes" fill="#242e3c"><ellipse cx="137" cy="130" rx="3.6" ry="4.5"/><ellipse cx="184" cy="130" rx="3.6" ry="4.5"/></g>
     <path d="m160 133-3 14 6 1" fill="none" stroke="#c78472" stroke-width="2" stroke-linecap="round"/>
     <ellipse cx="125" cy="145" rx="8" ry="4" fill="#d98978" opacity=".4"/>
     <ellipse cx="195" cy="145" rx="8" ry="4" fill="#d98978" opacity=".4"/>
     <path class="interviewer-smile" d="M150 161q10 7 21 0" fill="none" stroke="#984f52" stroke-width="2.4" stroke-linecap="round"/>
     <ellipse class="interviewer-mouth" cx="160" cy="162" rx="9" ry="8" fill="#783b43"/>
     <circle cx="111" cy="148" r="3" fill="#e8c578"/><circle cx="209" cy="148" r="3" fill="#e8c578"/>
-    <path d="M106 227q-5 18 4 28m103-28q7 18-3 28" fill="none" stroke="#193d3a" stroke-width="2"/>
+    <path d="M106 227q-5 18 4 28m103-28q7 18-3 28" fill="none" stroke="#17355f" stroke-width="2"/>
     <rect x="39" y="252" width="242" height="10" rx="5" fill="#b78e69"/>
     <path d="M53 262h214v15H53z" fill="#dbc1a1"/>
     <rect x="218" y="229" width="28" height="23" rx="5" fill="#f3ebd9"/>

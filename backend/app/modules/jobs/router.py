@@ -7,9 +7,9 @@ from .schemas import JobInput, ReviewInput
 router=APIRouter(prefix="/api/jobs",tags=["jobs"])
 
 @router.get("")
-def search(db:DB,q:str="",location:str="",category:str="",work_mode:str="",level:str="",
+def search(db:DB,q:str="",location:str="",category:str="",work_mode:str="",level:str="",company_id:int|None=None,
            salary_min:int|None=None,salary_max:int|None=None,offset:int=Query(0,ge=0),limit:int=Query(20,ge=1,le=100)):
-    return service.search(db,q=q[:200],location=location,category=category,work_mode=work_mode,level=level,
+    return service.search(db,q=q[:200],location=location,category=category,work_mode=work_mode,level=level,company_id=company_id,
                           salary_min=salary_min,salary_max=salary_max,offset=offset,limit=limit)
 
 @router.get("/semantic")
@@ -24,6 +24,10 @@ def mine(db:DB,actor:Actor):
 @router.get("/moderation")
 def queue(db:DB,actor:Actor):
     return service.moderation_queue(db,actor)
+
+@router.get("/moderation/count")
+def queue_count(db:DB,actor:Actor):
+    return service.moderation_count(db,actor)
 
 @router.get("/saved")
 def saved(db:DB,actor:Actor):

@@ -5,6 +5,7 @@ from app.common.records import record,require
 from app.core.config import now
 from app.modules.students import service as students
 from app.modules.jobs import service as jobs
+from app.modules.companies import service as companies
 from app.modules.notifications import service as notifications
 from .models import Application,ApplicationEvent
 from . import repository as repo
@@ -39,6 +40,10 @@ def apply(db,actor,data):
     try:
         db.flush()
         db.add(ApplicationEvent(application_id=a.id,actor_id=actor["id"],after="pending"))
+        score=a.match_score
+        fit=f" (phù hợp {round(score)}%)" if score is not None else ""
+        notifications.send_many(db,companies.member_user_ids(db,job["company_id"]),"application_new",
+            f"{s.name} ứng tuyển {job['title']}{fit}.",job["id"])
         db.commit()
     except IntegrityError:
         db.rollback()
@@ -66,8 +71,10 @@ def authorized(db,actor,ident):
 
 def interview_context(db,actor,ident):
     a=authorized(db,actor,ident)
+    info=jobs.brief(db,a.job_id)
     return {"application_id":a.id,"user_id":students.user_id_for(db,a.student_id),"status":a.status,
-            "student_name":students.public_name(db,a.student_id)}
+            "student_name":students.public_name(db,a.student_id),
+            "job_id":info["id"],"job_title":info["title"],"company_name":info["company_name"]}
 
 def reviewing(db,actor,ident):
     a=authorized(db,actor,ident)
@@ -88,9 +95,23 @@ def decision(db,actor,ident,status):
         a.decision_at=now()
     if status in {"rejected","withdrawn"}:
         interviews.cancel_for_application(db,a.id)
-    notifications.send(db,students.user_id_for(db,a.student_id),"application_status",f"Đơn #{a.id} cập nhật: {status}",a.id)
+    notify_decision(db,a,status)
     db.commit()
     return show(db,a,actor)
+
+STATUS_TEXT={"reviewing":"đang được xét","accepted":"đã được nhận","rejected":"đã bị từ chối"}
+
+def notify_decision(db,a,status):
+    info=jobs.brief(db,a.job_id)
+    if status=="withdrawn":
+        # Sinh viên tự rút đơn: báo cho doanh nghiệp, không báo lại cho chính sinh viên.
+        notifications.send_many(db,companies.member_user_ids(db,info["company_id"]),"application_withdrawn",
+            f"{students.public_name(db,a.student_id)} đã rút đơn {info['title']}.",info["id"])
+        return
+    text=f"Đơn ứng tuyển {info['title']} tại {info['company_name']} {STATUS_TEXT[status]}."
+    if status=="accepted":
+        text+=" Hãy theo dõi lịch phỏng vấn hoặc liên hệ từ doanh nghiệp."
+    notifications.send(db,students.user_id_for(db,a.student_id),"application_status",text,a.id)
 
 def download(db,actor,ident):
     a=authorized(db,actor,ident)

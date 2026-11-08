@@ -75,7 +75,10 @@ async function moderation({root,user,reload}){
   root.innerHTML=heading('Hàng chờ kiểm duyệt')+(rows.length?rows.map(j=>box('<div class="review-item"><div>'+jobCard(j)
     +(j.flags?.length?'<p class="alert">'+esc(j.flags.join(' · '))+'</p>':'')+'</div>'
     +form('review-'+j.id,select('decision','Quyết định',[['approved','Duyệt'],['rejected','Từ chối']])+area('reason','Lý do'),'Lưu quyết định')+'</div>')).join(''):empty('Hàng chờ đã trống.'));
-  for(const j of rows)bindForm(root,'review-'+j.id,async data=>{await api('/jobs/'+j.id+'/review',{method:'POST',data});await reload();});
+  for(const j of rows)bindForm(root,'review-'+j.id,async data=>{
+    if(data.decision==='rejected'&&!data.reason.trim())throw new Error('Nhập lý do từ chối để doanh nghiệp biết cần sửa gì.');
+    await api('/jobs/'+j.id+'/review',{method:'POST',data});await reload();
+  });
 }
 async function accounts({root,user,reload}){
   if(!user)return loginRequired(root);

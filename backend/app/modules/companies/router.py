@@ -1,6 +1,6 @@
 from fastapi import APIRouter, File, UploadFile
 from fastapi.responses import FileResponse
-from app.core.deps import Actor, DB
+from app.core.deps import Actor, DB, OptionalActor
 from . import service
 from .schemas import CompanyInput
 from .service import LOGO_MAX
@@ -16,8 +16,8 @@ def mine(db: DB, actor: Actor):
     return service.mine(db, actor)
 
 @router.get("/{ident}")
-def detail(ident: int, db: DB):
-    return service.detail(db, ident)
+def detail(ident: int, db: DB, actor: OptionalActor):
+    return service.profile(db, ident, actor)
 
 @router.get("/{ident}/logo")
 def logo(ident: int, db: DB):
