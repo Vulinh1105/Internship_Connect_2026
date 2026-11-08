@@ -4,6 +4,7 @@ from pathlib import Path
 from fastapi import HTTPException
 from sqlalchemy import select, text
 from app.common import storage,file_parsing
+from app.ai.rag.legacy_text import _clean_text
 from app.common.records import record,require
 from app.ai.providers.embedding import words
 from app.core.config import now,ROOT,RUNTIME
@@ -35,7 +36,7 @@ def read_document(path):
     content = file_parsing.parse(path,max_pdf_pages=MAX_PDF_PAGES,max_chars=None,ocr_tessdata=RUNTIME/"tessdata")
     if len(content) > MAX_DOCUMENT_CHARS:
         raise HTTPException(422, "Tài liệu vượt 3 triệu ký tự. Hãy tách thành nhiều phần.")
-    return content
+    return _clean_text(content)
 
 
 def upload(db,actor,name,data,title):

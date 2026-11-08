@@ -8,6 +8,7 @@ from app.core.rate_limit import enforce
 from app.ai.usage import check
 from app.ai.rag.retrieve import retrieve
 from app.ai.rag.generate import answer
+from app.ai.rag.relevance import NO_DATA_MESSAGE
 from app.ai.rag import legacy_runtime
 from app.modules.students import service as students
 from app.modules.jobs import service as jobs
@@ -63,10 +64,15 @@ def respond(db,actor,ident,data):
             job,state=jobs.public_by_code(db,job_code.group(0))
             result["jobs"]=[job] if job else []
             result["answer"]={"active":"Tin đang nhận hồ sơ.","expired":"Tin đã hết hạn.",
-                              "closed":"Tin đã đóng.","unavailable":"Không tìm thấy tin đang công khai."}[state]
+                              "closed":"Tin đã đóng.","unavailable":NO_DATA_MESSAGE}[state]
             result["tools_used"]=["get_job"]
         elif decision.confidence<.6:
-            result["answer"]="Bạn muốn tìm vị trí hoặc chủ đề nào cụ thể?"
+            result["answer"]=NO_DATA_MESSAGE
+        elif decision.intent=="hiring_companies":
+            names=jobs.hiring_companies(db)
+            result["answer"]=("Một số doanh nghiệp đang có tin tuyển dụng công khai:\n"
+                              +"\n".join(f"• {name}" for name in names)) if names else NO_DATA_MESSAGE
+            result["tools_used"]=["hiring_companies"]
         elif decision.intent=="job_search":
             filters=decision.entities.model_dump()
             if not filters["location"] and profile.get("location") and len(decision.query.split())<=6:
@@ -78,19 +84,17 @@ def respond(db,actor,ident,data):
                 elif profile.get("skills"):
                     query=" ".join(profile["skills"])
             if not result["answer"]:
-                result["jobs"],relax=tools.search(db,actor,query,filters)
+                result["jobs"]=tools.search(db,actor,query,filters)
                 result["tools_used"]=["search_jobs"]
-                result["answer"]=f"Tìm thấy {len(result['jobs'])} tin phù hợp." if result["jobs"] else "Chưa tìm thấy tin phù hợp."
-                if relax:
-                    result["answer"]+=" Đã mở rộng bộ lọc "+", ".join(relax)+"."
+                result["answer"]=f"Tìm thấy {len(result['jobs'])} tin phù hợp." if result["jobs"] else NO_DATA_MESSAGE
         elif decision.intent in {"job_detail","compare"}:
             result["jobs"]=tools.compare_jobs(db,actor,job_ids) if decision.intent=="compare" else tools.job_details(db,job_ids[:1] if not data.job_ids else job_ids)
             result["tools_used"]=["get_job"]
-            result["answer"]="Thông tin từ các tin đang công khai:" if result["jobs"] else "Hãy tìm tin đang mở trong hội thoại này trước khi xem chi tiết hoặc so sánh."
+            result["answer"]="Thông tin từ các tin đang công khai:" if result["jobs"] else NO_DATA_MESSAGE
         elif decision.intent=="application_status":
             items=tools.my_applications(db,actor,app_code.group(0) if app_code else None)
             result["tools_used"]=["get_my_applications"]
-            result["answer"]="\n".join(f"#{a['id']} · {a['title']} · {a['status']}" for a in items) or "Bạn chưa có đơn ứng tuyển."
+            result["answer"]="\n".join(f"#{a['id']} · {a['title']} · {a['status']}" for a in items) or NO_DATA_MESSAGE
         elif decision.intent=="cv_advice":
             result["answer"]=tools.cv_advice(db,actor,job_ids[0] if job_ids else None)
             result["tools_used"]=["compare_cv"]
@@ -104,7 +108,7 @@ def respond(db,actor,ident,data):
             result["answer"]="Bạn có thể chọn vị trí và bắt đầu phiên luyện tập."
             result["action"]="start_mock_interview"
         else:
-            result["answer"]="Mình hỗ trợ tìm việc thực tập, tra cứu đơn, CV và luyện phỏng vấn."
+            result["answer"]=NO_DATA_MESSAGE
     except HTTPException as e:
         if e.status_code==429:
             raise

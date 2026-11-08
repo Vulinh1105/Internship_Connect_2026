@@ -2,7 +2,7 @@
 
 import re
 
-from app.ai.providers.embedding import words
+from app.ai.providers.embedding import normalize, words
 
 from .relevance import IGNORED
 
@@ -12,7 +12,8 @@ _QUERY_FILLER = IGNORED | {"liet", "ke", "gom", "can", "hay", "cho", "toi", "bie
 
 
 def list_heading(question, text):
-    terms = set(words(question))
+    topic = re.sub(r"\bky nang (?:can co|can thiet)(?: (?:cho|cua|o)?\s*vi tri)?\b", "nang luc", normalize(question))
+    terms = set(words(topic))
     terms = {term for term in terms - _QUERY_FILLER if not term.isdigit()}
     for heading in _HEADING.finditer(text):
         heading_words = set(words(heading[2]))

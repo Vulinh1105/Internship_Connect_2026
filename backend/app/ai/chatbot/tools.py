@@ -1,20 +1,24 @@
 from fastapi import HTTPException
+from app.ai.providers.embedding import words
+from app.ai.rag.relevance import QUESTION_FILLER
 from app.ai.matching.service import search_jobs,comparison
 from app.modules.jobs import service as jobs
 from app.modules.applications import service as applications
 from app.modules.students import service as students
 
 def search(db,actor,query,filters):
-    relax=[]
-    current=dict(filters)
-    result=search_jobs(db,actor["id"],query,current)
-    for key,label in [("salary_min","mức phụ cấp"),("level","cấp bậc"),("location","địa điểm")]:
-        if result:
-            break
-        if current.pop(key,None):
-            relax.append(label)
-            result=search_jobs(db,actor["id"],query,current)
-    return result,relax
+    requested=set(words(query))-QUESTION_FILLER-{
+        "tim","viec","tin","goi","tuyen","dung","vi","tri","dang","cong","o","tai","thuc","tap",
+    }
+    rows=search_jobs(db,actor["id"],query,filters)
+    return [
+        job for job in rows if requested <= set(words(" ".join([
+            job["title"],job["category"],job["location"],job["company_name"],
+            job["work_mode"],job["level"]," ".join(job["skills"]),
+            job["requirements"],job["description"],
+        ])))
+    ]
+
 
 def job_details(db,ids):
     result=[]

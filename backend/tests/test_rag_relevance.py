@@ -68,3 +68,20 @@ def test_chat_answers_the_complete_list_without_request_markers(monkeypatch, que
     result = legacy_runtime.answer(None, None, question, "unused")
     assert [line[:2] for line in result["answer"].splitlines()[1:]] == ["01", "02", "03", "04", "05", "06"]
     assert result["sources"][0]["document_id"] == 7
+
+
+@pytest.mark.parametrize("question", [
+    "Chính sách bảo hiểm thất nghiệp ở Sao Hỏa là gì?",
+    "Lương của Data Analyst ở Tokyo là bao nhiêu?",
+])
+def test_chat_refuses_when_candidates_only_share_keywords(monkeypatch, question):
+    from contextlib import nullcontext
+    from app.ai.rag import legacy_runtime
+    from app.ai.rag.relevance import NO_DATA_MESSAGE
+
+    chunk = {"document_id": 1, "position": 0, "title": "Cẩm nang Data Analyst",
+             "source": "guide.pdf", "text": "Bảo hiểm thất nghiệp được đề cập cùng lương trong cẩm nang Data Analyst."}
+    monkeypatch.setattr(legacy_runtime, "call", lambda *args: nullcontext())
+    monkeypatch.setattr(legacy_runtime, "retrieve", lambda *args, **kwargs: [chunk])
+    result = legacy_runtime.answer(None, None, question, "unused")
+    assert result == {"answer": NO_DATA_MESSAGE, "sources": []}
