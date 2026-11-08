@@ -62,7 +62,19 @@ def ensure_owner(db, actor, job_id):
     return output(db,j)
 
 def mine(db, actor):
-    return [output(db,j) for j in repo.by_company(db,companies.memberships(db,actor["id"]))]
+    rows = repo.by_company(db, companies.memberships(db, actor["id"]))
+    ids = [j.id for j in rows]
+    counts = repo.application_counts(db, ids)
+    reviews = repo.latest_reviews(db, ids)
+    result = []
+    for j in rows:
+        total, waiting = counts.get(j.id, (0, 0))
+        review = reviews.get(j.id)
+        # Chỉ hiện lý do khi tin đang ở trạng thái bị từ chối (sửa và gửi lại thì lý do cũ không còn áp dụng).
+        reason = review.reason.strip() if review and review.decision == "rejected" and j.moderation_status == "rejected" else ""
+        result.append({**output(db, j), "application_count": total, "new_application_count": waiting,
+                       "rejection_reason": reason or None})
+    return result
 
 def moderation_queue(db, actor):
     if actor["role"] not in {"admin","staff"}:

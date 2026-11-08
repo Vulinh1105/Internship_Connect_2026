@@ -50,7 +50,7 @@ def mine(db,actor):
             if e.status_code in (403,404):
                 continue
             raise
-        result.append({**record(row),"student_name":ctx["student_name"]})
+        result.append({**record(row),"student_name":ctx["student_name"],"job_title":ctx["job_title"]})
     return result
 
 def reply(db,actor,ident,data):

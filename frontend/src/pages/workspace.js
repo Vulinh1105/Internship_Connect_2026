@@ -31,30 +31,126 @@ function jobPayload(data){
     employment_schedule:data.employment_schedule||null,
     salary_min:data.salary_min?Number(data.salary_min):null,salary_max:data.salary_max?Number(data.salary_max):null};
 }
+const WEEKDAYS=['Chủ nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
+const OPEN_INTERVIEW=['invited','confirmed','reschedule_requested'];
+const modeName=Object.fromEntries(modes);
+const tabs=[['jobs','Tin tuyển dụng'],['interviews','Lịch phỏng vấn'],['profile','Hồ sơ công ty']];
+let activeTab='jobs',menusBound=false;
+const two=n=>String(n).padStart(2,'0');
+const startOfDay=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+const dateText=key=>key.slice(8,10)+'/'+key.slice(5,7)+'/'+key.slice(0,4);
+const dayTitle=key=>WEEKDAYS[new Date(+key.slice(0,4),+key.slice(5,7)-1,+key.slice(8,10)).getDay()]+', '+dateText(key);
+
+// Trạng thái hiển thị của tin: xanh (đang mở), vàng (chờ duyệt), đỏ (bị từ chối), xám (đã đóng hoặc hết hạn).
+function jobState(j){
+  if(j.status==='closed')return ['closed','Đã đóng'];
+  if(j.moderation_status==='rejected')return ['rejected','Bị từ chối'];
+  if(j.moderation_status==='pending')return ['pending','Chờ duyệt'];
+  if(!j.active)return ['closed','Hết hạn'];
+  return ['open','Đang mở'];
+}
+function deadlineCell(j){
+  if(!j.deadline)return '<span class="job-sub">Không có hạn</span>';
+  const [y,m,d]=j.deadline.split('-').map(Number);
+  const days=Math.round((new Date(y,m-1,d)-startOfDay(new Date()))/864e5);
+  const left=days>0?'Còn '+days+' ngày':days===0?'Hết hạn hôm nay':'Đã quá hạn';
+  return '<div>'+two(d)+'/'+two(m)+'/'+y+'</div><div class="job-sub">'+left+'</div>';
+}
+const menuItem=(action,label,value)=>'<button type="button" data-action="'+action+'" data-value="'+esc(value)+'">'+label+'</button>';
+function jobRow(j){
+  const [state,label]=jobState(j),rejected=state==='rejected';
+  const items=[];
+  if(!rejected)items.push('<a href="#edit/'+j.id+'">Chỉnh tin</a>');
+  if(j.status==='open')items.push(menuItem('close','Đóng tin',j.id));
+  items.push(menuItem('delete','Xóa tin',j.id));
+  return '<tr><td><div class="job-title">'+esc(j.title)+'</div><div class="job-sub">'+esc(j.location)+' · '+esc(modeName[j.work_mode]||j.work_mode)+'</div>'
+    +(rejected&&j.rejection_reason?'<p class="job-reason">Lý do từ chối: '+esc(j.rejection_reason)+'</p>':'')+'</td>'
+    +'<td data-label="Trạng thái"><span class="state state-'+state+'">'+label+'</span></td>'
+    +'<td data-label="Hạn nộp">'+deadlineCell(j)+'</td>'
+    +'<td data-label="Đơn">'+(j.application_count??0)+(j.new_application_count?' <span class="badge">'+j.new_application_count+' mới</span>':'')+'</td>'
+    +'<td><div class="row-actions">'+(rejected?'<a class="button" href="#edit/'+j.id+'">Sửa và gửi lại</a>':'<a class="button" href="#applicants/'+j.id+'">Hồ sơ ứng tuyển</a>')
+    +'<details class="row-menu"><summary class="menu-btn" aria-label="Thao tác khác">…</summary><div class="menu-list">'+items.join('')+'</div></details></div></td></tr>';
+}
+const jobsPanel=jobs=>jobs.length?box('<table class="job-table"><thead><tr><th>Tin tuyển dụng</th><th>Trạng thái</th><th>Hạn nộp</th><th>Đơn</th><th>Thao tác</th></tr></thead><tbody>'
+  +jobs.map(jobRow).join('')+'</tbody></table>'):empty('Chưa có tin tuyển dụng.');
+
+function interviewCard(i,highlight){
+  const at=String(i.scheduled_at);
+  return '<article class="panel interview'+(highlight?' interview-alert':'')+'"><h3>'+esc(i.student_name)+'</h3>'
+    +(i.job_title?'<p class="job-sub">'+esc(i.job_title)+'</p>':'')
+    +tags((highlight?dateText(at.slice(0,10))+' ':'')+at.slice(11,16),status(i.status))
+    +copy(i.location)+(i.response?copy(i.response):'')
+    +(OPEN_INTERVIEW.includes(i.status)?btn('cancel','Hủy lịch',i.id):'')+'</article>';
+}
+function interviewsPanel(interviews){
+  if(!interviews.length)return empty('Chưa có lịch phỏng vấn.');
+  const asks=interviews.filter(i=>i.status==='reschedule_requested');
+  const days=new Map();
+  for(const i of interviews.filter(i=>i.status!=='reschedule_requested')){
+    const key=String(i.scheduled_at).slice(0,10);
+    days.set(key,[...(days.get(key)||[]),i]);
+  }
+  return (asks.length?'<h3 class="group-title">Sinh viên xin đổi lịch ('+asks.length+')</h3>'+asks.map(i=>interviewCard(i,true)).join(''):'')
+    +[...days].sort(([a],[b])=>a<b?-1:1).map(([key,rows])=>'<h3 class="group-title">'+esc(dayTitle(key))+'</h3>'
+      +[...rows].sort((a,b)=>a.scheduled_at<b.scheduled_at?-1:1).map(i=>interviewCard(i,false)).join('')).join('');
+}
+// Phỏng vấn còn hiệu lực từ bây giờ đến hết Chủ nhật của tuần này (giờ Việt Nam, cùng múi giờ với dữ liệu).
+function interviewsThisWeek(interviews){
+  const now=new Date(),today=startOfDay(now);
+  const nextMonday=new Date(today.getFullYear(),today.getMonth(),today.getDate()+7-(now.getDay()+6)%7);
+  return interviews.filter(i=>{
+    const at=new Date(i.scheduled_at);
+    return OPEN_INTERVIEW.includes(i.status)&&at>=now&&at<nextMonday;
+  }).length;
+}
+const profilePanel=companies=>companies.map(c=>box('<h3>'+esc(c.name)+'</h3><div class="profile-cols"><div class="logo-edit">'+logoTile(c.id,c.name,true,c.has_logo)
+  +form('logo-'+c.id,'<label class="field">Logo (PNG, JPG hoặc WebP, tối đa 2 MB)<input type="file" name="file" required accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"></label>','Tải logo lên')
+  +(c.has_logo?btn('remove-logo','Xóa logo',c.id):'')+'</div>'
+  +form('co-'+c.id,field('name','Tên',c.name)+field('industry','Ngành',c.industry)+field('city','Thành phố',c.city)
+    +area('description','Mô tả',c.description)+area('benefits','Quyền lợi',c.details?.benefits),'Lưu hồ sơ')+'</div>')).join('');
+
+function bindMenus(){
+  if(menusBound)return;
+  menusBound=true;
+  const closeAll=()=>{for(const m of document.querySelectorAll('.row-menu[open]'))m.removeAttribute('open');};
+  document.addEventListener('click',e=>{
+    for(const m of document.querySelectorAll('.row-menu[open]'))if(!m.contains(e.target)||e.target.closest('.menu-list'))m.removeAttribute('open');
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();});
+}
 async function workspace({root,user,reload}){
   if(!user)return loginRequired(root);
   const [companies,jobs,interviews]=await Promise.all([api('/companies/mine'),api('/jobs/mine'),api('/interviews')]);
-  root.innerHTML=heading('Quản lý tuyển dụng','Đăng tin, xử lý đơn ứng tuyển và đặt lịch.')
-    +'<div class="split"><div class="split-main">'+companies.map(c=>box('<details><summary>Chỉnh hồ sơ · '+esc(c.name)+'</summary>'
-      +'<div class="logo-edit">'+logoTile(c.id,c.name,true,c.has_logo)
-      +form('logo-'+c.id,'<label class="field">Logo (PNG, JPG hoặc WebP, tối đa 2 MB)<input type="file" name="file" required accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"></label>','Tải logo lên')
-      +(c.has_logo?btn('remove-logo','Xóa logo',c.id):'')+'</div>'
-      +form('co-'+c.id,
-      field('name','Tên',c.name)+field('industry','Ngành',c.industry)+field('city','Thành phố',c.city)
-      +area('description','Mô tả',c.description)+area('benefits','Quyền lợi',c.details?.benefits),'Lưu hồ sơ')+'</details>')).join('')
-    +(companies.length?box('<details><summary>Đăng tin mới</summary>'+form('new-job',jobFields(companies),'Gửi kiểm duyệt')+'</details>'):empty('Tài khoản chưa thuộc doanh nghiệp.'))
-    +'<h2>Tin đã đăng</h2>'+grid(jobs.map(j=>'<article class="card"><h3>'+esc(j.title)+'</h3>'+tags(status(j.status),status(j.moderation_status),j.deadline)
-      +'<div class="row">'+link('applicants/'+j.id,'Hồ sơ ứng tuyển')+link('edit/'+j.id,'Chỉnh tin')
-      +(j.status==='open'?btn('close','Đóng tin',j.id):'')+btn('delete','Xóa tin',j.id)+'</div></article>'))
-    +'</div><aside class="split-side"><h2>Lịch phỏng vấn đã mời</h2>'+grid(interviews.map(i=>box('<h3>'+esc(i.student_name)+'</h3>'
-      +tags(i.scheduled_at.replace('T',' '),status(i.status))+copy(i.location)+copy(i.response||'')
-      +(['invited','confirmed','reschedule_requested'].includes(i.status)?btn('cancel','Hủy lịch',i.id):''))))+'</aside></div>';
+  if(!companies.length){
+    root.innerHTML=heading('Quản lý tuyển dụng','Đăng tin, xử lý đơn ứng tuyển và đặt lịch.')+empty('Tài khoản chưa thuộc doanh nghiệp.');
+    return;
+  }
+  const asks=interviews.filter(i=>i.status==='reschedule_requested').length;
+  const stats=[['Tin đang mở',jobs.filter(j=>jobState(j)[0]==='open').length],['Chờ duyệt',jobs.filter(j=>jobState(j)[0]==='pending').length],
+    ['Đơn chưa xử lý',jobs.reduce((sum,j)=>sum+(j.new_application_count||0),0)],['Phỏng vấn tuần này',interviewsThisWeek(interviews)]];
+  const panels={jobs:jobsPanel(jobs),interviews:interviewsPanel(interviews),profile:profilePanel(companies)};
+  root.innerHTML='<div class="ws-head"><div class="ws-company">'+(companies.length===1?logoTile(companies[0].id,companies[0].name,true,companies[0].has_logo):'')
+    +'<div><h1>'+esc(companies.map(c=>c.name).join(' · '))+'</h1><p class="muted">Quản lý tuyển dụng</p></div></div>'
+    +'<button type="button" id="toggle-new-job" aria-expanded="false" aria-controls="new-job-panel">Đăng tin mới</button></div>'
+    +'<section class="panel" id="new-job-panel" hidden>'+form('new-job',jobFields(companies),'Gửi kiểm duyệt')+'</section>'
+    +'<div class="stat-grid">'+stats.map(([label,n])=>'<div class="stat"><strong>'+n+'</strong><span>'+esc(label)+'</span></div>').join('')+'</div>'
+    +'<div class="co-tabs ws-tabs" role="group" aria-label="Mục quản lý">'+tabs.map(([key,text])=>'<button type="button" class="co-tab" data-tab="'+key+'" aria-current="'+(key===activeTab)+'">'+text
+      +(key==='interviews'&&asks?'<span class="badge" aria-label="'+asks+' lời xin đổi lịch">'+asks+'</span>':'')+'</button>').join('')+'</div>'
+    +tabs.map(([key])=>'<div data-panel="'+key+'"'+(key===activeTab?'':' hidden')+'>'+panels[key]+'</div>').join('');
+  const toggle=root.querySelector('#toggle-new-job'),newJob=root.querySelector('#new-job-panel');
+  toggle.addEventListener('click',()=>{newJob.hidden=!newJob.hidden;toggle.setAttribute('aria-expanded',String(!newJob.hidden));});
+  for(const tab of root.querySelectorAll('[data-tab]'))tab.addEventListener('click',()=>{
+    activeTab=tab.dataset.tab;
+    for(const t of root.querySelectorAll('[data-tab]'))t.setAttribute('aria-current',String(t.dataset.tab===activeTab));
+    for(const p of root.querySelectorAll('[data-panel]'))p.hidden=p.dataset.panel!==activeTab;
+  });
+  bindMenus();
   for(const c of companies){
     bindForm(root,'co-'+c.id,async data=>{await api('/companies/'+c.id,{method:'PUT',data});toast('Đã lưu');await reload();});
     bindForm(root,'logo-'+c.id,async data=>{await api('/companies/'+c.id+'/logo',{method:'POST',data});toast('Đã cập nhật logo');await reload();},{keepFiles:true});
   }
   action(root,'remove-logo',async id=>{if(confirm('Xóa logo doanh nghiệp?')){await api('/companies/'+id+'/logo',{method:'DELETE'});toast('Đã xóa logo');await reload();}});
-  bindForm(root,'new-job',async data=>{await api('/jobs',{method:'POST',data:jobPayload(data)});toast('Tin đã vào hàng chờ');await reload();});
+  bindForm(root,'new-job',async data=>{await api('/jobs',{method:'POST',data:jobPayload(data)});activeTab='jobs';toast('Tin đã vào hàng chờ');await reload();});
   for(const [name,method] of [['close','POST'],['delete','DELETE']])action(root,name,async id=>{
     if(confirm('Cập nhật trạng thái tin này?')){await api('/jobs/'+id+(name==='close'?'/close':''),{method});await reload();}
   });

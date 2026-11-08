@@ -1,5 +1,6 @@
-from sqlalchemy import func, or_, select, text
+from sqlalchemy import case, func, or_, select, text
 from app.core.config import today
+from app.modules.applications.models import Application
 from .models import Job, Review, SavedJob
 
 def get_job(db, ident):
@@ -49,3 +50,21 @@ def queue_count(db):
 
 def approved_before(db, job_id):
     return db.scalar(select(func.count()).select_from(Review).where(Review.job_id==job_id, Review.decision=="approved")) or 0
+
+def application_counts(db, job_ids):
+    # {job_id: (tổng số đơn, số đơn đang chờ xử lý)}
+    if not job_ids:
+        return {}
+    waiting = func.sum(case((Application.status == "pending", 1), else_=0))
+    stmt = (select(Application.job_id, func.count(Application.id), waiting)
+            .where(Application.job_id.in_(job_ids)).group_by(Application.job_id))
+    return {job_id: (total, int(new or 0)) for job_id, total, new in db.execute(stmt)}
+
+def latest_reviews(db, job_ids):
+    # {job_id: lần kiểm duyệt gần nhất}
+    if not job_ids:
+        return {}
+    latest = {}
+    for review in db.scalars(select(Review).where(Review.job_id.in_(job_ids)).order_by(Review.id.desc())):
+        latest.setdefault(review.job_id, review)
+    return latest
