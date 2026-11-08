@@ -1,7 +1,7 @@
 import {api,stream} from '../api/client.js';
 import {esc,tags,box,copy,empty,money,heading,field,area,select,link,btn,form,grid,status,toast,bindForm,action} from '../components/ui.js';
 import {jobCard,loginRequired} from './public.js';
-import {interviewer,interviewMedia} from '../components/interviewer.js?v=interview-avatar-1';
+import {interviewer,interviewMedia} from '../components/interviewer.js?v=interview-avatar-2';
 
 const key=user=>'ic-chat-'+user.id;
 function compareTable(jobs){

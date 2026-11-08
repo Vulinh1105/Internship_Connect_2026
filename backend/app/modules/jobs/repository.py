@@ -9,8 +9,10 @@ def visible():
     return (Job.status == "open", Job.moderation_status == "approved",
             Job.deleted_at.is_(None), or_(Job.deadline.is_(None), Job.deadline >= today()))
 
-def find(db, q="", location="", category="", work_mode="", level="", salary_min=None, salary_max=None, offset=0, limit=20):
+def find(db, q="", location="", category="", work_mode="", level="", salary_min=None, salary_max=None, offset=0, limit=20, company_id=None):
     stmt = select(Job).where(*visible())
+    if company_id is not None:
+        stmt = stmt.where(Job.company_id == company_id)
     for col, value in [(Job.location,location),(Job.category,category),(Job.work_mode,work_mode),(Job.level,level)]:
         if value:
             stmt = stmt.where(col.icontains(value, autoescape=True))

@@ -1,11 +1,13 @@
 import {api} from './api/client.js';
 import {esc,heading,empty,toast,action,btn} from './components/ui.js';
-import * as publicPages from './pages/public.js';
+import {watchSelects} from './components/dropdown.js';
+import * as publicPages from './pages/public.js?v=blue-1';
 import * as student from './pages/student.js?v=merge-fix-1';
 import * as workspace from './pages/workspace.js?v=chat-history-1';
-import * as ai from './pages/ai.js?v=interview-avatar-1';
+import * as ai from './pages/ai.js?v=interview-avatar-2';
 
 const root=document.querySelector('#page'), nav=document.querySelector('#nav');
+watchSelects(root);
 const routes={...publicPages.pages,...student.pages,...workspace.pages,...ai.pages};
 let user=null, last=0, activePage;
 const common=[['jobs','Thực tập'],['companies','Doanh nghiệp']];

@@ -1,6 +1,6 @@
 from pathlib import Path
 from fastapi import HTTPException
-from sqlalchemy import select
+from sqlalchemy import func, select
 from app.common import storage
 from app.common.records import first, put, record, require
 from .models import Company, Follow, Member
@@ -19,6 +19,13 @@ def public(company):
 
 def detail(db, ident):
     return public(require(repo.get_company(db, ident), "Không tìm thấy doanh nghiệp"))
+
+def profile(db, ident, actor=None):
+    # Trang công ty: thêm số người theo dõi và trạng thái theo dõi của người đang xem.
+    data = detail(db, ident)
+    data["followers"] = db.scalar(select(func.count()).select_from(Follow).where(Follow.company_id == ident)) or 0
+    data["following"] = bool(actor and first(db, Follow, company_id=ident, user_id=actor["id"]))
+    return data
 
 def company_name(db, ident):
     return detail(db, ident)["name"]
