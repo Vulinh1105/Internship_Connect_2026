@@ -1,7 +1,6 @@
 import {api} from '../api/client.js';
 import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,money,modes,toast,bindForm,action} from '../components/ui.js';
 
-import {companyGallery} from '../components/company-gallery.js';
 import {logoTile, bannerHtml, bindBanner} from '../components/media.js';
 import {savedIds, heartButton, saveButton, bindHearts} from '../components/saved.js';
 
@@ -43,7 +42,7 @@ async function home({root,user}){
     +'<a href="#jobs">Xem tất cả</a></div>'
     +(locations.length?'<div class="chips">'+locations.map(l=>'<a class="chip" href="#jobs/'+new URLSearchParams({location:l})+'">'+esc(l)+'</a>').join('')+'</div>':'')
     +(featured(data).length?'<div class="top-grid">'+featured(data).map(topCard(ids)).join('')+'</div>':empty('Hiện chưa có vị trí đang mở.'))
-    +'</section>'+companyGallery();
+    +'</section>';
   bindBanner(root);
   bindForm(root,'hero-search',values=>{
     const params=new URLSearchParams(Object.entries(values).map(([k,v])=>[k,v.trim()]).filter(([,v])=>v));
@@ -126,8 +125,8 @@ async function companies({root,args}){
   const pages=Math.max(1,Math.ceil(all.length/COMPANY_PAGE));
   const current=Math.min(pages,Math.max(1,Number(new URLSearchParams(args[0]||'').get('page'))||1));
   const records=all.slice((current-1)*COMPANY_PAGE,current*COMPANY_PAGE);
-  root.innerHTML=heading('Doanh nghiệp','Khám phá hồ sơ trong hệ thống và xem ảnh những địa điểm làm việc tại Việt Nam.')
-    +companyGallery()+'<section class="section" aria-labelledby="demo-companies-title">'
+  root.innerHTML=heading('Doanh nghiệp','Khám phá hồ sơ các doanh nghiệp đang có trên hệ thống.')
+    +'<section class="section" aria-labelledby="demo-companies-title">'
     +'<div class="section-heading"><div><p class="eyebrow">Dữ liệu ứng tuyển mẫu</p>'
     +'<h2 id="demo-companies-title">Doanh nghiệp trên hệ thống</h2></div></div>'
     +(records.length?'<div class="top-grid">'+records.map(companyCard).join('')+'</div>':empty())

@@ -81,6 +81,8 @@ def cancel(db,actor,ident):
         raise HTTPException(403,"Chỉ doanh nghiệp được hủy")
     i=require(repo.get_interview(db,ident))
     ctx=applications.interview_context(db,actor,i.application_id)
+    if i.status not in {"invited","confirmed","reschedule_requested"}:
+        raise HTTPException(409,"Lịch này đã kết thúc hoặc đã được hủy")
     i.status="cancelled";i.cancelled_at=now()
     notifications.send(db,ctx["user_id"],"interview_cancelled",
         f"{ctx['company_name']} đã hủy lịch phỏng vấn {ctx['job_title']} ngày {i.scheduled_at:%d/%m}.",i.id)
