@@ -10,6 +10,17 @@ class User(Base):
     password = Column(String(160))
     role = Column(String(32), ForeignKey('roles.code'), nullable=False)
     active = Column(Boolean, nullable=False, default=False)
+    locked_at = Column(DateTime)
+    session_version = Column(Integer, nullable=False, default=0, server_default="0")
+
+class PasswordReset(Base):
+    __tablename__ = "password_resets"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'), index=True, nullable=False)
+    token_hash = Column(String(64), nullable=False, unique=True)
+    expires_at = Column(DateTime, nullable=False)
+    used_at = Column(DateTime)
+    created_at = Column(DateTime, default=now, nullable=False)
 
 class Role(Base):
     __tablename__ = "roles"

@@ -15,7 +15,8 @@ def event(db,a,actor_id,status):
     a.status=status
 
 def applied_ids(db,student_id):
-    return set(db.scalars(select(Application.job_id).filter_by(student_id=student_id)))
+    # Đơn đã rút coi như chưa ứng tuyển: tin vẫn được gợi ý và nộp lại được.
+    return set(db.scalars(select(Application.job_id).where(Application.student_id==student_id,Application.status!="withdrawn")))
 
 def show(db,a,actor=None):
     try:
@@ -34,12 +35,21 @@ def apply(db,actor,data):
     if data.job_id in applied_ids(db,s.id):
         raise HTTPException(409,"Bạn đã ứng tuyển tin này")
     match=score_application(db,actor,s.id,job,data.cv_id)
-    a=Application(student_id=s.id,job_id=data.job_id,cv_id=data.cv_id,cover_letter=data.cover_letter,
-                  status="pending",match_score=match["match_score"],match_reason=match)
-    db.add(a)
+    # Mỗi sinh viên chỉ có một đơn cho mỗi tin (ràng buộc duy nhất), nên nộp lại sau khi rút là mở lại đơn cũ.
+    a=db.scalar(select(Application).where(Application.student_id==s.id,Application.job_id==data.job_id))
+    reapply=a is not None
+    if reapply:
+        event(db,a,actor["id"],"pending")
+        a.cv_id,a.cover_letter,a.match_score,a.match_reason=data.cv_id,data.cover_letter,match["match_score"],match
+        a.submitted_at,a.decision_at,a.decision_reason=now(),None,None
+    else:
+        a=Application(student_id=s.id,job_id=data.job_id,cv_id=data.cv_id,cover_letter=data.cover_letter,
+                      status="pending",match_score=match["match_score"],match_reason=match)
+        db.add(a)
     try:
         db.flush()
-        db.add(ApplicationEvent(application_id=a.id,actor_id=actor["id"],after="pending"))
+        if not reapply:
+            db.add(ApplicationEvent(application_id=a.id,actor_id=actor["id"],after="pending"))
         score=a.match_score
         fit=f" (phù hợp {round(score)}%)" if score is not None else ""
         notifications.send_many(db,companies.member_user_ids(db,job["company_id"]),"application_new",
@@ -56,7 +66,9 @@ def mine(db,actor):
 
 def for_job(db,actor,job_id):
     jobs.ensure_owner(db,actor,job_id)
-    return [{**show(db,a,actor),"student_name":students.public_name(db,a.student_id)}
+    # Doanh nghiệp xem được tên, ngành học và kỹ năng trong hồ sơ đã nộp của sinh viên.
+    return [{**show(db,a,actor),"student_name":students.public_name(db,a.student_id),
+             **students.applicant_view(db,a.student_id,a.cv_id)}
             for a in db.scalars(select(Application).filter_by(job_id=job_id)
                               .order_by(Application.match_score.desc(),Application.id))]
 
@@ -81,16 +93,21 @@ def reviewing(db,actor,ident):
     if a.status=="pending":
         event(db,a,actor["id"],"reviewing")
 
-def decision(db,actor,ident,status):
+def decision(db,actor,ident,status,reason=""):
     from app.modules.interviews import service as interviews
     a=authorized(db,actor,ident)
     if a.status not in {"pending","reviewing"}:
         raise HTTPException(409,"Đơn đã kết thúc xét duyệt")
     if (actor["role"]=="student") != (status=="withdrawn"):
         raise HTTPException(403,"Không được thực hiện thay đổi này")
+    reason=reason.strip()
+    if status=="rejected" and not reason:
+        raise HTTPException(422,"Nhập lý do từ chối")
     if a.status==status:
         return show(db,a,actor)
     event(db,a,actor["id"],status)
+    if status=="rejected":
+        a.decision_reason=reason
     if status in {"accepted","rejected","withdrawn"}:
         a.decision_at=now()
     if status in {"rejected","withdrawn"}:
@@ -111,6 +128,8 @@ def notify_decision(db,a,status):
     text=f"Đơn ứng tuyển {info['title']} tại {info['company_name']} {STATUS_TEXT[status]}."
     if status=="accepted":
         text+=" Hãy theo dõi lịch phỏng vấn hoặc liên hệ từ doanh nghiệp."
+    if status=="rejected" and a.decision_reason:
+        text+=f" Lý do: {a.decision_reason}"
     notifications.send(db,students.user_id_for(db,a.student_id),"application_status",text,a.id)
 
 def download(db,actor,ident):

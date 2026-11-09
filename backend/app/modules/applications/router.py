@@ -20,7 +20,7 @@ def applicants(job_id:int,db:DB,actor:Actor):
 
 @router.patch("/{ident}/status")
 def decision(ident:int,data:Decision,db:DB,actor:Actor):
-    return service.decision(db,actor,ident,data.status)
+    return service.decision(db,actor,ident,data.status,data.reason)
 
 @router.get("/{ident}/cv")
 def cv(ident:int,db:DB,actor:Actor):

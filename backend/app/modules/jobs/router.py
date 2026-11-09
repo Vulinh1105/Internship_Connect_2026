@@ -61,6 +61,12 @@ def close(ident:int,db:DB,actor:Actor,tasks:BackgroundTasks):
     tasks.add_task(sync_pending)
     return result
 
+@router.post("/{ident}/reopen")
+def reopen(ident:int,db:DB,actor:Actor,tasks:BackgroundTasks):
+    result=service.reopen(db,actor,ident)
+    tasks.add_task(sync_pending)
+    return result
+
 @router.delete("/{ident}")
 def delete(ident:int,db:DB,actor:Actor,tasks:BackgroundTasks):
     result=service.close(db,actor,ident,True)

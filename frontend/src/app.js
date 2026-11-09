@@ -1,10 +1,10 @@
 import {api} from './api/client.js';
 import {esc,heading,empty,toast,action,btn} from './components/ui.js';
 import {watchSelects} from './components/dropdown.js';
-import * as publicPages from './pages/public.js?v=blue-1';
-import * as student from './pages/student.js?v=merge-fix-2';
+import * as publicPages from './pages/public.js?v=blue-2';
+import * as student from './pages/student.js?v=merge-fix-3';
 import * as notices from './pages/notifications.js?v=notice-2';
-import * as workspace from './pages/workspace.js?v=chat-history-1';
+import * as workspace from './pages/workspace.js?v=workspace-dash-3';
 import * as ai from './pages/ai.js?v=interview-avatar-2';
 
 const root=document.querySelector('#page'), nav=document.querySelector('#nav');
@@ -56,7 +56,7 @@ async function load(){
   if(version!==last)return;
   user=actor;
   if(user)await fetchCounts();else counts.notifications=counts.moderation=0;
-  const entries=[...common,...(roleNav[user?.role]||[]),...(user?[['chat','Chatbot'],['notifications','Thông báo']]:[['login','Đăng nhập']])];
+  const entries=[...common,...(roleNav[user?.role]||[]),...(user?[['chat','Chatbot'],['notifications','Thông báo'],['account','Đổi mật khẩu']]:[['login','Đăng nhập']])];
   nav.innerHTML=entries.map(([path,text])=>'<a href="#'+path+'"'+(key===path?' aria-current="page"':'')+'>'+esc(text)+(badgeFor(path))+'</a>').join('')
     +(user?btn('logout','Thoát'):'');
   paintBadges(nav);

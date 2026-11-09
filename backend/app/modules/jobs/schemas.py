@@ -16,6 +16,13 @@ class JobInput(BaseModel):
     deadline: date | None = None
     skills: list[str] = Field(default_factory=list, max_length=40)
     benefits: str = Field(default="", max_length=3000)
+    experience: str = Field(default="", max_length=100)
+    education: Literal["Không yêu cầu", "Sinh viên đại học/cao đẳng", "Sinh viên năm cuối", "Mới tốt nghiệp",
+                       "Trung cấp trở lên", "Cao đẳng trở lên", "Đại học trở lên", "Thạc sĩ trở lên"] | None = None
+    quantity: int | None = Field(default=None, ge=1, le=1000)
+    working_hours: str = Field(default="", max_length=500)
+    employment_schedule: Literal["part_time", "full_time"] | None = None
+    address: str = Field(default="", max_length=255)
 
     @model_validator(mode="after")
     def bounds(self):

@@ -9,6 +9,21 @@ from . import repository as repo
 from .models import Job, Review, SavedJob
 from .moderation import assess
 
+# Các trường mô tả thêm của tin, lưu trong cột details cùng với quyền lợi.
+DETAIL_FIELDS=("experience","education","quantity","working_hours","employment_schedule","address")
+
+# Sửa các trường này trên tin đã duyệt thì phải kiểm duyệt lại: mọi trường chữ tự do (người duyệt cần đọc) và mức lương.
+# Chỉ các trường dạng lựa chọn hoặc con số (hạn nộp, số lượng, học vấn, hình thức, cấp độ, lịch làm việc) có hiệu lực ngay.
+MATERIAL_FIELDS=("title","description","requirements","category","location","salary_min","salary_max")
+MATERIAL_DETAILS=("benefits","address","experience","working_hours")
+# Đơn còn đang chờ doanh nghiệp xử lý.
+ACTIVE_APPLICATIONS=("pending","reviewing")
+
+def material(j):
+    details=j.details or {}
+    return (tuple(getattr(j,key) for key in MATERIAL_FIELDS),tuple(sorted(str(s).strip() for s in (j.skills or []))),
+            tuple(details.get(key) or "" for key in MATERIAL_DETAILS))
+
 def is_public(j):
     return (j.status == "open" and j.moderation_status == "approved" and j.deleted_at is None
             and (j.deadline is None or j.deadline >= today()))
@@ -59,12 +74,28 @@ def ensure_owner(db, actor, job_id):
     return output(db,j)
 
 def mine(db, actor):
-    return [output(db,j) for j in repo.by_company(db,companies.memberships(db,actor["id"]))]
+    rows = repo.by_company(db, companies.memberships(db, actor["id"]))
+    ids = [j.id for j in rows]
+    counts = repo.application_counts(db, ids)
+    reviews = repo.latest_reviews(db, ids)
+    result = []
+    for j in rows:
+        total, waiting = counts.get(j.id, (0, 0))
+        review = reviews.get(j.id)
+        # Chỉ hiện lý do khi tin đang ở trạng thái bị từ chối (sửa và gửi lại thì lý do cũ không còn áp dụng).
+        reason = review.reason.strip() if review and review.decision == "rejected" and j.moderation_status == "rejected" else ""
+        result.append({**output(db, j), "application_count": total, "new_application_count": waiting,
+                       "rejection_reason": reason or None})
+    return result
 
 def moderation_queue(db, actor):
     if actor["role"] not in {"admin","staff"}:
         raise HTTPException(403, "Chỉ nhân sự kiểm duyệt")
-    return [output(db,j) for j in repo.queue(db)]
+    rows = repo.queue(db)
+    reviews = repo.latest_reviews(db, [j.id for j in rows])
+    # last_review: lần kiểm duyệt trước (nếu có) để biết tin này là tin mới hay tin gửi lại.
+    return [{**output(db, j), "last_review": ({"decision": reviews[j.id].decision, "reason": reviews[j.id].reason}
+                                              if j.id in reviews else None)} for j in rows]
 
 def moderation_count(db, actor):
     if actor["role"] not in {"admin","staff"}:
@@ -83,14 +114,20 @@ def upsert(db, actor, data, ident=None):
             raise HTTPException(409, "Tin đã xóa")
         if j.company_id!=data.company_id:
             raise HTTPException(422, "Không đổi công ty sở hữu")
+        before=material(j)
     else:
         j=Job(company_id=data.company_id)
         db.add(j)
-    for key,value in data.model_dump(exclude={"benefits"}).items():
+    for key,value in data.model_dump(exclude={"benefits",*DETAIL_FIELDS}).items():
         setattr(j,key,value)
-    j.details={**(j.details or {}),"benefits":data.benefits}
-    j.moderation_status="pending"
-    j.status="open"
+    # Bỏ giá trị cũ rồi ghi giá trị mới để doanh nghiệp xóa trống được một trường.
+    details={k:v for k,v in (j.details or {}).items() if k not in DETAIL_FIELDS}
+    details.update({k:getattr(data,k) for k in DETAIL_FIELDS if getattr(data,k) not in (None,"")})
+    j.details={**details,"benefits":data.benefits}
+    if not ident or j.moderation_status!="approved" or material(j)!=before:
+        j.moderation_status="pending"
+    if not ident:
+        j.status="open"
     j.flags=assess(j,actor["id"])
     db.flush()
     enqueue(db,"jobs",j.id)
@@ -126,16 +163,40 @@ def review(db, actor, ident, data):
     db.commit()
     return output(db,j)
 
+def close_job(db,j,notify_applicants=True):
+    from app.ai.vector.sync import enqueue
+    was_open=j.status!="closed"
+    j.status="closed"
+    enqueue(db,"jobs",j.id)
+    if was_open and notify_applicants:
+        notifications.send_many(db,repo.applicant_user_ids(db,j.id,ACTIVE_APPLICATIONS),"job_closed",
+            f"Tin {j.title} đã đóng tuyển. Đơn của bạn chưa có kết quả; bạn có thể theo dõi trạng thái trong mục Đơn ứng tuyển.",j.id)
+
 def close(db,actor,ident,delete=False):
+    ensure_owner(db,actor,ident)
+    j=require(repo.get_job(db,ident))
+    if delete and repo.count_applications(db,j.id,ACTIVE_APPLICATIONS):
+        raise HTTPException(409,"Tin còn đơn đang chờ xử lý. Hãy xử lý hết các đơn hoặc chỉ đóng tin.")
+    close_job(db,j)
+    if delete:
+        j.deleted_at=now()
+    db.commit()
+    return {"ok":True}
+
+def reopen(db,actor,ident):
     from app.ai.vector.sync import enqueue
     ensure_owner(db,actor,ident)
     j=require(repo.get_job(db,ident))
-    j.status="closed"
-    if delete:
-        j.deleted_at=now()
+    if j.deleted_at is not None:
+        raise HTTPException(409,"Tin đã xóa")
+    if j.status!="closed":
+        raise HTTPException(409,"Tin đang mở")
+    if j.deadline and j.deadline<today():
+        raise HTTPException(422,"Hạn nộp đã qua. Hãy sửa hạn nộp trước khi mở lại tin")
+    j.status="open"
     enqueue(db,"jobs",j.id)
     db.commit()
-    return {"ok":True}
+    return output(db,j)
 
 def save(db,actor,ident,value):
     public_detail(db,ident)
