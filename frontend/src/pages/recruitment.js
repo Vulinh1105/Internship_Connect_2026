@@ -18,12 +18,8 @@ async function members({root,user,reload}){
   const lists=await Promise.all(companies.map(c=>api('/companies/'+c.id+'/members')));
   root.innerHTML=heading('Thành viên doanh nghiệp')+(companies.length?companies.map((c,i)=>box('<h2>'+esc(c.name)+'</h2>'
     +lists[i].map(m=>'<div class="row">'+esc(m.email)+tags(m.manager?'Quản lý':m.active?'Thành viên':'Đã thu hồi')
-      +(m.active&&!m.manager?btn('revoke-member','Thu hồi',c.id+'/'+m.id):'')+'</div>').join('')
-    +form('member-'+c.id,field('email','Email thành viên','','email','required maxlength="255"'),'Thêm hoặc mời thành viên'))).join('')
+      +(m.active&&!m.manager?btn('revoke-member','Thu hồi',c.id+'/'+m.id):'')+'</div>').join(''))).join('')
     :empty('Bạn chưa quản lý doanh nghiệp nào.'));
-  for(const c of companies)bindForm(root,'member-'+c.id,async data=>{
-    await api('/companies/'+c.id+'/members',{method:'POST',data});toast('Đã lưu thành viên');await reload();
-  });
   action(root,'revoke-member',async value=>{
     if(!confirm('Thu hồi quyền truy cập doanh nghiệp?'))return;
     const [company,member]=value.split('/');

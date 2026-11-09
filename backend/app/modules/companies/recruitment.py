@@ -1,19 +1,17 @@
 from typing import Literal
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 from sqlalchemy import distinct, func, select, update
 from sqlalchemy.exc import IntegrityError
 
 from app.common.records import first, record, require
-from app.core import mailer
 from app.core.config import now
 from app.core.deps import Actor, DB, allow
 from app.core.rate_limit import enforce
 from app.modules.applications.models import Application
 from app.modules.applications.service import authorized
 from app.modules.auth.models import AccountSettings, User
-from app.modules.auth.service import send_reset_mail, start_reset
 from app.modules.interviews.models import Interview
 from app.modules.jobs.models import Job, JobMetrics, JobReport
 from app.modules.jobs.service import public_detail
@@ -40,10 +38,6 @@ class ReportDecision(BaseModel):
 
 class ReviewDecision(BaseModel):
     status: Literal["approved","rejected"]
-
-
-class Invite(BaseModel):
-    email: str = Field(max_length=255,pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
 @router.post("/jobs/{job_id}/views")
@@ -96,41 +90,6 @@ def members(company_id: int, db: DB, actor: Actor):
     manager(db,actor,company_id)
     stmt = select(Member,User.email).join(User).where(Member.company_id==company_id).order_by(Member.id)
     return [{**record(row,"id","active","manager"),"email":email} for row,email in db.execute(stmt)]
-
-
-@router.post("/companies/{company_id}/members")
-def invite(company_id: int, data: Invite, db: DB, actor: Actor, tasks: BackgroundTasks):
-    manager(db,actor,company_id)
-    email = data.email.lower()
-    user = first(db,User,email=email)
-    new_account = user is None
-    if new_account:
-        if not mailer.configured() or not mailer.deliverable(email):
-            raise HTTPException(422,"Cần cấu hình email để mời người chưa có tài khoản doanh nghiệp")
-        user = User(email=email,role="company_member",active=True)
-        db.add(user)
-        try:
-            db.flush()
-        except IntegrityError:
-            db.rollback()
-            raise HTTPException(409,"Địa chỉ email vừa được đăng ký")
-    if user.role!="company_member" or not user.active or user.locked_at is not None:
-        raise HTTPException(409,"Chỉ có thể mời tài khoản doanh nghiệp đang hoạt động")
-    row = first(db,Member,company_id=company_id,user_id=user.id)
-    if row:
-        row.active = True
-    else:
-        db.add(Member(company_id=company_id,user_id=user.id,active=True))
-    try:
-        db.commit()
-    except IntegrityError:
-        db.rollback()
-        raise HTTPException(409,"Thành viên đã được thêm")
-    if not user.password and mailer.configured():
-        found = start_reset(db,email)
-        if found:
-            tasks.add_task(send_reset_mail,*found)
-    return {"ok":True}
 
 
 @router.delete("/companies/{company_id}/members/{member_id}")
