@@ -26,15 +26,15 @@ a:hover { text-decoration: underline; }
 .skip-link:focus { transform: translateY(0); }
 
 .site-header { position: relative; z-index: 12; background: var(--forest); color: var(--white); border-bottom: 1px solid var(--pine); }
-.nav { min-height: 64px; display: grid; grid-template-columns: minmax(175px, 1fr) auto minmax(175px, 1fr); align-items: center; gap: clamp(10px, 1.6vw, 20px); padding-block: 8px; }
+.nav { min-height: 58px; display: grid; grid-template-columns: minmax(175px, 1fr) auto minmax(175px, 1fr); align-items: center; gap: clamp(10px, 1.6vw, 20px); padding-block: 6px; }
 .nav > .brand { justify-self: start; }
 .nav > .header-actions { justify-self: end; }
 .brand { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 10px; white-space: nowrap; color: var(--white); font-size: 1.15rem; font-weight: 750; letter-spacing: -.04em; }
 .brand:hover { text-decoration: none; }
-.brand-mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--mint); color: var(--forest); }
+.brand-mark { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: var(--mint); color: var(--forest); }
 .brand-accent { color: var(--sage); }
 .main-nav { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; gap: clamp(9px, 1.5vw, 22px); font-size: .88rem; }
-.main-nav > a, .nav-group > summary { display: flex; align-items: center; gap: 4px; height: 44px; padding: 0; border-bottom: 2px solid transparent; color: var(--mint); font: inherit; line-height: 1; white-space: nowrap; }
+.main-nav > a, .nav-group > summary { display: flex; align-items: center; gap: 4px; height: 40px; padding: 0; border-bottom: 2px solid transparent; color: var(--mint); font: inherit; line-height: 1; white-space: nowrap; }
 .main-nav > a:hover, .nav-group > summary:hover { color: var(--white); text-decoration: none; }
 .main-nav > a[aria-current], .main-nav > a[data-current], .nav-group > summary[data-current] { border-bottom-color: var(--sage); color: var(--white); }
 .nav-group, .account-menu { position: relative; margin: 0; }
@@ -145,7 +145,6 @@ button:disabled { opacity: .55; cursor: wait; }
 .body-copy { white-space: pre-wrap; overflow-wrap: anywhere; }
 .alert { border-left: 4px solid #a05929; padding: 10px; background: #fff2e1; color: #713e0d; }
 .empty { color: var(--muted); padding: 16px 0; }
-.chat-log { max-height: 480px; overflow: auto; }
 .bubble { margin: 8px 0; padding: 12px; border-radius: 11px; background: var(--mint); white-space: pre-wrap; overflow-wrap: anywhere; }
 .bubble.user { background: var(--paper); margin-left: 9%; }
 .score { color: var(--leaf); font-weight: 800; }
@@ -205,10 +204,31 @@ th { background: var(--paper); }
 .review-item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
 .review-item .card { border: 0; padding: 0; }
 
-.chat-log { min-height: 260px; margin-block: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
-.bubble { max-width: 92%; }
-.bubble.user { max-width: 75%; margin-left: auto; }
-#chat { grid-template-columns: minmax(0, 1fr) minmax(0, 260px) auto; align-items: end; }
+/* Chatbot */
+.chat-layout { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); min-width: 0; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
+.chat-toolbar { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.chat-toolbar h1 { flex: 1; margin: 0; font-size: clamp(1rem, 2.5vw, 1.35rem); letter-spacing: -.02em; }
+.chat-toolbar button { min-height: 36px; padding: 6px 10px; }
+.chat-toolbar [aria-expanded="true"] { background: var(--mint); }
+.chat-sidebar { grid-column: 1; grid-row: 2; width: clamp(190px, 23vw, 260px); min-width: 0; padding: 14px 10px; border-right: 1px solid var(--line); border-radius: 0 0 0 16px; background: var(--paper); }
+.chat-sidebar h2 { margin: 0 0 10px; padding-inline: 8px; font-size: .95rem; }
+#chat-history { display: grid; gap: 4px; max-height: clamp(220px, 52dvh, 520px); overflow: auto; padding: 4px; }
+#chat-history button { display: block; min-width: 0; overflow: hidden; border-color: transparent; background: transparent; color: var(--ink); font-weight: 500; text-align: left; text-overflow: ellipsis; white-space: nowrap; }
+#chat-history button:hover, #chat-history button[aria-pressed="true"] { background: var(--mint); }
+.chat-sidebar [data-action="more-chat"] { margin-top: 8px; }
+.chat-sidebar button[hidden] { display: none; }
+.chat-conversation { grid-column: 2; grid-row: 2; min-width: 0; padding: 0 clamp(10px, 2vw, 24px) 16px; }
+.chat-log { height: clamp(280px, 60dvh, 720px); overflow: auto; padding: 14px 4px; }
+.bubble { max-width: min(92%, 760px); }
+.bubble.user { max-width: min(75%, 620px); margin-left: auto; background: var(--mint); }
+.bubble.assistant { background: var(--paper); }
+#chat { grid-template-columns: minmax(0, 1fr) auto; align-items: end; width: min(100%, 780px); margin-inline: auto; }
+@media (max-width: 680px) {
+  .chat-sidebar { grid-column: 1 / -1; width: auto; border-right: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
+  #chat-history { max-height: min(28dvh, 220px); }
+  .chat-conversation { grid-column: 1 / -1; grid-row: 3; }
+  .chat-log { height: clamp(250px, 52dvh, 520px); }
+}
 
 /* ---- Trang chủ và chi tiết tin theo mẫu TopCV  ---- */
 .home-hero { padding: clamp(22px, 4vw, 44px); border-radius: 24px; background: radial-gradient(ellipse at 100% 100%, var(--leaf), transparent 63%), linear-gradient(130deg, var(--forest), var(--deep)); color: var(--white); }
@@ -322,7 +342,7 @@ th { background: var(--paper); }
   .gallery-grid { grid-template-columns: 1fr; }
   .match-row { grid-template-columns: auto minmax(0, 1fr); }
   .match-row .card-link { grid-column: 1 / -1; }
-  .review-item, #chat { grid-template-columns: 1fr; }
+  .review-item { grid-template-columns: 1fr; }
   .top-grid, .info-trio { grid-template-columns: 1fr; }
   .search-pill { flex-wrap: wrap; gap: 6px; border-radius: 20px; padding: 10px; }
   .search-pill .q { flex: 1 1 100%; }

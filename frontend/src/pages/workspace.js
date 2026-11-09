@@ -332,11 +332,28 @@ function modDetail(j){
 }
 async function moderation({root,user,reload}){
   if(!user)return loginRequired(root);
-  const rows=await api('/jobs/moderation');
+  const [rows,data]=await Promise.all([
+    api('/jobs/moderation'),user.role==='admin'?api('/admin/overview'):null,
+  ]);
   root.innerHTML=heading('Hàng chờ kiểm duyệt')
     +'<div class="stat-grid stat-grid-3">'+[['Chờ duyệt',rows.length],['Có cảnh báo',rows.filter(j=>j.flags?.length).length],['Gửi lại',rows.filter(j=>j.last_review).length]].map(statTile).join('')+'</div>'
     +(rows.length?'<div class="toolbar"><label class="check"><input type="checkbox" id="only-flags"'+(mod.flagsOnly?' checked':'')+'> Chỉ tin có cảnh báo</label></div>'
       +'<div class="mod-layout"><div class="mod-list" id="mod-list"></div><div id="mod-detail"></div></div>':empty('Hàng chờ đã trống.'));
+  if(data){
+    root.insertAdjacentHTML('beforeend','<h2>Báo cáo tin tuyển dụng</h2>'+(data.reports.length?data.reports.map(r=>box('<h3>'+esc(r.title)+'</h3>'+copy(r.reason)
+      +form('report-'+r.id,select('status','Kết quả',[['resolved','Đã xử lý'],['dismissed','Bác báo cáo']])
+        +area('note','Ghi chú xử lý','','required maxlength="2000"'),'Lưu kết quả'))).join(''):empty('Không có báo cáo đang chờ.'))
+    +'<h2>Đánh giá doanh nghiệp</h2>'+(data.reviews.length?data.reviews.map(r=>box('<h3>'+esc(r.company)+'</h3>'
+      +tags(r.student_rating+'/5',r.review_status==='approved'?'Đã công khai':'Chờ duyệt')+copy(r.student_review)
+      +(r.review_status==='approved'?'':btn('approve-review','Duyệt',r.application_id))+btn('reject-review',r.review_status==='approved'?'Gỡ':'Từ chối',r.application_id))).join('')
+      :empty('Chưa có đánh giá đang chờ hoặc công khai.')));
+    for(const r of data.reports)bindForm(root,'report-'+r.id,async data=>{
+      await api('/admin/job-reports/'+r.id,{method:'PATCH',data});await reload();
+    });
+    for(const [name,status] of [['approve-review','approved'],['reject-review','rejected']])action(root,name,async id=>{
+      await api('/admin/company-reviews/'+id,{method:'PATCH',data:{status}});await reload();
+    });
+  }
   if(!rows.length)return;
   const listEl=root.querySelector('#mod-list'),detailEl=root.querySelector('#mod-detail');
   function paint(){
@@ -367,7 +384,7 @@ async function moderation({root,user,reload}){
 const acct={q:'',role:'all',state:'all'};
 async function accounts({root,user,reload}){
   if(!user)return loginRequired(root);
-  const users=await api('/auth/users');
+  const [users,data]=await Promise.all([api('/auth/users'),api('/admin/overview')]);
   const roles=[...new Set(users.map(u=>u.role))];
   const count=fn=>users.filter(fn).length;
   root.innerHTML=heading('Quản lý tài khoản')
@@ -375,6 +392,13 @@ async function accounts({root,user,reload}){
     +'<div class="toolbar toolbar-wide">'+field('q','Tìm theo email',acct.q,'search','placeholder="Nhập một phần email"')
     +select('role','Vai trò',[['all','Tất cả vai trò'],...roles.map(r=>[r,roleName[r]||r])],acct.role)
     +select('state','Trạng thái',[['all','Tất cả'],['active','Đang hoạt động'],['inactive','Chưa kích hoạt'],['locked','Bị khóa']],acct.state)+'</div><div id="acct-table"></div>';
+  root.insertAdjacentHTML('beforeend','<h2>Yêu cầu tài khoản</h2>'+(data.closure_requests.length?data.closure_requests.map(r=>box(copy(r.email)
+      +tags(r.action==='delete'?'Yêu cầu xóa dữ liệu':'Yêu cầu vô hiệu hóa')
+      +btn('disable-account','Vô hiệu hóa tài khoản',r.id))).join(''):empty('Chưa có yêu cầu.')));
+  action(root,'disable-account',async id=>{
+    if(!confirm('Vô hiệu hóa đăng nhập của tài khoản này?'))return;
+    await api('/admin/account-closures/'+id,{method:'POST'});await reload();
+  });
   const tableEl=root.querySelector('#acct-table');
   function paint(){
     const q=acct.q.trim().toLowerCase();

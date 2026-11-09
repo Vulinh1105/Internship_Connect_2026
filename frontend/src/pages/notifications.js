@@ -1,5 +1,5 @@
 import {api} from '../api/client.js';
-import {esc,heading,empty,btn,action,select,link} from '../components/ui.js';
+import {esc,heading,empty,btn,action,select} from '../components/ui.js';
 import {loginRequired} from './public.js';
 
 const svg=path=>'<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+path+'</svg>';
@@ -48,7 +48,6 @@ async function notifications({root,user,reload}){
   const unread=all.filter(n=>!n.read_at).length;
   root.innerHTML=heading('Thông báo',unread?'Bạn có '+unread+' thông báo chưa đọc.':'Bạn đã đọc hết thông báo.')
     +select('notice-kind','Loại thông báo',[['','Tất cả'],['applications','Đơn ứng tuyển'],['interviews','Lịch phỏng vấn'],['jobs','Tin tuyển dụng'],['system','Hệ thống']],selected)
-    +link('account','Cài đặt tài khoản')
     +(unread?'<div class="row">'+btn('read-all','Đánh dấu tất cả đã đọc')+'</div>':'')
     +(rows.length?group('Hôm nay',rows.filter(n=>isToday(n.created_at)))+group('Trước đó',rows.filter(n=>!isToday(n.created_at))):empty('Chưa có thông báo.'));
   root.querySelector('[name="notice-kind"]').addEventListener('change',e=>{location.hash='notifications'+(e.target.value?'/?kind='+e.target.value:'');});

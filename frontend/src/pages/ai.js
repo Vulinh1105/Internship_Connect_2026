@@ -42,11 +42,34 @@ async function chat({root,user,reload}){
     try{history=await api('/chat/sessions/'+id+'/messages');}
     catch{sessionStorage.removeItem(key(user));id=0;}
   }
-  const sessionList='<details open><summary>Lịch sử hội thoại</summary><div class="row" id="chat-history"></div>'
-    +btn('more-chat','Xem thêm')+'</details>';
-  root.innerHTML=heading('Chatbot thực tập','Tìm vị trí, hỏi quy trình, tra cứu đơn của bạn hoặc luyện phỏng vấn.')
-    +box('<div class="row">'+btn('new-chat','Hội thoại mới')+'</div>'+sessionList+'<div class="chat-log" aria-live="polite"></div>'
-    +form('chat',field('message','Câu hỏi','','text','required minlength="2" maxlength="500"'),'Gửi'));
+  root.innerHTML='<section class="chat-layout" aria-labelledby="chat-title">'
+    +'<div class="chat-toolbar"><button type="button" class="secondary" data-action="toggle-history" aria-controls="chat-sidebar" aria-expanded="false">Lịch sử</button>'
+    +'<h1 id="chat-title">Chatbot thực tập</h1>'+btn('new-chat','Hội thoại mới')+'</div>'
+    +'<aside class="chat-sidebar" id="chat-sidebar" aria-labelledby="chat-history-title" hidden>'
+    +'<h2 id="chat-history-title">Lịch sử hội thoại</h2><div id="chat-history"></div>'+btn('more-chat','Xem thêm')+'</aside>'
+    +'<div class="chat-conversation"><div class="chat-log" aria-live="polite"></div>'
+    +form('chat',field('message','Câu hỏi','','text','required minlength="2" maxlength="500" placeholder="Nhập câu hỏi…"'),'Gửi')
+    +'</div></section>';
+  const sidebar=root.querySelector('#chat-sidebar');
+  const historyToggle=root.querySelector('[data-action="toggle-history"]');
+  const narrow=matchMedia('(max-width: 680px)');
+  const sidebarKey=key(user)+'-sidebar';
+  function showHistory(open){
+    sidebar.hidden=!open;
+    historyToggle.setAttribute('aria-expanded',String(open));
+  }
+  showHistory(!narrow.matches&&sessionStorage.getItem(sidebarKey)!=='closed');
+  historyToggle.addEventListener('click',()=>{
+    showHistory(sidebar.hidden);
+    if(!narrow.matches)sessionStorage.setItem(sidebarKey,sidebar.hidden?'closed':'open');
+  });
+  root.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&!sidebar.hidden){
+      showHistory(false);
+      if(!narrow.matches)sessionStorage.setItem(sidebarKey,'closed');
+      historyToggle.focus();
+    }
+  });
   const list=root.querySelector('#chat-history');
   const more=root.querySelector('[data-action="more-chat"]');
   let before=null;
@@ -309,23 +332,37 @@ async function mockSession({root,user,args,signal}){
       catch{if(!signal.aborted)media.set('ready');}
     }
   }
+  let evaluationRunning=false;
   async function evaluate(){
-    if(!session.evaluation_pending||signal.aborted)return;
-    media.set('thinking','Đang đánh giá toàn bộ buổi phỏng vấn');
-    const label=panel.querySelector('#evaluation-status');
-    const button=panel.querySelector('[data-action="evaluate"]');
-    if(label)label.textContent='Đang đối chiếu câu trả lời với rubric…';
-    if(button)button.disabled=true;
+    if(!session.evaluation_pending||evaluationRunning||signal.aborted)return;
+    const retryable=[
+      'AI chưa trả đủ điểm và dẫn chứng cho lịch sử phỏng vấn. Hãy thử chấm lại.',
+      'Buổi phỏng vấn đang được chấm. Hãy tải lại sau.',
+      'Trạng thái chấm điểm vừa thay đổi. Hãy tải lại.',
+      'Lượt chấm vừa thay đổi. Hãy tải lại báo cáo.',
+    ];
+    evaluationRunning=true;
+    panel.innerHTML=box('<p role="status">Đang chấm…</p>');
+    let delay=2000;
     try{
-      session=await api(endpoint+'/evaluation',{method:'POST',signal});
-      if(!signal.aborted)render();
-    }catch(error){
-      if(!signal.aborted){
-        media.set('finished');
-        if(label)label.textContent=error.message;
+      while(!signal.aborted){
+        try{
+          session=await api(endpoint+'/evaluation',{method:'POST',signal});
+          if(!signal.aborted)render();
+          return;
+        }catch(error){
+          if(signal.aborted)return;
+          if(!retryable.includes(error.message)){
+            render();
+            panel.querySelector('#evaluation-status').textContent=error.message;
+            return;
+          }
+        }
+        await new Promise(resolve=>setTimeout(resolve,delay));
+        delay=Math.min(delay*2,20000);
       }
     }finally{
-      if(button)button.disabled=false;
+      evaluationRunning=false;
     }
   }
   async function submit(data){
@@ -346,6 +383,7 @@ async function mockSession({root,user,args,signal}){
     }
   }
   render();
+  if(session.evaluation_pending)void evaluate();
   const ticker=setInterval(()=>void tick(),250);
   signal.addEventListener('abort',()=>clearInterval(ticker),{once:true});
   if(args[1]==='start'&&session.question){

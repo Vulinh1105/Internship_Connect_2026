@@ -1,13 +1,13 @@
 import {api} from './api/client.js';
 import {esc,heading,empty,toast,action,btn} from './components/ui.js';
 import {watchSelects} from './components/dropdown.js';
-import * as publicPages from './pages/public.js?v=company-symbols-1';
+import * as publicPages from './pages/public.js?v=company-logos-only-1';
 import * as student from './pages/student.js?v=hybrid-match-1';
-import * as notices from './pages/notifications.js?v=features-1';
-import * as workspace from './pages/workspace.js?v=company-symbols-1';
+import * as notices from './pages/notifications.js?v=admin-notices-1';
+import * as workspace from './pages/workspace.js?v=admin-notices-1';
 import * as account from './pages/account.js?v=password-reset-1';
-import * as recruitment from './pages/recruitment.js?v=position-text-1';
-import * as ai from './pages/ai.js?v=student-position-search-1';
+import * as recruitment from './pages/recruitment.js?v=admin-notices-1';
+import * as ai from './pages/ai.js?v=chat-sidebar-1';
 
 const root=document.querySelector('#page'), nav=document.querySelector('#nav');
 const tools=document.querySelector('#header-tools'), toggle=document.querySelector('#nav-toggle');
@@ -20,7 +20,7 @@ const personal=[['applications','Đơn ứng tuyển'],['saved','Tin đã lưu']
 const studentNav=[['matching','AI Matching'],['mock','Phỏng vấn ảo']];
 const adminNav={
   staff:[['moderation','Kiểm duyệt']],
-  admin:[['admin-overview','Tổng quan'],['moderation','Kiểm duyệt'],['accounts','Tài khoản'],['knowledge','Tri thức']],
+  admin:[['moderation','Kiểm duyệt'],['accounts','Tài khoản'],['knowledge','Tri thức']],
 };
 const adminPages=new Set(adminNav.admin.map(([path])=>path));
 const companyPages=new Set(['workspace','edit','applicants','recruitment-stats','company-members','question-sets']);

@@ -31,33 +31,6 @@ async function members({root,user,reload}){
   });
 }
 
-async function overview({root,user,reload}){
-  if(!user)return loginRequired(root);
-  const data=await api('/admin/overview');
-  const titles={users:'Tài khoản',companies:'Doanh nghiệp',jobs:'Tin tuyển dụng',applications:'Đơn ứng tuyển'};
-  root.innerHTML=heading('Tổng quan quản trị')
-    +'<div class="stat-grid">'+Object.entries(data.counts).map(([key,total])=>'<div class="stat"><strong>'+esc(total)+'</strong><span>'+esc(titles[key])+'</span></div>').join('')+'</div>'
-    +'<h2>Báo cáo tin tuyển dụng</h2>'+(data.reports.length?data.reports.map(r=>box('<h3>'+esc(r.title)+'</h3>'+copy(r.reason)
-      +form('report-'+r.id,select('status','Kết quả',[['resolved','Đã xử lý'],['dismissed','Bác báo cáo']])
-        +area('note','Ghi chú xử lý','','required maxlength="2000"'),'Lưu kết quả'))).join(''):empty('Không có báo cáo đang chờ.'))
-    +'<h2>Đánh giá doanh nghiệp</h2>'+(data.reviews.length?data.reviews.map(r=>box('<h3>'+esc(r.company)+'</h3>'
-      +tags(r.student_rating+'/5',r.review_status==='approved'?'Đã công khai':'Chờ duyệt')+copy(r.student_review)
-      +(r.review_status==='approved'?'':btn('approve-review','Duyệt',r.application_id))+btn('reject-review',r.review_status==='approved'?'Gỡ':'Từ chối',r.application_id))).join('')
-      :empty('Chưa có đánh giá đang chờ hoặc công khai.'))
-    +'<h2>Yêu cầu tài khoản</h2>'+(data.closure_requests.length?data.closure_requests.map(r=>box(copy(r.email)
-      +tags(r.action==='delete'?'Yêu cầu xóa dữ liệu':'Yêu cầu vô hiệu hóa')
-      +btn('disable-account','Vô hiệu hóa tài khoản',r.id))).join(''):empty('Chưa có yêu cầu.'));
-  for(const r of data.reports)bindForm(root,'report-'+r.id,async data=>{
-    await api('/admin/job-reports/'+r.id,{method:'PATCH',data});await reload();
-  });
-  for(const [name,status] of [['approve-review','approved'],['reject-review','rejected']])action(root,name,async id=>{
-    await api('/admin/company-reviews/'+id,{method:'PATCH',data:{status}});await reload();
-  });
-  action(root,'disable-account',async id=>{
-    if(!confirm('Vô hiệu hóa đăng nhập của tài khoản này?'))return;
-    await api('/admin/account-closures/'+id,{method:'POST'});await reload();
-  });
-}
 const questionKinds=[['knowledge','Kiến thức chuyên môn'],['problem_solving','Giải quyết vấn đề'],['both','Cả hai']];
 const questionLevels=[['basic','Cơ bản'],['intermediate','Trung bình'],['advanced','Nâng cao']];
 const questionFields=(q={})=>'<fieldset class="stack" data-question><legend>Câu hỏi</legend>'
@@ -154,4 +127,4 @@ async function questionSets({root,user,args,reload}){
   },{keepFiles:true});
 }
 
-export const pages={'question-sets':questionSets,'recruitment-stats':stats,'company-members':members,'admin-overview':overview};
+export const pages={'question-sets':questionSets,'recruitment-stats':stats,'company-members':members};
