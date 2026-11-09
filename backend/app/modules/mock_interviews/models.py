@@ -22,6 +22,7 @@ class MockSession(Base):
     role = Column(String(100), nullable=False)
     state = Column(String(24), nullable=False)
     plan = Column(JSON, nullable=False)
+    question_deadline = Column(DateTime)
     cursor = Column(Integer, nullable=False, default=0)
     followups = Column(Integer, nullable=False, default=0)
     created_at = Column(DateTime, default=now, nullable=False)
@@ -46,3 +47,15 @@ class Report(Base):
     session_id = Column(Integer, ForeignKey('interview_sessions.id'), unique=True, nullable=False)
     report = Column(JSON, nullable=False)
     created_at = Column(DateTime, default=now, nullable=False)
+
+
+class QuestionSet(Base):
+    __tablename__ = "interview_question_sets"
+    id = Column(Integer, primary_key=True)
+    job_id = Column(Integer, ForeignKey("jobs.id"), index=True)
+    company_id = Column(Integer, ForeignKey("companies.id"))
+    position_title = Column(String(200))
+    title = Column(String(160), nullable=False)
+    description = Column(Text, nullable=False)
+    published = Column(Boolean, nullable=False, default=False)
+    questions = Column(JSON, nullable=False)

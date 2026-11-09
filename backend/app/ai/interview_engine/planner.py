@@ -31,7 +31,7 @@ def default_domains(kind):
 
 
 def general(code,prompt,kind):
-    return {"code":code,"question":prompt,"kind":kind,"seconds":120}
+    return {"code":code,"question":prompt,"kind":kind}
 
 
 def plan(role,questions,job,profile,user_id,*,level="intern"):

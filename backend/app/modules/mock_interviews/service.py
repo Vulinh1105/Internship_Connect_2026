@@ -8,6 +8,8 @@ from app.core.deps import allow
 from app.modules.jobs import service as jobs
 from app.modules.students import service as students
 from .models import Answer, MockSession, Question, Report
+from .question_sets import QUESTION_SECONDS, snapshot
+from .schemas import Submit
 
 def roles(db):
     return list(db.scalars(select(Question.role).distinct().order_by(Question.role)))
@@ -85,17 +87,32 @@ def evaluate(db,actor,ident):
     return view(db,item)
 
 
+def new_deadline():
+    return now().replace(microsecond=0)+timedelta(seconds=QUESTION_SECONDS)
+
+
+def initialize_deadline(db,item):
+    if item.state=="active" and item.question_deadline is None:
+        db.execute(update(MockSession).where(MockSession.id==item.id,MockSession.state=="active",
+                   MockSession.question_deadline.is_(None)).values(question_deadline=new_deadline()))
+        db.commit()
+        db.refresh(item)
+
+
 def view(db,item):
     expire(db,item)
+    initialize_deadline(db,item)
     q=None
     if item.state=="active":
         q=item.plan[item.cursor]
-        q={k:q[k] for k in ("question","kind","seconds")}
+        q={**{k:q[k] for k in ("question","kind")},"seconds":QUESTION_SECONDS}
         if item.followups:
             q["question"]=item.plan[item.cursor]["followup"]
     result=saved_report(db,item.id) if item.state in {"finished","expired"} else None
     return {"id":item.id,"role":item.role,"state":item.state,"cursor":item.cursor,"turn":item.followups,
             "total":len(item.plan),"question":q,"expires_at":item.expires_at,"report":result,"mode":AI_BACKEND,
+            "source":item.plan[0].get("source") if item.plan else None,
+            "remaining_ms":max(0,int((item.question_deadline-now()).total_seconds()*1000)) if q else None,
             "evaluation_pending":result is None and item.state in {"finished","expired","evaluating"}}
 
 def history(db,actor):
@@ -106,25 +123,31 @@ def history(db,actor):
 
 def start(db,actor,data):
     allow(actor,"student")
-    role=data.role.strip()
-    questions=[{"code":q.code,"question":q.question,"kind":q.kind,"seconds":q.seconds,
-                "topic_criteria":[r["criterion"] for r in q.rubric]}
-               for q in db.scalars(select(Question).where(Question.role==role).order_by(Question.code))]
-    if not questions:
-        raise HTTPException(422,"Vai trò chưa có bộ câu hỏi")
-    job=jobs.public_detail(db,data.job_id) if data.job_id else None
-    jd={k:job[k] for k in ("title","requirements","skills","level")} if job else None
     count=db.scalar(select(func.count()).select_from(MockSession).where(
         MockSession.user_id==actor["id"],MockSession.created_at>=now().replace(hour=0,minute=0,second=0,microsecond=0)))
     if count>=DAILY_MOCKS:
         raise HTTPException(429,"Đã đạt số buổi luyện hôm nay")
-    profile=students.profile(db,actor)
-    level=data.level or (jd["level"] if jd else "intern")
-    profile["skills"]=[redact(skill,profile["name"]) for skill in profile["skills"]]
-    db.commit()
-    plan=planner.plan(role,questions,jd,profile,actor["id"],level=level)
-    item=MockSession(user_id=actor["id"],role=role,job_id=data.job_id,state="active",plan=plan,
-                     expires_at=now()+timedelta(hours=24))
+    job_id=data.job_id
+    if data.question_set_id is not None:
+        job_id,role,plan=snapshot(db,data.question_set_id)
+        if data.job_id is not None and data.job_id!=job_id:
+            raise HTTPException(422,"Bộ câu hỏi không thuộc vị trí đã chọn")
+    else:
+        role=data.role.strip()
+        questions=[{"code":q.code,"question":q.question,"kind":q.kind,"seconds":QUESTION_SECONDS,
+                    "topic_criteria":[r["criterion"] for r in q.rubric]}
+                   for q in db.scalars(select(Question).where(Question.role==role).order_by(Question.code))]
+        if not questions:
+            raise HTTPException(422,"Vai trò chưa có bộ câu hỏi")
+        job=jobs.public_detail(db,job_id) if job_id else None
+        jd={k:job[k] for k in ("title","requirements","skills","level")} if job else None
+        profile=students.profile(db,actor)
+        level=data.level or (jd["level"] if jd else "intern")
+        profile["skills"]=[redact(skill,profile["name"]) for skill in profile["skills"]]
+        db.commit()
+        plan=planner.plan(role,questions,jd,profile,actor["id"],level=level)
+    item=MockSession(user_id=actor["id"],role=role,job_id=job_id,state="active",plan=plan,
+                     question_deadline=new_deadline(),expires_at=now()+timedelta(hours=24))
     db.add(item)
     db.commit()
     return view(db,item)
@@ -136,10 +159,19 @@ def abandon(db,actor,ident):
     db.commit()
     return view(db,item)
 
-def submit(db,actor,ident,data):
+def timeout(db,actor,ident,data):
+    return submit(db,actor,ident,Submit(cursor=data.cursor,turn=data.turn,skip=True),timed_out=True)
+
+
+def submit(db,actor,ident,data,*,timed_out=False):
     item=session(db,actor,ident)
+    initialize_deadline(db,item)
     if item.state!="active" or item.expires_at<=now() or (data.cursor,data.turn)!=(item.cursor,item.followups):
         raise HTTPException(409,"Lượt trả lời đã thay đổi hoặc đã hết hạn")
+    deadline=item.question_deadline
+    expired=deadline<=now()
+    if timed_out!=expired:
+        raise HTTPException(409,"Đã hết thời gian trả lời câu này." if expired else "Câu hỏi vẫn còn thời gian.")
     text=redact(data.transcript.strip(),students.get_own(db,actor).name) if not data.skip else ""
     if not data.skip and (not text or not data.confirmed):
         raise HTTPException(422,"Hãy xác nhận nội dung câu trả lời")
@@ -147,11 +179,13 @@ def submit(db,actor,ident,data):
     prompt=q["followup"] if item.followups else q["question"]
     next_item=item.plan[item.cursor+1] if item.cursor+1<len(item.plan) else None
     turn=None
-    if not data.skip and (next_item or not item.followups):
+    company_question=bool(q.get("source"))
+    if not data.skip and (not item.followups or (next_item and not company_question)):
         recent=[{"question":a.question,"answer":a.transcript[-500:]} for a in answers_for(db,ident)[-3:]]
         db.commit()
         try:
-            turn=planner.next_turn(item.role,q,prompt,text,recent,next_item,bool(not item.followups),actor["id"])
+            turn=planner.next_turn(item.role,q,prompt,text,recent,None if company_question else next_item,
+                                   not item.followups,actor["id"])
         except HTTPException as error:
             if error.status_code not in (429,503):
                 raise
@@ -160,14 +194,16 @@ def submit(db,actor,ident,data):
     plan=list(item.plan)
     if needs_followup:
         plan[item.cursor]={**q,"followup":turn.followup.strip()}
-    elif next_item and turn and len(turn.next_question.strip())>=12:
+    elif not company_question and next_item and turn and len(turn.next_question.strip())>=12:
         plan[cursor]={**next_item,"question":turn.next_question.strip()}
     state="finished" if cursor==len(plan) else "active"
     answer=Answer(session_id=ident,position=data.cursor,turn=data.turn,question=prompt,transcript=text,
-                  transcript_confirmed=data.confirmed,evaluation={"skipped":data.skip})
+                  transcript_confirmed=data.confirmed,evaluation={"skipped":data.skip,"timed_out":timed_out})
     changed=db.execute(update(MockSession).where(MockSession.id==ident,MockSession.cursor==data.cursor,
-        MockSession.followups==data.turn,MockSession.state=="active",MockSession.expires_at>now()).values(
-        cursor=cursor,followups=int(needs_followup),state=state,plan=plan))
+        MockSession.followups==data.turn,MockSession.state=="active",MockSession.expires_at>now(),
+        MockSession.question_deadline==deadline).values(
+        cursor=cursor,followups=int(needs_followup),state=state,plan=plan,
+        question_deadline=new_deadline() if state=="active" else None))
     if changed.rowcount!=1:
         db.rollback()
         raise HTTPException(409,"Lượt trả lời đã thay đổi")

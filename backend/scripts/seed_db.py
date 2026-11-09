@@ -19,6 +19,7 @@ from app.modules.knowledge.models import Document
 from app.modules.mock_interviews.models import Question
 from app.modules.notifications.models import Notification
 from app.modules.students.models import Skill, Student
+from scripts.seed_company_interviews import seed_company_interviews
 
 SOURCE=ROOT/"data/seed/source"
 DEMO_USERS={"USR-DEMO-S001","USR-DEMO-C001","USR-ADMIN-DEMO","USR-STAFF-DEMO"}
@@ -166,6 +167,7 @@ def seed(db):
         insert(db,Question,{"code":r["question_id"]},role=r["role"],question=r["question"],kind=r["question_type"],
                difficulty=r["difficulty"],seconds=int(r["time_limit_sec"]),version=version,
                rubric=rubrics[r["question_id"],version])
+    seed_company_interviews(db,job_codes=[r["seed_code"] for r in rows("core/internships")])
     db.commit()
 
 if __name__=="__main__":

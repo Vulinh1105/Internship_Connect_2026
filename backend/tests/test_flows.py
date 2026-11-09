@@ -1,4 +1,5 @@
 from datetime import timedelta
+from io import BytesIO
 from types import SimpleNamespace
 import base64
 import os
@@ -23,6 +24,8 @@ from app.ai.interview_engine import evaluator, planner, report
 from app.ai.providers.model_config import OPENAI_DIMENSIONS
 from app.ai.vector.collections import MATCHING_JOBS
 from app.modules.jobs.models import Job
+from app.modules.mock_interviews.models import MockSession
+from app.modules.mock_interviews import question_import
 from scripts.seed_db import seed
 
 def initialize():
@@ -94,6 +97,66 @@ def test_complete_flows(monkeypatch):
         vectors.close()
         engine.dispose()
         sandbox.cleanup()
+
+def verify_question_upload(company,student,jid,bank,monkeypatch):
+    import pymupdf
+    from docx import Document
+
+    first = "Explain how an SQL index works."
+    second = "Describe how you would check a slow query."
+    with pymupdf.open() as pdf:
+        page=pdf.new_page()
+        page.insert_text((72,72),first+"\n"+second)
+        pdf_bytes=pdf.tobytes()
+    doc=Document()
+    doc.add_table(rows=1,cols=1).cell(0,0).text=first
+    doc.add_paragraph(second)
+    word=BytesIO()
+    doc.save(word)
+
+    def extract(schema,instruction,data,fallback,**options):
+        assert options["force_openai"] and options["feature"]=="interview_question_import"
+        assert data["document"].index(first)<data["document"].index(second)
+        return schema(questions=[{"question":question,"kind":"knowledge","difficulty":"basic",
+                                  "guidance":"Invented guidance"} for question in (second,first)])
+    monkeypatch.setattr(question_import,"structured",extract)
+    endpoint=bank+"/import"
+    def upload(client,filename,content):
+        return client.post(endpoint,data={"job_id":str(jid)},files={"file":(filename,content)})
+    assert upload(student,"interview.pdf",pdf_bytes).status_code==403
+    assert upload(company,"interview.doc",b"old word").status_code==415
+    for filename,data in (("interview.pdf",pdf_bytes),("interview.docx",word.getvalue())):
+        draft=payload(upload(company,filename,data),201)
+        assert draft["job_id"]==jid and draft["published"] is False
+        assert [q["question"] for q in draft["questions"]]==[first,second]
+        assert all(not q["guidance"] for q in draft["questions"])
+        assert all(item["id"]!=draft["id"] for item in payload(student.get(bank+"/catalog")))
+        payload(company.delete(f"{bank}/{draft['id']}"))
+    company_id=payload(company.get("/api/companies/mine"))[0]["id"]
+    actual_title=payload(company.get(f"/api/jobs/{jid}"))["title"]
+    files={"file":("typed.txt",(first+"\n"+second).encode())}
+    linked=payload(company.post(endpoint,data={"company_id":str(company_id),"position_title":actual_title},files=files),201)
+    assert linked["job_id"]==jid and linked["job_title"]==actual_title
+    payload(company.delete(f"{bank}/{linked['id']}"))
+    position="Thực tập sinh Phân tích sản phẩm"
+    fields={"company_id":str(company_id),"position_title":position}
+    draft=payload(company.post(endpoint,data=fields,files=files),201)
+    assert draft["job_id"] is None and draft["job_title"]==position and draft["company_id"]==company_id
+    assert student.post(endpoint,data=fields,files=files).status_code==403
+    updated=payload(company.put(f"{bank}/{draft['id']}",json={**draft,"published":True}))
+    assert updated["published"] is True
+    catalog=payload(student.get(bank+"/catalog"))
+    assert any(item["id"]==draft["id"] and item["job_title"]==position for item in catalog)
+    assert all(not item["job_title"].lower().startswith("tin demo") for item in catalog)
+    session=payload(student.post("/api/mock-interviews",json={"question_set_id":draft["id"]}))
+    assert session["source"]["job_title"]==position and session["question"]["question"]==first
+    payload(company.delete(f"{bank}/{draft['id']}"))
+
+    def invented(schema,*args,**kwargs):
+        return schema(questions=[{"question":"An invented question.","kind":"knowledge","difficulty":"basic"}])
+    monkeypatch.setattr(question_import,"structured",invented)
+    assert upload(company,"interview.txt",first.encode()).status_code==503
+
 
 def verify_flows(monkeypatch):
     guest=TestClient(app)
@@ -172,6 +235,43 @@ def verify_flows(monkeypatch):
     assert payload(student.post(f"/api/notifications/{one['id']}/read"))["unread"]==unread-1
     assert payload(student.post("/api/notifications/read"))["unread"]==0
     assert payload(student.get("/api/notifications/unread-count"))["unread"]==0
+    bank="/api/mock-interviews/question-sets"
+    verify_question_upload(company,student,jid,bank,monkeypatch)
+    draft={"job_id":jid,"title":"Bộ câu hỏi Backend","description":"Kiểm thử",
+        "questions":[{"question":"Bạn chọn chỉ mục SQL như thế nào?","kind":"both","difficulty":"basic","guidance":"Nội dung nội bộ"},
+                     {"question":"Hãy mô tả cách đọc kế hoạch truy vấn.","kind":"knowledge","difficulty":"intermediate"}]}
+    assert student.post(bank,json=draft).status_code==403
+    created=payload(company.post(bank,json=draft),201)
+    assert all(item["id"]!=created["id"] for item in payload(student.get(bank+"/catalog")))
+    start_body={"question_set_id":created["id"],"job_id":jid}
+    assert student.post("/api/mock-interviews",json=start_body).status_code==404
+    url=f"{bank}/{created['id']}"
+    payload(company.put(url,json={**draft,"published":True}))
+    info=next(item for item in payload(student.get(bank+"/catalog")) if item["id"]==created["id"])
+    assert info["question_count"]==2 and info["estimated_seconds"]==1200 and "questions" not in info
+    company_session=payload(student.post("/api/mock-interviews",json=start_body))
+    endpoint=f"/api/mock-interviews/{company_session['id']}"
+    assert company_session["question"]["question"]==draft["questions"][0]["question"]
+    assert company_session["question"]["seconds"]==600 and 590000<company_session["remaining_ms"]<=600000
+    assert "Nội dung nội bộ" not in str(company_session)
+    current={"cursor":0,"turn":0}
+    assert student.post(endpoint+"/timeout",json=current).status_code==409
+    with Session() as db:
+        row=db.get(MockSession,company_session["id"])
+        row.question_deadline=now()-timedelta(seconds=1)
+        db.commit()
+    assert payload(student.get(endpoint))["remaining_ms"]==0
+    assert student.post(endpoint+"/answers",json={**current,"skip":True}).status_code==409
+    next_question=payload(student.post(endpoint+"/timeout",json=current))
+    assert next_question["cursor"]==1 and next_question["remaining_ms"]>590000
+    assert student.post(endpoint+"/timeout",json=current).status_code==409
+    payload(company.delete(url))
+    assert all(item["id"]!=created["id"] for item in payload(student.get(bank+"/catalog")))
+    assert payload(student.get(endpoint))["question"]["question"]==draft["questions"][1]["question"]
+    payload(student.post(endpoint+"/finish"))
+    result=payload(student.post(endpoint+"/evaluation"))["report"]
+    assert result["answers"][0]["timed_out"] and result["answers"][0]["skipped"]
+
     payload(company.post(f"/api/jobs/{jid}/close"))
     assert guest.get(f"/api/jobs/{jid}").status_code==404
     assert not vectors.entries("jobs",vectors.filters(entity_id=jid))

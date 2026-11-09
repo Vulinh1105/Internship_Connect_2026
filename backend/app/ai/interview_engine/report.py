@@ -15,6 +15,7 @@ def summarize(answers,plan,role,previous,user_id):
         domains=question.get("domains",planner.default_domains(question["kind"]))
         turns.append({"turn_id":ident,"position":answer.position,"turn":answer.turn,"question":answer.question,
                       "transcript":answer.transcript,"skipped":answer.evaluation.get("skipped",False),"domains":domains,
+                      "timed_out":answer.evaluation.get("timed_out",False),
                       "reference_topics":question.get("topic_criteria",[])})
     level=plan[0].get("level","intern")
     groups=list(evaluator.batches(turns))
@@ -39,6 +40,7 @@ def summarize(answers,plan,role,previous,user_id):
                          "criteria":[{"label":label,"score":round(mean*2.5,1)} for label,mean in zip(labels,means)]}
     score=round(sum(d["score"] for d in domains.values())/2,1)
     for turn in turns:
+        turn.pop("reference_topics")
         turn["results"]=results.get(turn["turn_id"],[])
     if results and len(groups)>1:
         evidence=[{"turn_id":t["turn_id"],"question":t["question"],"results":t["results"]} for t in turns if t["results"]]

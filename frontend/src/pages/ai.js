@@ -1,7 +1,7 @@
 import {api,stream} from '../api/client.js';
 import {esc,tags,box,copy,empty,money,heading,field,area,select,link,btn,form,grid,status,toast,bindForm,action} from '../components/ui.js';
 import {jobCard,loginRequired} from './public.js';
-import {interviewer,interviewMedia} from '../components/interviewer.js?v=interview-avatar-2';
+import {interviewer,interviewMedia} from '../components/interviewer.js?v=company-interview-1';
 
 const key=user=>'ic-chat-'+user.id;
 function compareTable(jobs){
@@ -93,14 +93,95 @@ async function chat({root,user,reload}){
     await loadHistory();
   });
 }
+const searchKey=text=>text.toLocaleLowerCase('vi').normalize('NFD').replace(/\p{M}/gu,'').replace(/đ/g,'d')
+  .replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+
+function interviewSuggestions(root,name,options,onPick,onEdit){
+  const input=root.querySelector('[name="'+name+'"]');
+  const list=root.querySelector('[data-suggestions="'+name+'"]');
+  input.addEventListener('input',()=>{
+    onEdit();
+    const query=searchKey(input.value);
+    const matches=query?options.filter(([,label])=>{
+      const key=searchKey(label);
+      return key.includes(query)||key.replaceAll(' ','').includes(query.replaceAll(' ',''));
+    }):[];
+    list.innerHTML=matches.map(([id,label])=>btn('suggest',label,id)).join('');
+    action(list,'suggest',id=>{
+      const [key,label]=options.find(([key])=>String(key)===id);
+      input.value=label;
+      list.replaceChildren();
+      onPick(key);
+    });
+  });
+}
+
 async function mock({root,user}){
   if(!user)return loginRequired(root);
-  const [roles,history]=await Promise.all([api('/mock-interviews/roles'),api('/mock-interviews')]);
+  const [roles,history,catalog]=await Promise.all([api('/mock-interviews/roles'),api('/mock-interviews'),api('/mock-interviews/question-sets/catalog')]);
+  const companyChoices=[...new Map(catalog.map(s=>[s.company_id,s.company_name]))];
   root.innerHTML=heading('Phỏng vấn ảo','Câu trả lời đã lọc thông tin liên hệ được gửi tới OpenAI để đặt câu hỏi và chấm điểm cuối buổi.')
-    +box(form('start',select('role','Vị trí',roles,roles.includes('Backend Intern')?'Backend Intern':roles[0])
+    +box('<h2>Luyện theo doanh nghiệp</h2>'+(catalog.length?form('start-company',field('company','Tìm doanh nghiệp','','search','placeholder="Ví dụ: FPT" autocomplete="off"')
+      +'<div class="row" data-suggestions="company"></div><div id="company-set-choices" class="stack"></div>','Bắt đầu phỏng vấn'):empty('Chưa có bộ câu hỏi doanh nghiệp đang công khai.')))
+    +box('<h2>Luyện theo vai trò</h2>'+form('start',select('role','Vị trí',roles,roles.includes('Backend Intern')?'Backend Intern':roles[0])
       +select('level','Cấp độ',[['intern','Thực tập'],['fresher','Fresher'],['junior','Junior']]),'Bắt đầu phỏng vấn'))
-    +'<h2>Buổi luyện gần đây</h2>'+grid(history.map(s=>box('<h3>'+esc(s.role)+'</h3>'+tags(s.state==='evaluating'?'Đang chấm':status(s.state),s.report&&s.report.score+' / 100')
+    +'<h2>Buổi luyện gần đây</h2>'+grid(history.map(s=>box('<h3>'+esc(s.role)+'</h3>'+tags(s.source?.company_name,s.source?.title,s.state==='evaluating'?'Đang chấm':status(s.state),s.report&&s.report.score+' / 100')
       +link('mock-session/'+s.id,s.state==='active'?'Tiếp tục':'Xem buổi luyện'))));
+  if(catalog.length){
+    const choices=root.querySelector('#company-set-choices');
+    const start=root.querySelector('#start-company button:not([type])');
+    const labels={basic:'Cơ bản',intermediate:'Trung bình',advanced:'Nâng cao'};
+    let available=[];
+    function clearPosition(){
+      available=[];
+      start.disabled=true;
+      choices.querySelector('#position-sets')?.replaceChildren();
+    }
+    function showSets(sets){
+      available=sets;
+      const section=choices.querySelector('#position-sets');
+      section.innerHTML=select('question_set_id','Bộ câu hỏi',sets.map(s=>[s.id,s.title]))+'<div id="set-preview"></div>';
+      const selected=section.querySelector('[name="question_set_id"]');
+      function preview(){
+        const set=sets.find(s=>s.id===Number(selected.value));
+        section.querySelector('#set-preview').innerHTML=tags(set.job_category,set.question_count+' câu',
+          set.difficulties.map(d=>labels[d]||d).join(' / '),set.estimated_seconds/60+' phút tối đa cho các câu chính')
+          +copy(set.description)+(set.job_id?link('job/'+set.job_id,'Xem chi tiết vị trí'):'');
+      }
+      selected.addEventListener('change',preview);
+      preview();
+      start.disabled=false;
+    }
+    function showPositions(companyId){
+      const sets=catalog.filter(s=>s.company_id===Number(companyId));
+      const hiring=[...new Map(sets.filter(s=>s.job_id).map(s=>[s.job_id,s.job_title]))];
+      const practice=sets.filter(s=>!s.job_id);
+      const extra=[...new Map(practice.map(s=>[searchKey(s.job_title),s.job_title]))];
+      choices.innerHTML=field('position','Tìm vị trí đang tuyển','','search','placeholder="Ví dụ: AI Engineer" autocomplete="off"')
+        +'<div class="row" data-suggestions="position"></div>'
+        +(extra.length?'<details><summary>Vị trí luyện tập chưa đăng tin</summary><div id="practice-positions" class="row">'
+          +extra.map(([key,title])=>btn('practice-position',title,key)).join('')+'</div></details>':'')
+        +'<div id="position-sets" class="stack"></div>';
+      interviewSuggestions(choices,'position',hiring,id=>showSets(sets.filter(s=>s.job_id===id)),clearPosition);
+      action(choices,'practice-position',key=>{
+        choices.querySelector('[name="position"]').value='';
+        choices.querySelector('[data-suggestions="position"]').replaceChildren();
+        showSets(practice.filter(s=>searchKey(s.job_title)===key));
+      });
+      choices.querySelector('[name="position"]').focus();
+    }
+    start.disabled=true;
+    interviewSuggestions(root,'company',companyChoices,showPositions,()=>{
+      clearPosition();
+      choices.replaceChildren();
+    });
+    bindForm(root,'start-company',async data=>{
+      const id=Number(data.question_set_id);
+      if(!available.some(set=>set.id===id))throw new Error('Hãy chọn doanh nghiệp, vị trí và bộ câu hỏi.');
+      const session=await api('/mock-interviews',{method:'POST',data:{question_set_id:id}});
+      location.hash='mock-session/'+session.id+'/start';
+    });
+  }
   bindForm(root,'start',async data=>{const s=await api('/mock-interviews',{method:'POST',data:{role:data.role,level:data.level}});location.hash='mock-session/'+s.id+'/start';});
 }
 function reportView(r){
@@ -115,7 +196,7 @@ function reportView(r){
       +remarks('Điểm mạnh',r.strengths)+remarks('Hạn chế',r.limitations)
       +(r.practice.length?'<h3>Gợi ý luyện tập</h3><ul>'+r.practice.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>':'')
       +'<details><summary>Lịch sử và bằng chứng chấm điểm</summary>'+r.answers.map(a=>box('<h3>Lượt '+a.turn_id+' · '+esc(a.question)+'</h3>'
-        +(a.skipped?copy('Đã bỏ qua'):copy(a.transcript))
+        +(a.skipped?copy(a.timed_out?'Hết giờ':'Đã bỏ qua'):copy(a.transcript))
         +a.results.map(x=>'<h4>'+names[x.domain]+' · '+x.scores.reduce((a,b)=>a+b,0)*2.5+' / 100</h4>'
           +(x.quote?copy('“'+x.quote+'”'):'')+copy(x.feedback)).join(''))).join('')+'</details>';
   }
@@ -131,11 +212,13 @@ async function mockSession({root,user,args,signal}){
   const endpoint='/mock-interviews/'+Number(args[0]);
   let session=await api(endpoint,{signal});
   if(signal.aborted)return;
-  root.innerHTML=heading(session.role,'Interview AI đặt câu hỏi. Evaluation AI chấm toàn bộ lịch sử khi buổi phỏng vấn kết thúc.')
+  root.innerHTML=heading(session.source?.job_title||session.role,session.source
+    ?session.source.company_name+' · '+session.source.title
+    :'Interview AI đặt câu hỏi. Evaluation AI chấm toàn bộ lịch sử khi buổi phỏng vấn kết thúc.')
     +link('mock','Buổi luyện của bạn')
     +'<div class="interview-layout">'+interviewer+'<div class="interview-question"></div></div>';
   const panel=root.querySelector('.interview-question');
-  let state='ready';
+  let state='ready', deadline=0, retryAt=0;
   function updateControls(next){
     state=next;
     const mic=panel.querySelector('[data-action="mic"]');
@@ -151,6 +234,7 @@ async function mockSession({root,user,args,signal}){
   }
   const media=interviewMedia(root.querySelector('.interviewer'),{
     endpoint, mode:session.mode, signal, onError:toast, onState:updateControls,
+    remainingMs:()=>Math.max(0,deadline-performance.now()),
     onTranscript(text){
       const input=panel.querySelector('[name="transcript"]');
       if(!input)return;
@@ -168,7 +252,8 @@ async function mockSession({root,user,args,signal}){
       action(panel,'evaluate',evaluate);
       return;
     }
-    panel.innerHTML=box(tags('Câu '+(session.cursor+1)+' / '+session.total,session.turn?'Câu hỏi bổ sung':'',session.question.seconds+' giây gợi ý')
+    deadline=performance.now()+session.remaining_ms;
+    panel.innerHTML=box(tags('Câu '+(session.cursor+1)+' / '+session.total,session.turn?'Câu hỏi bổ sung':'')+'<p><strong>Thời gian còn lại <time id="question-timer">10:00</time></strong></p>'
       +'<h2>'+esc(session.question.question)+'</h2><div class="row">'+btn('read','Đọc câu hỏi')+btn('mic','Bật micro')+btn('skip','Bỏ qua')+btn('finish','Kết thúc và chấm điểm')+'</div>'
       +'<label><input type="checkbox" name="auto_read" '+(autoRead?'checked':'')+'> Tự đọc câu hỏi tiếp theo</label>'
       +form('answer',area('transcript','Câu trả lời','','required maxlength="5000"')
@@ -197,6 +282,32 @@ async function mockSession({root,user,args,signal}){
     action(panel,'read',()=>media.play(session.question.question));
     action(panel,'mic',()=>media.listen());
     media.set('ready');
+    paintTime();
+  }
+  function paintTime(){
+    const clock=panel.querySelector('#question-timer');
+    if(!clock)return 0;
+    const seconds=Math.max(0,Math.ceil((deadline-performance.now())/1000));
+    clock.textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
+    return seconds;
+  }
+  async function tick(){
+    if(!session.question||signal.aborted||paintTime()||state==='thinking'||performance.now()<retryAt)return;
+    media.stopSpeech();
+    media.stopInput();
+    media.set('thinking','Đã hết thời gian trả lời');
+    try{
+      session=await api(endpoint+'/timeout',{method:'POST',signal,data:{cursor:session.cursor,turn:session.turn}});
+      if(signal.aborted)return;
+      render();
+      if(session.evaluation_pending)await evaluate();
+      else if(autoRead&&session.question)void media.play(session.question.question);
+    }catch(error){
+      if(signal.aborted)return;
+      retryAt=performance.now()+3000;
+      try{session=await api(endpoint,{signal});if(!signal.aborted)render();}
+      catch{if(!signal.aborted)media.set('ready');}
+    }
   }
   async function evaluate(){
     if(!session.evaluation_pending||signal.aborted)return;
@@ -219,6 +330,7 @@ async function mockSession({root,user,args,signal}){
   }
   async function submit(data){
     if(['listening','thinking'].includes(state))return;
+    if(!paintTime()){await tick();return;}
     media.stopSpeech();
     media.set('thinking','Đang chuẩn bị câu hỏi tiếp theo');
     try{
@@ -234,6 +346,8 @@ async function mockSession({root,user,args,signal}){
     }
   }
   render();
+  const ticker=setInterval(()=>void tick(),250);
+  signal.addEventListener('abort',()=>clearInterval(ticker),{once:true});
   if(args[1]==='start'&&session.question){
     requestAnimationFrame(()=>{if(autoRead&&!signal.aborted&&state==='ready')void media.play(session.question.question);});
   }

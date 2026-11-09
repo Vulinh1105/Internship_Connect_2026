@@ -4,10 +4,10 @@ import {watchSelects} from './components/dropdown.js';
 import * as publicPages from './pages/public.js?v=password-reset-1';
 import * as student from './pages/student.js?v=hybrid-match-1';
 import * as notices from './pages/notifications.js?v=features-1';
-import * as workspace from './pages/workspace.js?v=hybrid-match-1';
+import * as workspace from './pages/workspace.js?v=company-interview-1';
 import * as account from './pages/account.js?v=password-reset-1';
-import * as recruitment from './pages/recruitment.js';
-import * as ai from './pages/ai.js?v=interview-rubric-1';
+import * as recruitment from './pages/recruitment.js?v=position-text-1';
+import * as ai from './pages/ai.js?v=student-position-search-1';
 
 const root=document.querySelector('#page'), nav=document.querySelector('#nav');
 watchSelects(root);

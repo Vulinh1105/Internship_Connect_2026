@@ -1,7 +1,7 @@
 from fastapi import APIRouter, File, Form, HTTPException, Response, UploadFile
 from app.core.deps import Actor, DB
 from app.ai.providers import speech
-from . import schemas, service
+from . import question_import, question_sets, schemas, service
 
 router=APIRouter(prefix="/api/mock-interviews",tags=["Phỏng vấn ảo"])
 
@@ -17,6 +17,36 @@ def history(db:DB,actor:Actor):
 def start(data:schemas.Start,db:DB,actor:Actor):
     return service.start(db,actor,data)
 
+@router.get("/question-sets/catalog")
+def catalog(db:DB,actor:Actor):
+    return question_sets.catalog(db,actor)
+
+@router.get("/question-sets")
+def my_question_sets(db:DB,actor:Actor):
+    return question_sets.mine(db,actor)
+
+@router.post("/question-sets",status_code=201)
+def create_set(data:schemas.QuestionSetInput,db:DB,actor:Actor):
+    return question_sets.save(db,actor,data)
+
+@router.post("/question-sets/import",status_code=201)
+def import_set(db:DB,actor:Actor,file:UploadFile=File(...),job_id:int|None=Form(None,gt=0),
+               company_id:int|None=Form(None,gt=0),position_title:str|None=Form(None,max_length=200)):
+    return question_import.import_draft(db,actor,job_id,file.filename or "",file.file.read(question_import.MAX_BYTES+1),
+                                        company_id=company_id,position_title=position_title)
+
+@router.put("/question-sets/{ident}")
+def update_set(ident:int,data:schemas.QuestionSetInput,db:DB,actor:Actor):
+    return question_sets.save(db,actor,data,ident)
+
+@router.delete("/question-sets/{ident}")
+def delete_set(ident:int,db:DB,actor:Actor):
+    return question_sets.remove(db,actor,ident)
+
+@router.post("/{ident}/timeout")
+def timeout(ident:int,data:schemas.TurnCursor,db:DB,actor:Actor):
+    return service.timeout(db,actor,ident,data)
+
 @router.get("/{ident}")
 def get(ident:int,db:DB,actor:Actor):
     return service.view(db,service.session(db,actor,ident))
@@ -30,6 +60,8 @@ def transcribe(ident:int,db:DB,actor:Actor,file:UploadFile=File(...),consent:boo
     item=get(ident,db,actor)
     if item["state"]!="active" or not consent:
         raise HTTPException(422,"Cần buổi luyện đang mở và đồng ý gửi âm thanh")
+    if item["remaining_ms"]<=0:
+        raise HTTPException(409,"Đã hết thời gian trả lời câu này.")
     media_type=(file.content_type or "").split(";",1)[0].strip().lower()
     if media_type not in {"audio/webm","audio/ogg","audio/mpeg","audio/wav","audio/mp4"}:
         raise HTTPException(415,"Định dạng âm thanh không hỗ trợ")

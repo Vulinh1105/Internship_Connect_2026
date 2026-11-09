@@ -45,8 +45,8 @@ export const interviewer = `<aside class="interviewer" data-state="ready" aria-l
   <div class="interviewer-dots" aria-hidden="true"><i></i><i></i><i></i></div>
 </aside>`;
 
-export function interviewMedia(avatar, {endpoint, mode, signal, onTranscript, onError, onState}) {
-  let state = 'ready', speech, recognition, recorder, stream, timer, audio, source, analyser, frame, playback = 0;
+export function interviewMedia(avatar, {endpoint, mode, signal, onTranscript, onError, onState, remainingMs}) {
+  let state = 'ready', speech, recognition, recorder, stream, audio, source, analyser, frame, playback = 0;
   const status = avatar.querySelector('.interviewer-status');
   function set(next, label = messages[next]) {
     state = next;
@@ -136,7 +136,6 @@ export function interviewMedia(avatar, {endpoint, mode, signal, onTranscript, on
     } catch(error) {onError(error.message);}
   }
   function releaseMic() {
-    clearTimeout(timer);
     stream?.getTracks().forEach(track => track.stop());
     stream = null;
   }
@@ -155,7 +154,7 @@ export function interviewMedia(avatar, {endpoint, mode, signal, onTranscript, on
     set('thinking', 'Đang mở micro');
     try {
       stream = await navigator.mediaDevices.getUserMedia({audio:true});
-      if (signal.aborted) { releaseMic(); return; }
+      if (signal.aborted || remainingMs()<=0) { releaseMic(); if(!signal.aborted)set('ready'); return; }
       const chunks = [];
       let size = 0;
       const maximum = 8*1024*1024;
@@ -187,7 +186,6 @@ export function interviewMedia(avatar, {endpoint, mode, signal, onTranscript, on
         if (!signal.aborted) {set('ready');onError('Không ghi được âm thanh.');}
       };
       recorder.start(1000);
-      timer = setTimeout(() => {if (recorder?.state === 'recording') recorder.stop();},120000);
       set('listening');
     } catch {
       releaseMic();
@@ -221,13 +219,27 @@ export function interviewMedia(avatar, {endpoint, mode, signal, onTranscript, on
     if (mode === 'openai' && navigator.mediaDevices?.getUserMedia && window.MediaRecorder) await record();
     else recognize();
   }
+  function stopInput() {
+    if(recorder){
+      recorder.onstop=null;
+      recorder.ondataavailable=null;
+      recorder.onerror=null;
+      if(recorder.state==='recording')recorder.stop();
+      recorder=null;
+    }
+    if(recognition){
+      recognition.onend=null;
+      recognition.onresult=null;
+      recognition.abort();
+      recognition=null;
+    }
+    releaseMic();
+  }
   function dispose() {
     stopSpeech();
-    if (recorder?.state === 'recording') recorder.stop();
-    if (recognition) recognition.abort();
-    releaseMic();
+    stopInput();
     if (audio && audio.state !== 'closed') audio.close().catch(()=>{});
   }
   signal.addEventListener('abort',dispose,{once:true});
-  return {play,listen,transcribe,stopSpeech,set};
+  return {play,listen,transcribe,stopSpeech,stopInput,set};
 }

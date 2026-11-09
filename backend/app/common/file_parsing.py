@@ -14,7 +14,7 @@ def pdf_text(pdf,ocr_tessdata):
     return "\n".join(pages)
 
 
-def parse(path, *, max_pdf_pages=100, max_chars=160_000, allow_empty_pdf=False, ocr_tessdata=None):
+def parse(path, *, max_pdf_pages=100, max_chars=160_000, allow_empty_pdf=False, ocr_tessdata=None, preserve_docx_order=False):
     suffix = path.suffix.lower()
     try:
         match suffix:
@@ -31,8 +31,14 @@ def parse(path, *, max_pdf_pages=100, max_chars=160_000, allow_empty_pdf=False, 
             case ".docx":
                 from docx import Document
                 doc = Document(path)
-                text = "\n".join([p.text for p in doc.paragraphs] +
-                                 [" | ".join(c.text for c in r.cells) for t in doc.tables for r in t.rows])
+                if preserve_docx_order:
+                    from docx.text.paragraph import Paragraph
+                    text = "\n".join(line for block in doc.iter_inner_content() for line in (
+                        [block.text] if isinstance(block,Paragraph)
+                        else [" | ".join(c.text for c in row.cells) for row in block.rows]))
+                else:
+                    text = "\n".join([p.text for p in doc.paragraphs] +
+                                     [" | ".join(c.text for c in r.cells) for t in doc.tables for r in t.rows])
             case _:
                 text = path.read_text(encoding="utf-8-sig")
     except HTTPException:

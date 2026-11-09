@@ -69,7 +69,7 @@ def evaluate(group,role,level,user_id,*,whole):
     response=structured(Batch,
         "Bạn là Evaluation AI. Đọc tất cả lượt trong nhóm. Chấm mỗi lượt có transcript và domains, đúng các domains "
         "được chỉ định. Bỏ qua lượt không có transcript hoặc domains rỗng trong kết quả turns. "
-        "reference_topics chỉ gợi ý nội dung cần chú ý, điểm luôn theo rubric chung. "
+        "reference_topics là hướng dẫn nội bộ. Không trích nguyên văn chúng trong phản hồi; điểm luôn theo rubric chung. "
         "Với mỗi domain, trả đúng 4 điểm nguyên từ 0 đến 10 theo đúng thứ tự rubric. "
         "Mỗi domain có điểm dương phải trích một đoạn nguyên văn liên tục từ transcript của chính lượt đó. "
         "Feedback ngắn gọn, giải thích các điểm có căn cứ và những gì còn thiếu. Không suy đoán thành tích. "

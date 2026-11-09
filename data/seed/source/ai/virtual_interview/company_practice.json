@@ -1,0 +1,400 @@
+{
+  "title_roles": {
+    "Thực tập sinh Kế toán": "Accounting Intern",
+    "Thực tập sinh Kinh doanh B2B": "Business Development",
+    "Thực tập sinh Logistics": "Logistics Intern",
+    "Thực tập sinh Marketing nội dung": "Content Marketing",
+    "Thực tập sinh Phát triển phần mềm": "Software Developer Intern",
+    "Thực tập sinh Phân tích dữ liệu": "Data Analyst",
+    "Thực tập sinh Tài chính doanh nghiệp": "Finance Intern",
+    "Thực tập sinh Thiết kế UI/UX": "UI UX Intern",
+    "Thực tập sinh Tuyển dụng": "Recruitment Intern",
+    "Thực tập sinh Vận hành": "Operations Intern"
+  },
+  "roles": {
+    "Data Analyst": [
+      [
+        "knowledge",
+        "basic",
+        "Khi nào dùng WHERE và khi nào dùng HAVING trong SQL? Hãy minh họa bằng một báo cáo đơn hàng.",
+        "Nêu thứ tự lọc, nhóm và ví dụ phù hợp."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Trong Power BI, khi nào bạn dùng measure thay cho calculated column?",
+        "Giải thích ngữ cảnh lọc và tác động đến mô hình."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Có dữ liệu ngày thiếu và giá trị null trong bảng doanh thu. Bạn phân biệt doanh thu bằng 0 và chưa có dữ liệu thế nào?",
+        "Giữ ý nghĩa dữ liệu, nêu cách hiển thị và đối soát."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Tỷ lệ chuyển đổi tăng sau khi đổi nguồn dữ liệu. Bạn kiểm tra thế nào trước khi báo cáo đây là cải thiện thực tế?",
+        "So định nghĩa, mẫu và kỳ đo, kiểm tác động nguồn."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Hãy thiết kế một cách đối soát giữa bảng Excel do nghiệp vụ cung cấp và kết quả truy vấn SQL.",
+        "Nêu khóa, tổng kiểm, chênh lệch và cách xử lý ngoại lệ."
+      ]
+    ],
+    "Finance Intern": [
+      [
+        "knowledge",
+        "basic",
+        "Phân biệt lợi nhuận gộp, lợi nhuận hoạt động và dòng tiền hoạt động.",
+        "Giải thích từng chỉ số và khi nào chúng khác nhau."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Vì sao cần tách giả định, phép tính và kết quả khi xây dựng mô hình tài chính trên Excel?",
+        "Nêu khả năng kiểm toán, cập nhật và kiểm tra đơn vị."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Doanh thu bằng kế hoạch nhưng biên lợi nhuận giảm. Bạn tách chênh lệch giá bán, sản lượng và chi phí thế nào?",
+        "Xác định kỳ so sánh, biến số và cách kiểm chứng."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Có hai dự án cho dòng tiền ở các thời điểm khác nhau và ngân sách chỉ đủ cho một dự án. Bạn sẽ so sánh theo cách nào?",
+        "Nêu dòng tiền gia tăng, chiết khấu, rủi ro và độ nhạy."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Bạn phát hiện một công thức dự báo tham chiếu nhầm kỳ. Làm sao xác định phạm vi ảnh hưởng và sửa báo cáo?",
+        "Truy vết phụ thuộc, đối chiếu lại, ghi nhận thay đổi."
+      ]
+    ],
+    "Content Marketing": [
+      [
+        "knowledge",
+        "basic",
+        "Search intent là gì? Cho ví dụ về hai ý định tìm kiếm khác nhau của người chuẩn bị CV.",
+        "Liên hệ ý định với loại nội dung và CTA."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Khi dùng Canva cho một chiến dịch nhiều kênh, bạn giữ nhận diện và khả năng đọc trên điện thoại thế nào?",
+        "Nêu phân cấp thị giác, kích thước, độ tương phản và kiểm tra."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Hai bài đang cạnh tranh cùng một từ khóa SEO. Bạn sẽ kiểm tra dữ liệu và quyết định gộp hay tách thế nào?",
+        "Đối chiếu ý định, dữ liệu trang và phương án theo dõi."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Chiến dịch còn ba ngày nhưng dữ liệu cho thấy đăng ký thấp. Bạn ưu tiên thử nghiệm nào và đo ra sao?",
+        "Chọn một giả thuyết có căn cứ, thước đo và rủi ro."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Một bài có nguồn dẫn chưa chắc chắn và đã lên lịch đăng. Bạn xác minh và chỉnh bài theo trình tự nào?",
+        "Kiểm nguồn, sửa thông tin, xin duyệt và lưu dấu thay đổi."
+      ]
+    ],
+    "Recruitment Intern": [
+      [
+        "knowledge",
+        "basic",
+        "Một email mời phỏng vấn cần có các thông tin gì để ứng viên dễ xác nhận?",
+        "Nêu thời gian, múi giờ, hình thức, người liên hệ và cách phản hồi."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Phân biệt tiêu chí sàng lọc hồ sơ và tiêu chí chấm phỏng vấn. Cho ví dụ về mỗi loại.",
+        "Liên hệ yêu cầu vị trí, bằng chứng và tính nhất quán."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Hai hồ sơ trùng email nhưng tên hiển thị khác nhau. Bạn xác minh và cập nhật dữ liệu thế nào?",
+        "Kiểm tra định danh, tránh ghi đè nhầm và giới hạn quyền xem."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Người phỏng vấn báo bận sát giờ và có nhiều ứng viên đã xác nhận. Bạn sẽ xử lý theo thứ tự nào?",
+        "Ưu tiên thông báo, khung giờ thay thế, xác nhận và theo dõi."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Bạn sẽ dùng dữ liệu nào để phân tích vì sao nhiều ứng viên không đến phỏng vấn?",
+        "Nêu nhóm dữ liệu, giả thuyết, giới hạn và cách thử cải tiến."
+      ]
+    ],
+    "Software Developer Intern": [
+      [
+        "knowledge",
+        "basic",
+        "Trong REST API, khi nào dùng GET, POST và PATCH? Nêu ví dụ từ chức năng tuyển dụng.",
+        "Đúng ý nghĩa phương thức và tác động lên dữ liệu."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Git merge khác rebase ở điểm nào? Khi xử lý xung đột trên nhánh dùng chung, bạn chọn cách nào?",
+        "Giải thích lịch sử commit và rủi ro viết lại lịch sử chung."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Một endpoint Python nhận dữ liệu sai định dạng. Bạn thiết kế xác thực đầu vào và phản hồi lỗi thế nào?",
+        "Nêu schema, lỗi HTTP, thông báo an toàn và bài kiểm thử."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "API danh sách tin chậm khi dữ liệu lớn. Hãy mô tả cách đo, khoanh vùng nguyên nhân và xác minh cải tiến.",
+        "Đo theo tầng, xem truy vấn, phân trang hoặc chỉ mục và đo lại."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Sinh viên thử đổi ID trên URL để xem hồ sơ người khác. Bạn chặn và kiểm thử trường hợp này thế nào?",
+        "Xác minh quyền sở hữu phía backend và kiểm thử truy cập chéo."
+      ]
+    ],
+    "Business Development": [
+      [
+        "knowledge",
+        "basic",
+        "Phân biệt lead, prospect và cơ hội bán hàng. Khi nào nên chuyển trạng thái trong CRM?",
+        "Nêu tiêu chí trạng thái và thông tin kiểm chứng."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Bạn phân biệt tỷ lệ phản hồi và tỷ lệ đặt lịch từ dữ liệu CRM thế nào?",
+        "Định nghĩa mẫu số, kỳ đo và giới hạn chỉ số."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Khách hàng B2B yêu cầu báo giá nhưng chưa rõ nhu cầu. Bạn chuẩn bị câu hỏi khai thác và theo dõi ra sao?",
+        "Xác định vấn đề, người quyết định, bước tiếp theo và cách ghi CRM."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Danh sách khách có nhiều bản ghi trùng và thiếu nguồn. Bạn làm sạch thế nào để không liên hệ lặp?",
+        "Nêu khóa nhận dạng, xử lý mâu thuẫn và quy tắc tiếp cận."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Hai nhóm khách có tỷ lệ phản hồi rất khác nhau. Bạn thiết kế thử nghiệm để tìm nguyên nhân thế nào?",
+        "So phân khúc, kiểm điều kiện gửi và đo kết quả."
+      ]
+    ],
+    "Accounting Intern": [
+      [
+        "knowledge",
+        "basic",
+        "Phân biệt ghi nhận chi phí với thanh toán chi phí bằng một ví dụ.",
+        "Giải thích thời điểm ghi nhận và tác động đối soát."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Trong Excel, bạn dùng phương pháp nào để đối chiếu hai bảng chứng từ theo mã và số tiền?",
+        "Nêu khóa ghép, bản ghi trùng, chênh lệch và kiểm tổng."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Chứng từ đến sau khi đã khóa kỳ kế toán. Bạn cần kiểm tra những gì trước khi đề xuất điều chỉnh?",
+        "Xem kỳ phát sinh, chứng từ, quy trình phê duyệt và lưu vết."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Sổ theo dõi công nợ không khớp với xác nhận của nhà cung cấp. Bạn khoanh vùng và báo cáo chênh lệch ra sao?",
+        "Đối chiếu chi tiết, phân loại nguyên nhân và nêu bằng chứng."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Bạn phát hiện cùng một khoản được ghi vào hai nhóm chi phí. Bạn xác nhận và đề xuất xử lý thế nào?",
+        "Kiểm chứng chứng từ, xác định tác động và tránh tự ý sửa."
+      ]
+    ],
+    "Operations Intern": [
+      [
+        "knowledge",
+        "basic",
+        "Phân biệt thời gian xử lý, thời gian chờ và tổng thời gian hoàn thành yêu cầu.",
+        "Giải thích ý nghĩa các mốc và cách đo."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Một báo cáo theo dõi SLA cần có trường dữ liệu và chỉ số nào?",
+        "Nêu thời hạn, thời điểm hoàn thành, phân loại và tỷ lệ đúng hạn."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Một bước phê duyệt thường xuyên gây chậm. Bạn thu thập dữ liệu và kiểm tra nguyên nhân thế nào?",
+        "Đo theo bước, tách lưu lượng khỏi năng lực và kiểm ngoại lệ."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Có nhiều yêu cầu gấp nhưng nhóm chỉ đủ xử lý một nửa. Bạn xây quy tắc ưu tiên và trao đổi ra sao?",
+        "Nêu mức ảnh hưởng, hạn cam kết, năng lực và phương án cập nhật."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Sau khi đổi quy trình, thời gian giảm nhưng số lỗi tăng. Bạn kết luận và đề xuất thử nghiệm tiếp thế nào?",
+        "Đo cả chất lượng và tốc độ, so điều kiện và kiểm tra lại."
+      ]
+    ],
+    "UI UX Intern": [
+      [
+        "knowledge",
+        "basic",
+        "Phân biệt wireframe, mockup và prototype. Khi nào nên dùng từng loại?",
+        "Nêu độ chi tiết và mục tiêu kiểm thử của từng loại."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Trong Figma, component và variant giúp quản lý các trạng thái nút và form thế nào?",
+        "Nêu tái sử dụng, trạng thái lỗi và tính nhất quán."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Người dùng bàn phím khó hoàn tất form. Bạn kiểm tra và đề xuất thay đổi giao diện như thế nào?",
+        "Kiểm thứ tự focus, nhãn, lỗi và thao tác bằng bàn phím."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Dữ liệu cho thấy người dùng bỏ ở bước nộp CV nhưng phỏng vấn người dùng cho ý kiến trái chiều. Bạn kiểm chứng thế nào?",
+        "Đối chiếu mẫu, hành vi thực tế, giả thuyết và tiêu chí đo."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Bạn có một ngày để kiểm thử prototype nộp hồ sơ. Hãy chọn tác vụ, cách ghi nhận và cách ưu tiên sửa.",
+        "Nêu tình huống, chỉ số quan sát và mức nghiêm trọng."
+      ]
+    ],
+    "Logistics Intern": [
+      [
+        "knowledge",
+        "basic",
+        "Phân biệt tồn kho trên hệ thống, tồn kho khả dụng và tồn kho thực tế.",
+        "Nêu ảnh hưởng của hàng đã giữ chỗ và giao dịch chưa cập nhật."
+      ],
+      [
+        "knowledge",
+        "intermediate",
+        "Một chứng từ giao nhận cần những dữ liệu nào để có thể đối soát với đơn hàng?",
+        "Nêu mã đơn, SKU, số lượng, thời gian và dấu vết bàn giao."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Kho báo giao đủ nhưng bên nhận báo thiếu. Bạn kiểm tra các nguồn nào và ghi nhận sai lệch ra sao?",
+        "Đối chiếu chứng từ, lượng thực giao và liên hệ đúng đầu mối."
+      ],
+      [
+        "problem_solving",
+        "advanced",
+        "Hai đơn gấp cùng cần một lượng hàng còn thiếu. Bạn ưu tiên và đề xuất phương án nào?",
+        "Cân nhắc cam kết, ảnh hưởng, hàng thay thế và thông báo."
+      ],
+      [
+        "both",
+        "intermediate",
+        "Bạn lập báo cáo Excel về tỷ lệ giao đúng hạn. Bạn xử lý các đơn giao nhiều lần hoặc thiếu mốc giao thế nào?",
+        "Định nghĩa đơn vị đo, ngoại lệ và cách đối soát."
+      ]
+    ]
+  },
+  "generic": [
+    [
+      "knowledge",
+      "basic",
+      "Trong công việc này, em hiểu mục đích của {skill} như thế nào? Hãy nêu một ví dụ sử dụng.",
+      "Giải thích đúng kỹ năng và liên hệ với đầu việc."
+    ],
+    [
+      "knowledge",
+      "basic",
+      "Em cần đọc hoặc hỏi rõ những thông tin nào trước khi bắt đầu một đầu việc của vị trí {title}?",
+      "Xác định đầu vào, đầu ra và tiêu chuẩn chất lượng."
+    ],
+    [
+      "both",
+      "intermediate",
+      "Chọn một yêu cầu chuyên môn trong tin này và giải thích cách em kiểm tra kết quả sau khi thực hiện.",
+      "Liên hệ yêu cầu, cách làm và cách kiểm chứng."
+    ],
+    [
+      "problem_solving",
+      "basic",
+      "Một yêu cầu mới mâu thuẫn với hướng dẫn trước đó. Em làm gì để xác nhận cách xử lý?",
+      "Phát hiện mâu thuẫn và xác nhận đúng đầu mối."
+    ],
+    [
+      "both",
+      "intermediate",
+      "Hãy mô tả một bài tập hoặc dự án cho thấy em có thể áp dụng {skill} vào vị trí này.",
+      "Nêu đóng góp, cách áp dụng và kết quả."
+    ],
+    [
+      "problem_solving",
+      "intermediate",
+      "Kết quả kiểm tra lần đầu chưa đạt. Em sẽ tách lỗi đầu vào và lỗi ở cách thực hiện như thế nào?",
+      "Đưa ra phép kiểm phân biệt nguyên nhân."
+    ],
+    [
+      "problem_solving",
+      "advanced",
+      "Hai đầu việc cùng đến hạn nhưng chỉ hoàn thành được một. Em ưu tiên và trao đổi theo căn cứ nào?",
+      "Nêu ảnh hưởng, thời hạn, phụ thuộc và phương án báo sớm."
+    ],
+    [
+      "both",
+      "intermediate",
+      "Em sẽ bàn giao một phần việc của vị trí {title} ra sao để đồng đội có thể kiểm tra và tiếp tục?",
+      "Nêu tài liệu, trạng thái và điểm cần kiểm tra."
+    ]
+  ],
+  "context": [
+    [
+      "both",
+      "intermediate",
+      "Nếu được giao dùng {skill} trong tuần đầu ở vị trí {title} tại {company}, em chọn một đầu việc nào từ tin tuyển dụng? Mô tả cách làm và tiêu chí hoàn thành.",
+      "Gắn với một đầu việc thực tế, nêu bước làm và cách kiểm tra đầu ra."
+    ],
+    [
+      "problem_solving",
+      "intermediate",
+      "Giả sử đầu việc đầu tiên của vị trí {title} tại {company} có dữ liệu chưa đủ và hạn là ngày mai. Em sẽ xác minh điều gì, ưu tiên phần nào và báo tiến độ ra sao?",
+      "Phân tích phần thiếu, nêu phương án khả thi, giới hạn và cách cập nhật."
+    ]
+  ]
+}

@@ -136,7 +136,7 @@ async function workspace({root,user,reload}){
   root.innerHTML='<div class="ws-head"><div class="ws-company">'+(companies.length===1?logoTile(companies[0].id,companies[0].name,true,companies[0].has_logo):'')
     +'<div><h1>'+esc(companies.map(c=>c.name).join(' · '))+'</h1><p class="muted">Quản lý tuyển dụng</p></div></div>'
     +'<div class="row">'+link('recruitment-stats','Thống kê tuyển dụng')
-    +(companies.some(c=>c.can_manage_members)?link('company-members','Thành viên'):'')
+    +(companies.some(c=>c.can_manage_members)?link('company-members','Thành viên')+link('question-sets','Bộ câu hỏi phỏng vấn'):'')
     +'<button type="button" id="toggle-new-job" aria-expanded="false" aria-controls="new-job-panel">Đăng tin mới</button></div></div>'
     +'<section class="panel" id="new-job-panel" hidden>'+form('new-job',jobFields(companies),'Gửi kiểm duyệt')+'</section>'
     +'<div class="stat-grid">'+stats.map(([label,n])=>'<div class="stat"><strong>'+n+'</strong><span>'+esc(label)+'</span></div>').join('')+'</div>'
