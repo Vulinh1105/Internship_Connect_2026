@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b2545">
   <meta name="description" content="Khám phá vị trí thực tập, chuẩn bị hồ sơ và theo dõi đơn ứng tuyển với Internship Connect.">
   <title>Internship Connect 2026</title>
-  <link rel="stylesheet" href="style.css?v=features-1">
+  <link rel="stylesheet" href="style.css?v=company-symbols-1">
 </head>
 <body>
   <a class="skip-link" href="#page">Đến nội dung</a>
@@ -14,9 +14,15 @@
     <div class="shell nav">
       <a href="#home" class="brand" aria-label="Internship Connect, trang chủ">
         <span class="brand-mark" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 16 5-5 3 3 6-7M14 7h5v5"/><path d="M5 7v12h14" opacity=".55"/></svg></span>
-        <span>Internship<span class="brand-accent">Connect</span></span>
+        <span class="brand-label">Internship<span class="brand-accent">Connect</span></span>
       </a>
-      <nav id="nav" aria-label="Điều hướng"></nav>
+      <nav id="nav" class="main-nav" aria-label="Điều hướng chính"></nav>
+      <div class="header-actions">
+        <button type="button" id="nav-toggle" aria-label="Mở điều hướng" aria-controls="nav" aria-expanded="false">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <div id="header-tools" class="header-tools"></div>
+      </div>
     </div>
   </header>
   <main class="shell" id="page" tabindex="-1"></main>
@@ -26,7 +32,10 @@
       <div class="footer-links"><a href="#jobs">Vị trí thực tập</a><a href="#companies">Doanh nghiệp</a><span>Bản chạy local</span></div>
     </div>
   </footer>
+  <a href="#chat" id="chat-launcher" class="chat-launcher" aria-label="Mở Chatbot" title="Chatbot" hidden>
+    <svg aria-hidden="true" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 3V6a1 1 0 0 1 1-1z"/><path d="M8 10h8M8 13h5"/></svg>
+  </a>
   <div id="notice" role="status"></div>
-  <script type="module" src="src/app.js?v=student-position-search-1"></script>
+  <script type="module" src="src/app.js?v=company-symbols-1"></script>
 </body>
 </html>

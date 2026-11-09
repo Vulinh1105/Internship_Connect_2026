@@ -33,7 +33,7 @@ def initialize():
     with Session() as db:
         seed(db)
         seed(db)
-        assert db.scalar(select(func.count()).select_from(Job))==106
+        assert db.scalar(select(func.count()).select_from(Job))==100
         assert sync.drain(db,500)["failed"]==0
 
 def actor(email):

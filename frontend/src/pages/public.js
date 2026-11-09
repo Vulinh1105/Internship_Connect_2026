@@ -1,8 +1,7 @@
 import {api} from '../api/client.js';
-import {companyGallery} from '../components/company-gallery.js';
 import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,money,modes,toast,bindForm,action} from '../components/ui.js';
 
-import {logoTile, bannerHtml, bindBanner} from '../components/media.js';
+import {logoTile, companyPhoto, bannerHtml, bindBanner} from '../components/media.js?v=company-symbols-1';
 import {savedIds, heartButton, saveButton, bindHearts} from '../components/saved.js';
 
 const briefcase='<svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M3 13h18m-11 0v2h4v-2"/></svg>';
@@ -137,7 +136,7 @@ async function job({root,args,user}){
 }
 export const companyCard=c=>'<article class="card top-card"><div class="top-card-head">'+logoTile(c.id,c.name,false,c.has_logo)
   +'<div><h3><a href="#company/'+c.id+'">'+esc(c.name)+'</a></h3><p class="muted">'+esc(c.industry)+'</p></div></div>'
-  +'<div class="top-card-foot">'+tags(c.city,c.details?.company_size&&c.details.company_size+' nhân viên')+'</div></article>';
+  +companyPhoto(c.name)+'<div class="top-card-foot">'+tags(c.city,c.details?.company_size&&c.details.company_size+' nhân viên')+'</div></article>';
 const COMPANY_PAGE=12;
 async function companies({root,args}){
   const all=await api('/companies');
@@ -150,7 +149,6 @@ async function companies({root,args}){
     +'<h2 id="demo-companies-title">Doanh nghiệp trên hệ thống</h2></div></div>'
     +(records.length?'<div class="top-grid">'+records.map(companyCard).join('')+'</div>':empty())
     +pager(current,pages,current-1,current+1)+'</section>';
-  root.insertAdjacentHTML('beforeend',companyGallery());
   action(root,'page',n=>{location.hash='companies/'+new URLSearchParams({page:n});});
 }
 const iconUsers=svg('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2A6.5 6.5 0 0 1 21.5 20"/>');
@@ -197,7 +195,7 @@ async function company({root,args,user,signal}){
     +'<div class="co-tabs" role="group" aria-label="Mục của công ty"><button type="button" class="co-tab" data-tab="co-about" aria-current="true">Tổng quan</button>'
     +'<button type="button" class="co-tab" data-tab="co-jobs" aria-current="false">Tin tuyển dụng ('+all.total+')</button></div></section>'
     +'<div class="detail-layout"><div class="detail-main">'
-    +'<section class="panel" id="co-about"><h2 class="co-section-title">Giới thiệu công ty</h2>'+copy(c.description)+about+benefitList(d)+'</section>'
+    +'<section class="panel" id="co-about"><h2 class="co-section-title">Giới thiệu công ty</h2>'+companyPhoto(c.name,true)+copy(c.description)+about+benefitList(d)+'</section>'
     +(reviews.length?box('<h2>Đánh giá sau thực tập</h2>'+reviews.map(r=>tags(r.student_rating+'/5')+copy(r.student_review)).join('')):'')
     +'<section class="panel" id="co-jobs"><h2 class="co-section-title">Tin tuyển dụng</h2>'
     +(all.total?searchForm+'<div id="co-job-list" aria-live="polite"></div>':empty('Công ty chưa có tin tuyển dụng đang mở.'))+'</section>'

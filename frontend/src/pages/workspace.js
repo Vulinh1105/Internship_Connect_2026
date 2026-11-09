@@ -1,7 +1,7 @@
 import {api} from '../api/client.js';
 import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,modes,list,money,status,toast,bindForm,action} from '../components/ui.js';
 import {loginRequired} from './public.js';
-import {logoTile} from '../components/media.js';
+import {logoTile} from '../components/media.js?v=company-symbols-1';
 
 const educations=[['','Chưa nêu'],'Không yêu cầu','Sinh viên đại học/cao đẳng','Sinh viên năm cuối','Mới tốt nghiệp','Trung cấp trở lên','Cao đẳng trở lên','Đại học trở lên','Thạc sĩ trở lên'];
 const part=(title,html)=>'<section class="form-section"><h3>'+title+'</h3>'+html+'</section>';

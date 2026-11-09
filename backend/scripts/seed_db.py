@@ -6,7 +6,7 @@ from collections import defaultdict
 from datetime import date, datetime
 from sqlalchemy import select
 from app.core import metadata
-from app.core.config import LOCAL_TZ, ROOT
+from app.core.config import LOCAL_TZ, ROOT, now
 from app.core.database import Session
 from app.core.security import hash_password
 from app.ai.vector.sync import enqueue
@@ -15,6 +15,7 @@ from app.modules.auth.models import Grant, Permission, Role, User
 from app.modules.companies.models import Company, Member
 from app.modules.interviews.models import Interview
 from app.modules.jobs.models import Job
+from app.modules.jobs.service import close_job
 from app.modules.knowledge.models import Document
 from app.modules.mock_interviews.models import Question
 from app.modules.notifications.models import Notification
@@ -64,7 +65,17 @@ def enrich_details(item, fields, *, old_address=None):
         item.details = {**item.details, "address": fields["address"], "address_is_synthetic": True}
 
 
+def retire_demo_jobs(db):
+    codes = [row["seed_code"] for row in rows("core/internships") if row["seed_code"].startswith("DEMO-F-")]
+    jobs = list(db.scalars(select(Job).where(Job.code.in_(codes),Job.deleted_at.is_(None))))
+    for job in jobs:
+        close_job(db,job,notify_applicants=False)
+        job.deleted_at=now()
+    return len(jobs)
+
+
 def seed(db):
+    retire_demo_jobs(db)
     company_extras = json.loads((SOURCE / "core/companies_v3.json").read_text(encoding="utf-8"))
     job_extras = json.loads((SOURCE / "core/internships_v3.json").read_text(encoding="utf-8"))
     for r in rows("access/roles"):
@@ -113,6 +124,8 @@ def seed(db):
         job_skills[r["job_seed_code"]].append({"name":skills[r["skill_id"]],"priority":r["priority"]})
     for r in rows("core/internships"):
         code=r["seed_code"]
+        if code.startswith("DEMO-F-"):
+            continue
         job,created=insert(db,Job,{"code":code},company_id=companies[r["company_seed_code"]],
              title=r["title"],description=r["description"],requirements=r["requirements"],category=r["category"],
              location=r["location"],work_mode=r["work_mode"],salary_min=number(r["salary_min_vnd"]),
