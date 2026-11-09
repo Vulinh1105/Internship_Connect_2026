@@ -16,6 +16,7 @@ const kinds={
 };
 // Trang đích theo loại thông báo; target_id là mã tin khi trang đích cần (hồ sơ ứng tuyển, chi tiết tin).
 export function destination(n){
+  if(n.kind==='company_registration')return 'company-verification/'+n.target_id;
   const [,page='notifications']=kinds[n.kind]||[];
   if(page==='applicants')return n.target_id!=null?'applicants/'+n.target_id:'workspace';
   return page==='job'&&n.target_id!=null?'job/'+n.target_id:page==='job'?'jobs':page;

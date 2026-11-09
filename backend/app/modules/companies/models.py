@@ -21,6 +21,17 @@ class Member(Base):
     manager = Column(Boolean, default=False, server_default="0", nullable=False)
     __table_args__ = (UniqueConstraint('company_id','user_id'),)
 
+class CompanyRegistration(Base):
+    __tablename__ = "company_registrations"
+
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
+    tax_code = Column(String(13), unique=True, nullable=False)
+    info = Column(JSON, nullable=False)
+    files = Column(JSON, nullable=False)
+    status = Column(String(20), nullable=False, index=True)
+    reason = Column(Text, nullable=False, default="")
+
+
 class Follow(Base):
     __tablename__ = "company_follows"
     id = Column(Integer, primary_key=True)

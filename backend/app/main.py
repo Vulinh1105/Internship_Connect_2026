@@ -12,6 +12,7 @@ from app.core.deps import Actor, DB
 from app.modules.applications.router import router as applications
 from app.modules.auth.router import router as auth
 from app.modules.companies.router import router as companies
+from app.modules.companies.registration import router as company_registrations
 from app.modules.companies.recruitment import router as recruitment
 from app.modules.interviews.router import router as interviews
 from app.modules.jobs.router import router as jobs
@@ -57,7 +58,7 @@ async def lifespan(_):
             await task
 
 app=FastAPI(title="Internship Connect 2026",version="1.0.0",lifespan=lifespan)
-for router in (auth,students,companies,recruitment,jobs,applications,interviews,notifications,knowledge,mock,chatbot):
+for router in (auth,students,companies,company_registrations,recruitment,jobs,applications,interviews,notifications,knowledge,mock,chatbot):
     app.include_router(router)
 
 @app.middleware("http")

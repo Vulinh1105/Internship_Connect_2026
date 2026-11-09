@@ -585,3 +585,21 @@ select.dd-native { position: absolute !important; width: 1px !important; height:
   .header-auth { padding-inline: 9px; }
   .chat-launcher { right: 14px; bottom: 14px; }
 }
+
+.company-registration { max-width: 900px; margin-inline: auto; }
+.company-registration fieldset { min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 10px; }
+.company-registration legend, .registration-fields dt { font-weight: 700; }
+.company-registration [hidden] { display: none; }
+.registration-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; }
+.registration-fields dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+@media (max-width: 680px) {
+  .registration-fields { grid-template-columns: 1fr; }
+}
+@media (max-width: 440px) {
+  .header-tools:has(.company-register-link) .header-auth { font-size: .75rem; padding-inline: 5px; }
+}
+
+@media (max-width: 390px) {
+  .nav:has(.company-register-link) { flex-wrap: wrap; }
+  .nav:has(.company-register-link) .header-actions { flex-wrap: wrap; }
+}

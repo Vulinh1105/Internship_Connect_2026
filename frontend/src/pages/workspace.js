@@ -332,28 +332,11 @@ function modDetail(j){
 }
 async function moderation({root,user,reload}){
   if(!user)return loginRequired(root);
-  const [rows,data]=await Promise.all([
-    api('/jobs/moderation'),user.role==='admin'?api('/admin/overview'):null,
-  ]);
-  root.innerHTML=heading('Hàng chờ kiểm duyệt')
+  const rows=await api('/jobs/moderation');
+  root.innerHTML=heading('Duyệt tin tuyển dụng')
     +'<div class="stat-grid stat-grid-3">'+[['Chờ duyệt',rows.length],['Có cảnh báo',rows.filter(j=>j.flags?.length).length],['Gửi lại',rows.filter(j=>j.last_review).length]].map(statTile).join('')+'</div>'
     +(rows.length?'<div class="toolbar"><label class="check"><input type="checkbox" id="only-flags"'+(mod.flagsOnly?' checked':'')+'> Chỉ tin có cảnh báo</label></div>'
       +'<div class="mod-layout"><div class="mod-list" id="mod-list"></div><div id="mod-detail"></div></div>':empty('Hàng chờ đã trống.'));
-  if(data){
-    root.insertAdjacentHTML('beforeend','<h2>Báo cáo tin tuyển dụng</h2>'+(data.reports.length?data.reports.map(r=>box('<h3>'+esc(r.title)+'</h3>'+copy(r.reason)
-      +form('report-'+r.id,select('status','Kết quả',[['resolved','Đã xử lý'],['dismissed','Bác báo cáo']])
-        +area('note','Ghi chú xử lý','','required maxlength="2000"'),'Lưu kết quả'))).join(''):empty('Không có báo cáo đang chờ.'))
-    +'<h2>Đánh giá doanh nghiệp</h2>'+(data.reviews.length?data.reviews.map(r=>box('<h3>'+esc(r.company)+'</h3>'
-      +tags(r.student_rating+'/5',r.review_status==='approved'?'Đã công khai':'Chờ duyệt')+copy(r.student_review)
-      +(r.review_status==='approved'?'':btn('approve-review','Duyệt',r.application_id))+btn('reject-review',r.review_status==='approved'?'Gỡ':'Từ chối',r.application_id))).join('')
-      :empty('Chưa có đánh giá đang chờ hoặc công khai.')));
-    for(const r of data.reports)bindForm(root,'report-'+r.id,async data=>{
-      await api('/admin/job-reports/'+r.id,{method:'PATCH',data});await reload();
-    });
-    for(const [name,status] of [['approve-review','approved'],['reject-review','rejected']])action(root,name,async id=>{
-      await api('/admin/company-reviews/'+id,{method:'PATCH',data:{status}});await reload();
-    });
-  }
   if(!rows.length)return;
   const listEl=root.querySelector('#mod-list'),detailEl=root.querySelector('#mod-detail');
   function paint(){
@@ -382,6 +365,8 @@ async function moderation({root,user,reload}){
 
 // ---- Quản lý tài khoản (admin) ----
 const acct={q:'',role:'all',state:'all'};
+const registrationLabels={pending:['pending','Chờ xác minh'],needs_changes:['pending','Cần bổ sung'],rejected:['rejected','Hồ sơ bị từ chối']};
+const awaitingVerification=u=>!u.active&&Object.hasOwn(registrationLabels,u.registration_status);
 async function accounts({root,user,reload}){
   if(!user)return loginRequired(root);
   const [users,data]=await Promise.all([api('/auth/users'),api('/admin/overview')]);
@@ -407,11 +392,11 @@ async function accounts({root,user,reload}){
     const rowsShown=shown.slice(0,100);
     tableEl.innerHTML=shown.length?'<section class="panel"><table class="data-table"><thead><tr><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>'
       +rowsShown.map(u=>'<tr><td><div class="job-title">'+esc(u.email)+'</div></td><td data-label="Vai trò">'+esc(roleName[u.role]||u.role)+'</td>'
-        +'<td data-label="Trạng thái">'+(u.locked?stateChip('rejected','Bị khóa'):stateChip(u.active?'open':'pending',u.active?'Đang hoạt động':'Chưa kích hoạt'))+'</td>'
-        +'<td><div class="row-actions">'+(!u.active?'<button type="button" class="secondary" data-toggle="activate-panel-'+u.id+'">Kích hoạt</button>'
+        +'<td data-label="Trạng thái">'+(u.locked?stateChip('rejected','Bị khóa'):awaitingVerification(u)?stateChip(...registrationLabels[u.registration_status]):stateChip(u.active?'open':'pending',u.active?'Đang hoạt động':'Chưa kích hoạt'))+'</td>'
+        +'<td><div class="row-actions">'+(awaitingVerification(u)?'':!u.active?'<button type="button" class="secondary" data-toggle="activate-panel-'+u.id+'">Kích hoạt</button>'
           :u.locked?'<button type="button" class="secondary" data-action="unlock" data-value="'+u.id+'">Mở khóa</button>'
           :u.id!==user.id?'<button type="button" class="secondary danger" data-action="lock" data-value="'+u.id+'">Khóa</button>':'')+'</div></td></tr>'
-        +(u.active?'':'<tr class="act-row inline-form" id="activate-panel-'+u.id+'" hidden><td colspan="4">'
+        +(u.active||awaitingVerification(u)?'':'<tr class="act-row inline-form" id="activate-panel-'+u.id+'" hidden><td colspan="4">'
           +form('activate-'+u.id,field('password','Mật khẩu ban đầu','','password','required minlength="10"'),'Xác nhận kích hoạt')+'</td></tr>')).join('')
       +'</tbody></table>'+(shown.length>rowsShown.length?'<p class="job-sub">Hiển thị '+rowsShown.length+' / '+shown.length+' tài khoản. Hãy tìm hoặc lọc để thu hẹp.</p>':'')+'</section>'
       :empty('Không có tài khoản phù hợp.');

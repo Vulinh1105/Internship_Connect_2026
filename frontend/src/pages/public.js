@@ -259,13 +259,18 @@ async function company({root,args,user,signal}){
 }
 async function login({root,user}){
   if(user){root.innerHTML=heading('Bạn đã đăng nhập',user.email)+link('home','Trang chủ');return;}
-  root.innerHTML='<div class="auth">'+heading('Đăng nhập','Dùng tài khoản đã kích hoạt trong bộ dữ liệu hoặc đăng ký sinh viên.')
-    +box(form('login',field('email','Email','','email','required autocomplete="username"')+field('password','Mật khẩu','','password','required autocomplete="current-password"'),'Đăng nhập'))
+  root.innerHTML='<div class="auth">'+heading('Đăng nhập','Dùng tài khoản đã kích hoạt để đăng nhập.')
+    +box(form('login',field('email','Email','','email','required autocomplete="username"')+field('password','Mật khẩu','','password','required autocomplete="current-password"'),'Đăng nhập')+'<p class="alert" id="login-error" role="alert" hidden></p>')
     +box('<h2>Tài khoản mẫu</h2><p class="muted">Dùng mật khẩu demo đã đặt khi seed. Mặc định LocalDemo2026!</p><div class="row">'
     +[['usr-demo-s001','Sinh viên'],['usr-demo-c001','Doanh nghiệp'],['staff-demo','Kiểm duyệt'],['admin-demo','Admin']].map(([k,v])=>btn('demo',v,k+'@example.invalid')).join('')
-    +'</div>')+link('forgot','Quên mật khẩu?')+link('register','Đăng ký sinh viên')+'</div>';
+    +'</div>')+link('forgot','Quên mật khẩu?')+link('register','Đăng ký sinh viên')+link('register-company','Đăng ký doanh nghiệp')+'</div>';
   action(root,'demo',email=>{root.querySelector('#login [name=email]').value=email;root.querySelector('#login [name=password]').focus();});
-  bindForm(root,'login',async data=>{await api('/auth/login',{method:'POST',data});location.hash='home';});
+  const errorText=root.querySelector('#login-error');
+  bindForm(root,'login',async data=>{
+    errorText.hidden=true;
+    try{await api('/auth/login',{method:'POST',data});location.hash='home';}
+    catch(error){errorText.textContent=error.message;errorText.hidden=false;}
+  });
 }
 async function register({root}){
   root.innerHTML='<div class="auth">'+heading('Đăng ký sinh viên')+box(form('register',field('name','Họ tên','','text','required')+field('email','Email','','email','required')

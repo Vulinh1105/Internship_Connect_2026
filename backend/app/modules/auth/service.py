@@ -33,6 +33,15 @@ def login(db, email, password):
     if user.locked_at is not None:
         raise HTTPException(403, "Tài khoản đã bị khóa. Hãy liên hệ quản trị viên.")
     if not user.active:
+        if user.role == "company_member":
+            from app.modules.companies.models import CompanyRegistration
+            registration = db.get(CompanyRegistration, user.id)
+            if registration and registration.status == "pending":
+                raise HTTPException(403, "Hồ sơ doanh nghiệp đang chờ xác minh.")
+            if registration and registration.status in {"needs_changes", "rejected"}:
+                message = ("Hồ sơ cần bổ sung. Hãy gửi lại form đăng ký với cùng email và mật khẩu. "
+                           if registration.status == "needs_changes" else "Hồ sơ doanh nghiệp bị từ chối. ")
+                raise HTTPException(403, message + registration.reason)
         raise HTTPException(401, "Email hoặc mật khẩu không hợp lệ, hoặc tài khoản chưa kích hoạt")
     return active_user(db, user.id)
 
@@ -128,8 +137,12 @@ def register(db, data):
 def list_users(db, actor):
     if actor["role"] != "admin":
         raise HTTPException(403, "Chỉ admin được quản lý tài khoản")
-    return [{**record(u, "id", "email", "role", "active", "code"), "locked": u.locked_at is not None}
-            for u in db.scalars(repo.select(User).order_by(User.id))]
+    from app.modules.companies.models import CompanyRegistration
+
+    statement = (select(User, CompanyRegistration.status).outerjoin(CompanyRegistration)
+                 .order_by(User.id))
+    return [{**record(u, "id", "email", "role", "active", "code"), "locked": u.locked_at is not None,
+             "registration_status": status} for u, status in db.execute(statement)]
 
 def activate(db, actor, ident, password):
     if actor["role"] != "admin":
@@ -137,6 +150,11 @@ def activate(db, actor, ident, password):
     u = require(repo.get_user(db, ident))
     if u.active or u.locked_at is not None:
         raise HTTPException(409, "Tài khoản đã hoạt động")
+    if u.role == "company_member":
+        from app.modules.companies.models import CompanyRegistration
+        registration = db.get(CompanyRegistration, ident)
+        if registration and registration.status != "approved":
+            raise HTTPException(409, "Hãy xác minh hồ sơ trong mục Kiểm duyệt.")
     u.password = hash_password(password)
     u.active = True
     db.commit()

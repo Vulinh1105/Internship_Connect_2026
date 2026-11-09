@@ -1,11 +1,12 @@
 import {api} from './api/client.js';
 import {esc,heading,empty,toast,action,btn} from './components/ui.js';
 import {watchSelects} from './components/dropdown.js';
-import * as publicPages from './pages/public.js?v=company-logos-only-1';
+import * as publicPages from './pages/public.js?v=company-registration-1';
 import * as student from './pages/student.js?v=hybrid-match-1';
-import * as notices from './pages/notifications.js?v=notices-list-1';
-import * as workspace from './pages/workspace.js?v=admin-notices-1';
+import * as notices from './pages/notifications.js?v=company-registration-1';
+import * as workspace from './pages/workspace.js?v=company-registration-1';
 import * as account from './pages/account.js?v=password-reset-1';
+import * as registration from './pages/company-registration.js?v=company-registration-1';
 import * as recruitment from './pages/recruitment.js?v=members-no-invite-1';
 import * as ai from './pages/ai.js?v=chat-sidebar-1';
 
@@ -13,14 +14,14 @@ const root=document.querySelector('#page'), nav=document.querySelector('#nav');
 const tools=document.querySelector('#header-tools'), toggle=document.querySelector('#nav-toggle');
 const header=document.querySelector('.site-header'), launcher=document.querySelector('#chat-launcher');
 watchSelects(root);
-const routes={...publicPages.pages,...student.pages,...notices.pages,...workspace.pages,...ai.pages,...account.pages,...recruitment.pages};
+const routes={...publicPages.pages,...student.pages,...notices.pages,...workspace.pages,...ai.pages,...account.pages,...recruitment.pages,...registration.pages};
 let user=null, last=0, activePage;
 const common=[['jobs','Thực tập'],['companies','Doanh nghiệp']];
 const personal=[['applications','Đơn ứng tuyển'],['saved','Tin đã lưu'],['followed','Đang theo dõi']];
 const studentNav=[['matching','AI Matching'],['mock','Phỏng vấn ảo']];
 const adminNav={
   staff:[['moderation','Kiểm duyệt']],
-  admin:[['moderation','Kiểm duyệt'],['accounts','Tài khoản'],['knowledge','Tri thức']],
+  admin:[['company-verification','Kiểm duyệt'],['moderation','Duyệt tin tuyển dụng'],['accounts','Tài khoản'],['knowledge','Tri thức']],
 };
 const adminPages=new Set(adminNav.admin.map(([path])=>path));
 const companyPages=new Set(['workspace','edit','applicants','recruitment-stats','company-members','question-sets']);
@@ -95,7 +96,8 @@ function renderHeader(key){
       +'</summary><div class="header-menu">'
       +(role==='student'?routeLink('profile','Hồ sơ &amp; CV',current):'')
       +routeLink('account','Tài khoản &amp; cài đặt',current)+btn('logout','Thoát')+'</div></details>'
-    :routeLink('login','Đăng nhập',key,'header-auth login-link')+routeLink('register','Đăng ký',key,'header-auth register-link');
+    :routeLink('login','Đăng nhập',key,'header-auth login-link')+routeLink('register','Đăng ký',key,'header-auth register-link')
+      +routeLink('register-company','Đăng ký doanh nghiệp',key,'header-auth company-register-link');
   launcher.hidden=!user||key==='chat';
   setDrawer(false);
   paintBadges(tools);
