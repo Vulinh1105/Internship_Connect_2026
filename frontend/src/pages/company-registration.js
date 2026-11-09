@@ -1,46 +1,47 @@
 import {api} from '../api/client.js';
-import {area,bindForm,box,copy,empty,esc,field,form,heading,link,select,toast} from '../components/ui.js';
+import {area,bindForm,box,empty,esc,field,form,heading,link,select,toast} from '../components/ui.js';
 import {loginRequired} from './public.js';
 
 const endpoint='/company-registrations';
 const companyFields=[
   ['name','Tên doanh nghiệp',180],['tax_code','Mã số thuế',14],['registration_number','Số giấy chứng nhận đăng ký doanh nghiệp',80],
   ['industry','Lĩnh vực hoạt động',100],['company_size','Quy mô nhân sự',40],['address','Địa chỉ trụ sở',350],
-  ['city','Tỉnh/thành phố',100],['website','Website công ty',250,'url',false],
-  ['company_email','Email doanh nghiệp',255,'email'],['company_phone','Số điện thoại công ty',25,'tel'],
+  ['city','Tỉnh/thành phố',100],['website','Website công ty',250,'text',false],
+  ['company_email','Email doanh nghiệp',255],['company_phone','Số điện thoại công ty',25,'tel'],
 ];
 const contactFields=[
   ['contact_name','Họ và tên',150],['position','Chức vụ',120],
   ['email','Email đăng nhập',255,'email'],['phone','Số điện thoại người đăng ký',25,'tel'],
 ];
 const fields=rows=>rows.map(([name,label,max,type='text',required=true])=>
-  field(name,label,'',type,(required?'required ':'')+'maxlength="'+max+'"')).join('');
+  field(name,label+(required?' *':''),'',type,(required?'required ':'')+'maxlength="'+max+'"')).join('');
 const documents={
   certificate:'Giấy chứng nhận đăng ký doanh nghiệp',
   authorization:'Giấy ủy quyền',
   identity:'CCCD người đại diện pháp luật',
   logo:'Logo công ty',
 };
-const file=(name,accept,required=false)=>'<label class="field">'+documents[name]
+const file=(name,accept,required=false)=>'<label class="field">'+documents[name]+(required?' *':'')
   +'<input type="file" name="'+name+'" accept="'+accept+'" '+(required?'required':'')+'></label>';
 const proofTypes='.pdf,.png,.jpg,.jpeg,.webp';
 
 async function registerCompany({root}){
   root.innerHTML='<div class="company-registration">'+heading('Đăng ký doanh nghiệp',
-    'Hồ sơ sẽ được admin xác minh trước khi bạn có thể đăng nhập và đăng tin tuyển dụng.')
+    'Các mục có dấu * là bắt buộc. Có thể dùng thông tin doanh nghiệp mẫu để gửi hồ sơ kiểm thử.')
     +box(form('register-company','<fieldset class="stack"><legend>Thông tin doanh nghiệp</legend><div class="registration-fields">'
       +fields(companyFields)+file('logo','.png,.jpg,.jpeg,.webp')+'</div></fieldset>'
       +'<fieldset class="stack"><legend>Thông tin người đăng ký</legend><div class="registration-fields">'
-      +fields(contactFields)+field('password','Mật khẩu','','password','required minlength="10" maxlength="128" autocomplete="new-password"')
-      +select('representative','Bạn là người đại diện theo pháp luật?',[['','Chọn câu trả lời'],['yes','Có'],['no','Không']])
-      +'</div><label class="check" data-authorization hidden><input type="checkbox" name="authorized"> Tôi có quyền tuyển dụng thay mặt doanh nghiệp.</label></fieldset>'
+      +fields(contactFields)+field('password','Mật khẩu (tối thiểu 10 ký tự) *','','password','required minlength="10" maxlength="128" autocomplete="new-password"')
+      +select('representative','Bạn là người đại diện theo pháp luật? *',[['','Chọn câu trả lời'],['yes','Có'],['no','Không']])
+      +'</div><label class="check" data-authorization hidden><input type="checkbox" name="authorized"> Tôi có quyền tuyển dụng thay mặt doanh nghiệp. *</label></fieldset>'
       +'<fieldset class="stack"><legend>Giấy tờ xác minh</legend>'+file('certificate',proofTypes,true)
-      +'<div data-authorization hidden>'+file('authorization',proofTypes)+'</div>'+file('identity',proofTypes)
+      +'<div data-authorization hidden>'+file('authorization',proofTypes,true)+'</div>'+file('identity',proofTypes)
       +'<p class="muted">Mỗi giấy tờ tối đa 5 MB. Logo tối đa 2 MB. CCCD chỉ cần khi admin yêu cầu bổ sung.</p></fieldset>',
     'Gửi hồ sơ đăng ký'))+'</div>';
   const registration=root.querySelector('#register-company');
   const representative=registration.elements.namedItem('representative');
   representative.required=true;
+  registration.elements.namedItem('authorization').required=false;
   representative.addEventListener('change',()=>{
     const required=representative.value==='no';
     for(const el of registration.querySelectorAll('[data-authorization]'))el.hidden=!required;

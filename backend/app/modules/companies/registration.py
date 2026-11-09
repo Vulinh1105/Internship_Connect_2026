@@ -1,8 +1,9 @@
+import re
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, ConfigDict, Field, HttpUrl, StringConstraints, TypeAdapter, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, ValidationError
 from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
 
@@ -19,7 +20,6 @@ from .service import LOGO_MAX, LOGO_TYPES, discard, logo_kind
 router = APIRouter(prefix="/api/company-registrations", tags=["company registrations"])
 DOC_MAX = 5 * 1024 * 1024
 EMAIL = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
-PHONE = r"^\+?[0-9][0-9 .()\-]{6,23}$"
 DOCUMENTS = {"certificate": "Giấy chứng nhận", "authorization": "Giấy ủy quyền",
              "identity": "Giấy tờ đại diện", "logo": "Logo"}
 
@@ -27,20 +27,20 @@ DOCUMENTS = {"certificate": "Giấy chứng nhận", "authorization": "Giấy �
 class RegistrationInput(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
 
-    name: str = Field(min_length=2, max_length=180)
-    tax_code: str = Field(pattern=r"^\d{10}(?:-?\d{3})?$")
+    name: str = Field(min_length=1, max_length=180)
+    tax_code: str = Field(min_length=1, max_length=14)
     registration_number: str = Field(min_length=1, max_length=80)
     industry: str = Field(min_length=1, max_length=100)
     company_size: str = Field(min_length=1, max_length=40)
     address: str = Field(min_length=1, max_length=350)
     city: str = Field(min_length=1, max_length=100)
     website: str = Field(default="", max_length=250)
-    company_email: str = Field(max_length=255, pattern=EMAIL)
-    company_phone: str = Field(pattern=PHONE)
-    contact_name: str = Field(min_length=2, max_length=150)
+    company_email: str = Field(min_length=1, max_length=255)
+    company_phone: str = Field(min_length=1, max_length=25)
+    contact_name: str = Field(min_length=1, max_length=150)
     position: str = Field(min_length=1, max_length=120)
     email: str = Field(max_length=255, pattern=EMAIL)
-    phone: str = Field(pattern=PHONE)
+    phone: str = Field(min_length=1, max_length=25)
     password: Annotated[str, StringConstraints(min_length=10, max_length=128, strip_whitespace=False)]
     representative: bool
     authorized: bool
@@ -75,15 +75,16 @@ def submit(db: DB, request: Request, payload: Annotated[str, Form()],
         raise HTTPException(422, "Thông tin đăng ký vượt giới hạn độ dài.")
     try:
         data = RegistrationInput.model_validate_json(payload)
-        website = str(TypeAdapter(HttpUrl).validate_python(data.website)) if data.website else ""
     except ValidationError:
-        raise HTTPException(422, "Kiểm tra thông tin bắt buộc, mã số thuế, email, số điện thoại, mật khẩu và website.")
+        raise HTTPException(422, "Hồ sơ chưa được gửi. Hãy điền các mục có dấu * và kiểm tra thông tin đăng nhập.")
     if not data.representative and not data.authorized:
         raise HTTPException(422, "Hãy xác nhận bạn có quyền tuyển dụng thay mặt doanh nghiệp.")
     if not data.representative and authorization is None:
         raise HTTPException(422, "Hãy tải giấy ủy quyền của doanh nghiệp.")
     email = data.email.lower()
-    tax_code = data.tax_code.replace("-", "")
+    tax_code = re.sub(r"^([0-9]{10})-([0-9]{3})$", r"\1\2", data.tax_code)
+    if len(tax_code) > 13:
+        raise HTTPException(422, "Hồ sơ chưa được gửi. Vui lòng kiểm tra độ dài thông tin.")
     user = first(db, User, email=email)
     old = db.get(CompanyRegistration, user.id) if user else None
     if user and (not old or old.status != "needs_changes" or not verify_password(data.password, user.password)):
@@ -93,7 +94,6 @@ def submit(db: DB, request: Request, payload: Annotated[str, Form()],
         raise HTTPException(409, "Mã số thuế đã có hồ sơ trong hệ thống.")
 
     info = data.model_dump(exclude={"password", "email", "tax_code"})
-    info["website"] = website
     files = {}
     previous_files = dict(old.files) if old else {}
     try:
