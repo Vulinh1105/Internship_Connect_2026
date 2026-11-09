@@ -72,9 +72,11 @@ def change_password(data: ChangePassword, db: DB, actor: Actor, response: Respon
 
 @router.post("/forgot-password")
 def forgot_password(data: ForgotPassword, db: DB, request: Request, tasks: BackgroundTasks):
+    if not mailer.configured():
+        raise HTTPException(503, "Máy chủ chưa cấu hình gửi email đặt lại mật khẩu.")
     enforce(("forgot", client_key(request)), 6, 600)
     enforce(("forgot-email", data.email.strip().lower()), 3, 600)
-    found = service.start_reset(db, data.email) if mailer.configured() else None
+    found = service.start_reset(db, data.email)
     if found:
         tasks.add_task(service.send_reset_mail, *found)
     # Luôn trả về cùng một kết quả để không lộ email nào đã đăng ký.

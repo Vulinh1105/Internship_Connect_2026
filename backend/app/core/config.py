@@ -26,7 +26,8 @@ SMTP_SECURITY = os.getenv("SMTP_SECURITY", "starttls")
 if SMTP_SECURITY not in {"starttls", "ssl", "none"}:
     raise ValueError("SMTP_SECURITY must be starttls, ssl or none")
 MAIL_FROM = os.getenv("MAIL_FROM", "") or SMTP_USER
-APP_URL = os.getenv("APP_URL", "http://127.0.0.1:8000/app/")
+APP_LOCAL_PORT = os.getenv("APP_LOCAL_PORT", "8000")
+APP_URL = os.getenv("APP_URL") or f"http://127.0.0.1:{APP_LOCAL_PORT}/app/"
 try:
     LOCAL_TZ = ZoneInfo("Asia/Bangkok")
 except ZoneInfoNotFoundError:

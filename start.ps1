@@ -28,6 +28,7 @@ try {
   Invoke-Checked $python @('backend/scripts/seed_db.py')
   & $python backend/scripts/sync_vectors.py
   if ($LASTEXITCODE -ne 0) { Write-Warning 'Vector sync incomplete. The backend worker will retry.' }
+  $env:APP_LOCAL_PORT = [string]$Port
   Write-Host "Internship Connect: http://127.0.0.1:$Port/app/"
   Invoke-Checked $python @('-m','uvicorn','app.main:app','--host','127.0.0.1','--port',"$Port")
 } finally { Pop-Location }

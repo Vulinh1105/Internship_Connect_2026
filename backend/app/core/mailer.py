@@ -5,7 +5,7 @@ from email.utils import formatdate, make_msgid
 from app.core import config
 
 def configured():
-    return bool(config.SMTP_HOST and config.MAIL_FROM)
+    return bool(config.SMTP_HOST and config.MAIL_FROM) and bool(config.SMTP_USER) == bool(config.SMTP_PASSWORD)
 
 def deliverable(email):
     # Tài khoản mẫu (@example.invalid) không có hộp thư thật.

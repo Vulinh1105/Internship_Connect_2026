@@ -274,12 +274,21 @@ async function register({root}){
     +field('password','Mật khẩu','','password','required minlength="8" autocomplete="new-password"'),'Tạo tài khoản'))+'</div>';
   bindForm(root,'register',async data=>{await api('/auth/register',{method:'POST',data});location.hash='profile';});
 }
-async function forgot({root}){
-  root.innerHTML='<div class="auth">'+heading('Quên mật khẩu','Nhập email tài khoản. Nếu email đã đăng ký, bạn sẽ nhận được liên kết đặt lại mật khẩu.')
-    +box(form('forgot',field('email','Email','','email','required autocomplete="username"'),'Gửi liên kết'))+link('login','Quay lại đăng nhập')+'</div>';
+async function forgot({root,user}){
+  root.innerHTML='<div class="auth">'+heading('Quên mật khẩu','Nhập email đăng ký trên Internship Connect để yêu cầu liên kết đặt lại mật khẩu.')
+    +box(form('forgot',field('email','Email',user?.email,'email','required maxlength="255" autocomplete="username"')
+      +'<p role="status" id="forgot-status" hidden></p>','Gửi liên kết'))
+    +(user?link('account','Quay lại cài đặt'):link('login','Quay lại đăng nhập'))+'</div>';
   bindForm(root,'forgot',async data=>{
-    await api('/auth/forgot-password',{method:'POST',data});
-    root.querySelector('#forgot').closest('.panel').innerHTML='<p>Nếu email này có tài khoản, một liên kết đặt lại mật khẩu đã được gửi. Liên kết có hiệu lực trong 1 giờ và chỉ dùng được một lần. Hãy kiểm tra cả thư mục thư rác.</p>';
+    const status=root.querySelector('#forgot-status');
+    status.hidden=true;
+    try{
+      await api('/auth/forgot-password',{method:'POST',data});
+      root.querySelector('#forgot').closest('.panel').innerHTML='<p>Đã tiếp nhận yêu cầu. Nếu email thuộc tài khoản đủ điều kiện, hãy kiểm tra hộp thư đến và thư rác. Liên kết có hiệu lực trong 1 giờ và dùng được một lần.</p>';
+    }catch(error){
+      status.textContent=error.message;
+      status.hidden=false;
+    }
   });
 }
 async function reset({root,args}){

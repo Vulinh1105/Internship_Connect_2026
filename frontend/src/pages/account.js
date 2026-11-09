@@ -1,5 +1,5 @@
 import {api} from '../api/client.js';
-import {action, bindForm, box, btn, copy, empty, esc, field, form, heading, select, toast} from '../components/ui.js';
+import {action, bindForm, box, btn, copy, empty, esc, field, form, heading, link, select, toast} from '../components/ui.js';
 import {loginRequired} from './public.js';
 
 const noticeOptions=[['applications','Đơn ứng tuyển'],['interviews','Lịch phỏng vấn'],['jobs','Tin tuyển dụng'],['system','Hệ thống']];
@@ -27,7 +27,8 @@ async function account({root,user,reload}){
         :copy('Đổi email qua liên kết xác minh khả dụng khi hệ thống cấu hình gửi email.')))
     +box('<h2>Đổi mật khẩu</h2>'+form('password',password('current_password','Mật khẩu hiện tại')
       +field('new_password','Mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"')
-      +field('confirm','Nhập lại mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"'),'Đổi mật khẩu'))
+      +field('confirm','Nhập lại mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"'),'Đổi mật khẩu')
+      +'<div class="row">'+link('forgot','Quên mật khẩu?')+'</div>')
     +box('<h2>Phiên đăng nhập</h2>'+(sessions.length?sessions.map(s=>'<div class="row">'+esc(s.device||'Thiết bị chưa xác định')+' · '+esc(s.created_at.replace('T',' '))
       +(s.current?' · Phiên hiện tại ':' ')+btn('revoke',s.current?'Đăng xuất':'Thu hồi',s.id)+'</div>').join(''):empty('Chưa có phiên được ghi nhận.'))
       +btn('logout-others','Đăng xuất các thiết bị khác'))
