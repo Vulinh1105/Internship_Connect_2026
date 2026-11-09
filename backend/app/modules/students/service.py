@@ -32,6 +32,11 @@ def public_name(db,ident):
     s=require(repo.get_student(db,ident))
     return s.name
 
+def applicant_view(db,student_id,cv_id=None):
+    # Phần hồ sơ sinh viên mà doanh nghiệp được xem trên đơn ứng tuyển: chỉ ngành học và kỹ năng.
+    info=match_input(db,student_id,cv_id)
+    return {"major":info["major"],"skills":info["skills"]}
+
 def user_id_for(db,ident):
     return require(repo.get_student(db,ident)).user_id
 

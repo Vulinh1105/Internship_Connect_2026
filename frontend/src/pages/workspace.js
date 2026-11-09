@@ -1,6 +1,6 @@
 import {api} from '../api/client.js';
-import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,modes,list,status,toast,bindForm,action} from '../components/ui.js';
-import {jobCard,loginRequired} from './public.js';
+import {esc,tags,box,copy,empty,heading,field,area,select,btn,form,modes,list,money,status,toast,bindForm,action} from '../components/ui.js';
+import {loginRequired} from './public.js';
 import {logoTile} from '../components/media.js';
 
 const educations=[['','Chưa nêu'],'Không yêu cầu','Sinh viên đại học/cao đẳng','Sinh viên năm cuối','Mới tốt nghiệp','Trung cấp trở lên','Cao đẳng trở lên','Đại học trở lên','Thạc sĩ trở lên'];
@@ -71,7 +71,7 @@ function jobRow(j){
     +'<td><div class="row-actions">'+(rejected?'<a class="button" href="#edit/'+j.id+'">Sửa và gửi lại</a>':'<a class="button" href="#applicants/'+j.id+'">Hồ sơ ứng tuyển</a>')
     +'<details class="row-menu"><summary class="menu-btn" aria-label="Thao tác khác">…</summary><div class="menu-list">'+items.join('')+'</div></details></div></td></tr>';
 }
-const jobsPanel=jobs=>jobs.length?box('<table class="job-table"><thead><tr><th>Tin tuyển dụng</th><th>Trạng thái</th><th>Hạn nộp</th><th>Đơn</th><th>Thao tác</th></tr></thead><tbody>'
+const jobsPanel=jobs=>jobs.length?box('<table class="data-table"><thead><tr><th>Tin tuyển dụng</th><th>Trạng thái</th><th>Hạn nộp</th><th>Đơn</th><th>Thao tác</th></tr></thead><tbody>'
   +jobs.map(jobRow).join('')+'</tbody></table>'):empty('Chưa có tin tuyển dụng.');
 
 function interviewCard(i,highlight){
@@ -163,52 +163,245 @@ async function edit({root,user,args}){
   root.innerHTML=heading('Chỉnh sửa tin',j.title)+box(form('edit',jobFields(c.filter(x=>x.id===j.company_id),j),'Lưu và gửi duyệt lại'));
   bindForm(root,'edit',async data=>{await api('/jobs/'+id,{method:'PUT',data:jobPayload(data)});location.hash='workspace';});
 }
+// ---- Dùng chung cho các trang đơn ứng tuyển, kiểm duyệt và quản trị ----
+const statTile=([label,n])=>'<div class="stat"><strong>'+n+'</strong><span>'+esc(label)+'</span></div>';
+const stateChip=(kind,text)=>'<span class="state state-'+kind+'">'+esc(text)+'</span>';
+const chipRow=(label,items,kind='')=>items?.length?'<div class="chip-row"><span class="job-sub">'+esc(label)+'</span>'
+  +items.map(s=>'<span class="tag'+(kind?' '+kind:'')+'">'+esc(s)+'</span>').join('')+'</div>':'';
+const dateTime=iso=>{const s=String(iso);return dateText(s.slice(0,10))+' '+s.slice(11,16);};
+const ago=iso=>{const days=Math.round((startOfDay(new Date())-startOfDay(new Date(iso)))/864e5);return days<=0?'hôm nay':days+' ngày trước';};
+const levelName={intern:'Thực tập',fresher:'Fresher',junior:'Junior',senior:'Senior'};
+const scheduleName={part_time:'Bán thời gian',full_time:'Toàn thời gian'};
+const roleName={student:'Sinh viên',company_member:'Doanh nghiệp',staff:'Kiểm duyệt',admin:'Quản trị'};
+const fileName=source=>String(source).replaceAll('\\','/').split('/').pop();
+// Nút có data-toggle="<id>" mở/đóng khối có id đó; mở khối này thì đóng các khối .inline-form khác cùng thẻ.
+function bindToggles(container){
+  container.addEventListener('click',e=>{
+    const button=e.target.closest('[data-toggle]');
+    const panel=button&&container.querySelector('#'+button.dataset.toggle);
+    if(!panel)return;
+    for(const other of (button.closest('.panel')||container).querySelectorAll('.inline-form'))if(other!==panel)other.hidden=true;
+    panel.hidden=!panel.hidden;
+    if(!panel.hidden)panel.querySelector('textarea,input')?.focus();
+  });
+}
+
+// ---- Hồ sơ ứng tuyển (doanh nghiệp) ----
+const appView={job:null,filter:'all',sort:'match'};
+const appKind={pending:'pending',reviewing:'info',accepted:'open',rejected:'rejected',withdrawn:'closed'};
+const appFilters=[
+  ['all','Tất cả',()=>true],
+  ['pending','Chờ xử lý',a=>a.status==='pending'],
+  ['reviewing','Đang xét',a=>a.status==='reviewing'],
+  ['accepted','Đã nhận',a=>a.status==='accepted'],
+  ['closed','Từ chối / Đã rút',a=>['rejected','withdrawn'].includes(a.status)]];
+const appSorts={
+  match:(a,b)=>(b.match_score??-1)-(a.match_score??-1)||a.id-b.id,
+  new:(a,b)=>String(b.submitted_at).localeCompare(String(a.submitted_at))||b.id-a.id};
+// Mỗi đơn lấy một lịch phỏng vấn: ưu tiên lịch còn hiệu lực, nếu không thì lịch gần nhất.
+function latestInterviews(interviews){
+  const map=new Map();
+  for(const i of interviews){
+    const old=map.get(i.application_id);
+    if(!old||OPEN_INTERVIEW.includes(i.status)||!OPEN_INTERVIEW.includes(old.status))map.set(i.application_id,i);
+  }
+  return map;
+}
+function interviewLine(i){
+  if(!i)return '';
+  return '<div class="interview-line'+(i.status==='reschedule_requested'?' interview-alert':'')+'"><strong>Phỏng vấn:</strong> '+esc(dateTime(i.scheduled_at))
+    +' · '+esc(i.location)+' · '+esc(status(i.status))+(i.response?'<div class="job-sub">'+esc(i.response)+'</div>':'')+'</div>';
+}
+function applicantCard(a,iv){
+  const open=['pending','reviewing'].includes(a.status);
+  const canInvite=!['rejected','withdrawn'].includes(a.status)&&!(iv&&['invited','confirmed'].includes(iv.status));
+  const match=a.match_reason||{};
+  const skills=a.skills||[];
+  return '<article class="panel applicant"><div class="applicant-head"><span class="avatar" aria-hidden="true">'+esc(String(a.student_name||'?').trim().charAt(0).toUpperCase())+'</span>'
+    +'<div class="applicant-name"><h3>'+esc(a.student_name)+'</h3><p class="job-sub">'
+    +esc([a.major,'Nộp '+dateText(String(a.submitted_at).slice(0,10))+' ('+ago(a.submitted_at)+')'].filter(Boolean).join(' · '))+'</p></div>'
+    +'<div class="applicant-side">'+stateChip(appKind[a.status]||'closed',status(a.status))+(a.match_score!=null?'<span class="score">Phù hợp '+esc(a.match_score)+'%</span>':'')+'</div></div>'
+    +chipRow('Kỹ năng',skills.slice(0,10).concat(skills.length>10?['+'+(skills.length-10)]:[]))
+    +chipRow('Khớp yêu cầu',match.matched_skills,'chip-ok')+chipRow('Còn thiếu',match.missing_skills,'chip-miss')
+    +(a.status==='rejected'&&a.decision_reason?'<p class="job-reason">Lý do từ chối: '+esc(a.decision_reason)+'</p>':'')
+    +(String(a.cover_letter||'').trim()?'<details class="letter"><summary>Thư xin việc</summary>'+copy(a.cover_letter)+'</details>':'')
+    +interviewLine(iv)
+    +'<div class="row applicant-actions">'+(a.cv_id?'<a class="button secondary" href="/api/applications/'+a.id+'/cv">Tải CV</a>':'')
+    +(canInvite?'<button type="button" class="secondary" data-toggle="invite-panel-'+a.id+'">Mời phỏng vấn</button>':'')
+    +(open?'<button type="button" data-action="accept" data-value="'+a.id+'">Nhận</button><button type="button" class="secondary danger" data-toggle="reject-panel-'+a.id+'">Từ chối</button>':'')+'</div>'
+    +(canInvite?'<div class="inline-form" id="invite-panel-'+a.id+'" hidden>'+form('invite-'+a.id,field('scheduled_at','Giờ Việt Nam','','datetime-local','required')
+      +field('location','Địa điểm / liên kết','','text','required')+area('note','Ghi chú'),'Gửi lời mời')+'</div>':'')
+    +(open?'<div class="inline-form" id="reject-panel-'+a.id+'" hidden>'+form('reject-'+a.id,area('reason','Lý do từ chối (sinh viên sẽ nhận được lý do này)','','required maxlength="2000"'),'Xác nhận từ chối')+'</div>':'')
+    +'</article>';
+}
 async function applicants({root,user,args,reload}){
   if(!user)return loginRequired(root);
   const id=Number(args[0]);
-  const [rows,j]=await Promise.all([api('/applications/job/'+id),api('/jobs/'+id)]);
-  root.innerHTML=heading('Hồ sơ ứng tuyển',j.title)+link('workspace','Về quản lý')
-    +(rows.length?rows.map(a=>box('<h3>'+esc(a.student_name)+'</h3>'+tags('#'+a.id,status(a.status),a.match_score!=null?'Phù hợp '+a.match_score+'%':'')
-      +(a.match_reason?.reason?copy(a.match_reason.reason):'')+copy(a.cover_letter)+(a.cv_id?'<a href="/api/applications/'+a.id+'/cv">Tải CV đã nộp</a>':'')
-      +(['pending','reviewing'].includes(a.status)?form('decision-'+a.id,select('status','Trạng thái',[['reviewing','Đang xét'],['accepted','Nhận'],['rejected','Từ chối']]),'Cập nhật'):'')
-      +(!['rejected','withdrawn'].includes(a.status)?'<details><summary>Mời phỏng vấn</summary>'+form('invite-'+a.id,
-        field('scheduled_at','Giờ Việt Nam','','datetime-local','required')+field('location','Địa điểm / liên kết','','text','required')
-        +area('note','Ghi chú'),'Gửi lời mời')+'</details>':''))).join(''):empty());
-  for(const a of rows){
-    bindForm(root,'decision-'+a.id,async data=>{await api('/applications/'+a.id+'/status',{method:'PATCH',data});await reload();});
-    bindForm(root,'invite-'+a.id,async data=>{await api('/interviews',{method:'POST',data:{...data,application_id:a.id}});toast('Đã gửi lời mời');await reload();});
+  const [rows,j,interviews]=await Promise.all([api('/applications/job/'+id),api('/jobs/'+id),api('/interviews')]);
+  if(appView.job!==id)Object.assign(appView,{job:id,filter:'all',sort:'match'});
+  const count=fn=>rows.filter(fn).length;
+  const head='<div class="ws-head"><div><h1>Hồ sơ ứng tuyển</h1><p class="muted">'+esc(j.title)+' · '+esc(jobState(j)[1])+' · Hạn '
+    +esc(j.deadline?dateText(j.deadline):'linh hoạt')+'</p></div><a class="button secondary" href="#workspace">Về quản lý</a></div>';
+  if(!rows.length){root.innerHTML=head+empty('Chưa có đơn ứng tuyển.');return;}
+  const ivs=latestInterviews(interviews);
+  root.innerHTML=head
+    +'<div class="stat-grid">'+[['Tổng số đơn',rows.length],['Chờ xử lý',count(a=>a.status==='pending')],['Đang xét',count(a=>a.status==='reviewing')],['Đã nhận',count(a=>a.status==='accepted')]].map(statTile).join('')+'</div>'
+    +'<div class="co-tabs ws-tabs" role="group" aria-label="Lọc đơn theo trạng thái">'+appFilters.map(([key,text,fn])=>'<button type="button" class="co-tab" data-filter="'+key+'" aria-current="'
+      +(key===appView.filter)+'">'+esc(text)+' ('+count(fn)+')</button>').join('')+'</div>'
+    +'<div class="toolbar">'+select('sort','Sắp xếp',[['match','Phù hợp nhất'],['new','Mới nhất']],appView.sort)+'</div><div id="applicant-list"></div>';
+  const listEl=root.querySelector('#applicant-list');
+  function paint(){
+    const fn=appFilters.find(f=>f[0]===appView.filter)[2];
+    const shown=rows.filter(fn).sort(appSorts[appView.sort]);
+    listEl.innerHTML=shown.length?shown.map(a=>applicantCard(a,ivs.get(a.id))).join(''):empty('Không có đơn nào trong mục này.');
+    for(const a of shown){
+      bindForm(listEl,'invite-'+a.id,async data=>{await api('/interviews',{method:'POST',data:{...data,application_id:a.id}});toast('Đã gửi lời mời');await reload();});
+      bindForm(listEl,'reject-'+a.id,async data=>{
+        if(!data.reason.trim())throw new Error('Nhập lý do từ chối.');
+        await api('/applications/'+a.id+'/status',{method:'PATCH',data:{status:'rejected',reason:data.reason}});toast('Đã từ chối đơn');await reload();
+      });
+    }
+    action(listEl,'accept',async value=>{
+      if(confirm('Nhận đơn ứng tuyển này?')){await api('/applications/'+value+'/status',{method:'PATCH',data:{status:'accepted'}});toast('Đã nhận đơn');await reload();}
+    });
   }
+  bindToggles(listEl);
+  for(const tab of root.querySelectorAll('[data-filter]'))tab.addEventListener('click',()=>{
+    appView.filter=tab.dataset.filter;
+    for(const t of root.querySelectorAll('[data-filter]'))t.setAttribute('aria-current',String(t.dataset.filter===appView.filter));
+    paint();
+  });
+  root.querySelector('[name="sort"]').addEventListener('change',e=>{appView.sort=e.target.value;paint();});
+  paint();
+}
+
+// ---- Kiểm duyệt tin (staff, admin) ----
+const mod={sel:null,flagsOnly:false};
+function modDetail(j){
+  const d=j.details||{};
+  const facts=[['Địa điểm',j.location],['Hình thức',modeName[j.work_mode]||j.work_mode],['Cấp độ',levelName[j.level]||j.level],['Ngành',j.category],
+    ['Lương',money(j.salary_min,j.salary_max)],['Hạn nộp',j.deadline?dateText(j.deadline):'Linh hoạt'],['Lịch làm việc',scheduleName[d.employment_schedule]],
+    ['Thời gian làm việc',d.working_hours],['Địa chỉ',d.address],['Kinh nghiệm',d.experience],['Học vấn',d.education],['Số lượng tuyển',d.quantity]].filter(([,v])=>v);
+  const last=j.last_review;
+  return '<section class="panel mod-detail"><p class="job-sub">'+esc(j.company_name)+'</p><h2 class="mod-title">'+esc(j.title)+'</h2>'
+    +(j.flags?.length?'<div class="alert"><strong>Cảnh báo hệ thống</strong><ul class="bullets">'+j.flags.map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul></div>':'')
+    +(last?'<p class="'+(last.decision==='rejected'?'job-reason':'job-sub')+'">Lần duyệt trước: '
+      +(last.decision==='rejected'?'Từ chối'+(last.reason?' — '+esc(last.reason):''):'Đã duyệt')+'</p>':'')
+    +'<dl class="facts fact-grid">'+facts.map(([k,v])=>'<div><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl>'
+    +'<h3 class="co-sub">Mô tả</h3>'+copy(j.description)+'<h3 class="co-sub">Yêu cầu</h3>'+copy(j.requirements)
+    +(d.benefits?'<h3 class="co-sub">Quyền lợi</h3>'+copy(d.benefits):'')
+    +(j.skills?.length?'<h3 class="co-sub">Kỹ năng</h3>'+tags(...j.skills):'')
+    +'<div class="row mod-actions"><button type="button" data-action="approve" data-value="'+j.id+'">Duyệt</button>'
+    +'<button type="button" class="secondary danger" data-toggle="mod-reject">Từ chối</button></div>'
+    +'<div class="inline-form" id="mod-reject" hidden>'+form('review-'+j.id,area('reason','Lý do từ chối (doanh nghiệp sẽ nhận được lý do này)','','required maxlength="2000"'),'Xác nhận từ chối')+'</div></section>';
 }
 async function moderation({root,user,reload}){
   if(!user)return loginRequired(root);
   const rows=await api('/jobs/moderation');
-  root.innerHTML=heading('Hàng chờ kiểm duyệt')+(rows.length?rows.map(j=>box('<div class="review-item"><div>'+jobCard(j)
-    +(j.flags?.length?'<p class="alert">'+esc(j.flags.join(' · '))+'</p>':'')+'</div>'
-    +form('review-'+j.id,select('decision','Quyết định',[['approved','Duyệt'],['rejected','Từ chối']])+area('reason','Lý do'),'Lưu quyết định')+'</div>')).join(''):empty('Hàng chờ đã trống.'));
-  for(const j of rows)bindForm(root,'review-'+j.id,async data=>{
-    if(data.decision==='rejected'&&!data.reason.trim())throw new Error('Nhập lý do từ chối để doanh nghiệp biết cần sửa gì.');
-    await api('/jobs/'+j.id+'/review',{method:'POST',data});await reload();
+  root.innerHTML=heading('Hàng chờ kiểm duyệt')
+    +'<div class="stat-grid stat-grid-3">'+[['Chờ duyệt',rows.length],['Có cảnh báo',rows.filter(j=>j.flags?.length).length],['Gửi lại',rows.filter(j=>j.last_review).length]].map(statTile).join('')+'</div>'
+    +(rows.length?'<div class="toolbar"><label class="check"><input type="checkbox" id="only-flags"'+(mod.flagsOnly?' checked':'')+'> Chỉ tin có cảnh báo</label></div>'
+      +'<div class="mod-layout"><div class="mod-list" id="mod-list"></div><div id="mod-detail"></div></div>':empty('Hàng chờ đã trống.'));
+  if(!rows.length)return;
+  const listEl=root.querySelector('#mod-list'),detailEl=root.querySelector('#mod-detail');
+  function paint(){
+    const shown=rows.filter(j=>!mod.flagsOnly||j.flags?.length);
+    if(!shown.some(j=>j.id===mod.sel))mod.sel=shown[0]?.id??null;
+    listEl.innerHTML=shown.length?shown.map(j=>'<button type="button" class="mod-item" data-job="'+j.id+'" aria-current="'+(j.id===mod.sel)+'"><strong>'+esc(j.title)+'</strong>'
+      +'<span class="job-sub">'+esc(j.company_name)+'</span><span class="mod-tags">'+(j.flags?.length?stateChip('pending',j.flags.length+' cảnh báo'):'')
+      +(j.last_review?stateChip('info','Gửi lại'):'')+'</span></button>').join(''):empty('Không có tin nào có cảnh báo.');
+    const job=shown.find(j=>j.id===mod.sel);
+    detailEl.innerHTML=job?modDetail(job):'';
+    if(!job)return;
+    bindForm(detailEl,'review-'+job.id,async data=>{
+      if(!data.reason.trim())throw new Error('Nhập lý do từ chối để doanh nghiệp biết cần sửa gì.');
+      await api('/jobs/'+job.id+'/review',{method:'POST',data:{decision:'rejected',reason:data.reason}});toast('Đã từ chối tin');await reload();
+    });
+    action(detailEl,'approve',async value=>{await api('/jobs/'+value+'/review',{method:'POST',data:{decision:'approved',reason:''}});toast('Đã duyệt tin');await reload();});
+  }
+  listEl.addEventListener('click',e=>{
+    const item=e.target.closest('[data-job]');
+    if(item){mod.sel=Number(item.dataset.job);paint();}
   });
+  bindToggles(detailEl);
+  root.querySelector('#only-flags').addEventListener('change',e=>{mod.flagsOnly=e.target.checked;paint();});
+  paint();
 }
+
+// ---- Quản lý tài khoản (admin) ----
+const acct={q:'',role:'all',state:'all'};
 async function accounts({root,user,reload}){
   if(!user)return loginRequired(root);
   const users=await api('/auth/users');
-  root.innerHTML=heading('Quản lý tài khoản')+grid(users.map(u=>'<article class="card"><h3>'+esc(u.email)+'</h3>'+tags(u.role,u.active?'Đang hoạt động':'Chưa kích hoạt')
-    +(u.active?'':form('activate-'+u.id,field('password','Mật khẩu ban đầu','','password','required minlength="10"'),'Kích hoạt'))+'</article>'));
-  for(const u of users)bindForm(root,'activate-'+u.id,async data=>{await api('/auth/users/'+u.id+'/activate',{method:'POST',data});await reload();});
+  const roles=[...new Set(users.map(u=>u.role))];
+  const count=fn=>users.filter(fn).length;
+  root.innerHTML=heading('Quản lý tài khoản')
+    +'<div class="stat-grid">'+[['Tổng tài khoản',users.length],['Chưa kích hoạt',count(u=>!u.active)],['Sinh viên',count(u=>u.role==='student')],['Doanh nghiệp',count(u=>u.role==='company_member')]].map(statTile).join('')+'</div>'
+    +'<div class="toolbar toolbar-wide">'+field('q','Tìm theo email',acct.q,'search','placeholder="Nhập một phần email"')
+    +select('role','Vai trò',[['all','Tất cả vai trò'],...roles.map(r=>[r,roleName[r]||r])],acct.role)
+    +select('state','Trạng thái',[['all','Tất cả'],['active','Đang hoạt động'],['inactive','Chưa kích hoạt']],acct.state)+'</div><div id="acct-table"></div>';
+  const tableEl=root.querySelector('#acct-table');
+  function paint(){
+    const q=acct.q.trim().toLowerCase();
+    const shown=users.filter(u=>(!q||u.email.toLowerCase().includes(q))&&(acct.role==='all'||u.role===acct.role)
+      &&(acct.state==='all'||(acct.state==='active')===u.active));
+    const rowsShown=shown.slice(0,100);
+    tableEl.innerHTML=shown.length?'<section class="panel"><table class="data-table"><thead><tr><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>'
+      +rowsShown.map(u=>'<tr><td><div class="job-title">'+esc(u.email)+'</div></td><td data-label="Vai trò">'+esc(roleName[u.role]||u.role)+'</td>'
+        +'<td data-label="Trạng thái">'+stateChip(u.active?'open':'pending',u.active?'Đang hoạt động':'Chưa kích hoạt')+'</td>'
+        +'<td>'+(u.active?'':'<div class="row-actions"><button type="button" class="secondary" data-toggle="activate-panel-'+u.id+'">Kích hoạt</button></div>')+'</td></tr>'
+        +(u.active?'':'<tr class="act-row inline-form" id="activate-panel-'+u.id+'" hidden><td colspan="4">'
+          +form('activate-'+u.id,field('password','Mật khẩu ban đầu','','password','required minlength="10"'),'Xác nhận kích hoạt')+'</td></tr>')).join('')
+      +'</tbody></table>'+(shown.length>rowsShown.length?'<p class="job-sub">Hiển thị '+rowsShown.length+' / '+shown.length+' tài khoản. Hãy tìm hoặc lọc để thu hẹp.</p>':'')+'</section>'
+      :empty('Không có tài khoản phù hợp.');
+    for(const u of rowsShown)bindForm(tableEl,'activate-'+u.id,async data=>{await api('/auth/users/'+u.id+'/activate',{method:'POST',data});toast('Đã kích hoạt tài khoản');await reload();});
+  }
+  bindToggles(tableEl);
+  root.querySelector('[name="q"]').addEventListener('input',e=>{acct.q=e.target.value;paint();});
+  root.querySelector('[name="role"]').addEventListener('change',e=>{acct.role=e.target.value;paint();});
+  root.querySelector('[name="state"]').addEventListener('change',e=>{acct.state=e.target.value;paint();});
+  paint();
 }
+
+// ---- Tài liệu chatbot (staff, admin) ----
+const kb={q:'',status:'published'};
+const docState=d=>d.status==='archived'?['closed','Đã lưu trữ']:d.vector_synced_at?['open','Đã lập chỉ mục']:['pending','Chờ lập chỉ mục'];
 async function knowledge({root,user,reload}){
   if(!user)return loginRequired(root);
   const docs=await api('/knowledge');
-  root.innerHTML=heading('Tài liệu chatbot')+box(form('add-doc',field('title','Tiêu đề','','text','required')+field('topic','Chủ đề','FAQ')
-    +area('content','Nội dung','','required minlength="15"'),'Thêm tài liệu'))
-    +box(form('upload-doc',field('title','Tiêu đề','','text','required')+'<label class="field">Tệp văn bản (tối đa 50 MB, PDF tối đa 600 trang)<input name="file" type="file" required accept=".md,.txt,.pdf,.docx"></label>','Tải tài liệu'))
-    +grid(docs.map(d=>'<article class="card"><h3>'+esc(d.title)+'</h3>'+tags(status(d.status),d.source,'v'+d.version,d.status==='published'?(d.vector_synced_at?'Đã lập chỉ mục':'Chờ lập chỉ mục'):'')
-       +(d.status==='published'?btn('archive','Lưu trữ',d.id)
-          +(d.source.replaceAll('\\','/').startsWith('data/knowledge/')&&d.source.toLowerCase().endsWith('.pdf')?btn('reprocess','Đọc lại PDF',d.id):''):'')+'</article>'));
+  root.innerHTML='<div class="ws-head"><div>'+heading('Tài liệu chatbot')+'</div><button type="button" id="toggle-doc" aria-expanded="false" aria-controls="doc-panel">Thêm tài liệu</button></div>'
+    +'<section class="panel" id="doc-panel" hidden><div class="co-tabs" role="group" aria-label="Cách thêm tài liệu"><button type="button" class="co-tab" data-doc-mode="add" aria-current="true">Nhập nội dung</button>'
+    +'<button type="button" class="co-tab" data-doc-mode="upload" aria-current="false">Tải tệp</button></div>'
+    +'<div class="inline-form" data-doc-form="add">'+form('add-doc',field('title','Tiêu đề','','text','required')+field('topic','Chủ đề','FAQ')
+      +area('content','Nội dung','','required minlength="15"'),'Thêm tài liệu')+'</div>'
+    +'<div class="inline-form" data-doc-form="upload" hidden>'+form('upload-doc',field('title','Tiêu đề','','text','required')
+      +'<label class="field">Tệp văn bản (tối đa 50 MB, PDF tối đa 600 trang)<input name="file" type="file" required accept=".md,.txt,.pdf,.docx"></label>','Tải tài liệu')+'</div></section>'
+    +'<div class="toolbar toolbar-wide">'+field('q','Tìm tài liệu',kb.q,'search','placeholder="Tiêu đề hoặc chủ đề"')
+    +select('status','Trạng thái',[['published','Đang công khai'],['archived','Đã lưu trữ'],['all','Tất cả']],kb.status)+'</div><div id="kb-table"></div>';
+  const tableEl=root.querySelector('#kb-table'),panel=root.querySelector('#doc-panel'),toggle=root.querySelector('#toggle-doc');
+  function paint(){
+    const q=kb.q.trim().toLowerCase();
+    const shown=docs.filter(d=>(kb.status==='all'||d.status===kb.status)&&(!q||(d.title+' '+d.topic).toLowerCase().includes(q))).sort((a,b)=>b.id-a.id);
+    tableEl.innerHTML=shown.length?'<section class="panel"><table class="data-table"><thead><tr><th>Tài liệu</th><th>Nguồn</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>'
+      +shown.map(d=>{
+        const [kind,label]=docState(d),published=d.status==='published';
+        const pdf=d.source.replaceAll('\\','/').startsWith('data/knowledge/')&&d.source.toLowerCase().endsWith('.pdf');
+        return '<tr><td><div class="job-title">'+esc(d.title)+'</div><div class="job-sub">'+esc(d.topic)+' · v'+esc(d.version)+'</div></td>'
+          +'<td data-label="Nguồn">'+esc(fileName(d.source))+'</td><td data-label="Trạng thái">'+stateChip(kind,label)+'</td>'
+          +'<td><div class="row-actions">'+(published&&pdf?btn('reprocess','Đọc lại PDF',d.id):'')+(published?btn('archive','Lưu trữ',d.id):'')+'</div></td></tr>';
+      }).join('')+'</tbody></table></section>':empty('Không có tài liệu phù hợp.');
+    action(tableEl,'reprocess',async id=>{toast('Đang đọc lại PDF. Bản scan có thể mất vài phút.');await api('/knowledge/'+id+'/reprocess',{method:'POST'});toast('Đã đọc lại PDF');await reload();});
+    action(tableEl,'archive',async id=>{if(confirm('Gỡ tài liệu khỏi tri thức công khai?')){await api('/knowledge/'+id,{method:'DELETE'});await reload();}});
+  }
+  toggle.addEventListener('click',()=>{panel.hidden=!panel.hidden;toggle.setAttribute('aria-expanded',String(!panel.hidden));});
+  for(const tab of root.querySelectorAll('[data-doc-mode]'))tab.addEventListener('click',()=>{
+    for(const t of root.querySelectorAll('[data-doc-mode]'))t.setAttribute('aria-current',String(t===tab));
+    for(const f of root.querySelectorAll('[data-doc-form]'))f.hidden=f.dataset.docForm!==tab.dataset.docMode;
+  });
+  root.querySelector('[name="q"]').addEventListener('input',e=>{kb.q=e.target.value;paint();});
+  root.querySelector('[name="status"]').addEventListener('change',e=>{kb.status=e.target.value;paint();});
   bindForm(root,'add-doc',async data=>{await api('/knowledge',{method:'POST',data});await reload();});
   bindForm(root,'upload-doc',async data=>{await api('/knowledge/upload',{method:'POST',data});await reload();},{keepFiles:true});
-  action(root,'reprocess',async id=>{toast('Đang đọc lại PDF. Bản scan có thể mất vài phút.');await api('/knowledge/'+id+'/reprocess',{method:'POST'});toast('Đã đọc lại PDF');await reload();});
-  action(root,'archive',async id=>{if(confirm('Gỡ tài liệu khỏi tri thức công khai?')){await api('/knowledge/'+id,{method:'DELETE'});await reload();}});
+  paint();
 }
 export const pages={workspace,edit,applicants,moderation,accounts,knowledge};

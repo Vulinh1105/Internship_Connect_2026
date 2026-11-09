@@ -7,3 +7,4 @@ class ApplyInput(BaseModel):
 
 class Decision(BaseModel):
     status: Literal["reviewing","accepted","rejected","withdrawn"]
+    reason: str=Field(default="",max_length=2000)

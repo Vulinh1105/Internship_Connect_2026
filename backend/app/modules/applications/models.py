@@ -15,6 +15,7 @@ class Application(Base):
     match_reason = Column(JSON)
     submitted_at = Column(DateTime, default=now, nullable=False)
     decision_at = Column(DateTime)
+    decision_reason = Column(Text)
     __table_args__ = (UniqueConstraint('student_id','job_id'),)
 
 class ApplicationEvent(Base):

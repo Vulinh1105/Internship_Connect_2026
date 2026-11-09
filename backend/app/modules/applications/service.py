@@ -56,7 +56,9 @@ def mine(db,actor):
 
 def for_job(db,actor,job_id):
     jobs.ensure_owner(db,actor,job_id)
-    return [{**show(db,a,actor),"student_name":students.public_name(db,a.student_id)}
+    # Doanh nghiệp xem được tên, ngành học và kỹ năng trong hồ sơ đã nộp của sinh viên.
+    return [{**show(db,a,actor),"student_name":students.public_name(db,a.student_id),
+             **students.applicant_view(db,a.student_id,a.cv_id)}
             for a in db.scalars(select(Application).filter_by(job_id=job_id)
                               .order_by(Application.match_score.desc(),Application.id))]
 
@@ -81,16 +83,21 @@ def reviewing(db,actor,ident):
     if a.status=="pending":
         event(db,a,actor["id"],"reviewing")
 
-def decision(db,actor,ident,status):
+def decision(db,actor,ident,status,reason=""):
     from app.modules.interviews import service as interviews
     a=authorized(db,actor,ident)
     if a.status not in {"pending","reviewing"}:
         raise HTTPException(409,"Đơn đã kết thúc xét duyệt")
     if (actor["role"]=="student") != (status=="withdrawn"):
         raise HTTPException(403,"Không được thực hiện thay đổi này")
+    reason=reason.strip()
+    if status=="rejected" and not reason:
+        raise HTTPException(422,"Nhập lý do từ chối")
     if a.status==status:
         return show(db,a,actor)
     event(db,a,actor["id"],status)
+    if status=="rejected":
+        a.decision_reason=reason
     if status in {"accepted","rejected","withdrawn"}:
         a.decision_at=now()
     if status in {"rejected","withdrawn"}:
@@ -111,6 +118,8 @@ def notify_decision(db,a,status):
     text=f"Đơn ứng tuyển {info['title']} tại {info['company_name']} {STATUS_TEXT[status]}."
     if status=="accepted":
         text+=" Hãy theo dõi lịch phỏng vấn hoặc liên hệ từ doanh nghiệp."
+    if status=="rejected" and a.decision_reason:
+        text+=f" Lý do: {a.decision_reason}"
     notifications.send(db,students.user_id_for(db,a.student_id),"application_status",text,a.id)
 
 def download(db,actor,ident):

@@ -2,9 +2,9 @@ import {api} from './api/client.js';
 import {esc,heading,empty,toast,action,btn} from './components/ui.js';
 import {watchSelects} from './components/dropdown.js';
 import * as publicPages from './pages/public.js?v=blue-1';
-import * as student from './pages/student.js?v=merge-fix-2';
+import * as student from './pages/student.js?v=merge-fix-3';
 import * as notices from './pages/notifications.js?v=notice-2';
-import * as workspace from './pages/workspace.js?v=workspace-dash-1';
+import * as workspace from './pages/workspace.js?v=workspace-dash-2';
 import * as ai from './pages/ai.js?v=interview-avatar-2';
 
 const root=document.querySelector('#page'), nav=document.querySelector('#nav');

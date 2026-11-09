@@ -79,7 +79,11 @@ def mine(db, actor):
 def moderation_queue(db, actor):
     if actor["role"] not in {"admin","staff"}:
         raise HTTPException(403, "Chỉ nhân sự kiểm duyệt")
-    return [output(db,j) for j in repo.queue(db)]
+    rows = repo.queue(db)
+    reviews = repo.latest_reviews(db, [j.id for j in rows])
+    # last_review: lần kiểm duyệt trước (nếu có) để biết tin này là tin mới hay tin gửi lại.
+    return [{**output(db, j), "last_review": ({"decision": reviews[j.id].decision, "reason": reviews[j.id].reason}
+                                              if j.id in reviews else None)} for j in rows]
 
 def moderation_count(db, actor):
     if actor["role"] not in {"admin","staff"}:
