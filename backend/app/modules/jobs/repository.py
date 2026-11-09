@@ -1,6 +1,7 @@
 from sqlalchemy import case, func, or_, select, text
 from app.core.config import today
 from app.modules.applications.models import Application
+from app.modules.students.models import Student
 from .models import Job, Review, SavedJob
 
 def get_job(db, ident):
@@ -42,11 +43,12 @@ def find(db, q="", location="", category="", work_mode="", level="", salary_min=
 def by_company(db, company_ids):
     return list(db.scalars(select(Job).where(Job.company_id.in_(company_ids), Job.deleted_at.is_(None)).order_by(Job.id.desc())))
 
+# Tin đã đóng không nằm trong hàng chờ: chỉ duyệt lại khi doanh nghiệp mở lại tin.
 def queue(db):
-    return list(db.scalars(select(Job).where(Job.moderation_status=="pending", Job.deleted_at.is_(None)).order_by(Job.id)))
+    return list(db.scalars(select(Job).where(Job.moderation_status=="pending", Job.status=="open", Job.deleted_at.is_(None)).order_by(Job.id)))
 
 def queue_count(db):
-    return db.scalar(select(func.count()).select_from(Job).where(Job.moderation_status=="pending", Job.deleted_at.is_(None))) or 0
+    return db.scalar(select(func.count()).select_from(Job).where(Job.moderation_status=="pending", Job.status=="open", Job.deleted_at.is_(None))) or 0
 
 def approved_before(db, job_id):
     return db.scalar(select(func.count()).select_from(Review).where(Review.job_id==job_id, Review.decision=="approved")) or 0
@@ -68,3 +70,12 @@ def latest_reviews(db, job_ids):
     for review in db.scalars(select(Review).where(Review.job_id.in_(job_ids)).order_by(Review.id.desc())):
         latest.setdefault(review.job_id, review)
     return latest
+
+def count_applications(db, job_id, statuses):
+    return db.scalar(select(func.count()).select_from(Application)
+                     .where(Application.job_id == job_id, Application.status.in_(statuses))) or 0
+
+def applicant_user_ids(db, job_id, statuses):
+    stmt = (select(Student.user_id).join(Application, Application.student_id == Student.id)
+            .where(Application.job_id == job_id, Application.status.in_(statuses)))
+    return list(db.scalars(stmt))

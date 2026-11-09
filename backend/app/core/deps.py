@@ -3,7 +3,7 @@ import jwt
 from fastapi import Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.core.security import subject
+from app.core.security import claims
 from app.modules.auth import service
 
 DB = Annotated[Session, Depends(get_db)]
@@ -14,8 +14,9 @@ def optional_user(request: Request, db: DB):
     if not value:
         return None
     try:
-        return service.active_user(db, subject(value))
-    except (jwt.PyJWTError, ValueError, TypeError):
+        data = claims(value)
+        return service.active_user(db, data["sub"], data["v"])
+    except (jwt.PyJWTError, ValueError, TypeError, KeyError):
         return None
 
 def current_user(user=Depends(optional_user)):

@@ -36,9 +36,13 @@ def verify_password(value, stored):
     except (ValueError, AttributeError):
         return False
 
-def token(user_id):
-    return jwt.encode({"sub": str(user_id), "exp": datetime.now(timezone.utc) + timedelta(hours=8)},
+def token(user_id, version=0):
+    return jwt.encode({"sub": str(user_id), "v": int(version), "exp": datetime.now(timezone.utc) + timedelta(hours=8)},
                       secret(), algorithm="HS256")
+
+def claims(value):
+    data = jwt.decode(value, secret(), algorithms=["HS256"], options={"require": ["exp", "sub"]})
+    return {"sub": int(data["sub"]), "v": int(data.get("v", 0))}
 
 def subject(value):
     return int(jwt.decode(value, secret(), algorithms=["HS256"], options={"require": ["exp", "sub"]})["sub"])

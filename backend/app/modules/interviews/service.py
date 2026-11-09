@@ -3,7 +3,11 @@ from fastapi import HTTPException
 from app.core.config import now,LOCAL_TZ
 from app.common.records import record,require
 from app.modules.applications import service as applications
+from app.modules.applications.models import Application
+from app.modules.companies import service as companies
+from app.modules.jobs.models import Job
 from app.modules.notifications import service as notifications
+from app.modules.students import service as students
 from .models import Interview
 from . import repository as repo
 
@@ -42,8 +46,17 @@ def invite(db,actor,data):
 def mine(db,actor):
     if actor["role"] not in {"student","company_member"}:
         return []
+    # Chỉ lấy lịch thuộc về người dùng: sinh viên theo đơn của mình, doanh nghiệp theo tin của công ty mình.
+    stmt=select(Interview).join(Application,Application.id==Interview.application_id)
+    if actor["role"]=="student":
+        try:
+            stmt=stmt.where(Application.student_id==students.get_own(db,actor).id)
+        except HTTPException:
+            return []
+    else:
+        stmt=stmt.join(Job,Job.id==Application.job_id).where(Job.company_id.in_(companies.memberships(db,actor["id"])))
     result=[]
-    for row in db.scalars(select(Interview).order_by(Interview.scheduled_at)):
+    for row in db.scalars(stmt.order_by(Interview.scheduled_at)):
         try:
             ctx=applications.interview_context(db,actor,row.application_id)
         except HTTPException as e:

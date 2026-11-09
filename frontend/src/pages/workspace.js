@@ -62,6 +62,7 @@ function jobRow(j){
   const items=[];
   if(!rejected)items.push('<a href="#edit/'+j.id+'">Chỉnh tin</a>');
   if(j.status==='open')items.push(menuItem('close','Đóng tin',j.id));
+  if(j.status==='closed')items.push(menuItem('reopen','Mở lại tin',j.id));
   items.push(menuItem('delete','Xóa tin',j.id));
   return '<tr><td><div class="job-title">'+esc(j.title)+'</div><div class="job-sub">'+esc(j.location)+' · '+esc(modeName[j.work_mode]||j.work_mode)+'</div>'
     +(rejected&&j.rejection_reason?'<p class="job-reason">Lý do từ chối: '+esc(j.rejection_reason)+'</p>':'')+'</td>'
@@ -127,7 +128,7 @@ async function workspace({root,user,reload}){
   }
   const asks=interviews.filter(i=>i.status==='reschedule_requested').length;
   const stats=[['Tin đang mở',jobs.filter(j=>jobState(j)[0]==='open').length],['Chờ duyệt',jobs.filter(j=>jobState(j)[0]==='pending').length],
-    ['Đơn chưa xử lý',jobs.reduce((sum,j)=>sum+(j.new_application_count||0),0)],['Phỏng vấn tuần này',interviewsThisWeek(interviews)]];
+    ['Đơn chưa xử lý',jobs.filter(j=>j.status!=='closed').reduce((sum,j)=>sum+(j.new_application_count||0),0)],['Phỏng vấn tuần này',interviewsThisWeek(interviews)]];
   const panels={jobs:jobsPanel(jobs),interviews:interviewsPanel(interviews),profile:profilePanel(companies)};
   root.innerHTML='<div class="ws-head"><div class="ws-company">'+(companies.length===1?logoTile(companies[0].id,companies[0].name,true,companies[0].has_logo):'')
     +'<div><h1>'+esc(companies.map(c=>c.name).join(' · '))+'</h1><p class="muted">Quản lý tuyển dụng</p></div></div>'
@@ -152,7 +153,12 @@ async function workspace({root,user,reload}){
   action(root,'remove-logo',async id=>{if(confirm('Xóa logo doanh nghiệp?')){await api('/companies/'+id+'/logo',{method:'DELETE'});toast('Đã xóa logo');await reload();}});
   bindForm(root,'new-job',async data=>{await api('/jobs',{method:'POST',data:jobPayload(data)});activeTab='jobs';toast('Tin đã vào hàng chờ');await reload();});
   for(const [name,method] of [['close','POST'],['delete','DELETE']])action(root,name,async id=>{
-    if(confirm('Cập nhật trạng thái tin này?')){await api('/jobs/'+id+(name==='close'?'/close':''),{method});await reload();}
+    if(confirm(name==='close'?'Đóng tin này? Các ứng viên đang chờ sẽ được thông báo.':'Xóa tin này?')){await api('/jobs/'+id+(name==='close'?'/close':''),{method});await reload();}
+  });
+  action(root,'reopen',async id=>{
+    const job=await api('/jobs/'+id+'/reopen',{method:'POST'});
+    toast(job.moderation_status==='approved'?'Đã mở lại tin':'Đã mở lại tin. Tin đang chờ kiểm duyệt trước khi hiển thị công khai.');
+    await reload();
   });
   action(root,'cancel',async id=>{if(confirm('Hủy lời mời này?')){await api('/interviews/'+id+'/cancel',{method:'POST'});await reload();}});
 }
@@ -160,8 +166,14 @@ async function edit({root,user,args}){
   if(!user)return loginRequired(root);
   const id=Number(args[0]);
   const [c,j]=await Promise.all([api('/companies/mine'),api('/jobs/'+id)]);
-  root.innerHTML=heading('Chỉnh sửa tin',j.title)+box(form('edit',jobFields(c.filter(x=>x.id===j.company_id),j),'Lưu và gửi duyệt lại'));
-  bindForm(root,'edit',async data=>{await api('/jobs/'+id,{method:'PUT',data:jobPayload(data)});location.hash='workspace';});
+  root.innerHTML=heading('Chỉnh sửa tin',j.title)
+    +'<p class="muted">Với tin đã duyệt: sửa phần nội dung chữ (tiêu đề, mô tả, yêu cầu, quyền lợi, lương, ngành, địa điểm, địa chỉ, kỹ năng, kinh nghiệm, giờ làm) sẽ phải kiểm duyệt lại trước khi tin hiển thị. Hạn nộp, số lượng, học vấn, hình thức, cấp độ và loại hình làm việc có hiệu lực ngay.</p>'
+    +box(form('edit',jobFields(c.filter(x=>x.id===j.company_id),j),'Lưu thay đổi'));
+  bindForm(root,'edit',async data=>{
+    const saved=await api('/jobs/'+id,{method:'PUT',data:jobPayload(data)});
+    toast(saved.moderation_status==='pending'?'Đã lưu. Tin cần được kiểm duyệt trước khi hiển thị công khai.':'Đã lưu thay đổi.');
+    location.hash='workspace';
+  });
 }
 // ---- Dùng chung cho các trang đơn ứng tuyển, kiểm duyệt và quản trị ----
 const statTile=([label,n])=>'<div class="stat"><strong>'+n+'</strong><span>'+esc(label)+'</span></div>';
@@ -336,25 +348,31 @@ async function accounts({root,user,reload}){
   const roles=[...new Set(users.map(u=>u.role))];
   const count=fn=>users.filter(fn).length;
   root.innerHTML=heading('Quản lý tài khoản')
-    +'<div class="stat-grid">'+[['Tổng tài khoản',users.length],['Chưa kích hoạt',count(u=>!u.active)],['Sinh viên',count(u=>u.role==='student')],['Doanh nghiệp',count(u=>u.role==='company_member')]].map(statTile).join('')+'</div>'
+    +'<div class="stat-grid">'+[['Tổng tài khoản',users.length],['Chưa kích hoạt',count(u=>!u.active)],['Bị khóa',count(u=>u.locked)],['Sinh viên',count(u=>u.role==='student')]].map(statTile).join('')+'</div>'
     +'<div class="toolbar toolbar-wide">'+field('q','Tìm theo email',acct.q,'search','placeholder="Nhập một phần email"')
     +select('role','Vai trò',[['all','Tất cả vai trò'],...roles.map(r=>[r,roleName[r]||r])],acct.role)
-    +select('state','Trạng thái',[['all','Tất cả'],['active','Đang hoạt động'],['inactive','Chưa kích hoạt']],acct.state)+'</div><div id="acct-table"></div>';
+    +select('state','Trạng thái',[['all','Tất cả'],['active','Đang hoạt động'],['inactive','Chưa kích hoạt'],['locked','Bị khóa']],acct.state)+'</div><div id="acct-table"></div>';
   const tableEl=root.querySelector('#acct-table');
   function paint(){
     const q=acct.q.trim().toLowerCase();
     const shown=users.filter(u=>(!q||u.email.toLowerCase().includes(q))&&(acct.role==='all'||u.role===acct.role)
-      &&(acct.state==='all'||(acct.state==='active')===u.active));
+      &&(acct.state==='all'||(acct.state==='locked'?u.locked:acct.state==='inactive'?!u.active:u.active&&!u.locked)));
     const rowsShown=shown.slice(0,100);
     tableEl.innerHTML=shown.length?'<section class="panel"><table class="data-table"><thead><tr><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>'
       +rowsShown.map(u=>'<tr><td><div class="job-title">'+esc(u.email)+'</div></td><td data-label="Vai trò">'+esc(roleName[u.role]||u.role)+'</td>'
-        +'<td data-label="Trạng thái">'+stateChip(u.active?'open':'pending',u.active?'Đang hoạt động':'Chưa kích hoạt')+'</td>'
-        +'<td>'+(u.active?'':'<div class="row-actions"><button type="button" class="secondary" data-toggle="activate-panel-'+u.id+'">Kích hoạt</button></div>')+'</td></tr>'
+        +'<td data-label="Trạng thái">'+(u.locked?stateChip('rejected','Bị khóa'):stateChip(u.active?'open':'pending',u.active?'Đang hoạt động':'Chưa kích hoạt'))+'</td>'
+        +'<td><div class="row-actions">'+(!u.active?'<button type="button" class="secondary" data-toggle="activate-panel-'+u.id+'">Kích hoạt</button>'
+          :u.locked?'<button type="button" class="secondary" data-action="unlock" data-value="'+u.id+'">Mở khóa</button>'
+          :u.id!==user.id?'<button type="button" class="secondary danger" data-action="lock" data-value="'+u.id+'">Khóa</button>':'')+'</div></td></tr>'
         +(u.active?'':'<tr class="act-row inline-form" id="activate-panel-'+u.id+'" hidden><td colspan="4">'
           +form('activate-'+u.id,field('password','Mật khẩu ban đầu','','password','required minlength="10"'),'Xác nhận kích hoạt')+'</td></tr>')).join('')
       +'</tbody></table>'+(shown.length>rowsShown.length?'<p class="job-sub">Hiển thị '+rowsShown.length+' / '+shown.length+' tài khoản. Hãy tìm hoặc lọc để thu hẹp.</p>':'')+'</section>'
       :empty('Không có tài khoản phù hợp.');
     for(const u of rowsShown)bindForm(tableEl,'activate-'+u.id,async data=>{await api('/auth/users/'+u.id+'/activate',{method:'POST',data});toast('Đã kích hoạt tài khoản');await reload();});
+    action(tableEl,'lock',async id=>{
+      if(confirm('Khóa tài khoản này? Người dùng sẽ bị đăng xuất ngay và không đăng nhập lại được.')){await api('/auth/users/'+id+'/lock',{method:'POST'});toast('Đã khóa tài khoản');await reload();}
+    });
+    action(tableEl,'unlock',async id=>{await api('/auth/users/'+id+'/unlock',{method:'POST'});toast('Đã mở khóa tài khoản');await reload();});
   }
   bindToggles(tableEl);
   root.querySelector('[name="q"]').addEventListener('input',e=>{acct.q=e.target.value;paint();});

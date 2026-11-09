@@ -108,7 +108,8 @@ async function job({root,args,user}){
   if(canApply){
     const cvs=await api('/students/me/cvs');
     root.querySelector('.detail-main').insertAdjacentHTML('beforeend','<div id="apply-section">'+box('<h2 class="section-title">Ứng tuyển</h2>'+form('apply',select('cv_id','CV',[['','Dùng hồ sơ hiện tại'],...cvs.map(c=>[c.id,c.original_name])])
-      +area('cover_letter','Thư ứng tuyển','','maxlength="5000"'),'Gửi đơn'))+'</div>');
+      +area('cover_letter','Thư ứng tuyển','','maxlength="5000"')
+      +'<p class="muted">Khi gửi đơn, doanh nghiệp sẽ xem được họ tên, ngành học, kỹ năng trong CV bạn chọn, thư ứng tuyển và tệp CV đính kèm.</p>','Gửi đơn'))+'</div>');
     bindForm(root,'apply',async values=>{
       await api('/applications',{method:'POST',data:{...values,job_id:j.id,cv_id:Number(values.cv_id)||null}});
       toast('Đã gửi đơn');location.hash='applications';
@@ -243,7 +244,7 @@ async function login({root,user}){
     +box(form('login',field('email','Email','','email','required autocomplete="username"')+field('password','Mật khẩu','','password','required autocomplete="current-password"'),'Đăng nhập'))
     +box('<h2>Tài khoản mẫu</h2><p class="muted">Dùng mật khẩu demo đã đặt khi seed. Mặc định LocalDemo2026!</p><div class="row">'
     +[['usr-demo-s001','Sinh viên'],['usr-demo-c001','Doanh nghiệp'],['staff-demo','Kiểm duyệt'],['admin-demo','Admin']].map(([k,v])=>btn('demo',v,k+'@example.invalid')).join('')
-    +'</div>')+link('register','Đăng ký sinh viên')+'</div>';
+    +'</div>')+link('forgot','Quên mật khẩu?')+link('register','Đăng ký sinh viên')+'</div>';
   action(root,'demo',email=>{root.querySelector('#login [name=email]').value=email;root.querySelector('#login [name=password]').focus();});
   bindForm(root,'login',async data=>{await api('/auth/login',{method:'POST',data});location.hash='home';});
 }
@@ -252,4 +253,35 @@ async function register({root}){
     +field('password','Mật khẩu','','password','required minlength="8" autocomplete="new-password"'),'Tạo tài khoản'))+'</div>';
   bindForm(root,'register',async data=>{await api('/auth/register',{method:'POST',data});location.hash='profile';});
 }
-export const pages={home,jobs,job,companies,company,login,register};
+async function forgot({root}){
+  root.innerHTML='<div class="auth">'+heading('Quên mật khẩu','Nhập email tài khoản. Nếu email đã đăng ký, bạn sẽ nhận được liên kết đặt lại mật khẩu.')
+    +box(form('forgot',field('email','Email','','email','required autocomplete="username"'),'Gửi liên kết'))+link('login','Quay lại đăng nhập')+'</div>';
+  bindForm(root,'forgot',async data=>{
+    await api('/auth/forgot-password',{method:'POST',data});
+    root.querySelector('#forgot').closest('.panel').innerHTML='<p>Nếu email này có tài khoản, một liên kết đặt lại mật khẩu đã được gửi. Liên kết có hiệu lực trong 1 giờ và chỉ dùng được một lần. Hãy kiểm tra cả thư mục thư rác.</p>';
+  });
+}
+async function reset({root,args}){
+  const token=args[0];
+  if(!token){root.innerHTML='<div class="auth">'+heading('Liên kết không hợp lệ','Hãy yêu cầu đặt lại mật khẩu để nhận liên kết mới.')+link('forgot','Quên mật khẩu')+'</div>';return;}
+  root.innerHTML='<div class="auth">'+heading('Đặt mật khẩu mới')+box(form('reset',field('password','Mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"')
+    +field('confirm','Nhập lại mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"'),'Đặt mật khẩu'))+'</div>';
+  bindForm(root,'reset',async data=>{
+    if(data.password!==data.confirm)throw new Error('Hai mật khẩu không khớp.');
+    await api('/auth/reset-password',{method:'POST',data:{token,password:data.password}});
+    toast('Đã đặt lại mật khẩu. Hãy đăng nhập bằng mật khẩu mới.');location.hash='login';
+  });
+}
+async function account({root,user}){
+  if(!user)return loginRequired(root);
+  root.innerHTML='<div class="auth">'+heading('Đổi mật khẩu',user.email)+box(form('password',field('current_password','Mật khẩu hiện tại','','password','required maxlength="128" autocomplete="current-password"')
+    +field('new_password','Mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"')
+    +field('confirm','Nhập lại mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"'),'Đổi mật khẩu'))
+    +'<p class="muted">Sau khi đổi, các thiết bị khác đang đăng nhập sẽ bị đăng xuất.</p></div>';
+  bindForm(root,'password',async (data,formEl)=>{
+    if(data.new_password!==data.confirm)throw new Error('Hai mật khẩu mới không khớp.');
+    await api('/auth/change-password',{method:'POST',data:{current_password:data.current_password,new_password:data.new_password}});
+    formEl.reset();toast('Đã đổi mật khẩu');
+  });
+}
+export const pages={home,jobs,job,companies,company,login,register,forgot,reset,account};

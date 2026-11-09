@@ -15,7 +15,8 @@ def event(db,a,actor_id,status):
     a.status=status
 
 def applied_ids(db,student_id):
-    return set(db.scalars(select(Application.job_id).filter_by(student_id=student_id)))
+    # Đơn đã rút coi như chưa ứng tuyển: tin vẫn được gợi ý và nộp lại được.
+    return set(db.scalars(select(Application.job_id).where(Application.student_id==student_id,Application.status!="withdrawn")))
 
 def show(db,a,actor=None):
     try:
@@ -34,12 +35,21 @@ def apply(db,actor,data):
     if data.job_id in applied_ids(db,s.id):
         raise HTTPException(409,"Bạn đã ứng tuyển tin này")
     match=score_application(db,actor,s.id,job,data.cv_id)
-    a=Application(student_id=s.id,job_id=data.job_id,cv_id=data.cv_id,cover_letter=data.cover_letter,
-                  status="pending",match_score=match["match_score"],match_reason=match)
-    db.add(a)
+    # Mỗi sinh viên chỉ có một đơn cho mỗi tin (ràng buộc duy nhất), nên nộp lại sau khi rút là mở lại đơn cũ.
+    a=db.scalar(select(Application).where(Application.student_id==s.id,Application.job_id==data.job_id))
+    reapply=a is not None
+    if reapply:
+        event(db,a,actor["id"],"pending")
+        a.cv_id,a.cover_letter,a.match_score,a.match_reason=data.cv_id,data.cover_letter,match["match_score"],match
+        a.submitted_at,a.decision_at,a.decision_reason=now(),None,None
+    else:
+        a=Application(student_id=s.id,job_id=data.job_id,cv_id=data.cv_id,cover_letter=data.cover_letter,
+                      status="pending",match_score=match["match_score"],match_reason=match)
+        db.add(a)
     try:
         db.flush()
-        db.add(ApplicationEvent(application_id=a.id,actor_id=actor["id"],after="pending"))
+        if not reapply:
+            db.add(ApplicationEvent(application_id=a.id,actor_id=actor["id"],after="pending"))
         score=a.match_score
         fit=f" (phù hợp {round(score)}%)" if score is not None else ""
         notifications.send_many(db,companies.member_user_ids(db,job["company_id"]),"application_new",
