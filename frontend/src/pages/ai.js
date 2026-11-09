@@ -96,14 +96,29 @@ async function chat({root,user,reload}){
 async function mock({root,user}){
   if(!user)return loginRequired(root);
   const [roles,history]=await Promise.all([api('/mock-interviews/roles'),api('/mock-interviews')]);
-  root.innerHTML=heading('Phỏng vấn ảo','Luyện câu hỏi theo vai trò, xem dẫn chứng và theo dõi tiến bộ.')
+  root.innerHTML=heading('Phỏng vấn ảo','Câu trả lời đã lọc thông tin liên hệ được gửi tới OpenAI để đặt câu hỏi và chấm điểm cuối buổi.')
     +box(form('start',select('role','Vị trí',roles,roles.includes('Backend Intern')?'Backend Intern':roles[0])
       +select('level','Cấp độ',[['intern','Thực tập'],['fresher','Fresher'],['junior','Junior']]),'Bắt đầu phỏng vấn'))
-    +'<h2>Buổi luyện gần đây</h2>'+grid(history.map(s=>box('<h3>'+esc(s.role)+'</h3>'+tags(status(s.state),s.report&&s.report.score+' / 100')
+    +'<h2>Buổi luyện gần đây</h2>'+grid(history.map(s=>box('<h3>'+esc(s.role)+'</h3>'+tags(s.state==='evaluating'?'Đang chấm':status(s.state),s.report&&s.report.score+' / 100')
       +link('mock-session/'+s.id,s.state==='active'?'Tiếp tục':'Xem buổi luyện'))));
   bindForm(root,'start',async data=>{const s=await api('/mock-interviews',{method:'POST',data:{role:data.role,level:data.level}});location.hash='mock-session/'+s.id+'/start';});
 }
 function reportView(r){
+  if(r.domains){
+    const names={knowledge:'Kiến thức chuyên môn',problem_solving:'Giải quyết vấn đề'};
+    const remarks=(title,items)=>'<h3>'+title+'</h3>'+(items.length?'<ul>'+items.map(x=>'<li>'+esc(x.text)
+      +' <small>(Lượt '+esc(x.turn_ids.join(', '))+')</small></li>').join('')+'</ul>':empty('Chưa có nhận xét có dẫn chứng.'));
+    return '<h2>Kết quả phỏng vấn</h2>'+tags('Tổng thể '+r.score+' / 100',r.band,r.previous_score!=null?'Buổi trước '+r.previous_score:'')
+      +Object.entries(r.domains).map(([key,d])=>box('<h3>'+names[key]+' · '+d.score+' / 100</h3>'+tags(d.band)
+        +(d.question_count?'<ul>'+d.criteria.map(c=>'<li>'+esc(c.label)+' · '+c.score+' / 25</li>').join('')+'</ul>'
+          :copy('Chưa có lượt trả lời thuộc tiêu chí này.')))).join('')
+      +remarks('Điểm mạnh',r.strengths)+remarks('Hạn chế',r.limitations)
+      +(r.practice.length?'<h3>Gợi ý luyện tập</h3><ul>'+r.practice.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>':'')
+      +'<details><summary>Lịch sử và bằng chứng chấm điểm</summary>'+r.answers.map(a=>box('<h3>Lượt '+a.turn_id+' · '+esc(a.question)+'</h3>'
+        +(a.skipped?copy('Đã bỏ qua'):copy(a.transcript))
+        +a.results.map(x=>'<h4>'+names[x.domain]+' · '+x.scores.reduce((a,b)=>a+b,0)*2.5+' / 100</h4>'
+          +(x.quote?copy('“'+x.quote+'”'):'')+copy(x.feedback)).join(''))).join('')+'</details>';
+  }
   return '<h2>Kết quả luyện tập</h2>'+tags(r.score+' / 100',r.previous_score!=null?'Buổi trước '+r.previous_score:'',r.delta!=null?'Thay đổi '+r.delta:'')
     +'<ul>'+r.practice.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ul>'
     +(r.example?'<h3>Câu trả lời mẫu</h3>'+copy(r.example):'')
@@ -116,7 +131,7 @@ async function mockSession({root,user,args,signal}){
   const endpoint='/mock-interviews/'+Number(args[0]);
   let session=await api(endpoint,{signal});
   if(signal.aborted)return;
-  root.innerHTML=heading(session.role,'Phỏng vấn ảo · '+(session.mode==='local'?'Chấm thử bằng quy tắc local':'Chấm thử có hỗ trợ mô hình'))
+  root.innerHTML=heading(session.role,'Interview AI đặt câu hỏi. Evaluation AI chấm toàn bộ lịch sử khi buổi phỏng vấn kết thúc.')
     +link('mock','Buổi luyện của bạn')
     +'<div class="interview-layout">'+interviewer+'<div class="interview-question"></div></div>';
   const panel=root.querySelector('.interview-question');
@@ -130,7 +145,7 @@ async function mockSession({root,user,args,signal}){
       mic.disabled=state==='thinking';
     }
     if(read)read.disabled=['thinking','listening'].includes(state);
-    for(const button of panel.querySelectorAll('#answer button, #audio button, [data-action="skip"], [data-action="abandon"]')){
+    for(const button of panel.querySelectorAll('#answer button, #audio button, [data-action="skip"], [data-action="finish"]')){
       button.disabled=['thinking','listening'].includes(state);
     }
   }
@@ -148,15 +163,13 @@ async function mockSession({root,user,args,signal}){
   function render(){
     if(!session.question){
       media.set('finished');
-      panel.innerHTML=box(session.report?reportView(session.report):empty('Buổi luyện đã kết thúc.'));
+      panel.innerHTML=box(session.report?reportView(session.report):empty('Buổi phỏng vấn đã kết thúc.')
+        +(session.evaluation_pending?'<p role="status" id="evaluation-status"></p>'+btn('evaluate','Chấm điểm hoặc tải lại kết quả'):''));
+      action(panel,'evaluate',evaluate);
       return;
     }
-    const feedback=session.evaluation;
-    const summary=feedback&&!feedback.skipped
-      ?'<details class="interview-feedback" open><summary>Câu vừa trả lời · '+esc(feedback.score)+' / 100</summary>'
-        +'<ul>'+feedback.criteria.map(item=>'<li><strong>'+esc(item.criterion)+'</strong> · '+esc(item.feedback)+'</li>').join('')+'</ul></details>':'';
-    panel.innerHTML=box(summary+tags('Câu '+(session.cursor+1)+' / '+session.total,session.turn?'Câu hỏi bổ sung':'',session.question.seconds+' giây gợi ý')
-      +'<h2>'+esc(session.question.question)+'</h2><div class="row">'+btn('read','Đọc câu hỏi')+btn('mic','Bật micro')+btn('skip','Bỏ qua')+btn('abandon','Dừng buổi luyện')+'</div>'
+    panel.innerHTML=box(tags('Câu '+(session.cursor+1)+' / '+session.total,session.turn?'Câu hỏi bổ sung':'',session.question.seconds+' giây gợi ý')
+      +'<h2>'+esc(session.question.question)+'</h2><div class="row">'+btn('read','Đọc câu hỏi')+btn('mic','Bật micro')+btn('skip','Bỏ qua')+btn('finish','Kết thúc và chấm điểm')+'</div>'
       +'<label><input type="checkbox" name="auto_read" '+(autoRead?'checked':'')+'> Tự đọc câu hỏi tiếp theo</label>'
       +form('answer',area('transcript','Câu trả lời','','required maxlength="5000"')
         +'<label><input type="checkbox" name="confirmed" required> Tôi đã kiểm tra và xác nhận câu trả lời</label>','Gửi câu trả lời')
@@ -167,13 +180,16 @@ async function mockSession({root,user,args,signal}){
     bindForm(panel,'answer',data=>submit({transcript:data.transcript,confirmed:!!data.confirmed}));
     bindForm(panel,'audio',data=>media.transcribe(data),{keepFiles:true});
     action(panel,'skip',async()=>{if(confirm('Bỏ qua câu này?'))await submit({skip:true});});
-    action(panel,'abandon',async()=>{
-      if(['listening','thinking'].includes(state) || !confirm('Dừng buổi luyện này?'))return;
+    action(panel,'finish',async()=>{
+      if(['listening','thinking'].includes(state) || !confirm('Kết thúc và chấm theo các lượt đã gửi?'))return;
       media.stopSpeech();
       media.set('thinking');
       try{
-        session=await api(endpoint+'/abandon',{method:'POST',signal});
-        if(!signal.aborted)render();
+        session=await api(endpoint+'/finish',{method:'POST',signal});
+        if(!signal.aborted){
+          render();
+          await evaluate();
+        }
       }finally{
         if(!signal.aborted&&session.question)media.set('ready');
       }
@@ -182,15 +198,35 @@ async function mockSession({root,user,args,signal}){
     action(panel,'mic',()=>media.listen());
     media.set('ready');
   }
+  async function evaluate(){
+    if(!session.evaluation_pending||signal.aborted)return;
+    media.set('thinking','Đang đánh giá toàn bộ buổi phỏng vấn');
+    const label=panel.querySelector('#evaluation-status');
+    const button=panel.querySelector('[data-action="evaluate"]');
+    if(label)label.textContent='Đang đối chiếu câu trả lời với rubric…';
+    if(button)button.disabled=true;
+    try{
+      session=await api(endpoint+'/evaluation',{method:'POST',signal});
+      if(!signal.aborted)render();
+    }catch(error){
+      if(!signal.aborted){
+        media.set('finished');
+        if(label)label.textContent=error.message;
+      }
+    }finally{
+      if(button)button.disabled=false;
+    }
+  }
   async function submit(data){
     if(['listening','thinking'].includes(state))return;
     media.stopSpeech();
-    media.set('thinking','Đang chấm câu trả lời');
+    media.set('thinking','Đang chuẩn bị câu hỏi tiếp theo');
     try{
       session=await api(endpoint+'/answers',{method:'POST',signal,data:{...data,cursor:session.cursor,turn:session.turn}});
       if(signal.aborted)return;
       render();
-      if(autoRead && session.question) void media.play(session.question.question);
+      if(session.evaluation_pending)await evaluate();
+      else if(autoRead && session.question)void media.play(session.question.question);
     }catch(error){
       if(signal.aborted)return;
       media.set('ready');

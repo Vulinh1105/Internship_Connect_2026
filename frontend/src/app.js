@@ -7,7 +7,7 @@ import * as notices from './pages/notifications.js?v=features-1';
 import * as workspace from './pages/workspace.js?v=hybrid-match-1';
 import * as account from './pages/account.js?v=password-reset-1';
 import * as recruitment from './pages/recruitment.js';
-import * as ai from './pages/ai.js?v=interview-avatar-2';
+import * as ai from './pages/ai.js?v=interview-rubric-1';
 
 const root=document.querySelector('#page'), nav=document.querySelector('#nav');
 watchSelects(root);

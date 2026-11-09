@@ -48,3 +48,13 @@ def speak(ident:int,db:DB,actor:Actor):
 @router.post("/{ident}/abandon")
 def abandon(ident:int,db:DB,actor:Actor):
     return service.abandon(db,actor,ident)
+
+
+@router.post("/{ident}/finish")
+def finish(ident:int,db:DB,actor:Actor):
+    return service.finish(db,actor,ident)
+
+
+@router.post("/{ident}/evaluation")
+def evaluate(ident:int,db:DB,actor:Actor):
+    return service.evaluate(db,actor,ident)

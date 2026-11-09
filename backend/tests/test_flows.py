@@ -1,4 +1,5 @@
 from datetime import timedelta
+from types import SimpleNamespace
 import base64
 import os
 from pathlib import Path
@@ -10,6 +11,7 @@ sandbox=TemporaryDirectory(dir=test_root,ignore_cleanup_errors=True)
 os.environ.update(DATABASE_URL="sqlite:///"+(Path(sandbox.name)/"test.sqlite").as_posix(),
                   UPLOADS_PATH=str(Path(sandbox.name)/"uploads"),QDRANT_PATH=str(Path(sandbox.name)/"qdrant"),QDRANT_URL="",AI_BACKEND="local",
                   JWT_SECRET="isolated-tests-only-7ca02ebdd891d68bc61a")
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
 from sqlalchemy import func, select
 from app.main import app
@@ -17,6 +19,7 @@ from app.core.config import now
 from app.core.database import Base, Session, engine
 from app.ai.vector import client as vectors, sync
 from app.ai.matching import service as matching
+from app.ai.interview_engine import evaluator, planner, report
 from app.ai.providers.model_config import OPENAI_DIMENSIONS
 from app.ai.vector.collections import MATCHING_JOBS
 from app.modules.jobs.models import Job
@@ -40,6 +43,41 @@ def payload(response,status=200):
     assert response.status_code==status,response.text
     return response.json()
 
+def fake_interview(schema,instruction,data,fallback,**options):
+    assert options["force_openai"] is True
+    if schema is planner.PlanWording:
+        return schema(questions=[{"code":q["code"],"question":q["question"],"domains":planner.default_domains(q["kind"])}
+                                 for q in data["questions"]])
+    if schema is planner.NextTurn:
+        return schema()
+    summary={"strengths":[{"text":"Trả lời đúng trọng tâm","turn_ids":[1,2,999]}],
+             "limitations":[],"practice":["Bổ sung ví dụ."]}
+    if schema is evaluator.Summary:
+        return schema.model_validate(summary)
+    return schema.model_validate({"turns":[
+        {"turn_id":t["turn_id"],"results":[{"domain":d,"scores":[8,7,6,5],
+             "quote":t["transcript"][:50],"feedback":"Còn thiếu ví dụ."} for d in t["domains"]]}
+        for t in data["turns"] if t["transcript"] and t["domains"]],
+        "summary":summary if data["whole"] else None})
+
+
+def test_long_interview_evaluation(monkeypatch):
+    calls=[]
+    def tracked(schema,instruction,data,fallback,**options):
+        calls.append((options["feature"],len(data.get("turns",[]))))
+        return fake_interview(schema,instruction,data,fallback,**options)
+    monkeypatch.setattr(evaluator,"structured",tracked)
+    plan=[{"kind":"technical","domains":["knowledge","problem_solving"]} for _ in range(6)]
+    answers=[SimpleNamespace(position=i//2,turn=i%2,question=f"Câu hỏi {i}",transcript=f"Câu trả lời {i}",
+                            evaluation={"skipped":False}) for i in range(11)]
+    result=report.summarize(answers,plan,"Backend Intern",None,42)
+    assert calls==[("interview_eval",10),("interview_eval",1),("interview_synthesis",0)]
+    assert result["group_count"]==2 and result["score"]==65
+    assert result["domains"]["knowledge"]["question_count"]==6
+    assert result["strengths"][0]["turn_ids"]==[1,2]
+    assert result["answers"][-1]["results"][0]["quote"]=="Câu trả lời 10"
+
+
 def test_complete_flows(monkeypatch):
     def fake_openai(texts,user_id=None):
         return [[1.0]+[0.0]*(OPENAI_DIMENSIONS-1) for _ in texts]
@@ -47,15 +85,17 @@ def test_complete_flows(monkeypatch):
     monkeypatch.setattr(matching,"OPENAI_API_KEY","mock")
     monkeypatch.setattr(sync,"embed_openai",fake_openai)
     monkeypatch.setattr(matching,"embed_openai",fake_openai)
+    monkeypatch.setattr(planner,"structured",fake_interview)
+    monkeypatch.setattr(evaluator,"structured",fake_interview)
     try:
         initialize()
-        verify_flows()
+        verify_flows(monkeypatch)
     finally:
         vectors.close()
         engine.dispose()
         sandbox.cleanup()
 
-def verify_flows():
+def verify_flows(monkeypatch):
     guest=TestClient(app)
     assert guest.get("/app/").status_code==200
     assert guest.get("/app/src/pages/ai.js").status_code==200
@@ -144,10 +184,25 @@ def verify_flows():
     first={"cursor":0,"turn":0,"transcript":"Tôi có kỹ năng SQL và mục tiêu thực hành qua một dự án cụ thể.","confirmed":True}
     session=payload(student.post(f"/api/mock-interviews/{sid}/answers",json=first))
     assert student.post(f"/api/mock-interviews/{sid}/answers",json=first).status_code==409
+    assert session["report"] is None
+    assert student.post(f"/api/mock-interviews/{sid}/evaluation").status_code==409
     while session["state"]=="active":
-        session=payload(student.post(f"/api/mock-interviews/{sid}/answers",
-            json={"cursor":session["cursor"],"turn":session["turn"],"skip":True}))
-    assert session["state"]=="finished" and len(session["report"]["answers"])>=5
+        session=payload(student.post(f"/api/mock-interviews/{sid}/answers",json={
+            "cursor":session["cursor"],"turn":session["turn"],"confirmed":True,
+            "transcript":"Tôi sẽ phân tích nguyên nhân và kiểm tra kết quả sau khi áp dụng."}))
+    assert session["state"]=="finished" and session["report"] is None
+    evaluation_endpoint=f"/api/mock-interviews/{sid}/evaluation"
+    assert company.post(evaluation_endpoint).status_code==403
+    def unavailable(*args,**kwargs):
+        raise HTTPException(503,"Mô phỏng API không khả dụng")
+    with monkeypatch.context() as patch:
+        patch.setattr(evaluator,"structured",unavailable)
+        assert student.post(evaluation_endpoint).status_code==503
+    assert payload(student.get(f"/api/mock-interviews/{sid}"))["evaluation_pending"]
+    result=payload(student.post(evaluation_endpoint))["report"]
+    assert result["score"]==65 and result["group_count"]==1 and len(result["answers"])>=5
+    assert result["domains"]["knowledge"]["score"]==result["domains"]["problem_solving"]["score"]==65
+    assert payload(student.post(evaluation_endpoint))["report"]==result
 
     chat=payload(student.post("/api/chat/sessions"),201)["id"]
     assert company.get(f"/api/chat/sessions/{chat}/messages").status_code==404

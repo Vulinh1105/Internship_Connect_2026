@@ -14,8 +14,9 @@ def client():
     from openai import OpenAI
     return OpenAI(api_key=OPENAI_API_KEY,timeout=30,max_retries=0)
 
-def structured(schema, instruction, data, fallback, *, user_id, feature, model=CHAT):
-    if AI_BACKEND=="local":
+def structured(schema, instruction, data, fallback, *, user_id, feature, model=CHAT,
+               force_openai=False, max_completion_tokens=900):
+    if AI_BACKEND=="local" and not force_openai:
         with call(user_id,feature,"local-rules"):
             return schema.model_validate(fallback)
     from openai import APIError
@@ -28,8 +29,8 @@ def structured(schema, instruction, data, fallback, *, user_id, feature, model=C
             with call(user_id,feature,model) as stats:
                 response=client().chat.completions.create(
                     model=model,response_format={"type":"json_object"},
-                    max_completion_tokens=900,messages=[{"role":"system","content":system},
-                    {"role":"user","content":"<data>"+payload[:26000]+"</data>"}])
+                    max_completion_tokens=max_completion_tokens,messages=[{"role":"system","content":system},
+                    {"role":"user","content":"<data>"+(payload if force_openai else payload[:26000])+"</data>"}])
                 usage=response.usage
                 stats["tokens_in"]=usage.prompt_tokens if usage else 0
                 stats["tokens_out"]=usage.completion_tokens if usage else 0
@@ -38,4 +39,6 @@ def structured(schema, instruction, data, fallback, *, user_id, feature, model=C
         except (APIError,ValidationError):
             if attempt==0:
                 sleep(0.35)
+    if fallback is None:
+        raise HTTPException(503,"OpenAI chưa trả về kết quả hợp lệ. Hãy thử lại sau.")
     return schema.model_validate(fallback)
