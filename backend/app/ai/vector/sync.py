@@ -3,12 +3,13 @@ from hashlib import sha256
 from threading import Lock
 import json, logging
 from sqlalchemy import select
-from app.core.config import now
+from app.core.config import OPENAI_API_KEY, now
 from app.modules.jobs import service as jobs
 from app.modules.students import service as students
 from app.modules.knowledge import service as knowledge
-from app.ai.providers.embedding import embed
+from app.ai.providers.embedding import embed, embed_openai
 from . import client as vectors
+from .collections import MATCHING_JOBS
 from .models import SyncTask
 
 lock=Lock()
@@ -16,13 +17,17 @@ log=logging.getLogger(__name__)
 
 def enqueue(db,kind,ident):
     db.add(SyncTask(entity_type=kind,entity_id=ident))
+    if kind=="jobs" and MATCHING_JOBS!="jobs" and OPENAI_API_KEY:
+        db.add(SyncTask(entity_type=MATCHING_JOBS,entity_id=ident))
+
 
 def refresh(db,kind,ident):
-    info={"jobs":jobs.vector_record,"cvs":students.vector_record,"knowledge":knowledge.vector_record}[kind](db,ident)
+    source = "jobs" if kind==MATCHING_JOBS else kind
+    info={"jobs":jobs.vector_record,"cvs":students.vector_record,"knowledge":knowledge.vector_record}[source](db,ident)
     if not info:
         vectors.delete_entity(kind,ident)
         return
-    if kind=="jobs":
+    if source=="jobs":
         details = info["details"]
         texts=[" ".join(filter(None,[info["title"],info["description"],info["requirements"]," ".join(info["skills"]),
                                     details.get("address") or details.get("work_address"), details.get("responsibilities")]))]
@@ -41,7 +46,8 @@ def refresh(db,kind,ident):
             knowledge.mark_synced(db,ident,digest,texts)
         return
     for start in range(0,len(texts),32):
-        values=embed(texts[start:start+32])
+        encode = embed_openai if kind==MATCHING_JOBS else embed
+        values=encode(texts[start:start+32])
         vectors.upsert(kind,[(vectors.point_id(kind,ident,i),v,{**payload,"entity_id":ident,"position":i,"hash":digest})
                              for i,v in enumerate(values,start)])
     keep={vectors.point_id(kind,ident,i) for i in range(len(texts))}
@@ -79,6 +85,8 @@ def drain(db,limit=40):
 def reconcile(db):
     for kind,ids in [("jobs",jobs.public_ids(db)),("knowledge",knowledge.public_ids(db)),("cvs",students.confirmed_cv_ids(db))]:
         existing={p.payload["entity_id"] for p in vectors.entries(kind)}
+        if kind=="jobs" and MATCHING_JOBS!="jobs" and OPENAI_API_KEY:
+            existing.update(p.payload["entity_id"] for p in vectors.entries(MATCHING_JOBS))
         for ident in existing|ids:
             enqueue(db,kind,ident)
     db.commit()

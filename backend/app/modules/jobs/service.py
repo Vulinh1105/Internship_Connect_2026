@@ -1,6 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy import select
 from app.core.config import now, today
+from app.ai.providers.embedding import normalize
 from app.common.pagination import page
 from app.common.records import first, put, record, require
 from app.modules.companies import service as companies
@@ -21,8 +22,10 @@ ACTIVE_APPLICATIONS=("pending","reviewing")
 
 def material(j):
     details=j.details or {}
+    required = tuple(sorted(normalize(row["name"].strip()) for row in details.get("skill_priorities",[])
+                            if row["priority"]=="required"))
     return (tuple(getattr(j,key) for key in MATERIAL_FIELDS),tuple(sorted(str(s).strip() for s in (j.skills or []))),
-            tuple(details.get(key) or "" for key in MATERIAL_DETAILS))
+            tuple(details.get(key) or "" for key in MATERIAL_DETAILS),required)
 
 def is_public(j):
     return (j.status == "open" and j.moderation_status == "approved" and j.deleted_at is None
@@ -118,11 +121,15 @@ def upsert(db, actor, data, ident=None):
     else:
         j=Job(company_id=data.company_id)
         db.add(j)
-    for key,value in data.model_dump(exclude={"benefits",*DETAIL_FIELDS}).items():
+    for key,value in data.model_dump(exclude={"benefits","required_skills",*DETAIL_FIELDS}).items():
         setattr(j,key,value)
     # Bỏ giá trị cũ rồi ghi giá trị mới để doanh nghiệp xóa trống được một trường.
     details={k:v for k,v in (j.details or {}).items() if k not in DETAIL_FIELDS}
     details.update({k:getattr(data,k) for k in DETAIL_FIELDS if getattr(data,k) not in (None,"")})
+    if data.required_skills is not None:
+        required = {normalize(skill.strip()) for skill in data.required_skills}
+        details["skill_priorities"] = [{"name":skill,"priority":"required" if normalize(skill.strip()) in required else "preferred"}
+                                       for skill in data.skills]
     j.details={**details,"benefits":data.benefits}
     if not ident or j.moderation_status!="approved" or material(j)!=before:
         j.moderation_status="pending"

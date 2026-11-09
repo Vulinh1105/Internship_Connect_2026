@@ -1,5 +1,6 @@
 from hashlib import sha256
 from pathlib import Path
+import re
 from fastapi import HTTPException
 from sqlalchemy import select, update
 from app.common.records import first,record,require
@@ -24,9 +25,13 @@ def get_own(db,actor):
         raise HTTPException(403,"Chỉ sinh viên có hồ sơ cá nhân")
     return require(first(db,Student,user_id=actor["id"]),"Chưa có hồ sơ sinh viên")
 
+def profile_skills(student):
+    return list(dict.fromkeys([*student.skills, *student.details.get("pending_skills", [])]))
+
+
 def profile(db,actor):
     student=get_own(db,actor)
-    return {**record(student),"skills":match_input(db,student.id)["skills"],"profile_skills":student.skills}
+    return {**record(student),"skills":match_input(db,student.id)["skills"],"profile_skills":profile_skills(student)}
 
 def public_name(db,ident):
     s=require(repo.get_student(db,ident))
@@ -48,7 +53,7 @@ def applicant_view(db,student_id,cv_id=None):
 def user_id_for(db,ident):
     return require(repo.get_student(db,ident)).user_id
 
-def match_input(db,student_id,cv_id=None):
+def match_input(db,student_id,cv_id=None,*,hybrid=False):
     s=require(repo.get_student(db,student_id))
     options=select(CV).where(CV.student_id==s.id,CV.confirmed.is_(True),CV.archived.is_(False))
     if cv_id is not None:
@@ -60,8 +65,28 @@ def match_input(db,student_id,cv_id=None):
     else:
         archived=db.scalars(select(CV.extracted).filter_by(student_id=s.id,archived=True))
         archived_skills={skill for facts in archived for skill in facts.get("skills",[])}
-        skills=[skill for skill in s.skills if skill not in archived_skills]
+        skills=[skill for skill in profile_skills(s) if skill not in archived_skills]
         content=s.summary
+    if hybrid:
+        skills = list(dict.fromkeys([*skills,*profile_skills(s)]))
+        evidence = []
+        if cv:
+            evidence.extend(cv.extracted.get("projects",[])+cv.extracted.get("experience",[]))
+            if not evidence:
+                sections = re.split(r"(?im)^\s*(?:dự án|kinh nghiệm(?: làm việc)?|projects?|(?:work )?experience)\s*[:：]?\s*$",
+                                    cv.parsed_text,maxsplit=1)
+                if len(sections)==2:
+                    section = re.split(r"(?im)^\s*(?:học vấn|kỹ năng|chứng chỉ|education|skills|certifications)\s*[:：]?\s*$",
+                                       sections[1],maxsplit=1)[0]
+                    evidence.append(section[:4000])
+        if set(words(s.summary)) & {"project","projects","experience","internship"} or any(
+                term in normalize(s.summary) for term in ("du an","kinh nghiem","thuc tap")):
+            evidence.append(s.summary)
+        safe = file_parsing.redact(" ".join([s.major,s.summary,content]),s.name)[:8000]
+        evidence = file_parsing.redact(" ".join(evidence),s.name)[:4000]
+        return {"student_id":s.id,"major":s.major,"skills":skills,"preferences":s.preferences,
+                "text":" ".join([" ".join(skills),s.preferences.get("target_category",""),safe]),
+                "experience_text":evidence,"cv_id":cv.id if cv else None}
     safe=file_parsing.redact(content,s.name)[:4000]
     return {"student_id":s.id,"major":s.major,"skills":skills,"preferences":s.preferences,
             "text":" ".join([s.major, s.preferences.get("target_category","")," ".join(skills),safe]),
@@ -89,13 +114,18 @@ def update_profile(db,actor,data):
     s.name=data.name.strip()
     s.major=data.major.strip()
     s.summary=data.summary
-    s.skills,unknown=canonical(db,data.skills)
+    known,unknown=canonical(db,data.skills)
+    skills={}
+    for skill in [*known,*unknown]:
+        skills.setdefault(normalize(skill),skill)
+    s.skills=list(skills.values())
     s.preferences=data.preferences.model_dump()
     extra = data.model_dump(include={"school","specialization","study_year","skill_levels"}, exclude_unset=True)
-    if "skill_levels" in extra:
-        levels = extra["skill_levels"] or {}
-        extra["skill_levels"] = {skill: levels[skill] for skill in s.skills if skill in levels}
-    s.details={**s.details,**extra,"pending_skills":unknown}
+    levels = extra.get("skill_levels",s.details.get("skill_levels")) or {}
+    normalized_levels = {normalize(skill):level for skill,level in levels.items()}
+    extra["skill_levels"] = {skill:normalized_levels[normalize(skill)] for skill in s.skills
+                             if normalize(skill) in normalized_levels}
+    s.details={**s.details,**extra,"pending_skills":[]}
     db.commit()
     return record(s)
 

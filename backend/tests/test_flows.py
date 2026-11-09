@@ -16,6 +16,9 @@ from app.main import app
 from app.core.config import now
 from app.core.database import Base, Session, engine
 from app.ai.vector import client as vectors, sync
+from app.ai.matching import service as matching
+from app.ai.providers.model_config import OPENAI_DIMENSIONS
+from app.ai.vector.collections import MATCHING_JOBS
 from app.modules.jobs.models import Job
 from scripts.seed_db import seed
 
@@ -37,7 +40,13 @@ def payload(response,status=200):
     assert response.status_code==status,response.text
     return response.json()
 
-def test_complete_flows():
+def test_complete_flows(monkeypatch):
+    def fake_openai(texts,user_id=None):
+        return [[1.0]+[0.0]*(OPENAI_DIMENSIONS-1) for _ in texts]
+    monkeypatch.setattr(sync,"OPENAI_API_KEY","mock")
+    monkeypatch.setattr(matching,"OPENAI_API_KEY","mock")
+    monkeypatch.setattr(sync,"embed_openai",fake_openai)
+    monkeypatch.setattr(matching,"embed_openai",fake_openai)
     try:
         initialize()
         verify_flows()
@@ -64,7 +73,12 @@ def verify_flows():
     staff=actor("staff-demo")
     assert student.get("/api/jobs/moderation").status_code==403
     assert staff.get("/api/auth/users").status_code==403
-    assert len(payload(student.get("/api/matching")))>0
+    assert MATCHING_JOBS!="jobs"
+    assert vectors.entries(MATCHING_JOBS)
+    matches=payload(student.get("/api/matching"))
+    assert 0<len(matches)<=10
+    assert all(j["semantic_available"] and j["score_breakdown"]["semantic"]==25 for j in matches)
+    assert all(j["match_score"]==round(sum(j["score_breakdown"].values()),1) for j in matches)
     company_id=payload(company.get("/api/companies/mine"))[0]["id"]
     job=payload(company.post("/api/jobs",json={"company_id":company_id,"title":"Thuc tap SQL Python",
          "description":"Phan tich du lieu SQL Python va viet bao cao kiem thu.",

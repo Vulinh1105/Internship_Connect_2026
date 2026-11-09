@@ -1,16 +1,13 @@
 import {api} from '../api/client.js';
-import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,money,modes,status,toast,bindForm,action} from '../components/ui.js';
+import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,list,money,modes,status,toast,bindForm,action} from '../components/ui.js';
 import {companyCard,jobCard,loginRequired} from './public.js';
 
 const cvFile='<label class="field">Tệp .pdf, .docx hoặc .txt (tối đa 5 MB)<input type="file" name="file" required accept=".pdf,application/pdf,.docx,.txt"></label>';
 
 async function profile({root,user,reload}){
   if(!user)return loginRequired(root);
-  const [cvs,profile,catalog]=await Promise.all([api('/students/me/cvs'),api('/students/me'),api('/students/skills')]);
+  const [cvs,profile]=await Promise.all([api('/students/me/cvs'),api('/students/me')]);
   const d=profile.details||{}, p=profile.preferences||{};
-  const levels=[['','Chưa chọn'],['basic','Cơ bản'],['intermediate','Trung cấp'],['advanced','Nâng cao']];
-  const skillNames=[...new Set([...(profile.profile_skills||[]),...catalog.map(s=>s.name)])];
-  const skillFields=skillNames.map((name,i)=>select('skill_'+i,name,levels,d.skill_levels?.[name]||(profile.profile_skills?.includes(name)?'basic':'')));
   root.innerHTML=heading('Hồ sơ nghề nghiệp','Thông tin dùng khi ứng tuyển và tìm việc. AI Matching ưu tiên kỹ năng đọc được từ CV đã xác nhận.')
     +box(form('career','<div class="form-grid">'
       +field('name','Họ tên',profile.name,'text','required maxlength="150"')+field('school','Trường',d.school)
@@ -21,7 +18,8 @@ async function profile({root,user,reload}){
       +field('salary_min','Lương kỳ vọng tối thiểu',p.salary_min,'number','min="0"')
       +select('level','Cấp độ',[['intern','Thực tập'],['fresher','Fresher'],['junior','Junior']],p.level)
       +'</div>'+area('summary','Giới thiệu',profile.summary,'maxlength="4000"')
-      +'<details><summary>Kỹ năng và mức độ</summary><div class="form-grid">'+skillFields.join('')+'</div></details>','Lưu hồ sơ nghề nghiệp'))
+      +area('skills','Kỹ năng (cách nhau bằng dấu phẩy hoặc xuống dòng)',(profile.profile_skills||[]).join(', '),
+        'rows="3" placeholder="Ví dụ: Python, Docker, Kubernetes"'),'Lưu hồ sơ nghề nghiệp'))
     +box('<h2>Tải CV</h2>'+form('upload',cvFile,'Tải lên'))
     +cvs.map(c=>box('<h3>'+esc(c.original_name)+'</h3>'
       +tags(c.confirmed?'Sẵn sàng sử dụng':'Chờ xác nhận')
@@ -30,10 +28,11 @@ async function profile({root,user,reload}){
       +(!c.confirmed?btn('activate-cv','Dùng CV này',c.id):'')+btn('remove-cv','Xóa CV',c.id)+'</div>'
       +'<details><summary>Thay CV</summary>'+form('replace-'+c.id,cvFile,'Lưu CV mới')+'</details>')).join('');
   bindForm(root,'career',async data=>{
-    const skill_levels=Object.fromEntries(skillNames.map((name,i)=>[name,data['skill_'+i]]).filter(([,level])=>level));
+    const skills=[...new Set(list(data.skills))];
+    if(skills.length>40)throw new Error('Bạn có thể nhập tối đa 40 kỹ năng.');
     const {name,major,school,specialization,study_year,summary,target_category,preferred_location,preferred_work_mode,salary_min,level}=data;
     await api('/students/me',{method:'PUT',data:{name,major,school,specialization,study_year:Number(study_year)||null,
-      summary,skills:Object.keys(skill_levels),skill_levels,
+      summary,skills,
       preferences:{target_category,preferred_location,preferred_work_mode,salary_min:salary_min===''?null:Number(salary_min),level}}});
     toast('Đã lưu hồ sơ nghề nghiệp');await reload();
   });
@@ -54,6 +53,8 @@ async function profile({root,user,reload}){
     }
   });
 }
+const matchCriteria=[['skills','Kỹ năng',40],['semantic','Ngữ nghĩa',25],['major','Ngành học',10],
+  ['experience','Kinh nghiệm và dự án',10],['preferences','Nguyện vọng',15]];
 const matchRow=j=>{
   const pct=Math.max(0,Math.min(100,Math.round(Number(j.match_score)||0)));
   const workMode=modes.find(([key])=>key===j.work_mode)?.[1];
@@ -61,13 +62,18 @@ const matchRow=j=>{
     +'<div class="match-body"><h3><a href="#job/'+j.id+'">'+esc(j.title)+'</a></h3><p class="muted">'+esc(j.company_name)+'</p>'
     +tags(j.location,workMode,j.category)
     +'<p class="job-summary">'+esc(money(j.salary_min,j.salary_max))+' · Hạn '+esc(j.deadline||'linh hoạt')+'</p>'
-    +(j.reason?'<p>'+esc(j.reason)+'</p>':'')+(j.skills?.length?tags(...j.skills.slice(0,5)):'')+'</div>'
+    +(j.reason?'<p>'+esc(j.reason)+'</p>':'')
+    +'<details><summary>Chi tiết điểm phù hợp</summary>'
+    +copy('Kỹ năng đã có: '+(j.matched_skills?.join(', ')||'Chưa ghi nhận'))
+    +copy('Kỹ năng còn thiếu: '+(j.missing_skills?.join(', ')||'Không có'))
+    +matchCriteria.map(([key,label,max])=>copy(label+': '+(key==='semantic'&&!j.semantic_available?'Chờ đồng bộ':(j.score_breakdown?.[key]??0)+'/'+max))).join('')
+    +'</details></div>'
     +'<a class="card-link" href="#job/'+j.id+'">Xem thêm <span aria-hidden="true">→</span></a></article>';
 };
 async function matching({root,user}){
   if(!user)return loginRequired(root);
   const jobs=await api('/matching');
-  root.innerHTML=heading('AI Matching','Gợi ý dựa trên hồ sơ, kỹ năng và nguyện vọng. Điểm số dùng để tham khảo khi chọn tin.')
+  root.innerHTML=heading('AI Matching','Xếp hạng theo hồ sơ và CV đã xác nhận. OpenAI tạo vector từ văn bản hồ sơ đã lọc thông tin liên hệ, và hệ thống tính điểm theo từng tiêu chí.')
     +(jobs.length?'<div class="match-list">'+jobs.map(matchRow).join('')+'</div>':empty())+(!jobs.length?link('profile','Cập nhật hồ sơ'):'');
 }
 async function saved({root,user,reload}){

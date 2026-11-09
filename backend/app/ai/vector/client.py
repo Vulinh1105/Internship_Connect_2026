@@ -4,8 +4,7 @@ from threading import RLock
 from uuid import uuid5,NAMESPACE_URL
 from qdrant_client import QdrantClient,models
 from app.core.config import QDRANT_URL,QDRANT_PATH
-from app.ai.providers.model_config import DIMENSIONS
-from .collections import collection
+from .collections import collection, dimensions
 
 lock=RLock()
 
@@ -23,7 +22,7 @@ def ensure(kind):
     name=collection(kind)
     c=client()
     if not c.collection_exists(name):
-        c.create_collection(name, vectors_config=models.VectorParams(size=DIMENSIONS,distance=models.Distance.COSINE))
+        c.create_collection(name, vectors_config=models.VectorParams(size=dimensions(kind),distance=models.Distance.COSINE))
     return name
 
 def filters(**pairs):

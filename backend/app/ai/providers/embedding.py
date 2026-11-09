@@ -7,7 +7,7 @@ from fastapi import HTTPException
 from app.core.config import AI_BACKEND
 from app.ai.usage import call
 from .llm import client
-from .model_config import DIMENSIONS, EMBEDDING, estimate
+from .model_config import DIMENSIONS, EMBEDDING, OPENAI_DIMENSIONS, estimate
 
 def normalize(text):
     return "".join(c for c in unicodedata.normalize("NFD",text.casefold().replace("đ","d")) if not unicodedata.combining(c))
@@ -24,15 +24,19 @@ def local_vector(text):
     return [x/length for x in v] if length else v
 
 def embed(texts,user_id=None):
-    texts=[t[:12000] or " " for t in texts]
     if AI_BACKEND=="local":
         with call(user_id,"embedding","local-hash"):
-            return [local_vector(t) for t in texts]
+            return [local_vector(t[:12000]) for t in texts]
+    return embed_openai(texts,user_id)
+
+
+def embed_openai(texts,user_id=None):
     from openai import APIError
+    texts=[t[:12000] or " " for t in texts]
     for attempt in range(2):
         try:
             with call(user_id,"embedding",EMBEDDING) as stats:
-                response=client().embeddings.create(model=EMBEDDING,input=texts,dimensions=DIMENSIONS)
+                response=client().embeddings.create(model=EMBEDDING,input=texts,dimensions=OPENAI_DIMENSIONS)
                 stats["tokens_in"]=response.usage.total_tokens
                 stats["cost_usd"]=estimate(stats["tokens_in"],0)
                 return [x.embedding for x in sorted(response.data,key=lambda x:x.index)]

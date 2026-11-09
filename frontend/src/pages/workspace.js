@@ -19,14 +19,15 @@ function jobFields(companies,j={}){
       +wide(field('address','Địa chỉ cụ thể',d.address,'text','maxlength="255"'))+'</div>')
     +part('3. Yêu cầu ứng viên','<div class="form-grid">'+field('experience','Kinh nghiệm',d.experience,'text','maxlength="100" placeholder="Ví dụ: Không yêu cầu, 6 tháng"')
       +select('education','Học vấn',educations,d.education)+field('quantity','Số lượng tuyển',d.quantity,'number','min="1" max="1000"')
-      +wide(field('skills','Kỹ năng, cách nhau bằng dấu phẩy',j.skills?.join(', ')))+'</div>')
+      +wide(field('skills','Tất cả kỹ năng, cách nhau bằng dấu phẩy',j.skills?.join(', ')))
+      +wide(field('required_skills','Kỹ năng bắt buộc (chọn từ danh sách trên)',d.skill_priorities?.filter(s=>s.priority==='required').map(s=>s.name).join(', ')))+'</div>')
     +part('4. Phụ cấp và hạn nộp','<div class="form-grid">'+field('salary_min','Lương từ',j.salary_min,'number','min="0"')
       +field('salary_max','Lương đến',j.salary_max,'number','min="0"')+field('deadline','Hạn nộp',j.deadline,'date')+'</div>')
     +part('5. Nội dung tin','<div class="stack">'+area('description','Mô tả',j.description,'required minlength="15"')
       +area('requirements','Yêu cầu',j.requirements,'required minlength="4"')+area('benefits','Quyền lợi',d.benefits)+'</div>');
 }
 function jobPayload(data){
-  return {...data,company_id:Number(data.company_id),skills:list(data.skills),deadline:data.deadline||null,
+  return {...data,company_id:Number(data.company_id),skills:list(data.skills),required_skills:list(data.required_skills),deadline:data.deadline||null,
     quantity:data.quantity?Number(data.quantity):null,education:data.education||null,
     employment_schedule:data.employment_schedule||null,
     salary_min:data.salary_min?Number(data.salary_min):null,salary_max:data.salary_max?Number(data.salary_max):null};

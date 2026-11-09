@@ -1,6 +1,7 @@
 from datetime import date
 from typing import Literal
 from pydantic import BaseModel, Field, model_validator
+from app.ai.providers.embedding import normalize
 
 class JobInput(BaseModel):
     company_id: int
@@ -15,6 +16,7 @@ class JobInput(BaseModel):
     salary_max: int | None = Field(default=None, ge=0, le=1000000000)
     deadline: date | None = None
     skills: list[str] = Field(default_factory=list, max_length=40)
+    required_skills: list[str] | None = Field(default=None,max_length=40)
     benefits: str = Field(default="", max_length=3000)
     experience: str = Field(default="", max_length=100)
     education: Literal["Không yêu cầu", "Sinh viên đại học/cao đẳng", "Sinh viên năm cuối", "Mới tốt nghiệp",
@@ -32,6 +34,10 @@ class JobInput(BaseModel):
             raise ValueError("Mức lương tối thiểu lớn hơn tối đa")
         if any(not s.strip() or len(s)>100 for s in self.skills):
             raise ValueError("Tên kỹ năng không hợp lệ")
+        if self.required_skills is not None:
+            all_skills = {normalize(skill.strip()) for skill in self.skills}
+            if any(normalize(skill.strip()) not in all_skills for skill in self.required_skills):
+                raise ValueError("Kỹ năng bắt buộc phải có trong danh sách kỹ năng của tin")
         return self
 
 class ReviewInput(BaseModel):
