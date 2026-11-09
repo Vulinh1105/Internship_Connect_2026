@@ -18,6 +18,7 @@ class Member(Base):
     company_id = Column(Integer, ForeignKey('companies.id'), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     active = Column(Boolean, default=True, nullable=False)
+    manager = Column(Boolean, default=False, server_default="0", nullable=False)
     __table_args__ = (UniqueConstraint('company_id','user_id'),)
 
 class Follow(Base):
@@ -26,3 +27,14 @@ class Follow(Base):
     company_id = Column(Integer, ForeignKey('companies.id'), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     __table_args__ = (UniqueConstraint('company_id','user_id'),)
+
+
+class PlacementFeedback(Base):
+    __tablename__ = "placement_feedback"
+    application_id = Column(Integer, ForeignKey("applications.id"), primary_key=True)
+    completed_at = Column(DateTime)
+    interviewer_rating = Column(Integer)
+    interviewer_note = Column(Text)
+    student_rating = Column(Integer)
+    student_review = Column(Text)
+    review_status = Column(String(20))

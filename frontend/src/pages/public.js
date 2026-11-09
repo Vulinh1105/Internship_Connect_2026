@@ -1,4 +1,5 @@
 import {api} from '../api/client.js';
+import {companyGallery} from '../components/company-gallery.js';
 import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,grid,money,modes,toast,bindForm,action} from '../components/ui.js';
 
 import {logoTile, bannerHtml, bindBanner} from '../components/media.js';
@@ -53,16 +54,22 @@ async function home({root,user}){
 const featured=data=>data.items.slice(0,6);
 async function jobs({root,args,user}){
   const params=new URLSearchParams(args[0]||'');
-  const [page,ids]=await Promise.all([api('/jobs?'+params),savedIds(user)]);
+  const semantic=user&&params.get('search_mode')==='semantic'&&(params.get('q')||'').trim().length>=2;
+  const request=semantic?api('/jobs/semantic?'+params).then(items=>({items,total:items.length,offset:0,limit:5})):api('/jobs?'+params);
+  const [page,ids]=await Promise.all([request,savedIds(user)]);
   root.innerHTML=heading('Vị trí thực tập','Chỉ hiển thị các tin đang mở, còn hạn và đã được duyệt.')
-    +box(form('search','<div class="form-grid">'+field('q','Từ khóa',params.get('q'))+field('location','Địa điểm',params.get('location'))
+    +box(form('search','<div class="form-grid">'+(user?select('search_mode','Kiểu tìm kiếm',[['keyword','Theo từ khóa'],['semantic','Theo câu tự nhiên']],params.get('search_mode')):'')
+    +field('q','Từ khóa hoặc câu mô tả vị trí',params.get('q'),'text','maxlength="500"')+field('location','Địa điểm',params.get('location'))
     +field('category','Ngành',params.get('category'))+select('work_mode','Hình thức',[['','Tất cả'],...modes],params.get('work_mode'))
     +select('level','Cấp độ',[['','Tất cả'],['intern','Thực tập'],['fresher','Fresher'],['junior','Junior'],['senior','Senior']],params.get('level'))
     +field('salary_min','Lương từ',params.get('salary_min'),'number','min="0"')+field('salary_max','Lương đến',params.get('salary_max'),'number','min="0"')+'</div>','Tìm vị trí'))
     +'<div class="row results-bar"><span class="muted">'+page.total+' kết quả</span>'+(user?link('saved','Tin đã lưu'):'')+'</div>'
     +(page.items.length?'<div class="top-grid">'+page.items.map(topCard(ids)).join('')+'</div>':empty('Chưa có tin khớp với bộ lọc.'))
     +pager(Math.floor(page.offset/page.limit)+1,Math.ceil(page.total/page.limit),Math.max(0,page.offset-page.limit),page.offset+page.limit);
-  bindForm(root,'search',values=>{location.hash='jobs/'+new URLSearchParams(Object.entries(values).filter(([,v])=>v));});
+  bindForm(root,'search',values=>{
+    if(values.search_mode==='semantic'&&values.q.trim().length<2)throw new Error('Nhập câu mô tả vị trí muốn tìm.');
+    location.hash='jobs/'+new URLSearchParams(Object.entries(values).filter(([,v])=>v));
+  });
   action(root,'page',offset=>{params.set('offset',offset);location.hash='jobs/'+params;});
   bindHearts(root,user,ids);
 }
@@ -76,24 +83,30 @@ const bullets=text=>{
   const lines=String(text||'').split('\n').map(s=>s.trim().replace(/^(\d+[.)]|[-•*])\s*/,'')).filter(Boolean);
   return lines.length?'<ul class="bullets">'+lines.map(l=>'<li>'+esc(l)+'</li>').join('')+'</ul>':'';
 };
+const benefitList=details=>Array.isArray(details.benefit_groups)&&details.benefit_groups.length
+  ?'<ul class="bullets">'+details.benefit_groups.map(b=>'<li><b>'+esc(b.title)+'</b> · '+esc(b.detail)+'</li>').join('')+'</ul>':'';
 const infoItem=(icon,label,value)=>'<div class="info-item"><span class="info-icon">'+icon+'</span><div><small class="muted">'+esc(label)+'</small><b>'+esc(value)+'</b></div></div>';
 const fact=(label,value)=>value?'<div><dt>'+esc(label)+'</dt><dd>'+esc(value)+'</dd></div>':'';
 const overviewRow=(label,html)=>html?'<div class="overview-row"><span class="muted">'+esc(label)+'</span>'+html+'</div>':'';
 async function job({root,args,user}){
   const j=await api('/jobs/'+Number(args[0]));
+  if(j.active)api('/jobs/'+j.id+'/views',{method:'POST'}).catch(()=>{});
   const [c,ids]=await Promise.all([api('/companies/'+j.company_id).catch(()=>null),savedIds(user)]);
   const d=j.details||{}, cd=c?.details||{};
   const canApply=user?.role==='student'&&j.active;
   const workMode=modes.find(([key])=>key===j.work_mode)?.[1];
   root.innerHTML='<p class="crumbs"><a href="#home">Trang chủ</a> › <a href="#jobs">Vị trí thực tập</a> › '+esc(j.title)+'</p><div class="detail-layout"><div class="detail-main">'
     +box('<h1>'+esc(j.title)+'</h1><p class="salary">'+esc(money(j.salary_min,j.salary_max))+'</p>'
-      +'<div class="info-trio">'+infoItem(iconPin,'Địa điểm',d.address?d.address+', '+j.location:j.location)+infoItem(iconExp,'Kinh nghiệm',d.experience||'—')+infoItem(iconCal,'Hạn ứng tuyển',j.deadline||'Linh hoạt')+'</div>'
+      +'<div class="info-trio">'+infoItem(iconPin,!d.address&&d.work_address&&j.work_mode!=='remote'?'Địa điểm làm việc demo':'Địa điểm',d.address||d.work_address||j.location)+infoItem(iconExp,'Kinh nghiệm',d.experience||'—')+infoItem(iconCal,'Hạn ứng tuyển',j.deadline||'Linh hoạt')+'</div>'
       +'<div class="cta-row">'+(canApply?'<button type="button" data-action="goto-apply">Ứng tuyển ngay</button>':!user?'<a class="button" href="#login">Đăng nhập để ứng tuyển</a>':'')
       +(user&&j.active?saveButton(j.id,j.title,ids.has(j.id)):'')+'</div>')
     +box('<h2 class="section-title">Tổng quan</h2>'+overviewRow('Kỹ năng',j.skills?.length?tags(...j.skills):'')+overviewRow('Ngành',tags(j.category))
       +overviewRow('Hình thức',tags(workMode))+overviewRow('Thời gian',d.working_hours?tags(...String(d.working_hours).split('\n').map(x=>x.trim()).filter(Boolean)):''))
     +box('<h2 class="section-title">Mô tả công việc</h2>'+bullets(j.description)+'<h2 class="section-title">Yêu cầu</h2>'+bullets(j.requirements)
-      +(d.benefits?'<h2 class="section-title">Quyền lợi</h2>'+bullets(d.benefits):''))
+      +(d.responsibilities?'<h2 class="section-title">Trách nhiệm</h2>'+bullets(d.responsibilities):'')
+      +(d.nice_to_have?'<h2 class="section-title">Ưu tiên</h2>'+copy(d.nice_to_have):'')
+      +(d.application_process?'<h2 class="section-title">Quy trình ứng tuyển</h2>'+copy(d.application_process):'')
+      +(d.benefits||d.benefit_groups?.length?'<h2 class="section-title">Quyền lợi</h2>'+bullets(d.benefits)+benefitList(d):''))
     +'</div><aside class="detail-side">'
     +box('<div class="company-head">'+logoTile(j.company_id,j.company_name,true,c?.has_logo??j.company_has_logo)+'<h3>'+esc(j.company_name)+'</h3></div>'
       +'<div class="company-facts">'+(cd.company_size?'<p><b>Quy mô:</b> '+esc(cd.company_size)+' nhân viên</p>':'')
@@ -101,8 +114,14 @@ async function job({root,args,user}){
       +link('company/'+j.company_id,'Xem trang công ty')).replace('class="panel"','class="panel company-card"')
     +box('<h2 class="section-title">Thông tin chung</h2><dl class="facts">'+fact('Cấp bậc',levelLabel[j.level]||j.level)+fact('Học vấn',d.education)
       +fact('Số lượng tuyển',d.quantity?d.quantity+' người':'')+fact('Hình thức làm việc',workMode)
-      +fact('Lịch làm việc',scheduleLabel[d.employment_schedule])+'</dl>')
+      +fact('Lịch làm việc',d.working_days||scheduleLabel[d.employment_schedule])+fact('Ca làm',d.shift_details)+'</dl>')
+    +(user&&j.active?box('<details><summary>Báo cáo tin tuyển dụng</summary>'+form('job-report',
+        area('reason','Lý do báo cáo','','required minlength="10" maxlength="2000"'),'Gửi báo cáo')+'</details>'):'')
     +'</aside></div>';
+  if(user&&j.active)bindForm(root,'job-report',async(data,el)=>{
+    await api('/jobs/'+j.id+'/reports',{method:'POST',data});
+    el.reset();toast('Đã gửi báo cáo cho quản trị viên');
+  });
   bindHearts(root,user,ids);
   action(root,'goto-apply',()=>root.querySelector('#apply-section')?.scrollIntoView({behavior:'smooth'}));
   if(canApply){
@@ -116,7 +135,7 @@ async function job({root,args,user}){
     });
   }
 }
-const companyCard=c=>'<article class="card top-card"><div class="top-card-head">'+logoTile(c.id,c.name,false,c.has_logo)
+export const companyCard=c=>'<article class="card top-card"><div class="top-card-head">'+logoTile(c.id,c.name,false,c.has_logo)
   +'<div><h3><a href="#company/'+c.id+'">'+esc(c.name)+'</a></h3><p class="muted">'+esc(c.industry)+'</p></div></div>'
   +'<div class="top-card-foot">'+tags(c.city,c.details?.company_size&&c.details.company_size+' nhân viên')+'</div></article>';
 const COMPANY_PAGE=12;
@@ -131,6 +150,7 @@ async function companies({root,args}){
     +'<h2 id="demo-companies-title">Doanh nghiệp trên hệ thống</h2></div></div>'
     +(records.length?'<div class="top-grid">'+records.map(companyCard).join('')+'</div>':empty())
     +pager(current,pages,current-1,current+1)+'</section>';
+  root.insertAdjacentHTML('beforeend',companyGallery());
   action(root,'page',n=>{location.hash='companies/'+new URLSearchParams({page:n});});
 }
 const iconUsers=svg('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2A6.5 6.5 0 0 1 21.5 20"/>');
@@ -156,12 +176,12 @@ const jobRow=ids=>j=>{
 const COMPANY_JOBS=10;
 async function company({root,args,user,signal}){
   const id=Number(args[0]);
-  const [c,all,ids]=await Promise.all([api('/companies/'+id),api('/jobs?company_id='+id+'&limit=100'),savedIds(user)]);
+  const [c,all,ids,reviews]=await Promise.all([api('/companies/'+id),api('/jobs?company_id='+id+'&limit=100'),savedIds(user),api('/companies/'+id+'/reviews')]);
   const d=c.details||{}, site=siteUrl(d.website);
   const locations=[...new Set(all.items.map(j=>j.location).filter(Boolean))];
   let following=Boolean(c.following), followers=c.followers||0;
   const followText=()=>following?'✓ Đang theo dõi':'+ Theo dõi';
-  const about=[['Sứ mệnh',d.mission],['Văn hoá',d.culture],['Quyền lợi',d.benefits]].filter(([,value])=>value)
+  const about=[['Sứ mệnh',d.mission],['Tầm nhìn',d.vision],['Giá trị cốt lõi',d.core_values],['Văn hoá',d.culture],['Quyền lợi',d.benefits],['Lịch làm việc',d.work_schedule],['Chính sách làm việc',d.work_policy],['Giờ nghỉ trưa',d.lunch_break],['Quy trình tuyển dụng',d.hiring_process],['Chính sách thực tập',d.internship_policy]].filter(([,value])=>value)
     .map(([title,value])=>'<h3 class="co-sub">'+title+'</h3>'+copy(value)).join('');
   const where=d.address?(c.city&&!d.address.includes(c.city)?d.address+', '+c.city:d.address):c.city;
   const searchForm='<form class="co-search" id="co-search" role="search"><label class="co-q">'+searchIcon
@@ -177,7 +197,8 @@ async function company({root,args,user,signal}){
     +'<div class="co-tabs" role="group" aria-label="Mục của công ty"><button type="button" class="co-tab" data-tab="co-about" aria-current="true">Tổng quan</button>'
     +'<button type="button" class="co-tab" data-tab="co-jobs" aria-current="false">Tin tuyển dụng ('+all.total+')</button></div></section>'
     +'<div class="detail-layout"><div class="detail-main">'
-    +'<section class="panel" id="co-about"><h2 class="co-section-title">Giới thiệu công ty</h2>'+copy(c.description)+about+'</section>'
+    +'<section class="panel" id="co-about"><h2 class="co-section-title">Giới thiệu công ty</h2>'+copy(c.description)+about+benefitList(d)+'</section>'
+    +(reviews.length?box('<h2>Đánh giá sau thực tập</h2>'+reviews.map(r=>tags(r.student_rating+'/5')+copy(r.student_review)).join('')):'')
     +'<section class="panel" id="co-jobs"><h2 class="co-section-title">Tin tuyển dụng</h2>'
     +(all.total?searchForm+'<div id="co-job-list" aria-live="polite"></div>':empty('Công ty chưa có tin tuyển dụng đang mở.'))+'</section>'
     +'</div><aside class="detail-side">'
@@ -186,7 +207,7 @@ async function company({root,args,user,signal}){
       +(d.company_size?infoItem(iconUsers,'Quy mô',d.company_size+' nhân viên'):'')
       +(c.industry?infoItem(iconBuilding,'Ngành nghề',c.industry):'')
       +(d.verification_status==='verified'?infoItem(iconShield,'Xác minh','Đã xác minh'):'')+'</div>')
-    +(where?box('<h2 class="co-section-title">Địa điểm công ty</h2><div class="co-info">'+infoItem(iconPin,'Địa chỉ',where)+'</div>'):'')
+    +(where?box('<h2 class="co-section-title">Địa điểm công ty</h2><div class="co-info">'+infoItem(iconPin,d.address_is_synthetic?'Địa chỉ văn phòng demo':'Địa chỉ',where)+'</div>'):'')
     +'</aside></div>';
 
   action(root,'follow',async(_,button)=>{
@@ -272,16 +293,4 @@ async function reset({root,args}){
     toast('Đã đặt lại mật khẩu. Hãy đăng nhập bằng mật khẩu mới.');location.hash='login';
   });
 }
-async function account({root,user}){
-  if(!user)return loginRequired(root);
-  root.innerHTML='<div class="auth">'+heading('Đổi mật khẩu',user.email)+box(form('password',field('current_password','Mật khẩu hiện tại','','password','required maxlength="128" autocomplete="current-password"')
-    +field('new_password','Mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"')
-    +field('confirm','Nhập lại mật khẩu mới','','password','required minlength="8" maxlength="128" autocomplete="new-password"'),'Đổi mật khẩu'))
-    +'<p class="muted">Sau khi đổi, các thiết bị khác đang đăng nhập sẽ bị đăng xuất.</p></div>';
-  bindForm(root,'password',async (data,formEl)=>{
-    if(data.new_password!==data.confirm)throw new Error('Hai mật khẩu mới không khớp.');
-    await api('/auth/change-password',{method:'POST',data:{current_password:data.current_password,new_password:data.new_password}});
-    formEl.reset();toast('Đã đổi mật khẩu');
-  });
-}
-export const pages={home,jobs,job,companies,company,login,register,forgot,reset,account};
+export const pages={home,jobs,job,companies,company,login,register,forgot,reset};

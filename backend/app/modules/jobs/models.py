@@ -42,3 +42,21 @@ class Review(Base):
     decision = Column(String(24), nullable=False)
     reason = Column(Text, nullable=False)
     created_at = Column(DateTime, default=now, nullable=False)
+
+
+class JobMetrics(Base):
+    __tablename__ = "job_metrics"
+    job_id = Column(Integer, ForeignKey("jobs.id"), primary_key=True)
+    views = Column(Integer, default=0, server_default="0", nullable=False)
+
+
+class JobReport(Base):
+    __tablename__ = "job_reports"
+    id = Column(Integer, primary_key=True)
+    job_id = Column(Integer, ForeignKey("jobs.id"), nullable=False)
+    reporter_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    reason = Column(Text, nullable=False)
+    status = Column(String(20), default="pending", nullable=False)
+    resolution = Column(Text)
+    created_at = Column(DateTime, default=now, nullable=False)
+    __table_args__ = (UniqueConstraint("job_id","reporter_id"),)

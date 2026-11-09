@@ -13,9 +13,11 @@ def search(db:DB,q:str="",location:str="",category:str="",work_mode:str="",level
                           salary_min=salary_min,salary_max=salary_max,offset=offset,limit=limit)
 
 @router.get("/semantic")
-def semantic(db:DB,actor:Actor,q:str=Query(min_length=2,max_length=500),location:str=""):
+def semantic(db:DB,actor:Actor,q:str=Query(min_length=2,max_length=500),location:str="",category:str="",work_mode:str="",
+             level:str="",salary_min:int|None=None,salary_max:int|None=None):
     from app.ai.matching.service import search_jobs
-    return search_jobs(db,actor["id"],q,{"location":location})
+    return search_jobs(db,actor["id"],q,{"location":location,"category":category,"work_mode":work_mode,"level":level,
+                                            "salary_min":salary_min,"salary_max":salary_max})
 
 @router.get("/mine")
 def mine(db:DB,actor:Actor):

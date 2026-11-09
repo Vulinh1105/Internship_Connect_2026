@@ -26,16 +26,24 @@ def get_own(db,actor):
 
 def profile(db,actor):
     student=get_own(db,actor)
-    return {**record(student),"skills":match_input(db,student.id)["skills"]}
+    return {**record(student),"skills":match_input(db,student.id)["skills"],"profile_skills":student.skills}
 
 def public_name(db,ident):
     s=require(repo.get_student(db,ident))
     return s.name
 
 def applicant_view(db,student_id,cv_id=None):
-    # Phần hồ sơ sinh viên mà doanh nghiệp được xem trên đơn ứng tuyển: chỉ ngành học và kỹ năng.
-    info=match_input(db,student_id,cv_id)
-    return {"major":info["major"],"skills":info["skills"]}
+    from app.modules.auth.settings import options
+    student = require(repo.get_student(db,student_id))
+    fields = options(db,student.user_id).get("profile_fields",["major","skills"])
+    info = match_input(db,student_id,cv_id)
+    result = {"major":info["major"] if "major" in fields else "",
+              "skills":info["skills"] if "skills" in fields else []}
+    values = {**student.details,"summary":student.summary}
+    for field in ("school","specialization","study_year","summary"):
+        if field in fields and values.get(field):
+            result[field] = values[field]
+    return result
 
 def user_id_for(db,ident):
     return require(repo.get_student(db,ident)).user_id
@@ -83,7 +91,11 @@ def update_profile(db,actor,data):
     s.summary=data.summary
     s.skills,unknown=canonical(db,data.skills)
     s.preferences=data.preferences.model_dump()
-    s.details={**s.details,"pending_skills":unknown}
+    extra = data.model_dump(include={"school","specialization","study_year","skill_levels"}, exclude_unset=True)
+    if "skill_levels" in extra:
+        levels = extra["skill_levels"] or {}
+        extra["skill_levels"] = {skill: levels[skill] for skill in s.skills if skill in levels}
+    s.details={**s.details,**extra,"pending_skills":unknown}
     db.commit()
     return record(s)
 

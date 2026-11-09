@@ -23,7 +23,9 @@ def refresh(db,kind,ident):
         vectors.delete_entity(kind,ident)
         return
     if kind=="jobs":
-        texts=[" ".join([info["title"],info["description"],info["requirements"]," ".join(info["skills"])])]
+        details = info["details"]
+        texts=[" ".join(filter(None,[info["title"],info["description"],info["requirements"]," ".join(info["skills"]),
+                                    details.get("address") or details.get("work_address"), details.get("responsibilities")]))]
         payload={k:info[k] for k in ("location","category","level","salary_min","salary_max","work_mode","deadline")}
         payload.update(status="active",skill_ids=info["skills"])
     elif kind=="cvs":

@@ -18,13 +18,6 @@ function credit(photo){
     +' / <a href="'+license+'" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>';
 }
 
-export function heroPhoto(){
-  const photo=photos[0];
-  return '<figure class="hero-photo"><img src="'+asset(photo.file)+'" alt="'+esc(photo.alt)
-    +'" width="1440" height="810" fetchpriority="high"><figcaption><span><b>'+esc(photo.name)
-    +'</b><span>Trụ sở tại Hà Nội</span></span><small>'+credit(photo)+' · Ảnh thu nhỏ, cắt khung</small></figcaption></figure>';
-}
-
 export function companyGallery(){
   return '<section class="section company-gallery" aria-labelledby="company-gallery-title">'
     +'<div class="section-heading"><div><p class="eyebrow">Góc nhìn doanh nghiệp</p>'

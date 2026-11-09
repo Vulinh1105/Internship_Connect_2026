@@ -1,4 +1,5 @@
 import csv
+import json
 import os
 from pathlib import Path
 from collections import defaultdict
@@ -46,7 +47,25 @@ def dt(text):
 def number(text):
     return int(text) if text else None
 
+def enrich_details(item, fields, *, old_address=None):
+    if not fields or item.details.get("seed_enriched_v3"):
+        return
+    fields = dict(fields)
+    if isinstance(item, Company):
+        address = fields.pop("address")
+        if item.details.get("address") in (None, "", old_address):
+            fields.update(address=address, address_is_synthetic=True)
+        else:
+            fields.pop("address_detail", None)
+            fields.pop("district", None)
+    item.details = {**fields, **item.details, "seed_enriched_v3": True}
+    if "address" in fields:
+        item.details = {**item.details, "address": fields["address"], "address_is_synthetic": True}
+
+
 def seed(db):
+    company_extras = json.loads((SOURCE / "core/companies_v3.json").read_text(encoding="utf-8"))
+    job_extras = json.loads((SOURCE / "core/internships_v3.json").read_text(encoding="utf-8"))
     for r in rows("access/roles"):
         insert(db,Role,{"code":r["role_code"]},label=r["label"])
     for r in rows("access/permissions"):
@@ -63,13 +82,18 @@ def seed(db):
                password=hash_password(password) if active else None)
     users=ids(db,User)
     for r in rows("core/companies"):
-        insert(db,Company,{"code":r["seed_code"]},name=r["company_name"],industry=r["industry"],city=r["city"],
+        company,_=insert(db,Company,{"code":r["seed_code"]},name=r["company_name"],industry=r["industry"],city=r["city"],
                description=r["description"],details={k:r[k] for k in ("address","website","company_size",
                     "founded_year","mission","culture","benefits","verification_status")})
+        extras = dict(company_extras.get(r["seed_code"], {}))
+        description = extras.pop("description", None)
+        if description and company.description == r["description"] and not company.details.get("seed_enriched_v3"):
+            company.description = description
+        enrich_details(company, extras, old_address=r["address"])
     companies=ids(db,Company)
     for r in rows("access/company_members"):
         insert(db,Member,{"company_id":companies[r["company_seed_code"]],"user_id":users[r["user_code"]]},
-               active=r["membership_status"]=="active")
+               active=r["membership_status"]=="active",manager=r["membership_status"]=="active")
     skills={}
     for r in rows("core/skills"):
         insert(db,Skill,{"code":r["skill_id"]},name=r["skill_name"])
@@ -96,7 +120,10 @@ def seed(db):
              details={**{k:r[k] for k in ("currency","experience","education","quantity","working_hours",
                          "benefits","application_instructions","program_type","employment_schedule","pay_type",
                          "pay_period","fixture_case")},"skill_priorities":job_skills[code]})
-        if created:
+        extras = job_extras.get(code)
+        enriched = bool(extras and not job.details.get("seed_enriched_v3"))
+        enrich_details(job, extras)
+        if created or enriched:
             enqueue(db,"jobs",job.id)
     jobs=ids(db,Job)
     new_apps=set()

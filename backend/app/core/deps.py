@@ -15,7 +15,14 @@ def optional_user(request: Request, db: DB):
         return None
     try:
         data = claims(value)
-        return service.active_user(db, data["sub"], data["v"])
+        actor = service.active_user(db, data["sub"], data["v"])
+        if actor and data["sid"]:
+            from app.modules.auth.models import LoginSession
+            from app.core.config import now
+            session = db.get(LoginSession, data["sid"])
+            if not session or session.user_id != actor["id"] or session.version != data["v"] or session.expires_at <= now():
+                return None
+        return {**actor, "session_id": data["sid"]} if actor else None
     except (jwt.PyJWTError, ValueError, TypeError, KeyError):
         return None
 

@@ -33,6 +33,15 @@ def company_name(db, ident):
 def list_public(db):
     return [public(c) for c in db.scalars(select(Company).order_by(Company.name).limit(300))]
 
+def followed(db, actor):
+    from app.modules.jobs.models import Job
+    from app.modules.jobs.repository import visible
+    active = select(func.count(Job.id)).where(Job.company_id == Company.id, *visible()).correlate(Company).scalar_subquery()
+    stmt = (select(Company, active).join(Follow, Follow.company_id == Company.id)
+            .where(Follow.user_id == actor["id"]).order_by(Company.name))
+    return [{**public(company), "active_jobs": count} for company, count in db.execute(stmt)]
+
+
 def memberships(db, user_id):
     return list(db.scalars(select(Member.company_id).filter_by(user_id=user_id, active=True)))
 
@@ -49,14 +58,18 @@ def ensure_member(db, actor, company_id):
         raise HTTPException(403, "Bạn không thuộc doanh nghiệp sở hữu dữ liệu này")
 
 def mine(db, actor):
-    return [detail(db, i) for i in memberships(db, actor["id"])]
+    stmt = select(Member).filter_by(user_id=actor["id"],active=True)
+    return [{**detail(db,row.company_id),"can_manage_members":row.manager} for row in db.scalars(stmt)]
 
 def save(db, actor, ident, data):
     ensure_member(db, actor, ident)
     c = require(repo.get_company(db, ident))
     for field in ("name", "industry", "city", "description"):
         setattr(c, field, getattr(data, field))
-    c.details = {**c.details, "benefits": data.benefits}
+    updates = data.model_dump(include={"address","work_schedule"},exclude_unset=True)
+    if "address" in updates and updates["address"]!=c.details.get("address"):
+        updates.update(address_is_synthetic=False,address_detail=None,district=None)
+    c.details = {**c.details, "benefits": data.benefits, **updates}
     db.commit()
     return public(c)
 

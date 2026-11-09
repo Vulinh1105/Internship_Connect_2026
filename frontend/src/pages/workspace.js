@@ -1,5 +1,5 @@
 import {api} from '../api/client.js';
-import {esc,tags,box,copy,empty,heading,field,area,select,btn,form,modes,list,money,status,toast,bindForm,action} from '../components/ui.js';
+import {esc,tags,box,copy,empty,heading,field,area,select,link,btn,form,modes,list,money,status,toast,bindForm,action} from '../components/ui.js';
 import {loginRequired} from './public.js';
 import {logoTile} from '../components/media.js';
 
@@ -108,6 +108,8 @@ const profilePanel=companies=>companies.map(c=>box('<h3>'+esc(c.name)+'</h3><div
   +form('logo-'+c.id,'<label class="field">Logo (PNG, JPG hoặc WebP, tối đa 2 MB)<input type="file" name="file" required accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"></label>','Tải logo lên')
   +(c.has_logo?btn('remove-logo','Xóa logo',c.id):'')+'</div>'
   +form('co-'+c.id,field('name','Tên',c.name)+field('industry','Ngành',c.industry)+field('city','Thành phố',c.city)
+    +field('address','Địa chỉ văn phòng',c.details?.address,'text','maxlength="400"')
+    +field('work_schedule','Lịch làm việc',c.details?.work_schedule,'text','maxlength="255"')
     +area('description','Mô tả',c.description)+area('benefits','Quyền lợi',c.details?.benefits),'Lưu hồ sơ')+'</div>')).join('');
 
 function bindMenus(){
@@ -132,7 +134,9 @@ async function workspace({root,user,reload}){
   const panels={jobs:jobsPanel(jobs),interviews:interviewsPanel(interviews),profile:profilePanel(companies)};
   root.innerHTML='<div class="ws-head"><div class="ws-company">'+(companies.length===1?logoTile(companies[0].id,companies[0].name,true,companies[0].has_logo):'')
     +'<div><h1>'+esc(companies.map(c=>c.name).join(' · '))+'</h1><p class="muted">Quản lý tuyển dụng</p></div></div>'
-    +'<button type="button" id="toggle-new-job" aria-expanded="false" aria-controls="new-job-panel">Đăng tin mới</button></div>'
+    +'<div class="row">'+link('recruitment-stats','Thống kê tuyển dụng')
+    +(companies.some(c=>c.can_manage_members)?link('company-members','Thành viên'):'')
+    +'<button type="button" id="toggle-new-job" aria-expanded="false" aria-controls="new-job-panel">Đăng tin mới</button></div></div>'
     +'<section class="panel" id="new-job-panel" hidden>'+form('new-job',jobFields(companies),'Gửi kiểm duyệt')+'</section>'
     +'<div class="stat-grid">'+stats.map(([label,n])=>'<div class="stat"><strong>'+n+'</strong><span>'+esc(label)+'</span></div>').join('')+'</div>'
     +'<div class="co-tabs ws-tabs" role="group" aria-label="Mục quản lý">'+tabs.map(([key,text])=>'<button type="button" class="co-tab" data-tab="'+key+'" aria-current="'+(key===activeTab)+'">'+text
@@ -237,7 +241,13 @@ function applicantCard(a,iv){
     +chipRow('Khớp yêu cầu',match.matched_skills,'chip-ok')+chipRow('Còn thiếu',match.missing_skills,'chip-miss')
     +(a.status==='rejected'&&a.decision_reason?'<p class="job-reason">Lý do từ chối: '+esc(a.decision_reason)+'</p>':'')
     +(String(a.cover_letter||'').trim()?'<details class="letter"><summary>Thư xin việc</summary>'+copy(a.cover_letter)+'</details>':'')
+    +tags(a.school,a.specialization,a.study_year?'Năm '+a.study_year:'')+(a.summary?copy(a.summary):'')
     +interviewLine(iv)
+    +(a.completed_at?tags('Đã hoàn thành kỳ thực tập'):a.status==='accepted'?btn('complete-placement','Xác nhận hoàn thành kỳ thực tập',a.id):'')
+    +(a.interviewer_rating||iv?.status==='confirmed'&&new Date(iv.scheduled_at+'+07:00')<=new Date()
+      ?'<details><summary>Đánh giá sau phỏng vấn</summary>'+form('feedback-'+a.id,
+        select('rating','Điểm ứng viên',Array.from({length:5},(_,i)=>[i+1,(i+1)+'/5']),String(a.interviewer_rating||5))
+        +area('note','Nhận xét nội bộ',a.interviewer_note,'required maxlength="2000"'),'Lưu đánh giá')+'</details>':'')
     +'<div class="row applicant-actions">'+(a.cv_id?'<a class="button secondary" href="/api/applications/'+a.id+'/cv">Tải CV</a>':'')
     +(canInvite?'<button type="button" class="secondary" data-toggle="invite-panel-'+a.id+'">Mời phỏng vấn</button>':'')
     +(open?'<button type="button" data-action="accept" data-value="'+a.id+'">Nhận</button><button type="button" class="secondary danger" data-toggle="reject-panel-'+a.id+'">Từ chối</button>':'')+'</div>'
@@ -260,13 +270,24 @@ async function applicants({root,user,args,reload}){
     +'<div class="stat-grid">'+[['Tổng số đơn',rows.length],['Chờ xử lý',count(a=>a.status==='pending')],['Đang xét',count(a=>a.status==='reviewing')],['Đã nhận',count(a=>a.status==='accepted')]].map(statTile).join('')+'</div>'
     +'<div class="co-tabs ws-tabs" role="group" aria-label="Lọc đơn theo trạng thái">'+appFilters.map(([key,text,fn])=>'<button type="button" class="co-tab" data-filter="'+key+'" aria-current="'
       +(key===appView.filter)+'">'+esc(text)+' ('+count(fn)+')</button>').join('')+'</div>'
-    +'<div class="toolbar">'+select('sort','Sắp xếp',[['match','Phù hợp nhất'],['new','Mới nhất']],appView.sort)+'</div><div id="applicant-list"></div>';
+    +'<div class="toolbar">'+select('sort','Sắp xếp',[['match','Phù hợp nhất'],['new','Mới nhất']],appView.sort)+field('applicant-query','Tìm theo tên, ngành hoặc kỹ năng','','search')+'</div><div id="applicant-list"></div>';
   const listEl=root.querySelector('#applicant-list');
+  const query=root.querySelector('[name="applicant-query"]');
   function paint(){
     const fn=appFilters.find(f=>f[0]===appView.filter)[2];
-    const shown=rows.filter(fn).sort(appSorts[appView.sort]);
+    const term=query.value.trim().toLocaleLowerCase('vi');
+    const shown=rows.filter(a=>fn(a)&&[a.student_name,a.major,...(a.skills||[])].join(' ').toLocaleLowerCase('vi').includes(term))
+      .sort(appSorts[appView.sort]);
     listEl.innerHTML=shown.length?shown.map(a=>applicantCard(a,ivs.get(a.id))).join(''):empty('Không có đơn nào trong mục này.');
+    action(listEl,'complete-placement',async id=>{
+      if(!confirm('Xác nhận sinh viên đã hoàn thành kỳ thực tập?'))return;
+      await api('/applications/'+id+'/internship-completed',{method:'POST'});await reload();
+    });
     for(const a of shown){
+      bindForm(listEl,'feedback-'+a.id,async data=>{
+        await api('/applications/'+a.id+'/interview-feedback',{method:'PUT',data:{rating:Number(data.rating),note:data.note}});
+        toast('Đã lưu đánh giá');await reload();
+      });
       bindForm(listEl,'invite-'+a.id,async data=>{await api('/interviews',{method:'POST',data:{...data,application_id:a.id}});toast('Đã gửi lời mời');await reload();});
       bindForm(listEl,'reject-'+a.id,async data=>{
         if(!data.reason.trim())throw new Error('Nhập lý do từ chối.');
@@ -277,6 +298,7 @@ async function applicants({root,user,args,reload}){
       if(confirm('Nhận đơn ứng tuyển này?')){await api('/applications/'+value+'/status',{method:'PATCH',data:{status:'accepted'}});toast('Đã nhận đơn');await reload();}
     });
   }
+  query.addEventListener('input',paint);
   bindToggles(listEl);
   for(const tab of root.querySelectorAll('[data-filter]'))tab.addEventListener('click',()=>{
     appView.filter=tab.dataset.filter;

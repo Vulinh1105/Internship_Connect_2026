@@ -40,3 +40,27 @@ class Grant(Base):
     role = Column(String(32), ForeignKey('roles.code'), nullable=False)
     permission = Column(String(100), ForeignKey('permissions.code'), nullable=False)
     __table_args__ = (UniqueConstraint('role','permission'),)
+
+
+class AccountSettings(Base):
+    __tablename__ = "account_settings"
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
+    options = Column(JSON, nullable=False, default=dict)
+
+
+class LoginSession(Base):
+    __tablename__ = "login_sessions"
+    id = Column(String(36), primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    version = Column(Integer, nullable=False)
+    device = Column(String(250), nullable=False)
+    created_at = Column(DateTime, nullable=False, default=now)
+    expires_at = Column(DateTime, nullable=False)
+
+
+class EmailChange(Base):
+    __tablename__ = "email_changes"
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
+    email = Column(String(255), nullable=False)
+    token_hash = Column(String(64), nullable=False, unique=True)
+    expires_at = Column(DateTime, nullable=False)

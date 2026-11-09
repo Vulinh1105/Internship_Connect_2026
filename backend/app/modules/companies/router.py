@@ -15,6 +15,10 @@ def list_companies(db: DB):
 def mine(db: DB, actor: Actor):
     return service.mine(db, actor)
 
+@router.get("/followed")
+def followed(db: DB, actor: Actor):
+    return service.followed(db, actor)
+
 @router.get("/{ident}")
 def detail(ident: int, db: DB, actor: OptionalActor):
     return service.profile(db, ident, actor)

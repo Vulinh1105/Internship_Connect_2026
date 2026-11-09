@@ -1,5 +1,5 @@
 import {api} from '../api/client.js';
-import {esc,heading,empty,btn,action} from '../components/ui.js';
+import {esc,heading,empty,btn,action,select,link} from '../components/ui.js';
 import {loginRequired} from './public.js';
 
 const svg=path=>'<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+path+'</svg>';
@@ -12,7 +12,7 @@ const kinds={
   interview:['calendar','applications'],interview_invited:['calendar','applications'],
   interview_cancelled:['calendar','applications'],interview_reply:['calendar','workspace'],
   application_status:['application','applications'],application_new:['application','applicants'],
-  application_withdrawn:['application','applicants'],company_new_job:['job','job'],job_approved:['job','workspace'],job_rejected:['job','workspace']
+  application_withdrawn:['application','applicants'],company_new_job:['job','job'],job_alert:['job','job'],job_approved:['job','workspace'],job_rejected:['job','workspace']
 };
 // Trang đích theo loại thông báo; target_id là mã tin khi trang đích cần (hồ sơ ứng tuyển, chi tiết tin).
 export function destination(n){
@@ -41,11 +41,17 @@ const group=(title,items)=>items.length?'<h2 class="notice-group">'+title+'</h2>
 
 async function notifications({root,user,reload}){
   if(!user)return loginRequired(root);
-  const rows=await api('/notifications');
-  const unread=rows.filter(n=>!n.read_at).length;
+  const all=await api('/notifications');
+  const category=n=>({calendar:'interviews',application:'applications',job:'jobs'}[kinds[n.kind]?.[0]]||'system');
+  const selected=new URLSearchParams(location.hash.split('/')[1]||'').get('kind')||'';
+  const rows=all.filter(n=>!selected||category(n)===selected);
+  const unread=all.filter(n=>!n.read_at).length;
   root.innerHTML=heading('Thông báo',unread?'Bạn có '+unread+' thông báo chưa đọc.':'Bạn đã đọc hết thông báo.')
+    +select('notice-kind','Loại thông báo',[['','Tất cả'],['applications','Đơn ứng tuyển'],['interviews','Lịch phỏng vấn'],['jobs','Tin tuyển dụng'],['system','Hệ thống']],selected)
+    +link('account','Cài đặt tài khoản')
     +(unread?'<div class="row">'+btn('read-all','Đánh dấu tất cả đã đọc')+'</div>':'')
     +(rows.length?group('Hôm nay',rows.filter(n=>isToday(n.created_at)))+group('Trước đó',rows.filter(n=>!isToday(n.created_at))):empty('Chưa có thông báo.'));
+  root.querySelector('[name="notice-kind"]').addEventListener('change',e=>{location.hash='notifications'+(e.target.value?'/?kind='+e.target.value:'');});
   action(root,'read-all',async()=>{await api('/notifications/read',{method:'POST'});await reload();});
   for(const link of root.querySelectorAll('[data-notice]'))link.addEventListener('click',async event=>{
     event.preventDefault();

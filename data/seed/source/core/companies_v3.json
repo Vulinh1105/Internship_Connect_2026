@@ -1,0 +1,722 @@
+{
+  "DEMO-C001": {
+    "address": "Khu văn phòng demo 1, Cầu Giấy, Hà Nội",
+    "district": "Cầu Giấy",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nNovaBridge Digital là doanh nghiệp giả lập trong lĩnh vực công nghệ thông tin, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào phát triển phần mềm, chuyển đổi số và ứng dụng công nghệ cho doanh nghiệp.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "NovaBridge Digital chuyên về phát triển phần mềm, chuyển đổi số và ứng dụng công nghệ cho doanh nghiệp, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong công nghệ thông tin.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 09:00–18:00",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "09:00:00",
+    "working_end": "18:00:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Công nghệ thông tin",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C002": {
+    "address": "Khu văn phòng demo 2, Nam Từ Liêm, Hà Nội",
+    "district": "Nam Từ Liêm",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nGreenPeak Finance là doanh nghiệp giả lập trong lĩnh vực tài chính - ngân hàng, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào tư vấn giải pháp tài chính, phân tích và tối ưu hoạt động kinh doanh.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "GreenPeak Finance chuyên về tư vấn giải pháp tài chính, phân tích và tối ưu hoạt động kinh doanh, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong tài chính - ngân hàng.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Tài chính - Ngân hàng",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C003": {
+    "address": "Khu văn phòng demo 3, Ngô Quyền, Hải Phòng",
+    "district": "Ngô Quyền",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nHorizon Logistics là doanh nghiệp giả lập trong lĩnh vực logistics, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào quản trị vận tải, kho vận và chuỗi cung ứng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "Horizon Logistics chuyên về quản trị vận tải, kho vận và chuỗi cung ứng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong logistics.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Logistics",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C004": {
+    "address": "Khu văn phòng demo 4, Đống Đa, Hà Nội",
+    "district": "Đống Đa",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nBrightPath Education là doanh nghiệp giả lập trong lĩnh vực giáo dục, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào đào tạo, phát triển chương trình học và công nghệ giáo dục.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "BrightPath Education chuyên về đào tạo, phát triển chương trình học và công nghệ giáo dục, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong giáo dục.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 09:00–18:00",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "09:00:00",
+    "working_end": "18:00:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Giáo dục",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C005": {
+    "address": "Khu văn phòng demo 5, Bình Thạnh, TP. Hồ Chí Minh",
+    "district": "Bình Thạnh",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nBlueRiver Commerce là doanh nghiệp giả lập trong lĩnh vực thương mại điện tử, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "BlueRiver Commerce chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong thương mại điện tử.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Thương mại điện tử",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C006": {
+    "address": "Khu văn phòng demo 1, Cầu Giấy, Hà Nội",
+    "district": "Cầu Giấy",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nAtlas Data Lab là doanh nghiệp giả lập trong lĩnh vực phân tích dữ liệu, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "Atlas Data Lab chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong phân tích dữ liệu.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Phân tích dữ liệu",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C007": {
+    "address": "Khu văn phòng demo 2, Hải Châu, Đà Nẵng",
+    "district": "Hải Châu",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nSunrise Retail là doanh nghiệp giả lập trong lĩnh vực bán lẻ, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "Sunrise Retail chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong bán lẻ.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 09:00–18:00",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "09:00:00",
+    "working_end": "18:00:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Bán lẻ",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C008": {
+    "address": "Khu văn phòng demo 3, Thanh Xuân, Hà Nội",
+    "district": "Thanh Xuân",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nFutureWorks Consulting là doanh nghiệp giả lập trong lĩnh vực tư vấn doanh nghiệp, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "FutureWorks Consulting chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong tư vấn doanh nghiệp.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Tư vấn doanh nghiệp",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C009": {
+    "address": "Khu văn phòng demo 4, Thủ Đức, TP. Hồ Chí Minh",
+    "district": "Thủ Đức",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nLotus Media House là doanh nghiệp giả lập trong lĩnh vực marketing, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "Lotus Media House chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong marketing.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Marketing",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C010": {
+    "address": "Khu văn phòng demo 5, Hai Bà Trưng, Hà Nội",
+    "district": "Hai Bà Trưng",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nCloudNest Solutions là doanh nghiệp giả lập trong lĩnh vực công nghệ thông tin, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào phát triển phần mềm, chuyển đổi số và ứng dụng công nghệ cho doanh nghiệp.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "CloudNest Solutions chuyên về phát triển phần mềm, chuyển đổi số và ứng dụng công nghệ cho doanh nghiệp, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong công nghệ thông tin.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 09:00–18:00",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "09:00:00",
+    "working_end": "18:00:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Công nghệ thông tin",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C011": {
+    "address": "Khu văn phòng demo 1, Ninh Kiều, Cần Thơ",
+    "district": "Ninh Kiều",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nMekong AgriTech là doanh nghiệp giả lập trong lĩnh vực nông nghiệp công nghệ, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "Mekong AgriTech chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong nông nghiệp công nghệ.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Nông nghiệp công nghệ",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C012": {
+    "address": "Khu văn phòng demo 2, Nam Từ Liêm, Hà Nội",
+    "district": "Nam Từ Liêm",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nUrbanSpace Design là doanh nghiệp giả lập trong lĩnh vực thiết kế, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "UrbanSpace Design chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong thiết kế.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Thiết kế",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C013": {
+    "address": "Khu văn phòng demo 3, Từ Sơn, Bắc Ninh",
+    "district": "Từ Sơn",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nVietLink Supply là doanh nghiệp giả lập trong lĩnh vực chuỗi cung ứng, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "VietLink Supply chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong chuỗi cung ứng.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 09:00–18:00",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "09:00:00",
+    "working_end": "18:00:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Chuỗi cung ứng",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C014": {
+    "address": "Khu văn phòng demo 4, Bình Thạnh, TP. Hồ Chí Minh",
+    "district": "Bình Thạnh",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nNextWave Fintech là doanh nghiệp giả lập trong lĩnh vực fintech, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "NextWave Fintech chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong fintech.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Fintech",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C015": {
+    "address": "Khu văn phòng demo 5, Hai Bà Trưng, Hà Nội",
+    "district": "Hai Bà Trưng",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nEduSphere Academy là doanh nghiệp giả lập trong lĩnh vực giáo dục, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào đào tạo, phát triển chương trình học và công nghệ giáo dục.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "EduSphere Academy chuyên về đào tạo, phát triển chương trình học và công nghệ giáo dục, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong giáo dục.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Giáo dục",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C016": {
+    "address": "Khu văn phòng demo 1, Thanh Khê, Đà Nẵng",
+    "district": "Thanh Khê",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nEcoMotion Energy là doanh nghiệp giả lập trong lĩnh vực năng lượng, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "EcoMotion Energy chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong năng lượng.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 09:00–18:00",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "09:00:00",
+    "working_end": "18:00:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Năng lượng",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C017": {
+    "address": "Khu văn phòng demo 2, Nam Từ Liêm, Hà Nội",
+    "district": "Nam Từ Liêm",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nCareConnect Health là doanh nghiệp giả lập trong lĩnh vực công nghệ y tế, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "CareConnect Health chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong công nghệ y tế.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Công nghệ y tế",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C018": {
+    "address": "Khu văn phòng demo 3, Thanh Xuân, Hà Nội",
+    "district": "Thanh Xuân",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nPrimeAudit Advisory là doanh nghiệp giả lập trong lĩnh vực kế toán - kiểm toán, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "PrimeAudit Advisory chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong kế toán - kiểm toán.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Kế toán - Kiểm toán",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C019": {
+    "address": "Khu văn phòng demo 4, Quận 1, TP. Hồ Chí Minh",
+    "district": "Quận 1",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nMarketSpring Research là doanh nghiệp giả lập trong lĩnh vực nghiên cứu thị trường, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "MarketSpring Research chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong nghiên cứu thị trường.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 09:00–18:00",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "09:00:00",
+    "working_end": "18:00:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Nghiên cứu thị trường",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  },
+  "DEMO-C020": {
+    "address": "Khu văn phòng demo 5, Hai Bà Trưng, Hà Nội",
+    "district": "Hai Bà Trưng",
+    "address_detail": "Văn phòng mô phỏng; không phải địa chỉ giao dịch thực tế",
+    "description": "GIỚI THIỆU DOANH NGHIỆP\nTalentLoop HR là doanh nghiệp giả lập trong lĩnh vực nhân sự, được xây dựng để mô phỏng trang tuyển dụng và trang giới thiệu doanh nghiệp trong hệ thống Internship Connect. Doanh nghiệp tập trung vào cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng.\n\nHOẠT ĐỘNG CHUYÊN MÔN\nĐội ngũ vận hành theo nhóm dự án, phối hợp giữa bộ phận chuyên môn, sản phẩm, vận hành và chăm sóc khách hàng. Các công việc dành cho sinh viên được giao theo mục tiêu rõ ràng, có người phụ trách hướng dẫn và tiêu chí đánh giá cụ thể.\n\nVĂN HÓA VÀ CON NGƯỜI\nKhuyến khích tinh thần trách nhiệm, học hỏi chủ động, trao đổi thẳng thắn và hợp tác đa phòng ban. Kết quả được phản hồi định kỳ để sinh viên hiểu kỳ vọng công việc và cải thiện kỹ năng.\n\nCƠ HỘI PHÁT TRIỂN\nSinh viên được làm quen quy trình tuyển dụng, tham gia nhiệm vụ phù hợp năng lực, được định hướng kiến thức nền và rèn luyện báo cáo tiến độ, làm việc nhóm, kỹ năng nghề nghiệp.\n\nLƯU Ý KIỂM THỬ\nToàn bộ hồ sơ, địa chỉ và chế độ trong bản ghi là dữ liệu giả lập; không phải lời mời tuyển dụng hay thông tin pháp lý của doanh nghiệp có thật.",
+    "short_description": "TalentLoop HR chuyên về cung cấp giải pháp và dịch vụ chuyên môn cho khách hàng, hướng đến sản phẩm có chất lượng, trải nghiệm khách hàng tốt và môi trường làm việc hỗ trợ người mới.",
+    "vision": "Trở thành tổ chức có năng lực chuyên môn vững mạnh, tạo giá trị thực tiễn trong nhân sự.",
+    "core_values": "Trách nhiệm | Minh bạch | Học hỏi | Hợp tác | Lấy khách hàng làm trọng tâm",
+    "work_schedule": "Thứ Hai – Thứ Sáu, 08:30–17:30",
+    "work_policy": "Làm việc tại văn phòng; một số vị trí hỗ trợ hybrid theo yêu cầu",
+    "overtime_policy": "Chỉ làm thêm khi thống nhất với người phụ trách; tuân thủ quy định áp dụng",
+    "hiring_process": "Nộp hồ sơ → Sàng lọc CV → Trao đổi/phỏng vấn → Thông báo kết quả → Hướng dẫn nhận việc",
+    "internship_policy": "Có người hướng dẫn; mục tiêu học việc được thống nhất từ đầu; đánh giá kết quả theo nhiệm vụ; hỗ trợ xác nhận thực tập theo chính sách mô phỏng.",
+    "working_days": "Thứ Hai – Thứ Sáu",
+    "working_start": "08:30:00",
+    "working_end": "17:30:00",
+    "lunch_break": "12:00–13:00",
+    "industry_tags": "Nhân sự",
+    "benefit_groups": [
+      {
+        "category": "learning",
+        "title": "Mentor và đào tạo",
+        "detail": "Hướng dẫn công việc, phản hồi định kỳ, chia sẻ kinh nghiệm."
+      },
+      {
+        "category": "environment",
+        "title": "Văn hóa làm việc",
+        "detail": "Hợp tác đa nhóm; mục tiêu rõ ràng; trao đổi cởi mở."
+      },
+      {
+        "category": "internship",
+        "title": "Hỗ trợ thực tập",
+        "detail": "Hỗ trợ tài liệu và xác nhận thực tập tùy kết quả và chính sách."
+      }
+    ]
+  }
+}

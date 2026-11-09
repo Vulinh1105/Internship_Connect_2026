@@ -6,3 +6,5 @@ class CompanyInput(BaseModel):
     city: str = Field(min_length=2, max_length=100)
     description: str = Field(min_length=5, max_length=12000)
     benefits: str = Field(default="", max_length=3000)
+    address: str|None = Field(default=None,max_length=400)
+    work_schedule: str|None = Field(default=None,max_length=255)

@@ -14,6 +14,10 @@ class ProfileInput(BaseModel):
     summary: str=Field(default="",max_length=4000)
     skills: list[str]=Field(default_factory=list,max_length=40)
     preferences: Preferences=Field(default_factory=Preferences)
+    school: str|None=Field(default=None,max_length=200)
+    specialization: str|None=Field(default=None,max_length=150)
+    study_year: int|None=Field(default=None,ge=1,le=10)
+    skill_levels: dict[str,Literal["basic","intermediate","advanced"]]|None=Field(default=None,max_length=40)
 
 class CVFacts(BaseModel):
     skills: list[str]=Field(default_factory=list,max_length=40)

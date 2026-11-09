@@ -155,10 +155,12 @@ def review(db, actor, ident, data):
         text=f"Tin {j.title} bị từ chối. Lý do: {data.reason.strip()}. Hãy chỉnh sửa và gửi duyệt lại."
         kind="job_rejected"
     notifications.send_many(db,companies.member_user_ids(db,j.company_id),kind,text,j.id)
-    if first_approval:
-        # Chỉ báo người theo dõi lần đầu tin được duyệt; sửa tin rồi duyệt lại không báo thêm.
-        notifications.send_many(db,companies.follower_user_ids(db,j.company_id),"company_new_job",
+    if first_approval and is_public(j):
+        followers = companies.follower_user_ids(db,j.company_id)
+        notifications.send_many(db,followers,"company_new_job",
             f"{companies.company_name(db,j.company_id)} vừa đăng tin {j.title}.",j.id)
+        alerts = set(notifications.matching_job_users(db,j)).difference(followers)
+        notifications.send_many(db,alerts,"job_alert",f"Tin phù hợp nguyện vọng của bạn: {j.title}.",j.id)
     enqueue(db,"jobs",j.id)
     db.commit()
     return output(db,j)
@@ -199,7 +201,8 @@ def reopen(db,actor,ident):
     return output(db,j)
 
 def save(db,actor,ident,value):
-    public_detail(db,ident)
+    if value:
+        public_detail(db,ident)
     keys=dict(job_id=ident,user_id=actor["id"])
     old=first(db,SavedJob,**keys)
     if value and old is None:
@@ -210,8 +213,15 @@ def save(db,actor,ident,value):
     return {"saved":value}
 
 def saved(db,actor):
-    stmt=select(Job).join(SavedJob,Job.id==SavedJob.job_id).where(SavedJob.user_id==actor["id"],*repo.visible())
-    return [output(db,j) for j in db.scalars(stmt)]
+    stmt=select(Job).join(SavedJob,Job.id==SavedJob.job_id).where(SavedJob.user_id==actor["id"]).order_by(Job.id.desc())
+    result = []
+    for job in db.scalars(stmt):
+        if job.deleted_at is not None or job.moderation_status != "approved":
+            result.append({"id": job.id, "title": job.title, "deadline": job.deadline, "saved_status": "removed"})
+        else:
+            state = "closed" if job.status == "closed" else "expired" if job.deadline and job.deadline < today() else "open"
+            result.append({**output(db, job), "saved_status": state})
+    return result
 
 def public_by_code(db,code):
     job=first(db,Job,code=code,moderation_status="approved",deleted_at=None)

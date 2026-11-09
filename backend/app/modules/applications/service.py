@@ -6,6 +6,7 @@ from app.core.config import now
 from app.modules.students import service as students
 from app.modules.jobs import service as jobs
 from app.modules.companies import service as companies
+from app.modules.companies.models import PlacementFeedback
 from app.modules.notifications import service as notifications
 from .models import Application,ApplicationEvent
 from . import repository as repo
@@ -24,7 +25,13 @@ def show(db,a,actor=None):
         title=job["title"]
     except HTTPException:
         title="Tin đã đóng hoặc không còn công khai"
-    return {**record(a),"job_title":title}
+    result = {**record(a),"job_title":title}
+    feedback = db.get(PlacementFeedback,a.id)
+    if feedback:
+        result.update(record(feedback,"completed_at","review_status"))
+        if actor and actor["role"]=="company_member":
+            result.update(record(feedback,"interviewer_rating","interviewer_note"))
+    return result
 
 def apply(db,actor,data):
     from app.ai.matching.service import score_application
@@ -67,10 +74,15 @@ def mine(db,actor):
 def for_job(db,actor,job_id):
     jobs.ensure_owner(db,actor,job_id)
     # Doanh nghiệp xem được tên, ngành học và kỹ năng trong hồ sơ đã nộp của sinh viên.
-    return [{**show(db,a,actor),"student_name":students.public_name(db,a.student_id),
-             **students.applicant_view(db,a.student_id,a.cv_id)}
-            for a in db.scalars(select(Application).filter_by(job_id=job_id)
-                              .order_by(Application.match_score.desc(),Application.id))]
+    result = []
+    for a in db.scalars(select(Application).filter_by(job_id=job_id)
+                        .order_by(Application.match_score.desc(),Application.id)):
+        profile = students.applicant_view(db,a.student_id,a.cv_id)
+        row = {**show(db,a,actor),"student_name":students.public_name(db,a.student_id),**profile}
+        if not profile["skills"]:
+            row.pop("match_reason",None)
+        result.append(row)
+    return result
 
 def authorized(db,actor,ident):
     a=require(repo.get_application(db,ident),"Không tìm thấy đơn")

@@ -12,11 +12,13 @@ from app.core.deps import Actor, DB
 from app.modules.applications.router import router as applications
 from app.modules.auth.router import router as auth
 from app.modules.companies.router import router as companies
+from app.modules.companies.recruitment import router as recruitment
 from app.modules.interviews.router import router as interviews
 from app.modules.jobs.router import router as jobs
 from app.modules.knowledge.router import router as knowledge
 from app.modules.mock_interviews.router import router as mock
 from app.modules.notifications.router import router as notifications
+from app.modules.notifications.service import deliver_pending
 from app.modules.students.router import router as students
 from app.ai.chatbot.router import router as chatbot
 from app.ai.matching.service import recommend
@@ -29,6 +31,7 @@ def tick(reconcile):
         if reconcile:
             sync.reconcile(db)
         sync.drain(db)
+        deliver_pending(db)
 
 async def worker():
     loop=asyncio.get_running_loop()
@@ -54,7 +57,7 @@ async def lifespan(_):
             await task
 
 app=FastAPI(title="Internship Connect 2026",version="1.0.0",lifespan=lifespan)
-for router in (auth,students,companies,jobs,applications,interviews,notifications,knowledge,mock,chatbot):
+for router in (auth,students,companies,recruitment,jobs,applications,interviews,notifications,knowledge,mock,chatbot):
     app.include_router(router)
 
 @app.middleware("http")
